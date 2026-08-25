@@ -1,0 +1,3 @@
+[submodule "services/asr"]
+	path = services/asr
+	url = https://github.com/adi-gov-tw/Taiwan-Tongues-ASR-CE.git
