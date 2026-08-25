@@ -1,0 +1,49 @@
+# 機敏設定
+.env
+*.env
+
+# Python
+__pycache__/
+*.pyc
+venv/
+.venv/
+asr_api/
+train_env/
+
+# AI模型
+models/
+model_for_finetune/
+output/
+*.bin
+*.safetensors
+*.pt
+*.pth
+
+# 語音與暫存資料
+audio_files/
+uploads/
+temp/
+*.wav
+*.mp3
+*.m4a
+*.aac
+*.flac
+
+# 資料庫
+*.db
+*.sqlite
+*.sqlite3
+
+# Node.js
+node_modules/
+dist/
+
+# 系統與編輯器
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# 金鑰
+*.key
+*.pem
