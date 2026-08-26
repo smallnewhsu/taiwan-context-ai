@@ -1,0 +1,133 @@
+{
+  "summary": {
+    "total_files": 5,
+    "files_with_transcript": 5,
+    "files_with_cer": 5,
+    "average_cer": 0.4288461538461538,
+    "average_correct_rate": 57.11538461538462,
+    "total_substitutions": 24,
+    "total_deletions": 3,
+    "total_insertions": 3
+  },
+  "detailed_results": [
+    {
+      "audio_file": "T04.m4a",
+      "asr_result": "改天再約",
+      "original_transcript": "改天再約。",
+      "cer_result": {
+        "correct_rate": 100.0,
+        "cer_rate": 0.0,
+        "total_errors": 0,
+        "substitutions_count": 0,
+        "deletions_count": 0,
+        "insertions_count": 0,
+        "total_chars": 4,
+        "substitutions_errors": [],
+        "deletions_errors": [],
+        "insertions_errors": [],
+        "reference_highlighted": "改天再約",
+        "hypothesis_highlighted": "改天再約"
+      },
+      "has_original_transcript": true
+    },
+    {
+      "audio_file": "T02.m4a",
+      "asr_result": "你吃百貨不然就回來問老闆 ",
+      "original_transcript": "你食飽未？若無就轉來阮兜食啦。",
+      "cer_result": {
+        "correct_rate": 23.076923076923073,
+        "cer_rate": 0.7692307692307693,
+        "total_errors": 10,
+        "substitutions_count": 9,
+        "deletions_count": 1,
+        "insertions_count": 0,
+        "total_chars": 13,
+        "substitutions_errors": [
+          "正確文本中的「食飽未若無」 在 ASR 轉譯文本中被替換成 「吃百貨不然」",
+          "正確文本中的「轉」 在 ASR 轉譯文本中被替換成 「回」",
+          "正確文本中的「阮兜食啦」 在 ASR 轉譯文本中被替換成 「問老闆」"
+        ],
+        "deletions_errors": [
+          "正確文本中的「啦」 被刪除，未被 ASR 轉譯成功 (替換造成)"
+        ],
+        "insertions_errors": [],
+        "reference_highlighted": "你[食][飽][未][若][無]就[轉]來[阮][兜][食]<啦>",
+        "hypothesis_highlighted": "你[吃][百][貨][不][然]就[回]來[問][老][闆]□"
+      },
+      "has_original_transcript": true
+    },
+    {
+      "audio_file": "T05.m4a",
+      "asr_result": "猜猜看回來回來快點不要再吃泡麵了",
+      "original_transcript": "菜在電鍋，轉來家己挾，莫閣食泡麵。",
+      "cer_result": {
+        "correct_rate": 0.0,
+        "cer_rate": 1.0,
+        "total_errors": 14,
+        "substitutions_count": 10,
+        "deletions_count": 1,
+        "insertions_count": 3,
+        "total_chars": 14,
+        "substitutions_errors": [
+          "正確文本中的「菜在電鍋轉」 在 ASR 轉譯文本中被替換成 「猜猜看回」",
+          "正確文本中的「家己挾莫閣食」 在 ASR 轉譯文本中被替換成 「回來快點不要再吃」"
+        ],
+        "deletions_errors": [
+          "正確文本中的「轉」 被刪除，未被 ASR 轉譯成功 (替換造成)"
+        ],
+        "insertions_errors": [
+          "「再吃」 在 ASR 結果 額外輸出，不屬於正確文本內容 (替換造成)",
+          "「了」 在 ASR 結果 額外輸出，不屬於正確文本內容"
+        ],
+        "reference_highlighted": "[菜][在][電][鍋]<轉>來[家][己][挾][莫][閣][食]□□泡麵□",
+        "hypothesis_highlighted": "[猜][猜][看][回]□來[回][來][快][點][不][要](再)(吃)泡麵(了)"
+      },
+      "has_original_transcript": true
+    },
+    {
+      "audio_file": "T03.m4a",
+      "asr_result": "阿嬤我今天比較忙做夢再回來看妳 ",
+      "original_transcript": "阿嬤，我今天比較無閒，週末再轉去看妳。",
+      "cer_result": {
+        "correct_rate": 62.5,
+        "cer_rate": 0.375,
+        "total_errors": 6,
+        "substitutions_count": 5,
+        "deletions_count": 1,
+        "insertions_count": 0,
+        "total_chars": 16,
+        "substitutions_errors": [
+          "正確文本中的「無閒週末」 在 ASR 轉譯文本中被替換成 「忙做夢」",
+          "正確文本中的「轉去」 在 ASR 轉譯文本中被替換成 「回來」"
+        ],
+        "deletions_errors": [
+          "正確文本中的「末」 被刪除，未被 ASR 轉譯成功 (替換造成)"
+        ],
+        "insertions_errors": [],
+        "reference_highlighted": "阿嬤我今天比較[無][閒][週]<末>再[轉][去]看妳",
+        "hypothesis_highlighted": "阿嬤我今天比較[忙][做][夢]□再[回][來]看妳"
+      },
+      "has_original_transcript": true
+    },
+    {
+      "audio_file": "T01.m4a",
+      "asr_result": "阿嬤我今天工作比較忙沒有辦法回家吃飯 ",
+      "original_transcript": "阿嬤，我今天工作比較忙，沒有辦法回家吃飯。",
+      "cer_result": {
+        "correct_rate": 100.0,
+        "cer_rate": 0.0,
+        "total_errors": 0,
+        "substitutions_count": 0,
+        "deletions_count": 0,
+        "insertions_count": 0,
+        "total_chars": 18,
+        "substitutions_errors": [],
+        "deletions_errors": [],
+        "insertions_errors": [],
+        "reference_highlighted": "阿嬤我今天工作比較忙沒有辦法回家吃飯",
+        "hypothesis_highlighted": "阿嬤我今天工作比較忙沒有辦法回家吃飯"
+      },
+      "has_original_transcript": true
+    }
+  ]
+}

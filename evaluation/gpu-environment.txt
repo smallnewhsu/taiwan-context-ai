@@ -1,0 +1,8 @@
+Taiwan Tongues ASR CE GPU Environment
+
+status: healthy
+vad_pipeline: ready
+asr_pipeline: ready
+asr_device: cuda
+asr_compute_type: float16
+asr_model_size: models

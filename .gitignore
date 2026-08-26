@@ -47,3 +47,15 @@ Thumbs.db
 # 金鑰
 *.key
 *.pem
+
+# ASR generated files
+services/asr/asr_comparison_results.json
+services/asr/*_asr.txt
+
+# Evaluation audio and temporary files
+evaluation/**/*.m4a
+evaluation/**/*.mp3
+evaluation/**/*.wav
+
+# Large AI models
+services/asr/models/
