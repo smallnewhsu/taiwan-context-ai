@@ -151,7 +151,12 @@ def find_original_transcript(audio_file):
     return None
 
 
-def process_audio_folder(folder_path, output_file="transcription_results.txt"):
+def process_audio_folder(
+    folder_path,
+    output_file="transcription_results.txt",
+    initial_prompt="",
+    result_prefix="asr",
+):
     """
     處理指定資料夾中的所有音檔
 
@@ -213,7 +218,7 @@ def process_audio_folder(folder_path, output_file="transcription_results.txt"):
                 vad_filter=True,
                 beam_size=5,
                 condition_on_previous_text=True,
-                initial_prompt="",
+                initial_prompt=initial_prompt,
             )
 
             # 組合轉錄結果
@@ -235,7 +240,9 @@ def process_audio_folder(folder_path, output_file="transcription_results.txt"):
             # 生成輸出檔案路徑
             audio_dir = os.path.dirname(audio_file)
             audio_name = os.path.splitext(os.path.basename(audio_file))[0]
-            output_path = os.path.join(audio_dir, f"{audio_name}_asr.txt")
+            output_path = os.path.join(
+                audio_dir, f"{audio_name}_{result_prefix}_asr.txt"
+            )
 
             # 儲存轉錄結果
             with open(output_path, "w", encoding="utf-8") as f:
@@ -315,7 +322,9 @@ def process_audio_folder(folder_path, output_file="transcription_results.txt"):
             # 即使發生錯誤也建立輸出檔案
             audio_dir = os.path.dirname(audio_file)
             audio_name = os.path.splitext(os.path.basename(audio_file))[0]
-            output_path = os.path.join(audio_dir, f"{audio_name}_asr.txt")
+            output_path = os.path.join(
+                audio_dir, f"{audio_name}_{result_prefix}_asr.txt"
+            )
 
             with open(output_path, "w", encoding="utf-8") as f:
                 f.write(f"檔案名稱: {os.path.basename(audio_file)}\n")
@@ -436,11 +445,15 @@ def process_audio_folder(folder_path, output_file="transcription_results.txt"):
     }
 
     # 輸出 JSON 到根目錄
-    output_json_path = os.path.join(os.getcwd(), "asr_comparison_results.json")
+    output_json_path = os.path.join(
+        os.getcwd(), f"{result_prefix}_results.json"
+    )
     with open(output_json_path, "w", encoding="utf-8") as f:
         json.dump(final_result, f, ensure_ascii=False, indent=2)
 
-    latency_csv_path = os.path.join(os.getcwd(), "asr_latency_results.csv")
+    latency_csv_path = os.path.join(
+        os.getcwd(), f"{result_prefix}_latency.csv"
+    )
     with open(latency_csv_path, "w", encoding="utf-8-sig", newline="") as f:
         writer = csv.writer(f)
         writer.writerow(
@@ -507,6 +520,15 @@ def main():
         default="transcription_results.txt",
         help="輸出檔案名稱 (已棄用，保留用於向後相容)",
     )
+    parser.add_argument(
+        "--prompt-file",
+        help="UTF-8 詞彙提示檔；未指定時使用空提示",
+    )
+    parser.add_argument(
+        "--result-prefix",
+        default="asr",
+        help="輸出檔名前綴，例如 baseline 或 prompt",
+    )
 
     args = parser.parse_args()
 
@@ -514,7 +536,22 @@ def main():
         print(f"資料夾不存在: {args.folder}")
         return
 
-    process_audio_folder(args.folder, args.output)
+    initial_prompt = ""
+    if args.prompt_file:
+        try:
+            with open(args.prompt_file, "r", encoding="utf-8-sig") as f:
+                initial_prompt = f.read().strip()
+            print(f"已載入提示檔: {args.prompt_file}")
+        except Exception as e:
+            print(f"無法讀取提示檔 {args.prompt_file}: {e}")
+            return
+
+    process_audio_folder(
+        args.folder,
+        args.output,
+        initial_prompt=initial_prompt,
+        result_prefix=args.result_prefix,
+    )
 
 
 if __name__ == "__main__":
