@@ -1,0 +1,488 @@
+{
+  "summary": {
+    "total_files": 10,
+    "model_load_seconds": 5.9536,
+    "margin": 0.0,
+    "baseline_average_cer": 0.510105580693816,
+    "prompt_average_cer": 0.4590336134453782,
+    "routed_average_cer": 0.48421272355095885,
+    "oracle_average_cer": 0.44364899806076286,
+    "prompt_selected_count": 5,
+    "baseline_selected_count": 5,
+    "router_oracle_match_count": 4,
+    "router_oracle_match_rate": 0.4,
+    "average_dual_pass_seconds": 1.452160580002237
+  },
+  "detailed_results": [
+    {
+      "audio_file": "T01.m4a",
+      "audio_duration_seconds": 5.9947,
+      "reference": "阿嬤，我今天工作比較忙，沒有辦法回家吃飯。",
+      "baseline": {
+        "text": "阿嬤我今天工作比較忙沒有辦法回家吃飯 ",
+        "confidence": -0.10217927474724618,
+        "no_speech_probability": 0.00023877620697021487,
+        "inference_seconds": 1.0719247999950312
+      },
+      "prompt": {
+        "text": "阿嬤我今天工作比較忙沒有辦法回家吃飯 ",
+        "confidence": -0.07216282894736842,
+        "no_speech_probability": 2.384185791015625e-07,
+        "inference_seconds": 0.7096747000468895
+      },
+      "selected": "prompt",
+      "selected_text": "阿嬤我今天工作比較忙沒有辦法回家吃飯 ",
+      "oracle_selection": "baseline",
+      "baseline_cer": {
+        "cer": 0.0,
+        "correct_rate": 100.0,
+        "errors": 0,
+        "substitutions": 0,
+        "deletions": 0,
+        "insertions": 0,
+        "characters": 18
+      },
+      "prompt_cer": {
+        "cer": 0.0,
+        "correct_rate": 100.0,
+        "errors": 0,
+        "substitutions": 0,
+        "deletions": 0,
+        "insertions": 0,
+        "characters": 18
+      },
+      "routed_cer": {
+        "cer": 0.0,
+        "correct_rate": 100.0,
+        "errors": 0,
+        "substitutions": 0,
+        "deletions": 0,
+        "insertions": 0,
+        "characters": 18
+      }
+    },
+    {
+      "audio_file": "T02.m4a",
+      "audio_duration_seconds": 5.4827,
+      "reference": "你食飽未？若無就轉來阮兜食啦。",
+      "baseline": {
+        "text": "你吃百貨不然就回來問老闆 ",
+        "confidence": -0.24402573529411767,
+        "no_speech_probability": 0.0018558502197265625,
+        "inference_seconds": 0.6353950999910012
+      },
+      "prompt": {
+        "text": "你吃百貨如果沒有就回來問老闆啊 ",
+        "confidence": -0.40690105325645876,
+        "no_speech_probability": 6.556510925292968e-06,
+        "inference_seconds": 0.6851526999962516
+      },
+      "selected": "baseline",
+      "selected_text": "你吃百貨不然就回來問老闆 ",
+      "oracle_selection": "baseline",
+      "baseline_cer": {
+        "cer": 0.7692307692307693,
+        "correct_rate": 23.076923076923073,
+        "errors": 10,
+        "substitutions": 9,
+        "deletions": 1,
+        "insertions": 0,
+        "characters": 13
+      },
+      "prompt_cer": {
+        "cer": 0.9230769230769231,
+        "correct_rate": 7.692307692307687,
+        "errors": 12,
+        "substitutions": 10,
+        "deletions": 0,
+        "insertions": 2,
+        "characters": 13
+      },
+      "routed_cer": {
+        "cer": 0.7692307692307693,
+        "correct_rate": 23.076923076923073,
+        "errors": 10,
+        "substitutions": 9,
+        "deletions": 1,
+        "insertions": 0,
+        "characters": 13
+      }
+    },
+    {
+      "audio_file": "T03.m4a",
+      "audio_duration_seconds": 6.8907,
+      "reference": "阿嬤，我今天比較無閒，週末再轉去看妳。",
+      "baseline": {
+        "text": "阿嬤我今天比較忙做夢再回來看妳 ",
+        "confidence": -0.3120659672551685,
+        "no_speech_probability": 0.00021374225616455078,
+        "inference_seconds": 0.6443245999980718
+      },
+      "prompt": {
+        "text": "阿嬤我今天比較忙碌昨天再回去看妳 ",
+        "confidence": -0.3228515625,
+        "no_speech_probability": 8.404254913330078e-06,
+        "inference_seconds": 0.7547494999598712
+      },
+      "selected": "baseline",
+      "selected_text": "阿嬤我今天比較忙做夢再回來看妳 ",
+      "oracle_selection": "prompt",
+      "baseline_cer": {
+        "cer": 0.375,
+        "correct_rate": 62.5,
+        "errors": 6,
+        "substitutions": 5,
+        "deletions": 1,
+        "insertions": 0,
+        "characters": 16
+      },
+      "prompt_cer": {
+        "cer": 0.3125,
+        "correct_rate": 68.75,
+        "errors": 5,
+        "substitutions": 5,
+        "deletions": 0,
+        "insertions": 0,
+        "characters": 16
+      },
+      "routed_cer": {
+        "cer": 0.375,
+        "correct_rate": 62.5,
+        "errors": 6,
+        "substitutions": 5,
+        "deletions": 1,
+        "insertions": 0,
+        "characters": 16
+      }
+    },
+    {
+      "audio_file": "T04.m4a",
+      "audio_duration_seconds": 2.688,
+      "reference": "改天再約。",
+      "baseline": {
+        "text": "改天再約",
+        "confidence": -0.16824776785714285,
+        "no_speech_probability": 4.410743713378906e-06,
+        "inference_seconds": 0.43900199997005984
+      },
+      "prompt": {
+        "text": "改天再約",
+        "confidence": -0.13309151785714285,
+        "no_speech_probability": 0.00028228759765625,
+        "inference_seconds": 0.4688449000241235
+      },
+      "selected": "prompt",
+      "selected_text": "改天再約",
+      "oracle_selection": "baseline",
+      "baseline_cer": {
+        "cer": 0.0,
+        "correct_rate": 100.0,
+        "errors": 0,
+        "substitutions": 0,
+        "deletions": 0,
+        "insertions": 0,
+        "characters": 4
+      },
+      "prompt_cer": {
+        "cer": 0.0,
+        "correct_rate": 100.0,
+        "errors": 0,
+        "substitutions": 0,
+        "deletions": 0,
+        "insertions": 0,
+        "characters": 4
+      },
+      "routed_cer": {
+        "cer": 0.0,
+        "correct_rate": 100.0,
+        "errors": 0,
+        "substitutions": 0,
+        "deletions": 0,
+        "insertions": 0,
+        "characters": 4
+      }
+    },
+    {
+      "audio_file": "T05.m4a",
+      "audio_duration_seconds": 5.504,
+      "reference": "菜在電鍋，轉來家己挾，莫閣食泡麵。",
+      "baseline": {
+        "text": "猜猜看回來回來快點不要再吃泡麵了",
+        "confidence": -0.4199218869209289,
+        "no_speech_probability": 0.0003039836883544922,
+        "inference_seconds": 0.7348793999990448
+      },
+      "prompt": {
+        "text": "菜在店裡剩下回來自己用的不要再吃泡麵了 ",
+        "confidence": -0.4014945600343787,
+        "no_speech_probability": 8.52346420288086e-06,
+        "inference_seconds": 0.820869599992875
+      },
+      "selected": "prompt",
+      "selected_text": "菜在店裡剩下回來自己用的不要再吃泡麵了 ",
+      "oracle_selection": "prompt",
+      "baseline_cer": {
+        "cer": 1.0,
+        "correct_rate": 0.0,
+        "errors": 14,
+        "substitutions": 10,
+        "deletions": 1,
+        "insertions": 3,
+        "characters": 14
+      },
+      "prompt_cer": {
+        "cer": 0.9285714285714286,
+        "correct_rate": 7.14285714285714,
+        "errors": 13,
+        "substitutions": 8,
+        "deletions": 0,
+        "insertions": 5,
+        "characters": 14
+      },
+      "routed_cer": {
+        "cer": 0.9285714285714286,
+        "correct_rate": 7.14285714285714,
+        "errors": 13,
+        "substitutions": 8,
+        "deletions": 0,
+        "insertions": 5,
+        "characters": 14
+      }
+    },
+    {
+      "audio_file": "T06.m4a",
+      "audio_duration_seconds": 7.616,
+      "reference": "阿嬤，妳不用擔心，我晚上到家會打電話給妳。",
+      "baseline": {
+        "text": "阿嬤妳不用擔心我晚上到家會打電話給妳 ",
+        "confidence": -0.08797554153463116,
+        "no_speech_probability": 0.00024187564849853516,
+        "inference_seconds": 0.7564804999856278
+      },
+      "prompt": {
+        "text": "阿嬤妳不用擔心我晚上到家會打電話給妳 ",
+        "confidence": -0.08631963056066762,
+        "no_speech_probability": 2.980232238769531e-07,
+        "inference_seconds": 0.8354573000106029
+      },
+      "selected": "prompt",
+      "selected_text": "阿嬤妳不用擔心我晚上到家會打電話給妳 ",
+      "oracle_selection": "baseline",
+      "baseline_cer": {
+        "cer": 0.0,
+        "correct_rate": 100.0,
+        "errors": 0,
+        "substitutions": 0,
+        "deletions": 0,
+        "insertions": 0,
+        "characters": 18
+      },
+      "prompt_cer": {
+        "cer": 0.0,
+        "correct_rate": 100.0,
+        "errors": 0,
+        "substitutions": 0,
+        "deletions": 0,
+        "insertions": 0,
+        "characters": 18
+      },
+      "routed_cer": {
+        "cer": 0.0,
+        "correct_rate": 100.0,
+        "errors": 0,
+        "substitutions": 0,
+        "deletions": 0,
+        "insertions": 0,
+        "characters": 18
+      }
+    },
+    {
+      "audio_file": "T07.m4a",
+      "audio_duration_seconds": 6.4854,
+      "reference": "有空就回來坐，不用特地買東西。",
+      "baseline": {
+        "text": "有空就回來做不用特地買東西",
+        "confidence": -0.25480768313774693,
+        "no_speech_probability": 0.0003559589385986328,
+        "inference_seconds": 0.5832643000176176
+      },
+      "prompt": {
+        "text": "有空就回來做不用特地買東西",
+        "confidence": -0.2836538369839008,
+        "no_speech_probability": 0.00039815902709960943,
+        "inference_seconds": 0.6544662999804132
+      },
+      "selected": "baseline",
+      "selected_text": "有空就回來做不用特地買東西",
+      "oracle_selection": "baseline",
+      "baseline_cer": {
+        "cer": 0.07692307692307693,
+        "correct_rate": 92.3076923076923,
+        "errors": 1,
+        "substitutions": 1,
+        "deletions": 0,
+        "insertions": 0,
+        "characters": 13
+      },
+      "prompt_cer": {
+        "cer": 0.07692307692307693,
+        "correct_rate": 92.3076923076923,
+        "errors": 1,
+        "substitutions": 1,
+        "deletions": 0,
+        "insertions": 0,
+        "characters": 13
+      },
+      "routed_cer": {
+        "cer": 0.07692307692307693,
+        "correct_rate": 92.3076923076923,
+        "errors": 1,
+        "substitutions": 1,
+        "deletions": 0,
+        "insertions": 0,
+        "characters": 13
+      }
+    },
+    {
+      "audio_file": "T08.m4a",
+      "audio_duration_seconds": 8.0854,
+      "reference": "菜佇電鍋內底，轉來家己挾，莫閣食泡麵。",
+      "baseline": {
+        "text": "菜喔在丁國內裡啦回來找到自己的東西不要再吃泡麵了",
+        "confidence": -0.5531850915688735,
+        "no_speech_probability": 0.0003268718719482422,
+        "inference_seconds": 0.8869686999823898
+      },
+      "prompt": {
+        "text": "菜在電鍋裡頭要找到解決方案不要再吃泡麵了 ",
+        "confidence": -0.4299879933779056,
+        "no_speech_probability": 0.0006070137023925781,
+        "inference_seconds": 0.8734912000363693
+      },
+      "selected": "prompt",
+      "selected_text": "菜在電鍋裡頭要找到解決方案不要再吃泡麵了 ",
+      "oracle_selection": "prompt",
+      "baseline_cer": {
+        "cer": 1.125,
+        "correct_rate": -12.5,
+        "errors": 18,
+        "substitutions": 10,
+        "deletions": 0,
+        "insertions": 8,
+        "characters": 16
+      },
+      "prompt_cer": {
+        "cer": 0.9375,
+        "correct_rate": 6.25,
+        "errors": 15,
+        "substitutions": 11,
+        "deletions": 0,
+        "insertions": 4,
+        "characters": 16
+      },
+      "routed_cer": {
+        "cer": 0.9375,
+        "correct_rate": 6.25,
+        "errors": 15,
+        "substitutions": 11,
+        "deletions": 0,
+        "insertions": 4,
+        "characters": 16
+      }
+    },
+    {
+      "audio_file": "T09.m4a",
+      "audio_duration_seconds": 5.504,
+      "reference": "有閒就來坐啦，毋免提物件來。",
+      "baseline": {
+        "text": "慧雯花藥就來這裡啦不要再拿東西來了啦",
+        "confidence": -0.49374998509883883,
+        "no_speech_probability": 0.000652313232421875,
+        "inference_seconds": 0.6925813000416383
+      },
+      "prompt": {
+        "text": "委任法後就來坐啦不要再騙你怕來了啦",
+        "confidence": -0.5370065914957147,
+        "no_speech_probability": 0.00017130374908447266,
+        "inference_seconds": 0.7679248999920674
+      },
+      "selected": "baseline",
+      "selected_text": "慧雯花藥就來這裡啦不要再拿東西來了啦",
+      "oracle_selection": "prompt",
+      "baseline_cer": {
+        "cer": 1.1666666666666667,
+        "correct_rate": -16.666666666666675,
+        "errors": 14,
+        "substitutions": 8,
+        "deletions": 0,
+        "insertions": 6,
+        "characters": 12
+      },
+      "prompt_cer": {
+        "cer": 1.0,
+        "correct_rate": 0.0,
+        "errors": 12,
+        "substitutions": 7,
+        "deletions": 0,
+        "insertions": 5,
+        "characters": 12
+      },
+      "routed_cer": {
+        "cer": 1.1666666666666667,
+        "correct_rate": -16.666666666666675,
+        "errors": 14,
+        "substitutions": 8,
+        "deletions": 0,
+        "insertions": 6,
+        "characters": 12
+      }
+    },
+    {
+      "audio_file": "T10.m4a",
+      "audio_duration_seconds": 7.8507,
+      "reference": "阿嬤，我今天加班較無閒，拜六才轉去看妳。",
+      "baseline": {
+        "text": "阿嬤我今天假班比較忙拜託你再回去看阿姨 ",
+        "confidence": -0.2322591207921505,
+        "no_speech_probability": 0.00018215179443359375,
+        "inference_seconds": 0.7735717999748886
+      },
+      "prompt": {
+        "text": "阿嬤我今天假班比較忙拜6天再回去看妳 ",
+        "confidence": -0.27418153626578196,
+        "no_speech_probability": 6.973743438720703e-06,
+        "inference_seconds": 0.7325822000275366
+      },
+      "selected": "baseline",
+      "selected_text": "阿嬤我今天假班比較忙拜託你再回去看阿姨 ",
+      "oracle_selection": "prompt",
+      "baseline_cer": {
+        "cer": 0.5882352941176471,
+        "correct_rate": 41.17647058823529,
+        "errors": 10,
+        "substitutions": 6,
+        "deletions": 1,
+        "insertions": 3,
+        "characters": 17
+      },
+      "prompt_cer": {
+        "cer": 0.4117647058823529,
+        "correct_rate": 58.82352941176471,
+        "errors": 7,
+        "substitutions": 4,
+        "deletions": 1,
+        "insertions": 2,
+        "characters": 17
+      },
+      "routed_cer": {
+        "cer": 0.5882352941176471,
+        "correct_rate": 41.17647058823529,
+        "errors": 10,
+        "substitutions": 6,
+        "deletions": 1,
+        "insertions": 3,
+        "characters": 17
+      }
+    }
+  ]
+}
