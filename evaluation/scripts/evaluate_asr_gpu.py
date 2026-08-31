@@ -1,0 +1,521 @@
+import os
+import sys
+import warnings
+from datetime import datetime, timedelta
+
+# Windows: 把 pip 裝的 nvidia cuDNN/cuBLAS bin 目錄加入 DLL 搜尋路徑，
+# 讓 ctranslate2 能載入。必須在 import faster_whisper 之前。
+# 注意：nvidia.cudnn / nvidia.cublas 是 PEP 420 namespace package，
+#       沒有 __init__.py 因此 __file__ 是 None；要改用 __path__ 取目錄。
+if sys.platform == "win32":
+    import importlib
+
+    for _pkg_name in ("nvidia.cudnn", "nvidia.cublas"):
+        try:
+            _pkg = importlib.import_module(_pkg_name)
+            _pkg_file = getattr(_pkg, "__file__", None)
+            if _pkg_file:
+                _pkg_dir = os.path.dirname(_pkg_file)
+            else:
+                _paths = list(getattr(_pkg, "__path__", []) or [])
+                _pkg_dir = _paths[0] if _paths else None
+            if _pkg_dir:
+                _bin = os.path.join(_pkg_dir, "bin")
+                if os.path.isdir(_bin):
+                    os.add_dll_directory(_bin)
+        except ImportError:
+            pass
+
+from faster_whisper import WhisperModel
+import time
+from pathlib import Path
+import librosa
+import soundfile as sf
+import re
+import cn2an
+import pandas as pd
+import opencc
+import unicodedata
+import argparse
+import glob
+import json
+import csv
+from cer import compare_texts
+
+s2tw = opencc.OpenCC("s2tw")
+
+
+def percentile(values, percent):
+    """以線性內插計算百分位數，避免額外增加套件相依。"""
+    if not values:
+        return 0.0
+    ordered = sorted(values)
+    if len(ordered) == 1:
+        return float(ordered[0])
+    position = (len(ordered) - 1) * percent / 100.0
+    lower = int(position)
+    upper = min(lower + 1, len(ordered) - 1)
+    weight = position - lower
+    return float(ordered[lower] * (1 - weight) + ordered[upper] * weight)
+
+
+def split_sentence_to_words(text: str, is_split: bool):
+    if is_split is False:
+        return text
+    pattern = re.compile(
+        r"([\u1100-\u11ff\u2e80-\ua4cf\ua840-\uD7AF\uF900-\uFAFF\uFE30-\uFE4F\uFF65-\uFFDC\U00020000-\U0002FFFF%]|\d+\.\d+|\d+)"
+    )
+    chars = pattern.split(text.strip().lower())
+    return " ".join([w.strip() for w in chars if w is not None and w.strip()])
+
+
+def replace_words(article):
+    mappings = {
+        "百分之十五": "15%",
+        "百分之五": "5%",
+        "百分之十二點五": "12.5%",
+        "百分之七": "7%",
+        "零八零零零九五九八": "080009598",
+    }
+    replaced_article = article
+    for old, new in mappings.items():
+        replaced_article = replaced_article.replace(old, new)
+    return replaced_article
+
+
+def convert_time(time):
+    time_str = f"{time:.3f}"
+    if "." in time_str:
+        seconds, millisecond = time_str.split(".")
+    else:
+        time = time_str
+        millisecond = "000"
+
+    delta = timedelta(seconds=int(seconds))
+    time_str = (datetime.min + delta).strftime("%H:%M:%S")
+
+    t = str(time_str).split(":")
+    return f"{':'.join([x.zfill(2) for x in t])}.{millisecond}"
+
+
+def full_to_half(text):
+    """全形 → 半形（透過 NFKC 正規化；限 Latin / 數字 / 標點，中文字不會被動到）。"""
+    return unicodedata.normalize("NFKC", text)
+
+
+def remove_special_characters_by_dataset_name(text):
+    # 移除中英常見標點，並做全形→半形
+    chars_to_ignore_regex_base = r'[,"\'。，^¿¡；「」《》:：＄$\[\]〜～·・‧―─–－⋯、＼【】=<>{}_〈〉　）（—『』«»→„…(),`&＆﹁﹂#＃\\!?！;]'
+
+    sentence = re.sub(chars_to_ignore_regex_base, "", text)
+    sentence = full_to_half(sentence)
+
+    return sentence
+
+
+def chinese_number_to_arabic(text: str) -> str:
+    """中文數字 → 阿拉伯數字（使用 cn2an.transform）。
+
+    例：'九百三十一' → '931'、'九十九元' → '99元'。
+    解析失敗時統一吃下例外回傳原文，並抑制 cn2an 內部 warn。
+    """
+    if not text:
+        return text
+    try:
+        with warnings.catch_warnings():
+            warnings.simplefilter("ignore", UserWarning)
+            return cn2an.transform(text, "cn2an")
+    except Exception:
+        return text
+
+
+def find_original_transcript(audio_file):
+    """尋找對應的原始逐字稿檔案"""
+    audio_dir = os.path.dirname(audio_file)
+    audio_name = os.path.splitext(os.path.basename(audio_file))[0]
+
+    # 可能的原始逐字稿檔案名稱模式
+    possible_names = [
+        f"{audio_name}.txt",
+        f"{audio_name}_transcript.txt",
+        f"{audio_name}_original.txt",
+        f"{audio_name}_reference.txt",
+        f"{audio_name}_ground_truth.txt",
+    ]
+
+    for name in possible_names:
+        transcript_path = os.path.join(audio_dir, name)
+        if os.path.exists(transcript_path):
+            return transcript_path
+
+    return None
+
+
+def process_audio_folder(folder_path, output_file="transcription_results.txt"):
+    """
+    處理指定資料夾中的所有音檔
+
+    Args:
+        folder_path: 音檔資料夾路徑
+        output_file: 輸出檔案名稱 (已棄用，保留用於向後相容)
+    """
+    # 支援的音檔格式
+    audio_extensions = ["*.wav", "*.mp3", "*.flac", "*.m4a", "*.aac"]
+
+    # 取得所有音檔
+    audio_files = []
+    for ext in audio_extensions:
+        # 使用 case-insensitive 搜尋，避免重複計算
+        found_files = glob.glob(os.path.join(folder_path, ext), recursive=False)
+        found_files.extend(
+            glob.glob(os.path.join(folder_path, ext.upper()), recursive=False)
+        )
+        audio_files.extend(found_files)
+
+    # 移除重複的檔案（因為大小寫搜尋可能找到同一個檔案）
+    # 固定評測順序，確保每次都由 T01 作為第一筆（暖機樣本）。
+    audio_files = sorted(set(audio_files), key=lambda p: os.path.basename(p).lower())
+
+    if not audio_files:
+        print(f"在資料夾 {folder_path} 中找不到音檔")
+        return
+
+    print(f"找到 {len(audio_files)} 個音檔")
+
+    # 載入模型
+    try:
+        model_load_started = time.perf_counter()
+        model = WhisperModel("models", device="cuda", compute_type="float16")
+        model_load_seconds = time.perf_counter() - model_load_started
+        print(f"模型載入成功: models（{model_load_seconds:.3f} 秒）")
+    except Exception as e:
+        print(f"模型載入失敗: {e}")
+        return
+
+    # 儲存所有比對結果
+    comparison_results = []
+
+    # 處理每個音檔
+    for i, audio_file in enumerate(audio_files, 1):
+        print(f"處理音檔 {i}/{len(audio_files)}: {os.path.basename(audio_file)}")
+
+        try:
+            # 載入音檔（mono=True 確保 1D 陣列；stereo 會自動 down-mix）
+            audio, sr = librosa.load(audio_file, sr=16000, mono=True)
+            audio_duration_seconds = len(audio) / float(sr)
+
+            # 轉錄
+            inference_started = time.perf_counter()
+            segments, info = model.transcribe(
+                audio,
+                language="zh",
+                word_timestamps=False,
+                vad_filter=True,
+                beam_size=5,
+                condition_on_previous_text=True,
+                initial_prompt="",
+            )
+
+            # 組合轉錄結果
+            text = ""
+            for segment in segments:
+                text += segment.text
+            inference_seconds = time.perf_counter() - inference_started
+            rtf = (
+                inference_seconds / audio_duration_seconds
+                if audio_duration_seconds > 0
+                else 0.0
+            )
+
+            # 後處理：phrase 替換 → 簡繁轉換 → 中文數字→阿拉伯數字 → 去標點/全半形 → 小寫
+            processed_text = remove_special_characters_by_dataset_name(
+                chinese_number_to_arabic(s2tw.convert(replace_words(text)))
+            ).lower()
+
+            # 生成輸出檔案路徑
+            audio_dir = os.path.dirname(audio_file)
+            audio_name = os.path.splitext(os.path.basename(audio_file))[0]
+            output_path = os.path.join(audio_dir, f"{audio_name}_asr.txt")
+
+            # 儲存轉錄結果
+            with open(output_path, "w", encoding="utf-8") as f:
+                f.write(f"{processed_text}")
+
+            print(f"轉錄結果已儲存至: {output_path}")
+            print(f"轉錄結果: {processed_text}")
+
+            # 尋找並比對原始逐字稿
+            original_transcript_path = find_original_transcript(audio_file)
+            comparison_result = {
+                "audio_file": os.path.basename(audio_file),
+                "asr_result": processed_text,
+                "original_transcript": None,
+                "cer_result": None,
+                "has_original_transcript": False,
+                "latency": {
+                    "audio_duration_seconds": round(audio_duration_seconds, 4),
+                    "inference_seconds": round(inference_seconds, 4),
+                    "rtf": round(rtf, 4),
+                    "is_warmup_sample": i == 1,
+                    "device": "cuda",
+                    "compute_type": "float16",
+                },
+            }
+
+            print(
+                f"音檔長度: {audio_duration_seconds:.3f} 秒, "
+                f"推論時間: {inference_seconds:.3f} 秒, RTF: {rtf:.4f}"
+            )
+
+            if original_transcript_path:
+                try:
+                    with open(original_transcript_path, "r", encoding="utf-8") as f:
+                        original_text = f.read().strip()
+
+                    comparison_result["original_transcript"] = original_text
+                    comparison_result["has_original_transcript"] = True
+
+                    # 進行 CER 比對
+                    cer_result = compare_texts(original_text, processed_text)
+                    if cer_result:
+                        comparison_result["cer_result"] = {
+                            "correct_rate": cer_result.correct_rate,
+                            "cer_rate": cer_result.cer_rate,
+                            "total_errors": cer_result.total_errors,
+                            "substitutions_count": cer_result.substitutions_count,
+                            "deletions_count": cer_result.deletions_count,
+                            "insertions_count": cer_result.insertions_count,
+                            "total_chars": cer_result.total_chars,
+                            "substitutions_errors": cer_result.substitutions_errors,
+                            "deletions_errors": cer_result.deletions_errors,
+                            "insertions_errors": cer_result.insertions_errors,
+                            "reference_highlighted": cer_result.reference_highlighted,
+                            "hypothesis_highlighted": cer_result.hypothesis_highlighted,
+                        }
+
+                        print(f"原始逐字稿: {original_text}")
+                        print(
+                            f"CER: {cer_result.cer_rate:.4f}, 正確率: {cer_result.correct_rate:.2f}%"
+                        )
+                        print(
+                            f"替換錯誤: {cer_result.substitutions_count}, 刪除錯誤: {cer_result.deletions_count}, 插入錯誤: {cer_result.insertions_count}"
+                        )
+                    else:
+                        print("CER 比對失敗")
+
+                except Exception as e:
+                    print(f"讀取原始逐字稿時發生錯誤: {e}")
+            else:
+                print(f"找不到對應的原始逐字稿檔案")
+
+            comparison_results.append(comparison_result)
+
+        except Exception as e:
+            print(f"處理音檔 {audio_file} 時發生錯誤: {e}")
+            # 即使發生錯誤也建立輸出檔案
+            audio_dir = os.path.dirname(audio_file)
+            audio_name = os.path.splitext(os.path.basename(audio_file))[0]
+            output_path = os.path.join(audio_dir, f"{audio_name}_asr.txt")
+
+            with open(output_path, "w", encoding="utf-8") as f:
+                f.write(f"檔案名稱: {os.path.basename(audio_file)}\n")
+                f.write(f"錯誤: {e}\n")
+
+            print(f"錯誤記錄已儲存至: {output_path}")
+
+            # 添加錯誤結果到比較結果中
+            comparison_results.append(
+                {
+                    "audio_file": os.path.basename(audio_file),
+                    "asr_result": None,
+                    "original_transcript": None,
+                    "cer_result": None,
+                    "has_original_transcript": False,
+                    "error": str(e),
+                }
+            )
+
+    # 計算整體統計
+    total_files = len(comparison_results)
+    files_with_transcript = sum(
+        1 for r in comparison_results if r.get("has_original_transcript", False)
+    )
+    files_with_cer = sum(
+        1 for r in comparison_results if r.get("cer_result") is not None
+    )
+
+    if files_with_cer > 0:
+        avg_cer = (
+            sum(
+                r["cer_result"]["cer_rate"]
+                for r in comparison_results
+                if r.get("cer_result")
+            )
+            / files_with_cer
+        )
+        avg_correct_rate = (
+            sum(
+                r["cer_result"]["correct_rate"]
+                for r in comparison_results
+                if r.get("cer_result")
+            )
+            / files_with_cer
+        )
+        total_substitutions = sum(
+            r["cer_result"]["substitutions_count"]
+            for r in comparison_results
+            if r.get("cer_result")
+        )
+        total_deletions = sum(
+            r["cer_result"]["deletions_count"]
+            for r in comparison_results
+            if r.get("cer_result")
+        )
+        total_insertions = sum(
+            r["cer_result"]["insertions_count"]
+            for r in comparison_results
+            if r.get("cer_result")
+        )
+    else:
+        avg_cer = 0
+        avg_correct_rate = 0
+        total_substitutions = 0
+        total_deletions = 0
+        total_insertions = 0
+
+    latency_results = [
+        r["latency"] for r in comparison_results if r.get("latency") is not None
+    ]
+    warm_latency_results = [
+        item for item in latency_results if not item["is_warmup_sample"]
+    ]
+    inference_times = [item["inference_seconds"] for item in latency_results]
+    rtfs = [item["rtf"] for item in latency_results]
+    warm_inference_times = [
+        item["inference_seconds"] for item in warm_latency_results
+    ]
+    warm_rtfs = [item["rtf"] for item in warm_latency_results]
+
+    def average(values):
+        return sum(values) / len(values) if values else 0.0
+
+    # 建立最終結果
+    final_result = {
+        "summary": {
+            "total_files": total_files,
+            "files_with_transcript": files_with_transcript,
+            "files_with_cer": files_with_cer,
+            "average_cer": avg_cer,
+            "average_correct_rate": avg_correct_rate,
+            "total_substitutions": total_substitutions,
+            "total_deletions": total_deletions,
+            "total_insertions": total_insertions,
+            "model_load_seconds": round(model_load_seconds, 4),
+            "latency_all_files": {
+                "sample_count": len(latency_results),
+                "average_inference_seconds": round(average(inference_times), 4),
+                "median_inference_seconds": round(percentile(inference_times, 50), 4),
+                "p95_inference_seconds": round(percentile(inference_times, 95), 4),
+                "average_rtf": round(average(rtfs), 4),
+            },
+            "latency_after_warmup": {
+                "sample_count": len(warm_latency_results),
+                "average_inference_seconds": round(
+                    average(warm_inference_times), 4
+                ),
+                "median_inference_seconds": round(
+                    percentile(warm_inference_times, 50), 4
+                ),
+                "p95_inference_seconds": round(
+                    percentile(warm_inference_times, 95), 4
+                ),
+                "average_rtf": round(average(warm_rtfs), 4),
+            },
+        },
+        "detailed_results": comparison_results,
+    }
+
+    # 輸出 JSON 到根目錄
+    output_json_path = os.path.join(os.getcwd(), "asr_comparison_results.json")
+    with open(output_json_path, "w", encoding="utf-8") as f:
+        json.dump(final_result, f, ensure_ascii=False, indent=2)
+
+    latency_csv_path = os.path.join(os.getcwd(), "asr_latency_results.csv")
+    with open(latency_csv_path, "w", encoding="utf-8-sig", newline="") as f:
+        writer = csv.writer(f)
+        writer.writerow(
+            [
+                "audio_file",
+                "audio_duration_seconds",
+                "inference_seconds",
+                "rtf",
+                "is_warmup_sample",
+                "device",
+                "compute_type",
+                "cer",
+            ]
+        )
+        for result in comparison_results:
+            latency = result.get("latency")
+            if not latency:
+                continue
+            cer_result = result.get("cer_result") or {}
+            writer.writerow(
+                [
+                    result["audio_file"],
+                    latency["audio_duration_seconds"],
+                    latency["inference_seconds"],
+                    latency["rtf"],
+                    latency["is_warmup_sample"],
+                    latency["device"],
+                    latency["compute_type"],
+                    cer_result.get("cer_rate", ""),
+                ]
+            )
+
+    print(f"\n=== 處理完成 ===")
+    print(f"總檔案數: {total_files}")
+    print(f"有原始逐字稿的檔案數: {files_with_transcript}")
+    print(f"成功比對的檔案數: {files_with_cer}")
+    if files_with_cer > 0:
+        print(f"平均 CER: {avg_cer:.4f}")
+        print(f"平均正確率: {avg_correct_rate:.2f}%")
+        print(f"總替換錯誤: {total_substitutions}")
+        print(f"總刪除錯誤: {total_deletions}")
+        print(f"總插入錯誤: {total_insertions}")
+    if latency_results:
+        print(f"模型載入時間: {model_load_seconds:.3f} 秒")
+        print(
+            f"全部樣本平均推論時間: {average(inference_times):.3f} 秒, "
+            f"平均 RTF: {average(rtfs):.4f}"
+        )
+    if warm_latency_results:
+        print(
+            f"排除暖機樣本後平均推論時間: {average(warm_inference_times):.3f} 秒, "
+            f"P95: {percentile(warm_inference_times, 95):.3f} 秒, "
+            f"平均 RTF: {average(warm_rtfs):.4f}"
+        )
+    print(f"詳細結果已儲存至: {output_json_path}")
+    print(f"延遲結果已儲存至: {latency_csv_path}")
+
+
+def main():
+    parser = argparse.ArgumentParser(description="音檔轉錄工具")
+    parser.add_argument("folder", help="音檔資料夾路徑")
+    parser.add_argument(
+        "--output",
+        default="transcription_results.txt",
+        help="輸出檔案名稱 (已棄用，保留用於向後相容)",
+    )
+
+    args = parser.parse_args()
+
+    if not os.path.exists(args.folder):
+        print(f"資料夾不存在: {args.folder}")
+        return
+
+    process_audio_folder(args.folder, args.output)
+
+
+if __name__ == "__main__":
+    main()

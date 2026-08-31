@@ -1,0 +1,11 @@
+﻿audio_file,audio_duration_seconds,inference_seconds,rtf,is_warmup_sample,device,compute_type,cer
+T01.m4a,5.9947,1.0582,0.1765,True,cuda,float16,0.0
+T02.m4a,5.4827,0.6323,0.1153,False,cuda,float16,0.7692307692307693
+T03.m4a,6.8907,0.6455,0.0937,False,cuda,float16,0.375
+T04.m4a,2.688,0.4403,0.1638,False,cuda,float16,0.0
+T05.m4a,5.504,0.7206,0.1309,False,cuda,float16,1.0
+T06.m4a,7.616,0.7462,0.098,False,cuda,float16,0.0
+T07.m4a,6.4854,0.5832,0.0899,False,cuda,float16,0.07692307692307693
+T08.m4a,8.0854,0.8101,0.1002,False,cuda,float16,1.125
+T09.m4a,5.504,0.6769,0.123,False,cuda,float16,1.1666666666666667
+T10.m4a,7.8507,0.7569,0.0964,False,cuda,float16,0.5882352941176471
