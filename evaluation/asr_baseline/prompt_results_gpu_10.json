@@ -1,0 +1,351 @@
+{
+  "summary": {
+    "total_files": 10,
+    "files_with_transcript": 10,
+    "files_with_cer": 10,
+    "average_cer": 0.4156970480499892,
+    "average_correct_rate": 58.43029519500109,
+    "total_substitutions": 43,
+    "total_deletions": 2,
+    "total_insertions": 14,
+    "model_load_seconds": 6.0456,
+    "latency_all_files": {
+      "sample_count": 10,
+      "average_inference_seconds": 0.7562,
+      "median_inference_seconds": 0.7416,
+      "p95_inference_seconds": 1.0279,
+      "average_rtf": 0.1264
+    },
+    "latency_after_warmup": {
+      "sample_count": 9,
+      "average_inference_seconds": 0.7239,
+      "median_inference_seconds": 0.7361,
+      "p95_inference_seconds": 0.9454,
+      "average_rtf": 0.121
+    }
+  },
+  "detailed_results": [
+    {
+      "audio_file": "T01.m4a",
+      "asr_result": "阿嬤我今天工作比較忙沒有辦法回家吃飯 ",
+      "original_transcript": "阿嬤，我今天工作比較忙，沒有辦法回家吃飯。",
+      "cer_result": {
+        "correct_rate": 100.0,
+        "cer_rate": 0.0,
+        "total_errors": 0,
+        "substitutions_count": 0,
+        "deletions_count": 0,
+        "insertions_count": 0,
+        "total_chars": 18,
+        "substitutions_errors": [],
+        "deletions_errors": [],
+        "insertions_errors": [],
+        "reference_highlighted": "阿嬤我今天工作比較忙沒有辦法回家吃飯",
+        "hypothesis_highlighted": "阿嬤我今天工作比較忙沒有辦法回家吃飯"
+      },
+      "has_original_transcript": true,
+      "latency": {
+        "audio_duration_seconds": 5.9947,
+        "inference_seconds": 1.0467,
+        "rtf": 0.1746,
+        "is_warmup_sample": true,
+        "device": "cuda",
+        "compute_type": "float16"
+      }
+    },
+    {
+      "audio_file": "T02.m4a",
+      "asr_result": "你吃百貨不然就回來問老闆 ",
+      "original_transcript": "你食飽未？若無就轉來阮兜食啦。",
+      "cer_result": {
+        "correct_rate": 23.076923076923073,
+        "cer_rate": 0.7692307692307693,
+        "total_errors": 10,
+        "substitutions_count": 9,
+        "deletions_count": 1,
+        "insertions_count": 0,
+        "total_chars": 13,
+        "substitutions_errors": [
+          "正確文本中的「食飽未若無」 在 ASR 轉譯文本中被替換成 「吃百貨不然」",
+          "正確文本中的「轉」 在 ASR 轉譯文本中被替換成 「回」",
+          "正確文本中的「阮兜食啦」 在 ASR 轉譯文本中被替換成 「問老闆」"
+        ],
+        "deletions_errors": [
+          "正確文本中的「啦」 被刪除，未被 ASR 轉譯成功 (替換造成)"
+        ],
+        "insertions_errors": [],
+        "reference_highlighted": "你[食][飽][未][若][無]就[轉]來[阮][兜][食]<啦>",
+        "hypothesis_highlighted": "你[吃][百][貨][不][然]就[回]來[問][老][闆]□"
+      },
+      "has_original_transcript": true,
+      "latency": {
+        "audio_duration_seconds": 5.4827,
+        "inference_seconds": 0.6511,
+        "rtf": 0.1188,
+        "is_warmup_sample": false,
+        "device": "cuda",
+        "compute_type": "float16"
+      }
+    },
+    {
+      "audio_file": "T03.m4a",
+      "asr_result": "阿嬤我今天比較忙碌昨天再回去看妳 ",
+      "original_transcript": "阿嬤，我今天比較無閒，週末再轉去看妳。",
+      "cer_result": {
+        "correct_rate": 68.75,
+        "cer_rate": 0.3125,
+        "total_errors": 5,
+        "substitutions_count": 5,
+        "deletions_count": 0,
+        "insertions_count": 0,
+        "total_chars": 16,
+        "substitutions_errors": [
+          "正確文本中的「無閒週末」 在 ASR 轉譯文本中被替換成 「忙碌昨天」",
+          "正確文本中的「轉」 在 ASR 轉譯文本中被替換成 「回」"
+        ],
+        "deletions_errors": [],
+        "insertions_errors": [],
+        "reference_highlighted": "阿嬤我今天比較[無][閒][週][末]再[轉]去看妳",
+        "hypothesis_highlighted": "阿嬤我今天比較[忙][碌][昨][天]再[回]去看妳"
+      },
+      "has_original_transcript": true,
+      "latency": {
+        "audio_duration_seconds": 6.8907,
+        "inference_seconds": 0.7128,
+        "rtf": 0.1035,
+        "is_warmup_sample": false,
+        "device": "cuda",
+        "compute_type": "float16"
+      }
+    },
+    {
+      "audio_file": "T04.m4a",
+      "asr_result": "改天再約",
+      "original_transcript": "改天再約。",
+      "cer_result": {
+        "correct_rate": 100.0,
+        "cer_rate": 0.0,
+        "total_errors": 0,
+        "substitutions_count": 0,
+        "deletions_count": 0,
+        "insertions_count": 0,
+        "total_chars": 4,
+        "substitutions_errors": [],
+        "deletions_errors": [],
+        "insertions_errors": [],
+        "reference_highlighted": "改天再約",
+        "hypothesis_highlighted": "改天再約"
+      },
+      "has_original_transcript": true,
+      "latency": {
+        "audio_duration_seconds": 2.688,
+        "inference_seconds": 0.4442,
+        "rtf": 0.1652,
+        "is_warmup_sample": false,
+        "device": "cuda",
+        "compute_type": "float16"
+      }
+    },
+    {
+      "audio_file": "T05.m4a",
+      "asr_result": "菜在電鍋裡倒下來快點不要再吃泡麵了 ",
+      "original_transcript": "菜在電鍋，轉來家己挾，莫閣食泡麵。",
+      "cer_result": {
+        "correct_rate": 28.57142857142857,
+        "cer_rate": 0.7142857142857143,
+        "total_errors": 10,
+        "substitutions_count": 7,
+        "deletions_count": 0,
+        "insertions_count": 3,
+        "total_chars": 14,
+        "substitutions_errors": [
+          "正確文本中的「轉」 在 ASR 轉譯文本中被替換成 「裡倒下」",
+          "正確文本中的「家己挾莫閣食」 在 ASR 轉譯文本中被替換成 「快點不要再吃」"
+        ],
+        "deletions_errors": [],
+        "insertions_errors": [
+          "「倒下」 在 ASR 結果 額外輸出，不屬於正確文本內容 (替換造成)",
+          "「了」 在 ASR 結果 額外輸出，不屬於正確文本內容"
+        ],
+        "reference_highlighted": "菜在電鍋[轉]□□來[家][己][挾][莫][閣][食]泡麵□",
+        "hypothesis_highlighted": "菜在電鍋[裡](倒)(下)來[快][點][不][要][再][吃]泡麵(了)"
+      },
+      "has_original_transcript": true,
+      "latency": {
+        "audio_duration_seconds": 5.504,
+        "inference_seconds": 0.7361,
+        "rtf": 0.1337,
+        "is_warmup_sample": false,
+        "device": "cuda",
+        "compute_type": "float16"
+      }
+    },
+    {
+      "audio_file": "T06.m4a",
+      "asr_result": "阿嬤妳不用擔心我晚上到家會打電話給妳 ",
+      "original_transcript": "阿嬤，妳不用擔心，我晚上到家會打電話給妳。",
+      "cer_result": {
+        "correct_rate": 100.0,
+        "cer_rate": 0.0,
+        "total_errors": 0,
+        "substitutions_count": 0,
+        "deletions_count": 0,
+        "insertions_count": 0,
+        "total_chars": 18,
+        "substitutions_errors": [],
+        "deletions_errors": [],
+        "insertions_errors": [],
+        "reference_highlighted": "阿嬤妳不用擔心我晚上到家會打電話給妳",
+        "hypothesis_highlighted": "阿嬤妳不用擔心我晚上到家會打電話給妳"
+      },
+      "has_original_transcript": true,
+      "latency": {
+        "audio_duration_seconds": 7.616,
+        "inference_seconds": 0.7472,
+        "rtf": 0.0981,
+        "is_warmup_sample": false,
+        "device": "cuda",
+        "compute_type": "float16"
+      }
+    },
+    {
+      "audio_file": "T07.m4a",
+      "asr_result": "而有空就回來做不用特地買東西",
+      "original_transcript": "有空就回來坐，不用特地買東西。",
+      "cer_result": {
+        "correct_rate": 84.61538461538461,
+        "cer_rate": 0.15384615384615385,
+        "total_errors": 2,
+        "substitutions_count": 1,
+        "deletions_count": 0,
+        "insertions_count": 1,
+        "total_chars": 13,
+        "substitutions_errors": [
+          "正確文本中的「坐」 在 ASR 轉譯文本中被替換成 「做」"
+        ],
+        "deletions_errors": [],
+        "insertions_errors": [
+          "「而」 在 ASR 結果 額外輸出，不屬於正確文本內容"
+        ],
+        "reference_highlighted": "□有空就回來[坐]不用特地買東西",
+        "hypothesis_highlighted": "(而)有空就回來[做]不用特地買東西"
+      },
+      "has_original_transcript": true,
+      "latency": {
+        "audio_duration_seconds": 6.4854,
+        "inference_seconds": 0.5851,
+        "rtf": 0.0902,
+        "is_warmup_sample": false,
+        "device": "cuda",
+        "compute_type": "float16"
+      }
+    },
+    {
+      "audio_file": "T08.m4a",
+      "asr_result": "菜在電鍋裡頭要找到自己的東西不要再吃泡麵了 ",
+      "original_transcript": "菜佇電鍋內底，轉來家己挾，莫閣食泡麵。",
+      "cer_result": {
+        "correct_rate": 6.25,
+        "cer_rate": 0.9375,
+        "total_errors": 15,
+        "substitutions_count": 10,
+        "deletions_count": 0,
+        "insertions_count": 5,
+        "total_chars": 16,
+        "substitutions_errors": [
+          "正確文本中的「佇」 在 ASR 轉譯文本中被替換成 「在」",
+          "正確文本中的「內底轉來家」 在 ASR 轉譯文本中被替換成 「裡頭要找到自」",
+          "正確文本中的「挾莫閣食」 在 ASR 轉譯文本中被替換成 「的東西不要再吃」"
+        ],
+        "deletions_errors": [],
+        "insertions_errors": [
+          "「自」 在 ASR 結果 額外輸出，不屬於正確文本內容 (替換造成)",
+          "「要再吃」 在 ASR 結果 額外輸出，不屬於正確文本內容 (替換造成)",
+          "「了」 在 ASR 結果 額外輸出，不屬於正確文本內容"
+        ],
+        "reference_highlighted": "菜[佇]電鍋[內][底][轉][來][家]□己[挾][莫][閣][食]□□□泡麵□",
+        "hypothesis_highlighted": "菜[在]電鍋[裡][頭][要][找][到](自)己[的][東][西][不](要)(再)(吃)泡麵(了)"
+      },
+      "has_original_transcript": true,
+      "latency": {
+        "audio_duration_seconds": 8.0854,
+        "inference_seconds": 0.7777,
+        "rtf": 0.0962,
+        "is_warmup_sample": false,
+        "device": "cuda",
+        "compute_type": "float16"
+      }
+    },
+    {
+      "audio_file": "T09.m4a",
+      "asr_result": "慧雯華偶就來坐啦阿嬤再拿東西來啦",
+      "original_transcript": "有閒就來坐啦，毋免提物件來。",
+      "cer_result": {
+        "correct_rate": 8.333333333333337,
+        "cer_rate": 0.9166666666666666,
+        "total_errors": 11,
+        "substitutions_count": 7,
+        "deletions_count": 0,
+        "insertions_count": 4,
+        "total_chars": 12,
+        "substitutions_errors": [
+          "正確文本中的「有閒」 在 ASR 轉譯文本中被替換成 「慧雯華偶」",
+          "正確文本中的「毋免提物件」 在 ASR 轉譯文本中被替換成 「阿嬤再拿東西」"
+        ],
+        "deletions_errors": [],
+        "insertions_errors": [
+          "「華偶」 在 ASR 結果 額外輸出，不屬於正確文本內容 (替換造成)",
+          "「西」 在 ASR 結果 額外輸出，不屬於正確文本內容 (替換造成)",
+          "「啦」 在 ASR 結果 額外輸出，不屬於正確文本內容"
+        ],
+        "reference_highlighted": "[有][閒]□□就來坐啦[毋][免][提][物][件]□來□",
+        "hypothesis_highlighted": "[慧][雯](華)(偶)就來坐啦[阿][嬤][再][拿][東](西)來(啦)"
+      },
+      "has_original_transcript": true,
+      "latency": {
+        "audio_duration_seconds": 5.504,
+        "inference_seconds": 0.856,
+        "rtf": 0.1555,
+        "is_warmup_sample": false,
+        "device": "cuda",
+        "compute_type": "float16"
+      }
+    },
+    {
+      "audio_file": "T10.m4a",
+      "asr_result": "阿嬤我今天假班比較忙拜6再回去看妳 ",
+      "original_transcript": "阿嬤，我今天加班較無閒，拜六才轉去看妳。",
+      "cer_result": {
+        "correct_rate": 64.70588235294117,
+        "cer_rate": 0.35294117647058826,
+        "total_errors": 6,
+        "substitutions_count": 4,
+        "deletions_count": 1,
+        "insertions_count": 1,
+        "total_chars": 17,
+        "substitutions_errors": [
+          "正確文本中的「加」 在 ASR 轉譯文本中被替換成 「假」",
+          "正確文本中的「無閒」 在 ASR 轉譯文本中被替換成 「忙」",
+          "正確文本中的「才轉」 在 ASR 轉譯文本中被替換成 「再回」"
+        ],
+        "deletions_errors": [
+          "正確文本中的「閒」 被刪除，未被 ASR 轉譯成功 (替換造成)"
+        ],
+        "insertions_errors": [
+          "「比」 在 ASR 結果 額外輸出，不屬於正確文本內容"
+        ],
+        "reference_highlighted": "阿嬤我今天[加]班□較[無]<閒>拜六[才][轉]去看妳",
+        "hypothesis_highlighted": "阿嬤我今天[假]班(比)較[忙]□拜六[再][回]去看妳"
+      },
+      "has_original_transcript": true,
+      "latency": {
+        "audio_duration_seconds": 7.8507,
+        "inference_seconds": 1.005,
+        "rtf": 0.128,
+        "is_warmup_sample": false,
+        "device": "cuda",
+        "compute_type": "float16"
+      }
+    }
+  ]
+}
