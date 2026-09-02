@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>人工審查台｜Taiwan Context AI</title>
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    .review-list { display: grid; gap: 18px; margin-top: 22px; }
+    .review-card { background: white; border: 1px solid var(--line); border-radius: 18px; padding: 22px; box-shadow: var(--shadow); }
+    .review-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+    .review-meta span { background: #eef4f4; border-radius: 999px; padding: 5px 9px; font-size: 12px; }
+    .text-row { border-left: 3px solid var(--line); padding-left: 12px; margin: 14px 0; }
+    .text-row.corrected { border-color: var(--teal); }
+    .text-row small { display: block; color: var(--muted); margin-bottom: 4px; }
+    .review-note { width: 100%; margin-top: 10px; }
+    .review-actions { display: flex; gap: 10px; margin-top: 12px; }
+    .reject { background: #a13b33; }
+    .empty { color: var(--muted); text-align: center; padding: 50px 20px; }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header>
+      <p class="eyebrow">TAIWAN CONTEXT DATASET</p>
+      <h1>人工審查台</h1>
+      <p class="subtitle">核對使用者修正內容；只有同意且核准的資料才會進入資料集。</p>
+      <a class="review-link" href="../">← 回到聲入其境</a>
+    </header>
+    <div id="reviewStatus" class="progress"><span class="spinner"></span><span>載入待審核資料…</span></div>
+    <p id="reviewError" class="error hidden"></p>
+    <section id="reviewList" class="review-list"></section>
+  </main>
+  <script src="review.js"></script>
+</body>
+</html>

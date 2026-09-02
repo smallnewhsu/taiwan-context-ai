@@ -46,6 +46,11 @@ class FeedbackRequest(BaseModel):
     consent_to_dataset: bool = False
 
 
+class ReviewRequest(BaseModel):
+    decision: Literal["approve", "reject"]
+    reviewer_note: str = Field(default="", max_length=1000)
+
+
 @app.get("/", include_in_schema=False)
 def root():
     return RedirectResponse(url="/app/")
@@ -85,6 +90,24 @@ def select_candidate(request: ContextRequest):
 @app.post("/feedback", status_code=201)
 def save_feedback(request: FeedbackRequest):
     return feedback_service.save(request.dict())
+
+
+@app.get("/feedback/pending")
+def list_pending_feedback():
+    items = feedback_service.list_pending()
+    return {"count": len(items), "items": items}
+
+
+@app.post("/feedback/{feedback_id}/review")
+def review_feedback(feedback_id: str, request: ReviewRequest):
+    try:
+        return feedback_service.review(
+            feedback_id, request.decision, request.reviewer_note
+        )
+    except KeyError as exc:
+        raise HTTPException(status_code=404, detail=str(exc)) from exc
+    except ValueError as exc:
+        raise HTTPException(status_code=409, detail=str(exc)) from exc
 
 
 @app.post("/speech/interpret")
