@@ -1,20 +1,29 @@
 from pathlib import Path
+from typing import Literal
 
 from fastapi import FastAPI, File, HTTPException, UploadFile
 from fastapi.concurrency import run_in_threadpool
-from pydantic import BaseModel
+from fastapi.responses import RedirectResponse
+from fastapi.staticfiles import StaticFiles
+from pydantic import BaseModel, Field
 
 from backend.asr_service import ASRService, SUPPORTED_EXTENSIONS
 from backend.context_engine import Candidate, ContextEngine
+from backend.feedback_service import FeedbackService
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 GLOSSARY_PATH = PROJECT_ROOT / "datasets" / "taiwan_context" / "glossary.json"
 MAX_UPLOAD_BYTES = 25 * 1024 * 1024
+FRONTEND_PATH = PROJECT_ROOT / "frontend"
 
 app = FastAPI(title="Taiwan Context Engine API", version="0.2.0")
 engine = ContextEngine(glossary_path=GLOSSARY_PATH, prompt_tolerance=-0.05)
 asr_service = ASRService()
+feedback_service = FeedbackService()
+
+if FRONTEND_PATH.exists():
+    app.mount("/app", StaticFiles(directory=FRONTEND_PATH, html=True), name="app")
 
 
 class CandidateInput(BaseModel):
@@ -25,6 +34,21 @@ class CandidateInput(BaseModel):
 class ContextRequest(BaseModel):
     baseline: CandidateInput
     prompt: CandidateInput
+
+
+class FeedbackRequest(BaseModel):
+    audio_file: str = Field(min_length=1, max_length=255)
+    baseline_text: str = Field(min_length=1, max_length=1000)
+    prompt_text: str = Field(min_length=1, max_length=1000)
+    selected_source: Literal["baseline", "prompt", "manual"]
+    corrected_text: str = Field(min_length=1, max_length=1000)
+    reasons: list[str] = Field(default_factory=list)
+    consent_to_dataset: bool = False
+
+
+@app.get("/", include_in_schema=False)
+def root():
+    return RedirectResponse(url="/app/")
 
 
 def make_decision(baseline_data, prompt_data):
@@ -56,6 +80,11 @@ def select_candidate(request: ContextRequest):
         request.baseline.dict(), request.prompt.dict()
     )
     return decision.to_dict()
+
+
+@app.post("/feedback", status_code=201)
+def save_feedback(request: FeedbackRequest):
+    return feedback_service.save(request.dict())
 
 
 @app.post("/speech/interpret")

@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>聲入其境｜Taiwan Context AI</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="shell">
+    <header>
+      <p class="eyebrow">TAIWAN CONTEXT AI</p>
+      <h1>聲入其境</h1>
+      <p class="subtitle">不只聽見語音，更理解臺灣生活裡的語境。</p>
+    </header>
+
+    <section class="panel upload-panel">
+      <label class="drop-zone" for="audioFile">
+        <span class="icon">🎙️</span>
+        <strong>選擇語音檔</strong>
+        <span>支援 M4A、WAV、MP3、FLAC、AAC，最大 25 MB</span>
+      </label>
+      <input id="audioFile" type="file" accept="audio/*,.m4a,.aac,.flac">
+      <div id="fileInfo" class="file-info hidden"></div>
+      <audio id="audioPreview" class="hidden" controls></audio>
+      <button id="analyzeButton" type="button" disabled>開始理解</button>
+      <div id="progress" class="progress hidden">
+        <span class="spinner"></span>
+        <span>正在進行雙路徑辨識與語境判斷…</span>
+      </div>
+      <p id="errorMessage" class="error hidden"></p>
+    </section>
+
+    <section id="resultPanel" class="panel hidden" aria-live="polite">
+      <div class="result-head">
+        <div>
+          <p class="eyebrow">理解結果</p>
+          <h2 id="statusTitle">辨識完成</h2>
+        </div>
+        <span id="statusBadge" class="badge"></span>
+      </div>
+
+      <div id="safeResult" class="safe-result hidden">
+        <p class="label">系統理解</p>
+        <p id="selectedText" class="selected-text"></p>
+      </div>
+
+      <div id="confirmationBox" class="confirmation hidden">
+        <p class="warning-title">這段語音可能辨識不完整</p>
+        <p class="muted">請選擇較接近的內容，或直接修正。</p>
+        <label class="candidate">
+          <input type="radio" name="candidate" value="baseline">
+          <span><small>原始辨識</small><strong id="baselineText"></strong></span>
+        </label>
+        <label class="candidate">
+          <input type="radio" name="candidate" value="prompt">
+          <span><small>臺灣語境提示</small><strong id="promptText"></strong></span>
+        </label>
+        <label class="manual-label" for="manualText">手動修正</label>
+        <textarea id="manualText" rows="3" placeholder="輸入正確內容…"></textarea>
+        <label class="consent">
+          <input id="datasetConsent" type="checkbox">
+          <span>我同意將去識別後的修正文字用於改善臺灣語境模型（不保存原始錄音）</span>
+        </label>
+        <button id="confirmButton" type="button">確認內容</button>
+        <p id="confirmedMessage" class="success hidden"></p>
+      </div>
+
+      <details class="technical">
+        <summary>查看技術資訊</summary>
+        <dl>
+          <div><dt>音檔長度</dt><dd id="audioDuration"></dd></div>
+          <div><dt>雙路徑時間</dt><dd id="processingTime"></dd></div>
+          <div><dt>原始信心</dt><dd id="baselineConfidence"></dd></div>
+          <div><dt>提示信心</dt><dd id="promptConfidence"></dd></div>
+          <div><dt>判斷原因</dt><dd id="decisionReasons"></dd></div>
+        </dl>
+      </details>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
