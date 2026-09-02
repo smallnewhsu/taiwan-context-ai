@@ -11,11 +11,13 @@ from backend.asr_service import ASRService, SUPPORTED_EXTENSIONS
 from backend.context_engine import Candidate, ContextEngine
 from backend.feedback_service import FeedbackService
 from backend.rewrite_service import RewriteService
+from backend.vision_service import SUPPORTED_IMAGE_EXTENSIONS, VisionService
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 GLOSSARY_PATH = PROJECT_ROOT / "datasets" / "taiwan_context" / "glossary.json"
 MAX_UPLOAD_BYTES = 25 * 1024 * 1024
+MAX_IMAGE_UPLOAD_BYTES = 15 * 1024 * 1024
 FRONTEND_PATH = PROJECT_ROOT / "frontend"
 
 app = FastAPI(title="Taiwan Context Engine API", version="0.2.0")
@@ -23,6 +25,7 @@ engine = ContextEngine(glossary_path=GLOSSARY_PATH, prompt_tolerance=-0.05)
 asr_service = ASRService()
 feedback_service = FeedbackService()
 rewrite_service = RewriteService()
+vision_service = VisionService()
 
 if FRONTEND_PATH.exists():
     app.mount("/app", StaticFiles(directory=FRONTEND_PATH, html=True), name="app")
@@ -91,6 +94,41 @@ def health():
 @app.get("/llm/health")
 def llm_health():
     return rewrite_service.health()
+
+
+@app.get("/vision/health")
+def vision_health():
+    return vision_service.health()
+
+
+@app.post("/vision/analyze")
+async def analyze_image(file: UploadFile = File(...)):
+    suffix = Path(file.filename or "").suffix.lower()
+    if suffix not in SUPPORTED_IMAGE_EXTENSIONS:
+        raise HTTPException(
+            status_code=415,
+            detail=f"不支援的格式。允許格式: {sorted(SUPPORTED_IMAGE_EXTENSIONS)}",
+        )
+
+    content = await file.read()
+    if not content:
+        raise HTTPException(status_code=400, detail="圖片內容為空")
+    if len(content) > MAX_IMAGE_UPLOAD_BYTES:
+        raise HTTPException(status_code=413, detail="圖片超過15 MB限制")
+
+    try:
+        return await run_in_threadpool(
+            vision_service.analyze_bytes,
+            content,
+            suffix,
+            file.filename or "image",
+        )
+    except ValueError as exc:
+        raise HTTPException(status_code=415, detail=str(exc)) from exc
+    except RuntimeError as exc:
+        raise HTTPException(status_code=503, detail=str(exc)) from exc
+    except Exception as exc:
+        raise HTTPException(status_code=500, detail=f"圖片處理失敗: {exc}") from exc
 
 
 @app.post("/expression/rewrite")

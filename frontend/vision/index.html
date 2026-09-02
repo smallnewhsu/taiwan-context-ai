@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>視界有解｜Taiwan Context AI</title>
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="vision.css">
+</head>
+<body>
+  <main class="shell">
+    <header>
+      <p class="eyebrow">TAIWAN CONTEXT AI</p>
+      <h1>視界有解</h1>
+      <p class="subtitle">看見畫面，也分清楚事實、文字候選與生活情境推測。</p>
+      <a class="review-link" href="../">← 聲入其境</a>
+      <a class="review-link" href="../rewrite/">語你傳心 →</a>
+    </header>
+
+    <section class="panel upload-panel">
+      <label class="drop-zone" id="dropZone" for="imageFile">
+        <span class="icon">🖼️</span>
+        <strong>選擇生活圖片</strong>
+        <span>支援 JPG、PNG、WEBP，最大 15 MB；圖片只在本機暫時處理</span>
+      </label>
+      <input id="imageFile" type="file" accept="image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp">
+      <div id="fileInfo" class="file-info hidden"></div>
+      <img id="imagePreview" class="image-preview hidden" alt="待分析圖片預覽">
+      <button id="analyzeButton" type="button" disabled>開始理解圖片</button>
+      <div id="progress" class="progress hidden">
+        <span class="spinner"></span>
+        <span>正在辨識畫面並檢查推論風險，首次載入模型可能需要較久時間…</span>
+      </div>
+      <p id="errorMessage" class="error hidden"></p>
+    </section>
+
+    <section id="resultPanel" class="panel hidden" aria-live="polite">
+      <div class="result-head">
+        <div>
+          <p class="eyebrow">圖片理解結果</p>
+          <h2 id="statusTitle">分析完成</h2>
+        </div>
+        <span id="statusBadge" class="badge"></span>
+      </div>
+
+      <div id="warningBox" class="vision-warning hidden">
+        <strong>部分內容需要確認</strong>
+        <p>模型可能誤讀模糊文字或過度推測；以下內容已按證據類型分開呈現。</p>
+        <ul id="warningList"></ul>
+      </div>
+
+      <div class="vision-grid">
+        <article class="vision-card observation-card">
+          <p class="card-kicker">直接觀察</p>
+          <h3>畫面中看見什麼</h3>
+          <ul id="observationList" class="result-list"></ul>
+        </article>
+
+        <article class="vision-card ocr-card">
+          <p class="card-kicker">OCR 候選</p>
+          <h3>可能看見的文字</h3>
+          <p class="card-note">低於 85% 的文字不得當成確定內容。</p>
+          <ul id="textList" class="result-list"></ul>
+        </article>
+
+        <article class="vision-card inference-card">
+          <p class="card-kicker">情境推測</p>
+          <h3>可能的生活情境</h3>
+          <p class="card-note">推測不等於圖片事實，請同時查看依據。</p>
+          <div id="inferenceList" class="inference-list"></div>
+        </article>
+
+        <article class="vision-card uncertainty-card">
+          <p class="card-kicker">資訊邊界</p>
+          <h3>圖片無法確認什麼</h3>
+          <ul id="uncertaintyList" class="result-list"></ul>
+        </article>
+      </div>
+
+      <details class="technical">
+        <summary>查看技術資訊</summary>
+        <dl>
+          <div><dt>模型</dt><dd id="modelName"></dd></div>
+          <div><dt>處理時間</dt><dd id="processingTime"></dd></div>
+          <div><dt>原始尺寸</dt><dd id="originalSize"></dd></div>
+          <div><dt>處理尺寸</dt><dd id="processedSize"></dd></div>
+          <div><dt>本機處理</dt><dd id="localProcessing"></dd></div>
+          <div><dt>保存圖片</dt><dd id="imagePersisted"></dd></div>
+        </dl>
+      </details>
+    </section>
+  </main>
+  <script src="vision.js"></script>
+</body>
+</html>

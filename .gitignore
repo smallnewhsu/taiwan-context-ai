@@ -62,3 +62,9 @@ services/asr/models/
 
 # Generated Taiwan Context Dataset releases
 /datasets/taiwan_context/releases/
+
+# Vision evaluation images
+evaluation/**/*.jpg
+evaluation/**/*.jpeg
+evaluation/**/*.png
+evaluation/**/*.webp

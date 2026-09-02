@@ -1,0 +1,83 @@
+.image-preview {
+  display: block;
+  width: 100%;
+  max-height: 440px;
+  margin: 16px 0 8px;
+  border-radius: 16px;
+  object-fit: contain;
+  background: #eef3f2;
+}
+
+#analyzeButton { width: 100%; margin-top: 12px; }
+
+.drop-zone.dragging {
+  border-color: var(--teal);
+  background: #dff5f0;
+  transform: translateY(-1px);
+}
+
+.vision-warning {
+  margin-top: 22px;
+  padding: 18px 20px;
+  border-radius: 16px;
+  color: var(--warn);
+  background: var(--warn-bg);
+}
+
+.vision-warning p { margin: 6px 0 8px; color: #7c4a22; }
+.vision-warning ul { margin: 0; padding-left: 20px; }
+
+.vision-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 22px;
+}
+
+.vision-card {
+  min-width: 0;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 17px;
+  background: #f8faf9;
+}
+
+.observation-card { border-top: 4px solid var(--teal); }
+.ocr-card { border-top: 4px solid #4773b7; }
+.inference-card { border-top: 4px solid #a66a24; }
+.uncertainty-card { border-top: 4px solid #7b8790; }
+
+.card-kicker {
+  margin: 0 0 5px;
+  color: var(--teal-dark);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: .12em;
+}
+
+.vision-card h3 { margin: 0 0 12px; font-size: 20px; }
+.card-note { margin: -4px 0 12px; color: var(--muted); font-size: 13px; line-height: 1.5; }
+.result-list { display: grid; gap: 9px; margin: 0; padding: 0; list-style: none; }
+.result-list li { padding: 10px 12px; border-radius: 10px; background: white; line-height: 1.45; }
+
+.confidence {
+  display: inline-block;
+  margin-left: 7px;
+  padding: 2px 7px;
+  border-radius: 999px;
+  color: var(--teal-dark);
+  background: var(--mint);
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.confidence.low { color: var(--warn); background: var(--warn-bg); }
+.inference-list { display: grid; gap: 10px; }
+.inference-item { padding: 12px; border-radius: 11px; background: white; }
+.inference-item strong { display: block; line-height: 1.45; }
+.inference-item p { margin: 7px 0 0; color: var(--muted); font-size: 13px; line-height: 1.5; }
+.empty-item { color: var(--muted); font-style: italic; }
+
+@media (max-width: 700px) {
+  .vision-grid { grid-template-columns: 1fr; }
+}
