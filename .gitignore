@@ -59,3 +59,6 @@ evaluation/**/*.wav
 
 # Large AI models
 services/asr/models/
+
+# Generated Taiwan Context Dataset releases
+/datasets/taiwan_context/releases/
