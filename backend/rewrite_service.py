@@ -26,6 +26,33 @@ ADDRESSEE_TERMS = (
     "阿嬤", "阿公", "媽媽", "爸爸", "媽", "爸", "老師", "主任",
     "叔叔", "阿姨", "伯父", "伯母", "哥哥", "姊姊", "姐姐"
 )
+PROTECTED_TAIWANESE_TERMS = (
+    "今仔日",
+    "明仔載",
+    "食暗頓",
+    "食飯",
+    "無閒",
+    "無法度",
+    "轉去",
+    "佇",
+    "內底",
+    "家己",
+    "毋免",
+    "莫閣",
+    "有閒",
+    "物件",
+    "拜六",
+    "外口",
+    "咧落雨",
+    "紮雨傘",
+)
+CONSTRAINT_EQUIVALENTS = {
+    "不能": ("不能", "不可", "無法", "沒辦法"),
+    "不可": ("不可", "不能", "請勿"),
+    "不要": ("不要", "不可", "不能", "請勿"),
+    "必須": ("必須", "務必", "應於", "一定要"),
+    "不受理": ("不受理", "無法受理", "不予受理"),
+}
 
 
 class RewriteService:
@@ -157,6 +184,23 @@ class RewriteService:
         if source_has_negation and not output_has_negation:
             warnings.append("negation_may_be_missing")
 
+        missing_taiwanese_terms = [
+            term
+            for term in PROTECTED_TAIWANESE_TERMS
+            if term in original_text and term not in rewritten
+        ]
+        if missing_taiwanese_terms:
+            warnings.append("taiwanese_term_changed_or_missing")
+
+        missing_constraint_terms = [
+            source_term
+            for source_term, accepted_terms in CONSTRAINT_EQUIVALENTS.items()
+            if source_term in original_text
+            and not any(term in rewritten for term in accepted_terms)
+        ]
+        if missing_constraint_terms:
+            warnings.append("constraint_modality_changed_or_missing")
+
         verification = self._chat_json(
             self._verification_prompt(),
             f"原句：{original_text}\n改寫句：{rewritten}",
@@ -207,6 +251,8 @@ class RewriteService:
                 "added_information": added_information,
                 "removed_information": removed_information,
                 "changed_facts": changed_facts,
+                "missing_taiwanese_terms": missing_taiwanese_terms,
+                "missing_constraint_terms": missing_constraint_terms,
             },
             "model": OLLAMA_MODEL,
             "processing_seconds": round(time.perf_counter() - started, 4),

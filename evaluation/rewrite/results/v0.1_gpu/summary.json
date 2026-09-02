@@ -1,0 +1,26 @@
+{
+  "total_cases": 12,
+  "completed_cases": 12,
+  "api_error_count": 0,
+  "automatic_pass_count": 12,
+  "automatic_pass_rate": 1.0,
+  "llm_candidate_accepted_count": 1,
+  "llm_candidate_accepted_rate": 0.08333333333333333,
+  "safe_fallback_count": 11,
+  "safe_fallback_rate": 0.9166666666666666,
+  "needs_confirmation_count": 11,
+  "warning_counts": {
+    "added_information_detected": 4,
+    "safe_fallback_applied": 11,
+    "semantic_fidelity_check_failed": 4,
+    "numbers_changed_or_missing": 4,
+    "constraint_modality_changed_or_missing": 2,
+    "negation_may_be_missing": 1,
+    "taiwanese_term_changed_or_missing": 1
+  },
+  "automatic_failure_counts": {},
+  "mean_processing_seconds": 1.1908833333333333,
+  "median_processing_seconds": 1.1336,
+  "p95_processing_seconds": 1.361,
+  "suite_wall_seconds": 16.711541400058195
+}
