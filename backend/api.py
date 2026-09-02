@@ -10,6 +10,7 @@ from pydantic import BaseModel, Field
 from backend.asr_service import ASRService, SUPPORTED_EXTENSIONS
 from backend.context_engine import Candidate, ContextEngine
 from backend.feedback_service import FeedbackService
+from backend.rewrite_service import RewriteService
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
@@ -21,6 +22,7 @@ app = FastAPI(title="Taiwan Context Engine API", version="0.2.0")
 engine = ContextEngine(glossary_path=GLOSSARY_PATH, prompt_tolerance=-0.05)
 asr_service = ASRService()
 feedback_service = FeedbackService()
+rewrite_service = RewriteService()
 
 if FRONTEND_PATH.exists():
     app.mount("/app", StaticFiles(directory=FRONTEND_PATH, html=True), name="app")
@@ -51,6 +53,13 @@ class ReviewRequest(BaseModel):
     reviewer_note: str = Field(default="", max_length=1000)
 
 
+class RewriteRequest(BaseModel):
+    original_text: str = Field(min_length=1, max_length=2000)
+    audience: Literal["elder", "family", "friend", "formal"]
+    tone: Literal["warm", "clear", "polite", "concise"]
+    scenario: str = Field(default="", max_length=1000)
+
+
 @app.get("/", include_in_schema=False)
 def root():
     return RedirectResponse(url="/app/")
@@ -77,6 +86,25 @@ def health():
         "service": "Taiwan Context Engine",
         "version": "0.2.0",
     }
+
+
+@app.get("/llm/health")
+def llm_health():
+    return rewrite_service.health()
+
+
+@app.post("/expression/rewrite")
+async def rewrite_expression(request: RewriteRequest):
+    try:
+        return await run_in_threadpool(
+            rewrite_service.rewrite,
+            request.original_text,
+            request.audience,
+            request.tone,
+            request.scenario,
+        )
+    except RuntimeError as exc:
+        raise HTTPException(status_code=503, detail=str(exc)) from exc
 
 
 @app.post("/context/select")
