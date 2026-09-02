@@ -1,0 +1,22 @@
+{
+  "version": "0.1.0",
+  "description": "Taiwan-context family conversation vocabulary for conservative candidate scoring.",
+  "entries": [
+    {"term": "阿嬤", "category": "kinship", "mandarin_gloss": "祖母"},
+    {"term": "阿公", "category": "kinship", "mandarin_gloss": "祖父"},
+    {"term": "無閒", "category": "daily_life", "mandarin_gloss": "忙碌"},
+    {"term": "有閒", "category": "daily_life", "mandarin_gloss": "有空"},
+    {"term": "轉去", "category": "movement", "mandarin_gloss": "回去"},
+    {"term": "轉來", "category": "movement", "mandarin_gloss": "回來"},
+    {"term": "阮兜", "category": "place", "mandarin_gloss": "我們家"},
+    {"term": "家己", "category": "person", "mandarin_gloss": "自己"},
+    {"term": "毋免", "category": "modal", "mandarin_gloss": "不用"},
+    {"term": "毋通", "category": "modal", "mandarin_gloss": "不要"},
+    {"term": "拜六", "category": "time", "mandarin_gloss": "星期六"},
+    {"term": "拜日", "category": "time", "mandarin_gloss": "星期日"},
+    {"term": "明仔載", "category": "time", "mandarin_gloss": "明天"},
+    {"term": "下晡", "category": "time", "mandarin_gloss": "下午"},
+    {"term": "暗頓", "category": "food", "mandarin_gloss": "晚餐"},
+    {"term": "食飽未", "category": "greeting", "mandarin_gloss": "吃飽了嗎"}
+  ]
+}

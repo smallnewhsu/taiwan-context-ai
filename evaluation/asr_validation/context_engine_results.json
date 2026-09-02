@@ -1,0 +1,248 @@
+{
+  "summary": {
+    "total_files": 10,
+    "average_selected_cer": 0.539033882783883,
+    "automatic_count": 6,
+    "confirmation_count": 4,
+    "automatic_coverage": 0.6,
+    "automatic_average_cer": 0.39732142857142855,
+    "confirmation_group_average_cer": 0.7516025641025642
+  },
+  "detailed_results": [
+    {
+      "audio_file": "T11.m4a",
+      "decision": {
+        "selected_source": "baseline",
+        "selected_text": "明天下午如果有時間我再陪你去醫院 ",
+        "decision_confidence": 1.0,
+        "needs_confirmation": false,
+        "reasons": [
+          "identical_candidates"
+        ],
+        "baseline_score": -0.094572367636781,
+        "prompt_score": -0.0940069932686655
+      },
+      "selected_cer": {
+        "cer": 0.0625,
+        "correct_rate": 93.75,
+        "errors": 1,
+        "substitutions": 1,
+        "deletions": 0,
+        "insertions": 0,
+        "characters": 16
+      }
+    },
+    {
+      "audio_file": "T12.m4a",
+      "decision": {
+        "selected_source": "baseline",
+        "selected_text": "天氣變冷了出門記得多穿1件衣服 ",
+        "decision_confidence": 1.0,
+        "needs_confirmation": false,
+        "reasons": [
+          "identical_candidates"
+        ],
+        "baseline_score": -0.07207031361758709,
+        "prompt_score": -0.06103515699505806
+      },
+      "selected_cer": {
+        "cer": 0.0,
+        "correct_rate": 100.0,
+        "errors": 0,
+        "substitutions": 0,
+        "deletions": 0,
+        "insertions": 0,
+        "characters": 15
+      }
+    },
+    {
+      "audio_file": "T13.m4a",
+      "decision": {
+        "selected_source": "prompt",
+        "selected_text": "別靠太陽光出門還是要記得在學校上 ",
+        "decision_confidence": 0.5448396721952841,
+        "needs_confirmation": true,
+        "reasons": [
+          "prompt_selected",
+          "both_candidates_low_confidence",
+          "candidates_disagree"
+        ],
+        "baseline_score": -0.6332031160593032,
+        "prompt_score": -0.6780427882545873
+      },
+      "selected_cer": {
+        "cer": 0.9230769230769231,
+        "correct_rate": 7.692307692307687,
+        "errors": 12,
+        "substitutions": 9,
+        "deletions": 0,
+        "insertions": 3,
+        "characters": 13
+      }
+    },
+    {
+      "audio_file": "T14.m4a",
+      "decision": {
+        "selected_source": "baseline",
+        "selected_text": "有法者會記得喝1些水不要放太多",
+        "decision_confidence": 0.5772461198270321,
+        "needs_confirmation": true,
+        "reasons": [
+          "baseline_selected",
+          "both_candidates_low_confidence"
+        ],
+        "baseline_score": -0.459375,
+        "prompt_score": -0.5366211198270321
+      },
+      "selected_cer": {
+        "cer": 0.7857142857142857,
+        "correct_rate": 21.42857142857143,
+        "errors": 11,
+        "substitutions": 10,
+        "deletions": 0,
+        "insertions": 1,
+        "characters": 14
+      }
+    },
+    {
+      "audio_file": "T15.m4a",
+      "decision": {
+        "selected_source": "baseline",
+        "selected_text": "你要回來之前先跟我說1下",
+        "decision_confidence": 0.6491654799743132,
+        "needs_confirmation": false,
+        "reasons": [
+          "baseline_selected"
+        ],
+        "baseline_score": -0.27519531548023224,
+        "prompt_score": -0.42436079545454547
+      },
+      "selected_cer": {
+        "cer": 0.5,
+        "correct_rate": 50.0,
+        "errors": 6,
+        "substitutions": 6,
+        "deletions": 0,
+        "insertions": 0,
+        "characters": 12
+      }
+    },
+    {
+      "audio_file": "T16.m4a",
+      "decision": {
+        "selected_source": "baseline",
+        "selected_text": "冰箱底有水果要吃自己灌",
+        "decision_confidence": 0.645795025588835,
+        "needs_confirmation": true,
+        "reasons": [
+          "baseline_selected",
+          "both_candidates_low_confidence"
+        ],
+        "baseline_score": -0.4277343861758709,
+        "prompt_score": -0.5735294117647058
+      },
+      "selected_cer": {
+        "cer": 0.5833333333333334,
+        "correct_rate": 41.666666666666664,
+        "errors": 7,
+        "substitutions": 4,
+        "deletions": 2,
+        "insertions": 1,
+        "characters": 12
+      }
+    },
+    {
+      "audio_file": "T17.m4a",
+      "decision": {
+        "selected_source": "baseline",
+        "selected_text": "阿公我明天在衣帽子這裡有辦法回去 ",
+        "decision_confidence": 0.5969321722434577,
+        "needs_confirmation": true,
+        "reasons": [
+          "baseline_selected",
+          "both_candidates_low_confidence"
+        ],
+        "baseline_score": -0.4117434116413719,
+        "prompt_score": -0.5086755838848296
+      },
+      "selected_cer": {
+        "cer": 0.7142857142857143,
+        "correct_rate": 28.57142857142857,
+        "errors": 10,
+        "substitutions": 6,
+        "deletions": 1,
+        "insertions": 3,
+        "characters": 14
+      }
+    },
+    {
+      "audio_file": "T18.m4a",
+      "decision": {
+        "selected_source": "prompt",
+        "selected_text": "我今天會比較昏舊回去不用等我吃晚飯了",
+        "decision_confidence": 0.5640851215626064,
+        "needs_confirmation": false,
+        "reasons": [
+          "prompt_selected"
+        ],
+        "baseline_score": -0.3089453095197678,
+        "prompt_score": -0.24486018795716136
+      },
+      "selected_cer": {
+        "cer": 0.75,
+        "correct_rate": 25.0,
+        "errors": 12,
+        "substitutions": 8,
+        "deletions": 1,
+        "insertions": 3,
+        "characters": 16
+      }
+    },
+    {
+      "audio_file": "T19.m4a",
+      "decision": {
+        "selected_source": "baseline",
+        "selected_text": "你如果沒有贏有勉勵你再打電話給我",
+        "decision_confidence": 0.5576606021987067,
+        "needs_confirmation": false,
+        "reasons": [
+          "baseline_selected"
+        ],
+        "baseline_score": -0.33339842557907107,
+        "prompt_score": -0.3910590277777778
+      },
+      "selected_cer": {
+        "cer": 0.6428571428571429,
+        "correct_rate": 35.71428571428571,
+        "errors": 9,
+        "substitutions": 7,
+        "deletions": 0,
+        "insertions": 2,
+        "characters": 14
+      }
+    },
+    {
+      "audio_file": "T20.m4a",
+      "decision": {
+        "selected_source": "baseline",
+        "selected_text": "明天我已經買好了禮拜會趕回去",
+        "decision_confidence": 1.0,
+        "needs_confirmation": false,
+        "reasons": [
+          "identical_candidates"
+        ],
+        "baseline_score": -0.16918945591896772,
+        "prompt_score": -0.22949219215661287
+      },
+      "selected_cer": {
+        "cer": 0.42857142857142855,
+        "correct_rate": 57.14285714285714,
+        "errors": 6,
+        "substitutions": 4,
+        "deletions": 1,
+        "insertions": 1,
+        "characters": 14
+      }
+    }
+  ]
+}
