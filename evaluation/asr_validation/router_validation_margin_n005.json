@@ -1,0 +1,488 @@
+{
+  "summary": {
+    "total_files": 10,
+    "model_load_seconds": 7.4984,
+    "margin": -0.05,
+    "baseline_average_cer": 0.5529761904761906,
+    "prompt_average_cer": 0.5961767399267399,
+    "routed_average_cer": 0.539033882783883,
+    "oracle_average_cer": 0.5318910256410257,
+    "prompt_selected_count": 4,
+    "baseline_selected_count": 6,
+    "router_oracle_match_count": 7,
+    "router_oracle_match_rate": 0.7,
+    "average_dual_pass_seconds": 1.399347169988323
+  },
+  "detailed_results": [
+    {
+      "audio_file": "T11.m4a",
+      "audio_duration_seconds": 7.7854,
+      "reference": "明天下午如果有時間，我再陪妳去醫院。",
+      "baseline": {
+        "text": "明天下午如果有時間我再陪你去醫院 ",
+        "confidence": -0.094572367636781,
+        "no_speech_probability": 0.00019562244415283203,
+        "inference_seconds": 1.588815699913539
+      },
+      "prompt": {
+        "text": "明天下午如果有時間我再陪你去醫院 ",
+        "confidence": -0.0940069932686655,
+        "no_speech_probability": 5.364418029785156e-07,
+        "inference_seconds": 0.703358699916862
+      },
+      "selected": "prompt",
+      "selected_text": "明天下午如果有時間我再陪你去醫院 ",
+      "oracle_selection": "baseline",
+      "baseline_cer": {
+        "cer": 0.0625,
+        "correct_rate": 93.75,
+        "errors": 1,
+        "substitutions": 1,
+        "deletions": 0,
+        "insertions": 0,
+        "characters": 16
+      },
+      "prompt_cer": {
+        "cer": 0.0625,
+        "correct_rate": 93.75,
+        "errors": 1,
+        "substitutions": 1,
+        "deletions": 0,
+        "insertions": 0,
+        "characters": 16
+      },
+      "routed_cer": {
+        "cer": 0.0625,
+        "correct_rate": 93.75,
+        "errors": 1,
+        "substitutions": 1,
+        "deletions": 0,
+        "insertions": 0,
+        "characters": 16
+      }
+    },
+    {
+      "audio_file": "T12.m4a",
+      "audio_duration_seconds": 6.144,
+      "reference": "天氣變冷了，出門記得多穿一件衣服。",
+      "baseline": {
+        "text": "天氣變冷了出門記得多穿1件衣服 ",
+        "confidence": -0.07207031361758709,
+        "no_speech_probability": 5.930662155151367e-05,
+        "inference_seconds": 0.6495642999652773
+      },
+      "prompt": {
+        "text": "天氣變冷了出門記得多穿1件衣服 ",
+        "confidence": -0.06103515699505806,
+        "no_speech_probability": 0.0,
+        "inference_seconds": 0.7424004999920726
+      },
+      "selected": "prompt",
+      "selected_text": "天氣變冷了出門記得多穿1件衣服 ",
+      "oracle_selection": "baseline",
+      "baseline_cer": {
+        "cer": 0.0,
+        "correct_rate": 100.0,
+        "errors": 0,
+        "substitutions": 0,
+        "deletions": 0,
+        "insertions": 0,
+        "characters": 15
+      },
+      "prompt_cer": {
+        "cer": 0.0,
+        "correct_rate": 100.0,
+        "errors": 0,
+        "substitutions": 0,
+        "deletions": 0,
+        "insertions": 0,
+        "characters": 15
+      },
+      "routed_cer": {
+        "cer": 0.0,
+        "correct_rate": 100.0,
+        "errors": 0,
+        "substitutions": 0,
+        "deletions": 0,
+        "insertions": 0,
+        "characters": 15
+      }
+    },
+    {
+      "audio_file": "T13.m4a",
+      "audio_duration_seconds": 6.4,
+      "reference": "外口咧落雨，出門會記得紮雨傘。",
+      "baseline": {
+        "text": "外面1直往下走出門還是要記得帶護身符 ",
+        "confidence": -0.6332031160593032,
+        "no_speech_probability": 0.0002446174621582031,
+        "inference_seconds": 0.6539146000286564
+      },
+      "prompt": {
+        "text": "別靠太陽光出門還是要記得在學校上 ",
+        "confidence": -0.6780427882545873,
+        "no_speech_probability": 1.4960765838623047e-05,
+        "inference_seconds": 0.6888266999740154
+      },
+      "selected": "prompt",
+      "selected_text": "別靠太陽光出門還是要記得在學校上 ",
+      "oracle_selection": "prompt",
+      "baseline_cer": {
+        "cer": 1.0,
+        "correct_rate": 0.0,
+        "errors": 13,
+        "substitutions": 8,
+        "deletions": 0,
+        "insertions": 5,
+        "characters": 13
+      },
+      "prompt_cer": {
+        "cer": 0.9230769230769231,
+        "correct_rate": 7.692307692307687,
+        "errors": 12,
+        "substitutions": 9,
+        "deletions": 0,
+        "insertions": 3,
+        "characters": 13
+      },
+      "routed_cer": {
+        "cer": 0.9230769230769231,
+        "correct_rate": 7.692307692307687,
+        "errors": 12,
+        "substitutions": 9,
+        "deletions": 0,
+        "insertions": 3,
+        "characters": 13
+      }
+    },
+    {
+      "audio_file": "T14.m4a",
+      "audio_duration_seconds": 6.5067,
+      "reference": "藥仔食了，記得啉一寡水，毋通空腹。",
+      "baseline": {
+        "text": "有法者會記得喝1些水不要放太多",
+        "confidence": -0.459375,
+        "no_speech_probability": 3.457069396972656e-05,
+        "inference_seconds": 0.5839314999757335
+      },
+      "prompt": {
+        "text": "有法者會叫你喝1些水不要空白 ",
+        "confidence": -0.5366211198270321,
+        "no_speech_probability": 7.969141006469727e-05,
+        "inference_seconds": 0.6485956000396982
+      },
+      "selected": "baseline",
+      "selected_text": "有法者會記得喝1些水不要放太多",
+      "oracle_selection": "baseline",
+      "baseline_cer": {
+        "cer": 0.7857142857142857,
+        "correct_rate": 21.42857142857143,
+        "errors": 11,
+        "substitutions": 10,
+        "deletions": 0,
+        "insertions": 1,
+        "characters": 14
+      },
+      "prompt_cer": {
+        "cer": 0.7857142857142857,
+        "correct_rate": 21.42857142857143,
+        "errors": 11,
+        "substitutions": 11,
+        "deletions": 0,
+        "insertions": 0,
+        "characters": 14
+      },
+      "routed_cer": {
+        "cer": 0.7857142857142857,
+        "correct_rate": 21.42857142857143,
+        "errors": 11,
+        "substitutions": 10,
+        "deletions": 0,
+        "insertions": 1,
+        "characters": 14
+      }
+    },
+    {
+      "audio_file": "T15.m4a",
+      "audio_duration_seconds": 5.9934,
+      "reference": "你欲轉來進前，先共我講一聲。",
+      "baseline": {
+        "text": "你要回來之前先跟我說1下",
+        "confidence": -0.27519531548023224,
+        "no_speech_probability": 0.00018095970153808594,
+        "inference_seconds": 0.5147620000643656
+      },
+      "prompt": {
+        "text": "你要回來之前先跟我說1下什麼",
+        "confidence": -0.42436079545454547,
+        "no_speech_probability": 1.1920928955078125e-07,
+        "inference_seconds": 0.5405040000332519
+      },
+      "selected": "baseline",
+      "selected_text": "你要回來之前先跟我說1下",
+      "oracle_selection": "baseline",
+      "baseline_cer": {
+        "cer": 0.5,
+        "correct_rate": 50.0,
+        "errors": 6,
+        "substitutions": 6,
+        "deletions": 0,
+        "insertions": 0,
+        "characters": 12
+      },
+      "prompt_cer": {
+        "cer": 0.6666666666666666,
+        "correct_rate": 33.333333333333336,
+        "errors": 8,
+        "substitutions": 6,
+        "deletions": 0,
+        "insertions": 2,
+        "characters": 12
+      },
+      "routed_cer": {
+        "cer": 0.5,
+        "correct_rate": 50.0,
+        "errors": 6,
+        "substitutions": 6,
+        "deletions": 0,
+        "insertions": 0,
+        "characters": 12
+      }
+    },
+    {
+      "audio_file": "T16.m4a",
+      "audio_duration_seconds": 6.8467,
+      "reference": "冰箱內底有果子，欲食家己提。",
+      "baseline": {
+        "text": "冰箱底有水果要吃自己灌",
+        "confidence": -0.4277343861758709,
+        "no_speech_probability": 0.00034928321838378906,
+        "inference_seconds": 0.6022097000386566
+      },
+      "prompt": {
+        "text": "臺商地有水果要吃的高麗瓜",
+        "confidence": -0.5735294117647058,
+        "no_speech_probability": 4.708766937255859e-06,
+        "inference_seconds": 0.6979159999173135
+      },
+      "selected": "baseline",
+      "selected_text": "冰箱底有水果要吃自己灌",
+      "oracle_selection": "baseline",
+      "baseline_cer": {
+        "cer": 0.5833333333333334,
+        "correct_rate": 41.666666666666664,
+        "errors": 7,
+        "substitutions": 4,
+        "deletions": 2,
+        "insertions": 1,
+        "characters": 12
+      },
+      "prompt_cer": {
+        "cer": 0.9166666666666666,
+        "correct_rate": 8.333333333333337,
+        "errors": 11,
+        "substitutions": 9,
+        "deletions": 1,
+        "insertions": 1,
+        "characters": 12
+      },
+      "routed_cer": {
+        "cer": 0.5833333333333334,
+        "correct_rate": 41.666666666666664,
+        "errors": 7,
+        "substitutions": 4,
+        "deletions": 2,
+        "insertions": 1,
+        "characters": 12
+      }
+    },
+    {
+      "audio_file": "T17.m4a",
+      "audio_duration_seconds": 6.2494,
+      "reference": "阿公，我明仔載下晡才有法度轉去。",
+      "baseline": {
+        "text": "阿公我明天在衣帽子這裡有辦法回去 ",
+        "confidence": -0.4317434116413719,
+        "no_speech_probability": 0.00013947486877441406,
+        "inference_seconds": 0.626976800034754
+      },
+      "prompt": {
+        "text": "爺爺我明天在衣服店裡再有辦法回去 ",
+        "confidence": -0.4936755838848296,
+        "no_speech_probability": 5.185604095458984e-06,
+        "inference_seconds": 0.7362483999459073
+      },
+      "selected": "baseline",
+      "selected_text": "阿公我明天在衣帽子這裡有辦法回去 ",
+      "oracle_selection": "baseline",
+      "baseline_cer": {
+        "cer": 0.7142857142857143,
+        "correct_rate": 28.57142857142857,
+        "errors": 10,
+        "substitutions": 6,
+        "deletions": 1,
+        "insertions": 3,
+        "characters": 14
+      },
+      "prompt_cer": {
+        "cer": 0.8571428571428571,
+        "correct_rate": 14.28571428571429,
+        "errors": 12,
+        "substitutions": 8,
+        "deletions": 1,
+        "insertions": 3,
+        "characters": 14
+      },
+      "routed_cer": {
+        "cer": 0.7142857142857143,
+        "correct_rate": 28.57142857142857,
+        "errors": 10,
+        "substitutions": 6,
+        "deletions": 1,
+        "insertions": 3,
+        "characters": 14
+      }
+    },
+    {
+      "audio_file": "T18.m4a",
+      "audio_duration_seconds": 6.2494,
+      "reference": "我今仔日會較晏轉去，毋免等我食暗頓。",
+      "baseline": {
+        "text": "我今天會比較洋洋得意不用等我吃晚飯了",
+        "confidence": -0.2939453095197678,
+        "no_speech_probability": 0.0007500648498535156,
+        "inference_seconds": 0.6498719999799505
+      },
+      "prompt": {
+        "text": "我今天會比較昏舊回去不用等我吃晚飯了",
+        "confidence": -0.24486018795716136,
+        "no_speech_probability": 2.884864807128906e-05,
+        "inference_seconds": 0.7883918000152335
+      },
+      "selected": "prompt",
+      "selected_text": "我今天會比較昏舊回去不用等我吃晚飯了",
+      "oracle_selection": "prompt",
+      "baseline_cer": {
+        "cer": 0.8125,
+        "correct_rate": 18.75,
+        "errors": 13,
+        "substitutions": 9,
+        "deletions": 1,
+        "insertions": 3,
+        "characters": 16
+      },
+      "prompt_cer": {
+        "cer": 0.75,
+        "correct_rate": 25.0,
+        "errors": 12,
+        "substitutions": 8,
+        "deletions": 1,
+        "insertions": 3,
+        "characters": 16
+      },
+      "routed_cer": {
+        "cer": 0.75,
+        "correct_rate": 25.0,
+        "errors": 12,
+        "substitutions": 8,
+        "deletions": 1,
+        "insertions": 3,
+        "characters": 16
+      }
+    },
+    {
+      "audio_file": "T19.m4a",
+      "audio_duration_seconds": 5.5467,
+      "reference": "你如果無閒，改工才閣打電話予我。",
+      "baseline": {
+        "text": "你如果沒有贏有勉勵你再打電話給我",
+        "confidence": -0.33339842557907107,
+        "no_speech_probability": 4.595518112182617e-05,
+        "inference_seconds": 0.6497865000274032
+      },
+      "prompt": {
+        "text": "你如果不答應我寧願再打電話給我",
+        "confidence": -0.3910590277777778,
+        "no_speech_probability": 5.841255187988281e-06,
+        "inference_seconds": 0.6838005000026897
+      },
+      "selected": "baseline",
+      "selected_text": "你如果沒有贏有勉勵你再打電話給我",
+      "oracle_selection": "prompt",
+      "baseline_cer": {
+        "cer": 0.6428571428571429,
+        "correct_rate": 35.71428571428571,
+        "errors": 9,
+        "substitutions": 7,
+        "deletions": 0,
+        "insertions": 2,
+        "characters": 14
+      },
+      "prompt_cer": {
+        "cer": 0.5714285714285714,
+        "correct_rate": 42.85714285714286,
+        "errors": 8,
+        "substitutions": 7,
+        "deletions": 0,
+        "insertions": 1,
+        "characters": 14
+      },
+      "routed_cer": {
+        "cer": 0.6428571428571429,
+        "correct_rate": 35.71428571428571,
+        "errors": 9,
+        "substitutions": 7,
+        "deletions": 0,
+        "insertions": 2,
+        "characters": 14
+      }
+    },
+    {
+      "audio_file": "T20.m4a",
+      "audio_duration_seconds": 6.8467,
+      "reference": "東西我已經買好了，拜日會提轉去。",
+      "baseline": {
+        "text": "明天我已經買好了禮拜會趕回去",
+        "confidence": -0.16918945591896772,
+        "no_speech_probability": 0.0005307197570800781,
+        "inference_seconds": 0.5876363000134006
+      },
+      "prompt": {
+        "text": "明天我已經買好了禮拜會趕回去",
+        "confidence": -0.22949219215661287,
+        "no_speech_probability": 2.5033950805664062e-06,
+        "inference_seconds": 0.6559601000044495
+      },
+      "selected": "baseline",
+      "selected_text": "明天我已經買好了禮拜會趕回去",
+      "oracle_selection": "baseline",
+      "baseline_cer": {
+        "cer": 0.42857142857142855,
+        "correct_rate": 57.14285714285714,
+        "errors": 6,
+        "substitutions": 4,
+        "deletions": 1,
+        "insertions": 1,
+        "characters": 14
+      },
+      "prompt_cer": {
+        "cer": 0.42857142857142855,
+        "correct_rate": 57.14285714285714,
+        "errors": 6,
+        "substitutions": 4,
+        "deletions": 1,
+        "insertions": 1,
+        "characters": 14
+      },
+      "routed_cer": {
+        "cer": 0.42857142857142855,
+        "correct_rate": 57.14285714285714,
+        "errors": 6,
+        "substitutions": 4,
+        "deletions": 1,
+        "insertions": 1,
+        "characters": 14
+      }
+    }
+  ]
+}
