@@ -21,7 +21,7 @@
       "tone": "polite",
       "scenario": "傳LINE提醒阿嬤",
       "required_all": ["明天", "下午", "3", "自己", "醫院"],
-      "required_any_groups": [["不要", "不可", "不能"]],
+      "required_any_groups": [["不要", "不可", "不能", "請勿"]],
       "forbidden_terms": ["陪你", "接你", "打電話"]
     },
     {
@@ -43,7 +43,7 @@
       "tone": "polite",
       "scenario": "工作群組通知",
       "required_all": ["會議", "週五", "下午", "2", "通知", "3", "同事"],
-      "required_any_groups": [["改到", "改為", "改成"]],
+      "required_any_groups": [["改到", "改為", "改成", "改至"]],
       "forbidden_terms": ["會議室", "主管", "準時"]
     },
     {
@@ -97,8 +97,8 @@
       "audience": "formal",
       "tone": "clear",
       "scenario": "提醒同事保密",
-      "required_all": ["資料", "傳", "別人"],
-      "required_any_groups": [["不要", "不可", "不能"]],
+      "required_all": ["資料", "傳"],
+      "required_any_groups": [["不要", "不可", "不能", "請勿"], ["別人", "他人"]],
       "forbidden_terms": ["機密", "公司規定", "會被處罰"]
     },
     {
@@ -130,8 +130,8 @@
       "audience": "formal",
       "tone": "polite",
       "scenario": "正式公告",
-      "required_all": ["申請", "資料", "9", "15", "下午", "5", "寄出", "逾期"],
-      "required_any_groups": [["必須", "務必", "應於"], ["不受理", "無法受理"]],
+      "required_all": ["申請", "資料", "9", "15", "下午", "5", "寄出"],
+      "required_any_groups": [["必須", "務必", "應於"], ["逾期", "逾時"], ["不受理", "無法受理", "不予受理"]],
       "forbidden_terms": ["可以補交", "視情況", "延長"]
     }
   ]

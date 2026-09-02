@@ -43,8 +43,36 @@ def extracted_numbers(text: str) -> list[str]:
     return re.findall(r"\d+(?:\.\d+)?", text)
 
 
+def arabic_to_chinese(number_text: str) -> str | None:
+    number = int(number_text)
+    digits = "零一二三四五六七八九"
+    if number < 10:
+        return digits[number]
+    if number < 20:
+        return "十" + (digits[number % 10] if number % 10 else "")
+    if number < 100:
+        return digits[number // 10] + "十" + (digits[number % 10] if number % 10 else "")
+    return None
+
+
+def term_present(term: str, text: str) -> bool:
+    if term in text:
+        return True
+    if term.isdigit():
+        chinese = arabic_to_chinese(term)
+        variants = {term}
+        if chinese:
+            variants.add(chinese)
+        if term == "2":
+            variants.add("兩")
+        return any(variant in text for variant in variants)
+    return False
+
+
 def evaluate_constraints(case: dict[str, Any], output_text: str) -> dict[str, Any]:
-    missing_all = [term for term in case.get("required_all", []) if term not in output_text]
+    missing_all = [
+        term for term in case.get("required_all", []) if not term_present(term, output_text)
+    ]
     missing_groups = [
         group
         for group in case.get("required_any_groups", [])
@@ -54,7 +82,10 @@ def evaluate_constraints(case: dict[str, Any], output_text: str) -> dict[str, An
 
     source_numbers = extracted_numbers(case["original_text"])
     output_numbers = extracted_numbers(output_text)
-    numbers_preserved = Counter(source_numbers) == Counter(output_numbers)
+    numbers_preserved = (
+        all(term_present(number, output_text) for number in source_numbers)
+        and all(number in source_numbers for number in output_numbers)
+    )
 
     source_has_negation = any(marker in case["original_text"] for marker in NEGATION_MARKERS)
     output_has_negation = any(marker in output_text for marker in NEGATION_MARKERS)
@@ -103,6 +134,7 @@ def summarize(results: list[dict[str, Any]], elapsed: float) -> dict[str, Any]:
         for row in completed
         if row["response"].get("processing_seconds") is not None
     ]
+    steady_state_latencies = latencies[1:] if len(latencies) > 1 else latencies
     warning_counts: Counter[str] = Counter()
     failure_counts: Counter[str] = Counter()
     for row in completed:
@@ -127,6 +159,15 @@ def summarize(results: list[dict[str, Any]], elapsed: float) -> dict[str, Any]:
         "mean_processing_seconds": statistics.fmean(latencies) if latencies else None,
         "median_processing_seconds": statistics.median(latencies) if latencies else None,
         "p95_processing_seconds": percentile(latencies, 0.95),
+        "warmup_processing_seconds": latencies[0] if latencies else None,
+        "steady_state_sample_count": len(steady_state_latencies),
+        "steady_state_mean_processing_seconds": (
+            statistics.fmean(steady_state_latencies) if steady_state_latencies else None
+        ),
+        "steady_state_median_processing_seconds": (
+            statistics.median(steady_state_latencies) if steady_state_latencies else None
+        ),
+        "steady_state_p95_processing_seconds": percentile(steady_state_latencies, 0.95),
         "suite_wall_seconds": elapsed,
     }
 

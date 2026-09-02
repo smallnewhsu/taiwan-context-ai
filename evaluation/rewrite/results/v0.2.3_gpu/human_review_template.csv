@@ -1,0 +1,13 @@
+﻿id,category,original_text,rewritten_text,audience,tone,fallback_used,automatic_pass,fidelity_score_1_5,audience_fit_score_1_5,naturalness_score_1_5,reviewer_notes
+R01,family_daily,我今天工作比較忙，沒辦法回家吃飯。,阿嬤，我今天工作比較忙，沒辦法回家吃飯。,elder,warm,False,True,,,,
+R02,time_negation,明天下午3點以前不要自己去醫院。,阿嬤，明天下午三點前請不要自己去醫院。,elder,polite,False,True,,,,
+R03,medicine_numbers,冰箱裡有2盒藥，晚上9點前不要一起吃。,冰箱裡有2盒藥，晚上9點前不要一起吃。,family,clear,True,True,,,,
+R04,formal_numbers,會議改到週五下午2點，請通知3位同事。,您好，會議改到週五下午2點，請通知3位同事。,formal,polite,True,True,,,,
+R05,causality,我今天不能去，因為車子壞了。,我今天不能去，車子壞了。,friend,concise,False,True,,,,
+R06,uncertainty,我還不確定明天能不能完成。,您好，我還不確定明天能不能完成。,formal,clear,True,True,,,,
+R07,cancellation,今天下午的約要取消。,今天下午的約要取消。,friend,polite,True,True,,,,
+R08,medicine_action,藥吃完了，明天要去拿。,阿嬤，藥吃完了，明天要去拿。,elder,warm,True,True,,,,
+R09,privacy_negation,這份資料不要傳給別人。,請勿將此份資料傳給他人。,formal,clear,False,True,,,,
+R10,money_limit,我只帶500元，不能買超過這個金額的東西。,我只帶500元，不能買超過這個金額的東西。,friend,concise,True,True,,,,
+R11,taiwanese_mixed,阿嬤，我今仔日較無閒，無法度轉去食暗頓。,想跟您說，阿嬤，我今仔日較無閒，無法度轉去食暗頓。,elder,warm,True,True,,,,
+R12,deadline,申請資料必須在9月15日下午5點前寄出，逾期不受理。,申請資料應於九月十五日下午五點前寄出，逾時恕不受理。,formal,polite,False,True,,,,

@@ -21,7 +21,7 @@ TONE_LABELS = {
     "polite": "禮貌委婉",
     "concise": "簡短自然",
 }
-NEGATION_MARKERS = ("不", "沒", "無", "毋", "莫", "免", "未")
+NEGATION_MARKERS = ("不", "沒", "無", "毋", "莫", "免", "未", "勿")
 ADDRESSEE_TERMS = (
     "阿嬤", "阿公", "媽媽", "爸爸", "媽", "爸", "老師", "主任",
     "叔叔", "阿姨", "伯父", "伯母", "哥哥", "姊姊", "姐姐"
@@ -45,6 +45,9 @@ PROTECTED_TAIWANESE_TERMS = (
     "外口",
     "咧落雨",
     "紮雨傘",
+)
+PROTECTED_NATURAL_PHRASES = (
+    "傳給",
 )
 CONSTRAINT_EQUIVALENTS = {
     "不能": ("不能", "不可", "無法", "沒辦法"),
@@ -130,6 +133,9 @@ class RewriteService:
 3. 使用繁體中文與臺灣自然說法；原句若有臺語詞，可自然保留。
 4. 依對象與語氣調整措辭，但不得改變原意。
 5. 若原句資訊不足，不得自行補充。
+6. 情境補充只用來判斷稱謂與語氣，不得拿來補上原句省略的受詞、原因或行動。
+7. 優先保留臺灣自然口語，不要把「傳給」等自然詞換成生硬或不適用的近義詞。
+8. 不得把已發生或已決定的事實陳述改成要求收件者執行的指令。
 錯誤示例：原句「今天忙，不能回家吃飯」不可加入「我會想辦法解決」「下次補償你」「你放心」。
 正確示例：「阿嬤，我今天工作比較忙，沒辦法回家吃飯。」
 只輸出JSON，欄位必須是 rewritten_text、meaning_summary、tone、warnings。"""
@@ -138,9 +144,47 @@ class RewriteService:
     def _verification_prompt():
         return """你是嚴格的語意保真審查器。比較原句與改寫句，只判斷資訊是否一致。
 只要改寫句新增任何承諾、安慰、解決方案、理由、時間、人物、地點或後續行動，就必須判定meaning_preserved為false。
-語氣詞與稱謂調整可以接受，但不能形成新事實。
+語氣詞與稱謂調整可以接受，但不能形成新事實。若稱謂明確出現在「情境補充」，改寫句加入該稱謂不算新增資訊。
+阿拉伯數字與完全相同數值的國字數字視為一致，例如3與三、15與十五。
 只輸出JSON：
 {"meaning_preserved":true或false,"added_information":[],"removed_information":[],"changed_facts":[]}"""
+
+    @staticmethod
+    def _arabic_to_chinese(number_text):
+        number = int(number_text)
+        digits = "零一二三四五六七八九"
+        if number < 10:
+            return digits[number]
+        if number < 20:
+            return "十" + (digits[number % 10] if number % 10 else "")
+        if number < 100:
+            return digits[number // 10] + "十" + (
+                digits[number % 10] if number % 10 else ""
+            )
+        return None
+
+    @classmethod
+    def _numbers_preserved(cls, source, output):
+        source_numbers = re.findall(r"\d+", source)
+        output_numbers = re.findall(r"\d+", output)
+        if any(number not in source_numbers for number in output_numbers):
+            return False
+        for number in source_numbers:
+            chinese = cls._arabic_to_chinese(number)
+            variants = {number}
+            if chinese:
+                variants.add(chinese)
+            if number == "2":
+                variants.add("兩")
+            if not any(variant in output for variant in variants):
+                return False
+        return True
+
+    @staticmethod
+    def _source_has_constraint(text, source_term):
+        if source_term == "不能":
+            return re.search(r"(?<!能)不能", text) is not None
+        return source_term in text
 
     @staticmethod
     def _safe_fallback(original_text, audience, tone, scenario):
@@ -175,9 +219,7 @@ class RewriteService:
             raise RuntimeError("本機模型未產生改寫內容")
 
         warnings = [str(item) for item in result.get("warnings", [])]
-        source_numbers = set(re.findall(r"\d+(?:\.\d+)?%?", original_text))
-        output_numbers = set(re.findall(r"\d+(?:\.\d+)?%?", rewritten))
-        if source_numbers != output_numbers:
+        if not self._numbers_preserved(original_text, rewritten):
             warnings.append("numbers_changed_or_missing")
         source_has_negation = any(marker in original_text for marker in NEGATION_MARKERS)
         output_has_negation = any(marker in rewritten for marker in NEGATION_MARKERS)
@@ -192,10 +234,39 @@ class RewriteService:
         if missing_taiwanese_terms:
             warnings.append("taiwanese_term_changed_or_missing")
 
+        missing_natural_phrases = [
+            phrase
+            for phrase in PROTECTED_NATURAL_PHRASES
+            if phrase in original_text and phrase not in rewritten
+        ]
+        if missing_natural_phrases:
+            warnings.append("natural_phrase_changed_or_missing")
+
+        source_completion = re.search(r"完成\s*[。！？!?]?$", original_text)
+        output_completion = re.search(r"完成([^。！？!?]*)[。！？!?]?$", rewritten)
+        completion_object_added = False
+        if source_completion and output_completion:
+            completion_suffix = output_completion.group(1).strip()
+            completion_object_added = completion_suffix not in {"", "了", "嗎", "呢"}
+        if completion_object_added:
+            warnings.append("omitted_object_was_added")
+
+        source_is_change_statement = bool(
+            re.search(r"(?:會議|時間).*?(?:改到|改為|改成|改至)", original_text)
+        )
+        output_is_change_instruction = bool(
+            re.search(r"請(?:將|把).*?(?:調整|更改|改到|改為|改成|改至)", rewritten)
+        )
+        statement_changed_to_instruction = (
+            source_is_change_statement and output_is_change_instruction
+        )
+        if statement_changed_to_instruction:
+            warnings.append("statement_changed_to_instruction")
+
         missing_constraint_terms = [
             source_term
             for source_term, accepted_terms in CONSTRAINT_EQUIVALENTS.items()
-            if source_term in original_text
+            if self._source_has_constraint(original_text, source_term)
             and not any(term in rewritten for term in accepted_terms)
         ]
         if missing_constraint_terms:
@@ -203,13 +274,26 @@ class RewriteService:
 
         verification = self._chat_json(
             self._verification_prompt(),
-            f"原句：{original_text}\n改寫句：{rewritten}",
+            f"原句：{original_text}\n情境補充：{scenario or '未提供'}\n改寫句：{rewritten}",
             temperature=0.0,
         )
         meaning_preserved = bool(verification.get("meaning_preserved", False))
         added_information = [str(x) for x in verification.get("added_information", [])]
         removed_information = [str(x) for x in verification.get("removed_information", [])]
         changed_facts = [str(x) for x in verification.get("changed_facts", [])]
+
+        allowed_addressees = [
+            term for term in ADDRESSEE_TERMS if term in (scenario or "")
+        ]
+        if (
+            not meaning_preserved
+            and added_information
+            and not removed_information
+            and not changed_facts
+            and all(item in allowed_addressees for item in added_information)
+        ):
+            meaning_preserved = True
+            added_information = []
         if not meaning_preserved:
             warnings.append("semantic_fidelity_check_failed")
         if added_information:
@@ -252,7 +336,10 @@ class RewriteService:
                 "removed_information": removed_information,
                 "changed_facts": changed_facts,
                 "missing_taiwanese_terms": missing_taiwanese_terms,
+                "missing_natural_phrases": missing_natural_phrases,
                 "missing_constraint_terms": missing_constraint_terms,
+                "completion_object_added": completion_object_added,
+                "statement_changed_to_instruction": statement_changed_to_instruction,
             },
             "model": OLLAMA_MODEL,
             "processing_seconds": round(time.perf_counter() - started, 4),
