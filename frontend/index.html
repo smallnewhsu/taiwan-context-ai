@@ -3,84 +3,65 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>聲入其境｜Taiwan Context AI</title>
+  <title>AI翻譯不了的台灣｜Taiwan Context AI</title>
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="home.css">
 </head>
 <body>
-  <main class="shell">
-    <header>
+  <main class="home-shell">
+    <header class="hero">
       <p class="eyebrow">TAIWAN CONTEXT AI</p>
-      <h1>聲入其境</h1>
-      <p class="subtitle">不只聽見語音，更理解臺灣生活裡的語境。</p>
-      <a class="review-link" href="review/">人工審查台 →</a>
-      <a class="review-link" href="rewrite/">語你傳心 →</a>
-      <a class="review-link" href="vision/">視界有解 →</a>
+      <h1>AI翻譯不了的台灣</h1>
+      <p class="hero-copy">從語音、說法到眼前的生活場景，讓開源AI不只辨識內容，也懂得在不確定時停下來，請你確認。</p>
+      <div class="hero-tags">
+        <span>本機AI</span><span>開源模型</span><span>人工確認</span><span>隱私優先</span>
+      </div>
     </header>
 
-    <section class="panel upload-panel">
-      <label class="drop-zone" for="audioFile">
-        <span class="icon">🎙️</span>
-        <strong>選擇語音檔</strong>
-        <span>支援 M4A、WAV、MP3、FLAC、AAC，最大 25 MB</span>
-      </label>
-      <input id="audioFile" type="file" accept="audio/*,.m4a,.aac,.flac">
-      <div id="fileInfo" class="file-info hidden"></div>
-      <audio id="audioPreview" class="hidden" controls></audio>
-      <button id="analyzeButton" type="button" disabled>開始理解</button>
-      <div id="progress" class="progress hidden">
-        <span class="spinner"></span>
-        <span>正在進行雙路徑辨識與語境判斷…</span>
-      </div>
-      <p id="errorMessage" class="error hidden"></p>
+    <section class="module-grid" aria-label="三個核心模組">
+      <a class="module-card speech" href="speech/">
+        <span class="module-icon">🎙️</span>
+        <p class="module-number">01</p>
+        <h2>聲入其境</h2>
+        <p>辨識國語、臺灣台語與混合語音，透過雙路徑候選與語境判斷降低誤解。</p>
+        <strong>開始理解語音 →</strong>
+      </a>
+
+      <a class="module-card rewrite" href="rewrite/">
+        <span class="module-icon">💬</span>
+        <p class="module-number">02</p>
+        <h2>語你傳心</h2>
+        <p>依對象與情境調整表達，同時保護數字、否定、限制條件與原句核心意思。</p>
+        <strong>開始改寫說法 →</strong>
+      </a>
+
+      <a class="module-card vision" href="vision/">
+        <span class="module-icon">🖼️</span>
+        <p class="module-number">03</p>
+        <h2>視界有解</h2>
+        <p>理解生活圖片，明確分開直接觀察、OCR候選、情境推測與無法確認資訊。</p>
+        <strong>開始理解圖片 →</strong>
+      </a>
     </section>
 
-    <section id="resultPanel" class="panel hidden" aria-live="polite">
-      <div class="result-head">
-        <div>
-          <p class="eyebrow">理解結果</p>
-          <h2 id="statusTitle">辨識完成</h2>
-        </div>
-        <span id="statusBadge" class="badge"></span>
+    <section class="trust-panel">
+      <div>
+        <p class="eyebrow">WHY IT MATTERS</p>
+        <h2>不是替使用者決定，而是讓風險被看見。</h2>
       </div>
-
-      <div id="safeResult" class="safe-result hidden">
-        <p class="label">系統理解</p>
-        <p id="selectedText" class="selected-text"></p>
-      </div>
-
-      <div id="confirmationBox" class="confirmation hidden">
-        <p class="warning-title">這段語音可能辨識不完整</p>
-        <p class="muted">請選擇較接近的內容，或直接修正。</p>
-        <label class="candidate">
-          <input type="radio" name="candidate" value="baseline">
-          <span><small>原始辨識</small><strong id="baselineText"></strong></span>
-        </label>
-        <label class="candidate">
-          <input type="radio" name="candidate" value="prompt">
-          <span><small>臺灣語境提示</small><strong id="promptText"></strong></span>
-        </label>
-        <label class="manual-label" for="manualText">手動修正</label>
-        <textarea id="manualText" rows="3" placeholder="輸入正確內容…"></textarea>
-        <label class="consent">
-          <input id="datasetConsent" type="checkbox">
-          <span>我同意將去識別後的修正文字用於改善臺灣語境模型（不保存原始錄音）</span>
-        </label>
-        <button id="confirmButton" type="button">確認內容</button>
-        <p id="confirmedMessage" class="success hidden"></p>
-      </div>
-
-      <details class="technical">
-        <summary>查看技術資訊</summary>
-        <dl>
-          <div><dt>音檔長度</dt><dd id="audioDuration"></dd></div>
-          <div><dt>雙路徑時間</dt><dd id="processingTime"></dd></div>
-          <div><dt>原始信心</dt><dd id="baselineConfidence"></dd></div>
-          <div><dt>提示信心</dt><dd id="promptConfidence"></dd></div>
-          <div><dt>判斷原因</dt><dd id="decisionReasons"></dd></div>
-        </dl>
-      </details>
+      <ul>
+        <li>候選不一致時要求確認</li>
+        <li>模型推測不包裝成事實</li>
+        <li>修正資料須經同意與人工審查</li>
+        <li>原始錄音與圖片不進公開資料集</li>
+      </ul>
     </section>
+
+    <footer>
+      <span>AI翻譯不了的台灣</span>
+      <a href="review/">人工審查台 →</a>
+      <a href="/docs">API文件 →</a>
+    </footer>
   </main>
-  <script src="app.js"></script>
 </body>
 </html>
