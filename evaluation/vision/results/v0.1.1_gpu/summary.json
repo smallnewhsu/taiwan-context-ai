@@ -1,0 +1,24 @@
+{
+  "suite": "Taiwan Context AI Vision v0.1.1",
+  "total_cases": 12,
+  "completed_cases": 12,
+  "missing_image_count": 0,
+  "api_error_count": 0,
+  "object_recall": 0.6078431372549019,
+  "ocr_exact_text_recall": 0.4,
+  "context_keyword_recall": 0.5833333333333334,
+  "hallucination_free_rate": 0.16666666666666666,
+  "confirmation_accuracy": 1.0,
+  "warning_counts": {
+    "low_confidence_ocr_requires_confirmation": 10,
+    "context_is_inference_not_fact": 10,
+    "low_confidence_context_requires_confirmation": 7,
+    "low_confidence_observation": 8
+  },
+  "warmup_processing_seconds": 12.6894,
+  "steady_state_sample_count": 11,
+  "steady_state_mean_processing_seconds": 10.643245454545454,
+  "steady_state_median_processing_seconds": 9.7928,
+  "steady_state_p95_processing_seconds": 23.1673,
+  "suite_wall_seconds": 129.8921982999891
+}
