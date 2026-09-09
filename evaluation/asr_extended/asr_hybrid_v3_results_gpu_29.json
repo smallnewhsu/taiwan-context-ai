@@ -1,0 +1,962 @@
+{
+  "suite": "Taiwan Context AI ASR Language-Conditional Hybrid v3 T22-T50",
+  "strategy": {
+    "baseline_languages": [
+      "國語",
+      "台語",
+      "中英混合"
+    ],
+    "prompt_v2_languages": [
+      "國台混合",
+      "客語（四縣）"
+    ],
+    "weight_fine_tuning_used": false
+  },
+  "summary": {
+    "total_files": 29,
+    "files_with_cer": 29,
+    "baseline_average_cer": 0.3714446909414221,
+    "hybrid_v3_average_cer": 0.36804950832315747,
+    "absolute_cer_change": -0.0033951826182646028,
+    "relative_improvement_rate": 0.009140479595116983,
+    "latency_note": "baseline evaluator did not record latency; prompt v2 steady-state latency is retained as separate benchmark evidence",
+    "prompt_v2_latency_after_warmup": {
+      "sample_count": 28,
+      "average_inference_seconds": 0.6490142857142857,
+      "p95_inference_seconds": 0.74752,
+      "average_rtf": 0.1130142857142857
+    }
+  },
+  "language_summary": [
+    {
+      "language_type": "國語",
+      "sample_count": 8,
+      "selected_source": "baseline",
+      "baseline_macro_cer": 0.032366071428571425,
+      "hybrid_v3_macro_cer": 0.032366071428571425,
+      "absolute_cer_change": 0.0,
+      "relative_improvement_rate": 0.0
+    },
+    {
+      "language_type": "台語",
+      "sample_count": 7,
+      "selected_source": "baseline",
+      "baseline_macro_cer": 0.7496839761545644,
+      "hybrid_v3_macro_cer": 0.7496839761545644,
+      "absolute_cer_change": 0.0,
+      "relative_improvement_rate": 0.0
+    },
+    {
+      "language_type": "國台混合",
+      "sample_count": 6,
+      "selected_source": "prompt_v2",
+      "baseline_macro_cer": 0.3876662030182019,
+      "hybrid_v3_macro_cer": 0.38407666651710265,
+      "absolute_cer_change": -0.0035895365010992775,
+      "relative_improvement_rate": 0.009259348566247699
+    },
+    {
+      "language_type": "中英混合",
+      "sample_count": 4,
+      "selected_source": "baseline",
+      "baseline_macro_cer": 0.07395644283121597,
+      "hybrid_v3_macro_cer": 0.07395644283121597,
+      "absolute_cer_change": 0.0,
+      "relative_improvement_rate": 0.0
+    },
+    {
+      "language_type": "客語（四縣）",
+      "sample_count": 4,
+      "selected_source": "prompt_v2",
+      "baseline_macro_cer": 0.6608391608391608,
+      "hybrid_v3_macro_cer": 0.6416083916083916,
+      "absolute_cer_change": -0.019230769230769273,
+      "relative_improvement_rate": 0.029100529100529165
+    }
+  ],
+  "detailed_results": [
+    {
+      "audio_file": "T22.m4a",
+      "asr_result": "出門前記得把門鎖好我晚1點回來",
+      "original_transcript": "出門前記得把門鎖好，我晚一點回來。",
+      "cer_result": {
+        "correct_rate": 100.0,
+        "cer_rate": 0.0,
+        "total_errors": 0,
+        "substitutions_count": 0,
+        "deletions_count": 0,
+        "insertions_count": 0,
+        "total_chars": 15,
+        "substitutions_errors": [],
+        "deletions_errors": [],
+        "insertions_errors": [],
+        "reference_highlighted": "出門前記的把門鎖好我晚一點回來",
+        "hypothesis_highlighted": "出門前記的把門鎖好我晚一點回來"
+      },
+      "has_original_transcript": true,
+      "case_id": "T22",
+      "language_type": "國語",
+      "selected_source": "baseline"
+    },
+    {
+      "audio_file": "T23.m4a",
+      "asr_result": "油鴨在上面吃飯才會快點吃",
+      "original_transcript": "藥仔佇桌頂，食飽才會記得食。",
+      "cer_result": {
+        "correct_rate": 16.666666666666664,
+        "cer_rate": 0.8333333333333334,
+        "total_errors": 10,
+        "substitutions_count": 10,
+        "deletions_count": 0,
+        "insertions_count": 0,
+        "total_chars": 12,
+        "substitutions_errors": [
+          "正確文本中的「藥仔佇桌頂食飽」 在 ASR 轉譯文本中被替換成 「油鴨在上面吃飯」",
+          "正確文本中的「記的食」 在 ASR 轉譯文本中被替換成 「快點吃」"
+        ],
+        "deletions_errors": [],
+        "insertions_errors": [],
+        "reference_highlighted": "[藥][仔][佇][桌][頂][食][飽]才會[記][的][食]",
+        "hypothesis_highlighted": "[油][鴨][在][上][面][吃][飯]才會[快][點][吃]"
+      },
+      "has_original_transcript": true,
+      "case_id": "T23",
+      "language_type": "台語",
+      "selected_source": "baseline"
+    },
+    {
+      "case_id": "T24",
+      "audio_file": "T24.m4a",
+      "language_type": "國台混合",
+      "prompt_applied": true,
+      "initial_prompt": "這段錄音混合使用國語與臺灣台語。請完全依照實際音訊逐字轉錄，保留語言切換，不翻譯、不改寫；聽不清楚時不要根據提示補字。",
+      "asr_result": "今天的meeting可能會拖到7點你先吃你們等我 ",
+      "original_transcript": "今天 meeting 可能會拖到七點，你先食，毋免等我。",
+      "has_original_transcript": true,
+      "cer_result": {
+        "correct_rate": 82.6086956521739,
+        "cer_rate": 0.17391304347826086,
+        "total_errors": 4,
+        "substitutions_count": 3,
+        "deletions_count": 0,
+        "insertions_count": 1,
+        "total_chars": 23,
+        "substitutions_errors": [
+          "正確文本中的「食毋免」 在 ASR 轉譯文本中被替換成 「吃你們」"
+        ],
+        "deletions_errors": [],
+        "insertions_errors": [
+          "「的」 在 ASR 結果 額外輸出，不屬於正確文本內容"
+        ],
+        "reference_highlighted": "今天□meeting可能會拖到七點你先[食][毋][免]等我",
+        "hypothesis_highlighted": "今天(的)meeting可能會拖到七點你先[吃][你][們]等我"
+      },
+      "latency": {
+        "audio_duration_seconds": 5.7387,
+        "inference_seconds": 0.7119,
+        "rtf": 0.1241,
+        "is_warmup_sample": false,
+        "device": "cuda",
+        "compute_type": "float16"
+      },
+      "selected_source": "prompt_v2"
+    },
+    {
+      "audio_file": "T25.m4a",
+      "asr_result": "週6如果沒下雨我們再去騎腳踏車",
+      "original_transcript": "週六如果沒下雨，我們再去騎腳踏車。",
+      "cer_result": {
+        "correct_rate": 100.0,
+        "cer_rate": 0.0,
+        "total_errors": 0,
+        "substitutions_count": 0,
+        "deletions_count": 0,
+        "insertions_count": 0,
+        "total_chars": 15,
+        "substitutions_errors": [],
+        "deletions_errors": [],
+        "insertions_errors": [],
+        "reference_highlighted": "週六如果沒下雨我們再去騎腳踏車",
+        "hypothesis_highlighted": "週六如果沒下雨我們再去騎腳踏車"
+      },
+      "has_original_transcript": true,
+      "case_id": "T25",
+      "language_type": "國語",
+      "selected_source": "baseline"
+    },
+    {
+      "audio_file": "T26.m4a",
+      "asr_result": "我明天早上3點吃得到你不用早上去等 ",
+      "original_transcript": "我明仔載下晡三點才會到，你毋免遐早去等。",
+      "cer_result": {
+        "correct_rate": 44.44444444444444,
+        "cer_rate": 0.5555555555555556,
+        "total_errors": 10,
+        "substitutions_count": 7,
+        "deletions_count": 2,
+        "insertions_count": 1,
+        "total_chars": 18,
+        "substitutions_errors": [
+          "正確文本中的「仔載下晡」 在 ASR 轉譯文本中被替換成 「天早上」",
+          "正確文本中的「才會」 在 ASR 轉譯文本中被替換成 「吃的」",
+          "正確文本中的「毋免遐」 在 ASR 轉譯文本中被替換成 「不用」"
+        ],
+        "deletions_errors": [
+          "正確文本中的「晡」 被刪除，未被 ASR 轉譯成功 (替換造成)",
+          "正確文本中的「遐」 被刪除，未被 ASR 轉譯成功 (替換造成)"
+        ],
+        "insertions_errors": [
+          "「上」 在 ASR 結果 額外輸出，不屬於正確文本內容"
+        ],
+        "reference_highlighted": "我明[仔][載][下]<晡>三點[才][會]到你[毋][免]<遐>早□去等",
+        "hypothesis_highlighted": "我明[天][早][上]□三點[吃][的]到你[不][用]□早(上)去等"
+      },
+      "has_original_transcript": true,
+      "case_id": "T26",
+      "language_type": "台語",
+      "selected_source": "baseline"
+    },
+    {
+      "audio_file": "T27.m4a",
+      "asr_result": "主管我明天上午要去複診想請0.5天假",
+      "original_transcript": "主管，我明天上午要去複診，想請半天假。",
+      "cer_result": {
+        "correct_rate": 87.5,
+        "cer_rate": 0.125,
+        "total_errors": 2,
+        "substitutions_count": 1,
+        "deletions_count": 0,
+        "insertions_count": 1,
+        "total_chars": 16,
+        "substitutions_errors": [
+          "正確文本中的「半」 在 ASR 轉譯文本中被替換成 「零五」"
+        ],
+        "deletions_errors": [],
+        "insertions_errors": [
+          "「五」 在 ASR 結果 額外輸出，不屬於正確文本內容 (替換造成)"
+        ],
+        "reference_highlighted": "主管我明天上午要去複診想請[半]□天假",
+        "hypothesis_highlighted": "主管我明天上午要去複診想請[零](五)天假"
+      },
+      "has_original_transcript": true,
+      "case_id": "T27",
+      "language_type": "國語",
+      "selected_source": "baseline"
+    },
+    {
+      "audio_file": "T28.m4a",
+      "asr_result": "1個禮拜我打不贏另1天我再跟你約",
+      "original_transcript": "這禮拜我較無閒，改工我才閣佮你約。",
+      "cer_result": {
+        "correct_rate": 26.66666666666667,
+        "cer_rate": 0.7333333333333333,
+        "total_errors": 11,
+        "substitutions_count": 8,
+        "deletions_count": 1,
+        "insertions_count": 2,
+        "total_chars": 15,
+        "substitutions_errors": [
+          "正確文本中的「這」 在 ASR 轉譯文本中被替換成 「一個」",
+          "正確文本中的「較無閒改工」 在 ASR 轉譯文本中被替換成 「打不贏另一天」",
+          "正確文本中的「才閣佮」 在 ASR 轉譯文本中被替換成 「再跟」"
+        ],
+        "deletions_errors": [
+          "正確文本中的「佮」 被刪除，未被 ASR 轉譯成功 (替換造成)"
+        ],
+        "insertions_errors": [
+          "「個」 在 ASR 結果 額外輸出，不屬於正確文本內容 (替換造成)",
+          "「天」 在 ASR 結果 額外輸出，不屬於正確文本內容 (替換造成)"
+        ],
+        "reference_highlighted": "[這]□禮拜我[較][無][閒][改][工]□我[才][閣]<佮>你約",
+        "hypothesis_highlighted": "[一](個)禮拜我[打][不][贏][另][一](天)我[再][跟]□你約"
+      },
+      "has_original_transcript": true,
+      "case_id": "T28",
+      "language_type": "台語",
+      "selected_source": "baseline"
+    },
+    {
+      "case_id": "T29",
+      "audio_file": "T29.m4a",
+      "language_type": "國台混合",
+      "prompt_applied": true,
+      "initial_prompt": "這段錄音混合使用國語與臺灣台語。請完全依照實際音訊逐字轉錄，保留語言切換，不翻譯、不改寫；聽不清楚時不要根據提示補字。",
+      "asr_result": "冰箱下層有1顆水果你若要吃就慢慢拿 ",
+      "original_transcript": "冰箱下層有一盒水果，你若欲食就家己提。",
+      "has_original_transcript": true,
+      "cer_result": {
+        "correct_rate": 64.70588235294117,
+        "cer_rate": 0.35294117647058826,
+        "total_errors": 6,
+        "substitutions_count": 6,
+        "deletions_count": 0,
+        "insertions_count": 0,
+        "total_chars": 17,
+        "substitutions_errors": [
+          "正確文本中的「盒」 在 ASR 轉譯文本中被替換成 「顆」",
+          "正確文本中的「欲食」 在 ASR 轉譯文本中被替換成 「要吃」",
+          "正確文本中的「家己提」 在 ASR 轉譯文本中被替換成 「慢慢拿」"
+        ],
+        "deletions_errors": [],
+        "insertions_errors": [],
+        "reference_highlighted": "冰箱下層有一[盒]水果你若[欲][食]就[家][己][提]",
+        "hypothesis_highlighted": "冰箱下層有一[顆]水果你若[要][吃]就[慢][慢][拿]"
+      },
+      "latency": {
+        "audio_duration_seconds": 5.9734,
+        "inference_seconds": 0.7541,
+        "rtf": 0.1262,
+        "is_warmup_sample": false,
+        "device": "cuda",
+        "compute_type": "float16"
+      },
+      "selected_source": "prompt_v2"
+    },
+    {
+      "audio_file": "T30.m4a",
+      "asr_result": "我已經把 report改完了等1下會email給你 ",
+      "original_transcript": "我已經把 report 改完了，等一下會 email 給你。",
+      "cer_result": {
+        "correct_rate": 100.0,
+        "cer_rate": 0.0,
+        "total_errors": 0,
+        "substitutions_count": 0,
+        "deletions_count": 0,
+        "insertions_count": 0,
+        "total_chars": 24,
+        "substitutions_errors": [],
+        "deletions_errors": [],
+        "insertions_errors": [],
+        "reference_highlighted": "我已經把report改完了等一下會email給你",
+        "hypothesis_highlighted": "我已經把report改完了等一下會email給你"
+      },
+      "has_original_transcript": true,
+      "case_id": "T30",
+      "language_type": "中英混合",
+      "selected_source": "baseline"
+    },
+    {
+      "audio_file": "T31.m4a",
+      "asr_result": "不好意思請問火車站往哪個方向走",
+      "original_transcript": "不好意思，請問火車站要往哪個方向走？",
+      "cer_result": {
+        "correct_rate": 93.75,
+        "cer_rate": 0.0625,
+        "total_errors": 1,
+        "substitutions_count": 0,
+        "deletions_count": 1,
+        "insertions_count": 0,
+        "total_chars": 16,
+        "substitutions_errors": [],
+        "deletions_errors": [
+          "正確文本中的「要」 被刪除 ，未被 ASR 轉譯成功"
+        ],
+        "insertions_errors": [],
+        "reference_highlighted": "不好意思請問火車站<要>往哪個方向走",
+        "hypothesis_highlighted": "不好意思請問火車站□往哪個方向走"
+      },
+      "has_original_transcript": true,
+      "case_id": "T31",
+      "language_type": "國語",
+      "selected_source": "baseline"
+    },
+    {
+      "audio_file": "T32.m4a",
+      "asr_result": "外面有風箏廠你出門記得找water嗎",
+      "original_transcript": "外口風真透，你出門記得穿外套。",
+      "cer_result": {
+        "correct_rate": 15.384615384615385,
+        "cer_rate": 0.8461538461538461,
+        "total_errors": 11,
+        "substitutions_count": 6,
+        "deletions_count": 0,
+        "insertions_count": 5,
+        "total_chars": 13,
+        "substitutions_errors": [
+          "正確文本中的「口」 在 ASR 轉譯文本中被替換成 「面有」",
+          "正確文本中的「真透」 在 ASR 轉譯文本中被替換成 「箏廠」",
+          "正確文本中的「穿外套」 在 ASR 轉譯文本中被替換成 「找water嗎」"
+        ],
+        "deletions_errors": [],
+        "insertions_errors": [
+          "「有」 在 ASR 結果 額外輸出，不屬於正確文本內容 (替換造成)",
+          "「ter嗎」 在 ASR 結果 額外輸出，不屬於正確文本內容 (替換造成)"
+        ],
+        "reference_highlighted": "外[口]□風[真][透]你出門記的[穿][外][套]□□□□",
+        "hypothesis_highlighted": "外[面](有)風[箏][廠]你出門記的[找][w][a](t)(e)(r)(嗎)"
+      },
+      "has_original_transcript": true,
+      "case_id": "T32",
+      "language_type": "台語",
+      "selected_source": "baseline"
+    },
+    {
+      "case_id": "T33",
+      "audio_file": "T33.m4a",
+      "language_type": "客語（四縣）",
+      "prompt_applied": true,
+      "initial_prompt": "這段錄音主要使用臺灣客語四縣腔。請完全依照實際音訊逐字轉錄，保留原本語言，不翻譯、不改寫；聽不清楚時不要根據提示補字。",
+      "asr_result": "吃飽忙還忙都1起來吃飯 ",
+      "original_transcript": "食飽吂？還吂就共下來食飯。",
+      "has_original_transcript": true,
+      "cer_result": {
+        "correct_rate": 36.36363636363637,
+        "cer_rate": 0.6363636363636364,
+        "total_errors": 7,
+        "substitutions_count": 7,
+        "deletions_count": 0,
+        "insertions_count": 0,
+        "total_chars": 11,
+        "substitutions_errors": [
+          "正確文本中的「食」 在 ASR 轉譯文本中被替換成 「吃」",
+          "正確文本中的「吂」 在 ASR 轉譯文本中被替換成 「忙」",
+          "正確文本中的「吂就共下」 在 ASR 轉譯文本中被替換成 「忙都一起」",
+          "正確文本中的「食」 在 ASR 轉譯文本中被替換成 「吃」"
+        ],
+        "deletions_errors": [],
+        "insertions_errors": [],
+        "reference_highlighted": "[食]飽[吂]還[吂][就][共][下]來[食]飯",
+        "hypothesis_highlighted": "[吃]飽[忙]還[忙][都][一][起]來[吃]飯"
+      },
+      "latency": {
+        "audio_duration_seconds": 9.152,
+        "inference_seconds": 0.6052,
+        "rtf": 0.0661,
+        "is_warmup_sample": false,
+        "device": "cuda",
+        "compute_type": "float16"
+      },
+      "selected_source": "prompt_v2"
+    },
+    {
+      "case_id": "T34",
+      "audio_file": "T34.m4a",
+      "language_type": "國台混合",
+      "prompt_applied": true,
+      "initial_prompt": "這段錄音混合使用國語與臺灣台語。請完全依照實際音訊逐字轉錄，保留語言切換，不翻譯、不改寫；聽不清楚時不要根據提示補字。",
+      "asr_result": "這把菜1斤50你來要不要我算你比較小的",
+      "original_transcript": "這把菜一斤五十，你若欲我算你便宜一點。",
+      "has_original_transcript": true,
+      "cer_result": {
+        "correct_rate": 52.94117647058824,
+        "cer_rate": 0.47058823529411764,
+        "total_errors": 8,
+        "substitutions_count": 6,
+        "deletions_count": 0,
+        "insertions_count": 2,
+        "total_chars": 17,
+        "substitutions_errors": [
+          "正確文本中的「若欲」 在 ASR 轉譯文本中被替換成 「來要不要」",
+          "正確文本中的「便宜一點」 在 ASR 轉譯文本中被替換成 「比較小的」"
+        ],
+        "deletions_errors": [],
+        "insertions_errors": [
+          "「不要」 在 ASR 結果 額外輸出，不屬於正確文本內容 (替換造成)"
+        ],
+        "reference_highlighted": "這把菜一斤五十你[若][欲]□□我算你[便][宜][一][點]",
+        "hypothesis_highlighted": "這把菜一斤五十你[來][要](不)(要)我算你[比][較][小][的]"
+      },
+      "latency": {
+        "audio_duration_seconds": 5.4614,
+        "inference_seconds": 0.7188,
+        "rtf": 0.1316,
+        "is_warmup_sample": false,
+        "device": "cuda",
+        "compute_type": "float16"
+      },
+      "selected_source": "prompt_v2"
+    },
+    {
+      "audio_file": "T35.m4a",
+      "asr_result": "這件事我還要想1想現在先不答應你",
+      "original_transcript": "這件事我還要想一想，現在先不答應你。",
+      "cer_result": {
+        "correct_rate": 100.0,
+        "cer_rate": 0.0,
+        "total_errors": 0,
+        "substitutions_count": 0,
+        "deletions_count": 0,
+        "insertions_count": 0,
+        "total_chars": 16,
+        "substitutions_errors": [],
+        "deletions_errors": [],
+        "insertions_errors": [],
+        "reference_highlighted": "這件事我還要想一想現在先不答應你",
+        "hypothesis_highlighted": "這件事我還要想一想現在先不答應你"
+      },
+      "has_original_transcript": true,
+      "case_id": "T35",
+      "language_type": "國語",
+      "selected_source": "baseline"
+    },
+    {
+      "audio_file": "T36.m4a",
+      "asr_result": "我到捷運站了你ready之後再call我",
+      "original_transcript": "我到捷運站了，你 ready 之後再 call 我。",
+      "cer_result": {
+        "correct_rate": 100.0,
+        "cer_rate": 0.0,
+        "total_errors": 0,
+        "substitutions_count": 0,
+        "deletions_count": 0,
+        "insertions_count": 0,
+        "total_chars": 20,
+        "substitutions_errors": [],
+        "deletions_errors": [],
+        "insertions_errors": [],
+        "reference_highlighted": "我到捷運站了你ready之後再call我",
+        "hypothesis_highlighted": "我到捷運站了你ready之後再call我"
+      },
+      "has_original_transcript": true,
+      "case_id": "T36",
+      "language_type": "中英混合",
+      "selected_source": "baseline"
+    },
+    {
+      "audio_file": "T37.m4a",
+      "asr_result": "你如果不贏打麻將要打電話來",
+      "original_transcript": "你若無閒，較晏才閣拍電話來。",
+      "cer_result": {
+        "correct_rate": 25.0,
+        "cer_rate": 0.75,
+        "total_errors": 9,
+        "substitutions_count": 8,
+        "deletions_count": 0,
+        "insertions_count": 1,
+        "total_chars": 12,
+        "substitutions_errors": [
+          "正確文本中的「若無閒較晏才閣拍」 在 ASR 轉譯文本中被替換成 「如果不贏打麻將要打」"
+        ],
+        "deletions_errors": [],
+        "insertions_errors": [
+          "「打」 在 ASR 結果 額外輸出，不屬於正確文本內容 (替換造成)"
+        ],
+        "reference_highlighted": "你[若][無][閒][較][晏][才][閣][拍]□電話來",
+        "hypothesis_highlighted": "你[如][果][不][贏][打][麻][將][要](打)電話來"
+      },
+      "has_original_transcript": true,
+      "case_id": "T37",
+      "language_type": "台語",
+      "selected_source": "baseline"
+    },
+    {
+      "audio_file": "T38.m4a",
+      "asr_result": "我已經平安到家了你不用再擔心",
+      "original_transcript": "我已經平安到家了，你不用再擔心。",
+      "cer_result": {
+        "correct_rate": 100.0,
+        "cer_rate": 0.0,
+        "total_errors": 0,
+        "substitutions_count": 0,
+        "deletions_count": 0,
+        "insertions_count": 0,
+        "total_chars": 14,
+        "substitutions_errors": [],
+        "deletions_errors": [],
+        "insertions_errors": [],
+        "reference_highlighted": "我已經平安到家了你不用再擔心",
+        "hypothesis_highlighted": "我已經平安到家了你不用再擔心"
+      },
+      "has_original_transcript": true,
+      "case_id": "T38",
+      "language_type": "國語",
+      "selected_source": "baseline"
+    },
+    {
+      "case_id": "T39",
+      "audio_file": "T39.m4a",
+      "language_type": "客語（四縣）",
+      "prompt_applied": true,
+      "initial_prompt": "這段錄音主要使用臺灣客語四縣腔。請完全依照實際音訊逐字轉錄，保留原本語言，不翻譯、不改寫；聽不清楚時不要根據提示補字。",
+      "asr_result": "下雨了出門要記得帶雨傘 ",
+      "original_transcript": "落水咧，出門愛記得帶遮仔。",
+      "has_original_transcript": true,
+      "cer_result": {
+        "correct_rate": 45.45454545454546,
+        "cer_rate": 0.5454545454545454,
+        "total_errors": 6,
+        "substitutions_count": 6,
+        "deletions_count": 0,
+        "insertions_count": 0,
+        "total_chars": 11,
+        "substitutions_errors": [
+          "正確文本中的「落水咧」 在 ASR 轉譯文本中被替換成 「下雨了」",
+          "正確文本中的「愛」 在 ASR 轉譯文本中被替換成 「要」",
+          "正確文本中的「遮仔」 在 ASR 轉譯文本中被替換成 「雨傘」"
+        ],
+        "deletions_errors": [],
+        "insertions_errors": [],
+        "reference_highlighted": "[落][水][咧]出門[愛]記的帶[遮][仔]",
+        "hypothesis_highlighted": "[下][雨][了]出門[要]記的帶[雨][傘]"
+      },
+      "latency": {
+        "audio_duration_seconds": 8.512,
+        "inference_seconds": 0.603,
+        "rtf": 0.0708,
+        "is_warmup_sample": false,
+        "device": "cuda",
+        "compute_type": "float16"
+      },
+      "selected_source": "prompt_v2"
+    },
+    {
+      "case_id": "T40",
+      "audio_file": "T40.m4a",
+      "language_type": "國台混合",
+      "prompt_applied": true,
+      "initial_prompt": "這段錄音混合使用國語與臺灣台語。請完全依照實際音訊逐字轉錄，保留語言切換，不翻譯、不改寫；聽不清楚時不要根據提示補字。",
+      "asr_result": "媽仔早上高點要停水請大家記得先出水 ",
+      "original_transcript": "明仔載早起九點會停水，請大家記得先儲水。",
+      "has_original_transcript": true,
+      "cer_result": {
+        "correct_rate": 66.66666666666667,
+        "cer_rate": 0.3333333333333333,
+        "total_errors": 6,
+        "substitutions_count": 5,
+        "deletions_count": 1,
+        "insertions_count": 0,
+        "total_chars": 18,
+        "substitutions_errors": [
+          "正確文本中的「明」 在 ASR 轉譯文本中被替換成 「媽」",
+          "正確文本中的「起九」 在 ASR 轉譯文本中被替換成 「上高」",
+          "正確文本中的「會」 在 ASR 轉譯文本中被替換成 「要」",
+          "正確文本中的「儲」 在 ASR 轉譯文本中被替換成 「出」"
+        ],
+        "deletions_errors": [
+          "正確文本中的「載」 被刪除 ，未被 ASR 轉譯成功"
+        ],
+        "insertions_errors": [],
+        "reference_highlighted": "[明]仔<載>早[起][九]點[會]停水請大家記的先[儲]水",
+        "hypothesis_highlighted": "[媽]仔□早[上][高]點[要]停水請大家記的先[出]水"
+      },
+      "latency": {
+        "audio_duration_seconds": 6.4,
+        "inference_seconds": 0.6658,
+        "rtf": 0.104,
+        "is_warmup_sample": false,
+        "device": "cuda",
+        "compute_type": "float16"
+      },
+      "selected_source": "prompt_v2"
+    },
+    {
+      "audio_file": "T41.m4a",
+      "asr_result": "安床在桌上拿冷氣就燒開菜要燒比較快吃 ",
+      "original_transcript": "暗頓佇桌頂，若冷去就小可仔炊予燒閣食。",
+      "cer_result": {
+        "correct_rate": -11.764705882352944,
+        "cer_rate": 1.1176470588235294,
+        "total_errors": 19,
+        "substitutions_count": 8,
+        "deletions_count": 5,
+        "insertions_count": 6,
+        "total_chars": 17,
+        "substitutions_errors": [
+          "正確文本中的「暗頓佇」 在 ASR 轉譯文本中被替換成 「安床在」",
+          "正確文本中的「頂若」 在 ASR 轉譯文本中被替換成 「上拿」",
+          "正確文本中的「去」 在 ASR 轉譯文本中被替換成 「氣」",
+          "正確文本中的「閣食」 在 ASR 轉譯文本中被替換成 「開菜要燒比較快吃」"
+        ],
+        "deletions_errors": [
+          "正確文本中的「小可仔炊予」 被刪除 ，未被 ASR 轉譯成功"
+        ],
+        "insertions_errors": [
+          "「要燒比較快吃」 在 ASR 結果 額外輸出，不屬於正確文本內容 (替換造成)"
+        ],
+        "reference_highlighted": "[暗][頓][佇]桌[頂][若]冷[去]就<小><可><仔><炊><予>燒[閣][食]□□□□□□",
+        "hypothesis_highlighted": "[安][床][在]桌[上][拿]冷[氣]就□□□□□燒[開][菜](要)(燒)(比)(較)(快)(吃)"
+      },
+      "has_original_transcript": true,
+      "case_id": "T41",
+      "language_type": "台語",
+      "selected_source": "baseline"
+    },
+    {
+      "audio_file": "T42.m4a",
+      "asr_result": "明天下午3點以前不要自己去醫院",
+      "original_transcript": "明天下午三點以前不要自己去醫院。",
+      "cer_result": {
+        "correct_rate": 100.0,
+        "cer_rate": 0.0,
+        "total_errors": 0,
+        "substitutions_count": 0,
+        "deletions_count": 0,
+        "insertions_count": 0,
+        "total_chars": 15,
+        "substitutions_errors": [],
+        "deletions_errors": [],
+        "insertions_errors": [],
+        "reference_highlighted": "明天下午三點以前不要自己去醫院",
+        "hypothesis_highlighted": "明天下午三點以前不要自己去醫院"
+      },
+      "has_original_transcript": true,
+      "case_id": "T42",
+      "language_type": "國語",
+      "selected_source": "baseline"
+    },
+    {
+      "audio_file": "T43.m4a",
+      "asr_result": "下午的meeting改成online認可我等1下傳給你",
+      "original_transcript": "下午的 meeting 改成 online，link 我等一下傳給你。",
+      "cer_result": {
+        "correct_rate": 86.20689655172413,
+        "cer_rate": 0.13793103448275862,
+        "total_errors": 4,
+        "substitutions_count": 2,
+        "deletions_count": 2,
+        "insertions_count": 0,
+        "total_chars": 29,
+        "substitutions_errors": [
+          "正確文本中的「link」 在 ASR 轉譯文本中被替換成 「認可」"
+        ],
+        "deletions_errors": [
+          "正確文本中的「nk」 被刪除，未被 ASR 轉譯成功 (替換造成)"
+        ],
+        "insertions_errors": [],
+        "reference_highlighted": "下午的meeting改成online[l][i]<n><k>我等一下傳給你",
+        "hypothesis_highlighted": "下午的meeting改成online[認][可]□□我等一下傳給你"
+      },
+      "has_original_transcript": true,
+      "case_id": "T43",
+      "language_type": "中英混合",
+      "selected_source": "baseline"
+    },
+    {
+      "case_id": "T44",
+      "audio_file": "T44.m4a",
+      "language_type": "客語（四縣）",
+      "prompt_applied": true,
+      "initial_prompt": "這段錄音主要使用臺灣客語四縣腔。請完全依照實際音訊逐字轉錄，保留原本語言，不翻譯、不改寫；聽不清楚時不要根據提示補字。",
+      "asr_result": "我今天比較忙碌明天再讓你聯絡 ",
+      "original_transcript": "𠊎今晡日較無閒，韶早正摎你聯絡。",
+      "has_original_transcript": true,
+      "cer_result": {
+        "correct_rate": 30.76923076923077,
+        "cer_rate": 0.6923076923076923,
+        "total_errors": 9,
+        "substitutions_count": 8,
+        "deletions_count": 0,
+        "insertions_count": 1,
+        "total_chars": 13,
+        "substitutions_errors": [
+          "正確文本中的「晡日」 在 ASR 轉譯文本中被替換成 「天比」",
+          "正確文本中的「無閒韶早正摎」 在 ASR 轉譯文本中被替換成 「忙碌明天再讓」"
+        ],
+        "deletions_errors": [],
+        "insertions_errors": [
+          "「我」 在 ASR 結果 額外輸出，不屬於正確文本內容"
+        ],
+        "reference_highlighted": "□今[晡][日]較[無][閒][韶][早][正][摎]你聯絡",
+        "hypothesis_highlighted": "(我)今[天][比]較[忙][碌][明][天][再][讓]你聯絡"
+      },
+      "latency": {
+        "audio_duration_seconds": 9.728,
+        "inference_seconds": 0.6451,
+        "rtf": 0.0663,
+        "is_warmup_sample": false,
+        "device": "cuda",
+        "compute_type": "float16"
+      },
+      "selected_source": "prompt_v2"
+    },
+    {
+      "case_id": "T45",
+      "audio_file": "T45.m4a",
+      "language_type": "國台混合",
+      "prompt_applied": true,
+      "initial_prompt": "這段錄音混合使用國語與臺灣台語。請完全依照實際音訊逐字轉錄，保留語言切換，不翻譯、不改寫；聽不清楚時不要根據提示補字。",
+      "asr_result": "你以前就打給我我我開車去載你不用怕 ",
+      "original_transcript": "你到站了就打給我，我開車去載你，毋免家己行。",
+      "has_original_transcript": true,
+      "cer_result": {
+        "correct_rate": 52.63157894736843,
+        "cer_rate": 0.47368421052631576,
+        "total_errors": 9,
+        "substitutions_count": 5,
+        "deletions_count": 3,
+        "insertions_count": 1,
+        "total_chars": 19,
+        "substitutions_errors": [
+          "正確文本中的「到站了」 在 ASR 轉譯文本中被替換成 「以前」",
+          "正確文本中的「毋免家己行」 在 ASR 轉譯文本中被替換成 「不用怕」"
+        ],
+        "deletions_errors": [
+          "正確文本中的「了」 被刪除，未被 ASR 轉譯成功 (替換造成)",
+          "正確文本中的「己行」 被刪除，未被 ASR 轉譯成功 (替換造成)"
+        ],
+        "insertions_errors": [
+          "「我」 在 ASR 結果 額外輸出，不屬於正確文本內容"
+        ],
+        "reference_highlighted": "你[到][站]<了>就打給□我我開車去載你[毋][免][家]<己><行>",
+        "hypothesis_highlighted": "你[以][前]□就打給(我)我我開車去載你[不][用][怕]□□"
+      },
+      "latency": {
+        "audio_duration_seconds": 6.6774,
+        "inference_seconds": 0.6798,
+        "rtf": 0.1018,
+        "is_warmup_sample": false,
+        "device": "cuda",
+        "compute_type": "float16"
+      },
+      "selected_source": "prompt_v2"
+    },
+    {
+      "audio_file": "T46.m4a",
+      "asr_result": "東西我已經放在管理室你回來要記得去掛啊",
+      "original_transcript": "物件我已經放佇管理室，你轉來記得去提。",
+      "cer_result": {
+        "correct_rate": 58.82352941176471,
+        "cer_rate": 0.4117647058823529,
+        "total_errors": 7,
+        "substitutions_count": 5,
+        "deletions_count": 0,
+        "insertions_count": 2,
+        "total_chars": 17,
+        "substitutions_errors": [
+          "正確文本中的「物件」 在 ASR 轉譯文本中被替換成 「東西」",
+          "正確文本中的「佇」 在 ASR 轉譯文本中被替換成 「在」",
+          "正確文本中的「轉」 在 ASR 轉譯文本中被替換成 「回」",
+          "正確文本中的「提」 在 ASR 轉譯文本中被替換成 「掛啊」"
+        ],
+        "deletions_errors": [],
+        "insertions_errors": [
+          "「要」 在 ASR 結果 額外輸出，不屬於正確文本內容",
+          "「啊」 在 ASR 結果 額外輸出，不屬於正確文本內容 (替換造成)"
+        ],
+        "reference_highlighted": "[物][件]我已經放[佇]管理室你[轉]來□記的去[提]□",
+        "hypothesis_highlighted": "[東][西]我已經放[在]管理室你[回]來(要)記的去[掛](啊)"
+      },
+      "has_original_transcript": true,
+      "case_id": "T46",
+      "language_type": "台語",
+      "selected_source": "baseline"
+    },
+    {
+      "audio_file": "T47.m4a",
+      "asr_result": "這本方案我先看看明天再回覆你",
+      "original_transcript": "這份方案我先看看，明天再回覆你。",
+      "cer_result": {
+        "correct_rate": 92.85714285714286,
+        "cer_rate": 0.07142857142857142,
+        "total_errors": 1,
+        "substitutions_count": 1,
+        "deletions_count": 0,
+        "insertions_count": 0,
+        "total_chars": 14,
+        "substitutions_errors": [
+          "正確文本中的「份」 在 ASR 轉譯文本中被替換成 「本」"
+        ],
+        "deletions_errors": [],
+        "insertions_errors": [],
+        "reference_highlighted": "這[份]方案我先看看明天再回覆你",
+        "hypothesis_highlighted": "這[本]方案我先看看明天再回覆你"
+      },
+      "has_original_transcript": true,
+      "case_id": "T47",
+      "language_type": "國語",
+      "selected_source": "baseline"
+    },
+    {
+      "audio_file": "T48.m4a",
+      "asr_result": "不好意思請問check in是在最貴嗎",
+      "original_transcript": "不好意思，請問 check-in 是在這一櫃嗎？",
+      "cer_result": {
+        "correct_rate": 84.21052631578947,
+        "cer_rate": 0.15789473684210525,
+        "total_errors": 3,
+        "substitutions_count": 2,
+        "deletions_count": 1,
+        "insertions_count": 0,
+        "total_chars": 19,
+        "substitutions_errors": [
+          "正確文本中的「這一櫃」 在 ASR 轉譯文本中被替換成 「最貴」"
+        ],
+        "deletions_errors": [
+          "正確文本中的「櫃」 被刪除，未被 ASR 轉譯成功 (替換造成)"
+        ],
+        "insertions_errors": [],
+        "reference_highlighted": "不好意思請問checkin是在[這][一]<櫃>嗎",
+        "hypothesis_highlighted": "不好意思請問checkin是在[最][貴]□嗎"
+      },
+      "has_original_transcript": true,
+      "case_id": "T48",
+      "language_type": "中英混合",
+      "selected_source": "baseline"
+    },
+    {
+      "case_id": "T49",
+      "audio_file": "T49.m4a",
+      "language_type": "客語（四縣）",
+      "prompt_applied": true,
+      "initial_prompt": "這段錄音主要使用臺灣客語四縣腔。請完全依照實際音訊逐字轉錄，保留原本語言，不翻譯、不改寫；聽不清楚時不要根據提示補字。",
+      "asr_result": "藥吃完要喝1些水不要空肚吃 ",
+      "original_transcript": "藥食忒愛啉兜仔水，毋好空肚食。",
+      "has_original_transcript": true,
+      "cer_result": {
+        "correct_rate": 30.76923076923077,
+        "cer_rate": 0.6923076923076923,
+        "total_errors": 9,
+        "substitutions_count": 9,
+        "deletions_count": 0,
+        "insertions_count": 0,
+        "total_chars": 13,
+        "substitutions_errors": [
+          "正確文本中的「食忒愛啉兜仔」 在 ASR 轉譯文本中被替換成 「吃完要喝一些」",
+          "正確文本中的「毋好」 在 ASR 轉譯文本中被替換成 「不要」",
+          "正確文本中的「食」 在 ASR 轉譯文本中被替換成 「吃」"
+        ],
+        "deletions_errors": [],
+        "insertions_errors": [],
+        "reference_highlighted": "藥[食][忒][愛][啉][兜][仔]水[毋][好]空肚[食]",
+        "hypothesis_highlighted": "藥[吃][完][要][喝][一][些]水[不][要]空肚[吃]"
+      },
+      "latency": {
+        "audio_duration_seconds": 8.576,
+        "inference_seconds": 0.66,
+        "rtf": 0.077,
+        "is_warmup_sample": false,
+        "device": "cuda",
+        "compute_type": "float16"
+      },
+      "selected_source": "prompt_v2"
+    },
+    {
+      "case_id": "T50",
+      "audio_file": "T50.m4a",
+      "language_type": "國台混合",
+      "prompt_applied": true,
+      "initial_prompt": "這段錄音混合使用國語與臺灣台語。請完全依照實際音訊逐字轉錄，保留語言切換，不翻譯、不改寫；聽不清楚時不要根據提示補字。",
+      "asr_result": "好到時候再看看",
+      "original_transcript": "好啦，到時陣閣看覓。",
+      "has_original_transcript": true,
+      "cer_result": {
+        "correct_rate": 50.0,
+        "cer_rate": 0.5,
+        "total_errors": 4,
+        "substitutions_count": 3,
+        "deletions_count": 1,
+        "insertions_count": 0,
+        "total_chars": 8,
+        "substitutions_errors": [
+          "正確文本中的「陣閣」 在 ASR 轉譯文本中被替換成 「候再」",
+          "正確文本中的「覓」 在 ASR 轉譯文本中被替換成 「看」"
+        ],
+        "deletions_errors": [
+          "正確文本中的「啦」 被刪除 ，未被 ASR 轉譯成功"
+        ],
+        "insertions_errors": [],
+        "reference_highlighted": "好<啦>到時[陣][閣]看[覓]",
+        "hypothesis_highlighted": "好□到時[候][再]看[看]"
+      },
+      "latency": {
+        "audio_duration_seconds": 4.1174,
+        "inference_seconds": 0.4941,
+        "rtf": 0.12,
+        "is_warmup_sample": false,
+        "device": "cuda",
+        "compute_type": "float16"
+      },
+      "selected_source": "prompt_v2"
+    }
+  ]
+}
