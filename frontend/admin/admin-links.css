@@ -1,0 +1,18 @@
+.kpis .metric-card {
+  display: grid;
+  gap: 7px;
+  padding: 18px;
+  border: 1px solid #dfe8eb;
+  border-radius: 16px;
+  color: #173450;
+  background: #fff;
+  box-shadow: 0 7px 20px rgba(27, 58, 79, .07);
+  text-decoration: none;
+  transition: .18s;
+}
+.kpis .metric-card:hover {
+  border-color: #65bcb3;
+  box-shadow: 0 11px 27px rgba(27, 58, 79, .13);
+  transform: translateY(-2px);
+}
+.kpis .metric-card span { color: #078c89; }

@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>登入｜Taiwan Context AI</title>
+  <link rel="stylesheet" href="login.css">
+  <link rel="stylesheet" href="login-layout-fix.css">
+</head>
+<body>
+  <main class="login-layout">
+    <section class="brand-panel">
+      <img class="login-hero-image" src="/app/login/login-context-cartoon.png?v=20260903-4" alt="">
+      <div class="login-hero-shade" aria-hidden="true"></div>
+      <div class="brand"><span>台</span><b>Taiwan Context AI</b></div>
+      <div class="brand-copy">
+        <p>OPEN SOURCE・LOCAL AI</p>
+        <h1><span>AI 翻譯不了的</span><br><em>台灣</em></h1>
+        <h2>讓 AI 聽懂台灣人的話外之意</h2>
+      </div>
+      <p class="privacy">語音、文字與影像皆由本機 AI 處理</p>
+    </section>
+    <section class="form-panel">
+      <form id="authForm">
+        <p class="eyebrow" id="formEyebrow">WELCOME BACK</p>
+        <h2 id="formTitle">登入系統</h2>
+        <p id="formIntro">請使用你的帳號繼續。</p>
+        <label id="displayNameLabel" class="hidden">顯示名稱<input id="displayName" autocomplete="name" placeholder="例如：系統管理員"></label>
+        <label>帳號<input id="username" autocomplete="username" required placeholder="請輸入帳號"></label>
+        <label>密碼<input id="password" type="password" autocomplete="current-password" required placeholder="至少 8 個字元"></label>
+        <button id="submitButton" type="submit">登入</button>
+        <p id="message" class="message hidden"></p>
+      </form>
+      <footer>AI 翻譯不了的台灣・本機安全版本</footer>
+    </section>
+  </main>
+  <script src="login.js"></script>
+</body>
+</html>

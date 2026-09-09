@@ -4,8 +4,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>視界有解｜Taiwan Context AI</title>
-  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="vision-base.css">
   <link rel="stylesheet" href="vision.css">
+  <link rel="stylesheet" href="vision-followup.css">
 </head>
 <body>
   <main class="shell">
@@ -13,8 +14,7 @@
       <p class="eyebrow">TAIWAN CONTEXT AI</p>
       <h1>視界有解</h1>
       <p class="subtitle">看見畫面，也分清楚事實、文字候選與生活情境推測。</p>
-      <a class="review-link" href="../">← 聲入其境</a>
-      <a class="review-link" href="../rewrite/">語你傳心 →</a>
+      <a class="review-link" href="../" aria-label="返回首頁">← 返回首頁</a>
     </header>
 
     <section class="panel upload-panel">
@@ -77,6 +77,50 @@
         </article>
       </div>
 
+      <section id="followupPanel" class="followup-panel">
+        <p class="card-kicker">影像＋語音＋文字多模態問答</p>
+        <h3>接著詢問這張圖片</h3>
+        <p class="card-note">可直接錄音、選擇音檔或輸入文字，例如：「她是在生氣嗎？」</p>
+
+        <div class="question-tabs" role="tablist" aria-label="選擇提問方式">
+          <button class="question-tab active" type="button" data-mode="record" role="tab" aria-selected="true">🎙 直接錄音</button>
+          <button class="question-tab" type="button" data-mode="upload" role="tab" aria-selected="false">📁 選擇音檔</button>
+          <button class="question-tab" type="button" data-mode="text" role="tab" aria-selected="false">⌨ 文字輸入</button>
+        </div>
+
+        <div id="recordMode" class="question-mode">
+          <div class="record-actions">
+            <button id="recordButton" class="secondary-button" type="button">開始錄音</button>
+            <button id="stopButton" class="secondary-button danger" type="button" disabled>停止錄音</button>
+            <span id="recordingTime" class="recording-time">00:00</span>
+          </div>
+          <div id="recordingPreviewBox" class="recording-preview hidden">
+            <audio id="recordingPreview" controls></audio>
+            <button id="resetRecordingButton" class="text-button" type="button">重新錄製</button>
+          </div>
+          <p id="microphoneHint" class="input-hint">第一次使用時，請允許瀏覽器存取麥克風。</p>
+        </div>
+
+        <div id="uploadMode" class="question-mode hidden">
+          <label class="audio-picker">選擇問題音檔<input id="followupAudio" type="file" accept="audio/*,.m4a,.aac,.flac,.wav,.mp3,.webm,.ogg"></label>
+          <p id="audioFileName" class="input-hint">尚未選擇音檔</p>
+        </div>
+
+        <div id="textMode" class="question-mode hidden">
+          <label for="followupText" class="field-label">輸入問題</label>
+          <textarea id="followupText" maxlength="500" rows="3" placeholder="例如：她是在生氣嗎？我應該怎麼回覆？"></textarea>
+        </div>
+
+        <div class="followup-submit-row">
+          <label for="followupRelationship" class="sr-only">人物關係</label>
+          <select id="followupRelationship" aria-label="人物關係"><option value="未提供">人物關係不確定</option><option value="阿嬤對孫子女">阿嬤 → 孫子女</option><option value="孫子女對阿嬤">孫子女 → 阿嬤</option><option value="家人">家人</option><option value="朋友">朋友</option><option value="同事">同事</option><option value="不熟悉者">不熟悉者</option></select>
+          <button id="askFollowupButton" type="button">送出問題</button>
+        </div>
+        <div id="followupProgress" class="progress hidden"><span class="spinner"></span><span>正在轉錄問題並依影像語境回答…</span></div>
+        <p id="followupError" class="error hidden"></p>
+        <article id="followupResult" class="followup-result hidden"><small>辨識到的問題</small><strong id="followupQuestion"></strong><small>語境回答</small><p id="followupAnswer"></p><small>判斷依據</small><ul id="followupBasis"></ul><p id="followupWarning" class="vision-warning hidden"></p></article>
+      </section>
+
       <details class="technical">
         <summary>查看技術資訊</summary>
         <dl>
@@ -90,6 +134,6 @@
       </details>
     </section>
   </main>
-  <script src="vision.js"></script>
+  <script src="vision.js"></script><script src="../auth-nav.js"></script>
 </body>
 </html>

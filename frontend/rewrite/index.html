@@ -1,81 +1,12 @@
-<!doctype html>
-<html lang="zh-Hant">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>語你傳心｜Taiwan Context AI</title>
-  <link rel="stylesheet" href="../styles.css">
-  <style>
-    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-    .field { display: grid; gap: 7px; }
-    .field.full { grid-column: 1 / -1; }
-    .field label { font-weight: 800; }
-    select, .field textarea, .field input { width: 100%; border: 1px solid var(--line); border-radius: 12px; padding: 12px; font: inherit; background: white; }
-    .rewrite-result { background: var(--mint); border-radius: 16px; padding: 22px; margin-top: 18px; }
-    .rewrite-text { font-size: 24px; font-weight: 900; line-height: 1.55; margin: 8px 0; }
-    .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 18px; }
-    .compare > div { background: #f5f7f7; border-radius: 13px; padding: 14px; }
-    .warning-box { background: var(--warn-bg); color: var(--warn); border-radius: 12px; padding: 12px; margin-top: 14px; }
-    @media (max-width: 620px) { .form-grid, .compare { grid-template-columns: 1fr; } .field.full { grid-column: auto; } }
-  </style>
-</head>
-<body>
-  <main class="shell">
-    <header>
-      <p class="eyebrow">TAIWAN CONTEXT AI</p>
-      <h1>語你傳心</h1>
-      <p class="subtitle">同一個意思，換成更適合對方、更貼近臺灣日常的說法。</p>
-      <a class="review-link" href="../">← 回到聲入其境</a>
-    </header>
-
-    <section class="panel">
-      <div class="form-grid">
-        <div class="field full">
-          <label for="originalText">原本想說的話</label>
-          <textarea id="originalText" rows="4" placeholder="例如：我今天很忙，沒辦法回家吃飯。"></textarea>
-        </div>
-        <div class="field">
-          <label for="audience">要對誰說</label>
-          <select id="audience">
-            <option value="elder">長輩</option>
-            <option value="family">家人</option>
-            <option value="friend">朋友</option>
-            <option value="formal">正式場合</option>
-          </select>
-        </div>
-        <div class="field">
-          <label for="tone">希望的語氣</label>
-          <select id="tone">
-            <option value="warm">溫暖體貼</option>
-            <option value="clear">清楚直接</option>
-            <option value="polite">禮貌委婉</option>
-            <option value="concise">簡短自然</option>
-          </select>
-        </div>
-        <div class="field full">
-          <label for="scenario">情境補充（選填）</label>
-          <input id="scenario" placeholder="例如：傳LINE給阿嬤">
-        </div>
-      </div>
-      <button id="rewriteButton" type="button" style="width:100%;margin-top:18px">幫我換個說法</button>
-      <div id="rewriteProgress" class="progress hidden"><span class="spinner"></span><span>本機模型正在理解語境…</span></div>
-      <p id="rewriteError" class="error hidden"></p>
-    </section>
-
-    <section id="rewriteResult" class="panel hidden">
-      <p class="eyebrow">改寫結果</p>
-      <div class="rewrite-result"><p id="rewrittenText" class="rewrite-text"></p></div>
-      <div class="compare">
-        <div><p class="label">原句</p><p id="sourceText"></p></div>
-        <div><p class="label">保留的核心意思</p><p id="meaningSummary"></p></div>
-      </div>
-      <div id="rewriteWarning" class="warning-box hidden"></div>
-      <details class="technical"><summary>查看技術資訊</summary><dl>
-        <div><dt>本機模型</dt><dd id="modelName"></dd></div>
-        <div><dt>處理時間</dt><dd id="rewriteTime"></dd></div>
-      </dl></details>
-    </section>
-  </main>
-  <script src="rewrite.js"></script>
-</body>
-</html>
+<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>語你傳心</title><link rel="stylesheet" href="../app-theme.css"><link rel="stylesheet" href="rewrite.css"><link rel="stylesheet" href="../ux-refresh.css"></head><body>
+<main class="app-screen rewrite-screen" style="--accent:#f66a00">
+<header class="page-head"><a class="back-link" href="../" aria-label="返回首頁">←</a><h1>語你傳心</h1><p>依對象調整說法，讓心意更容易被理解</p></header>
+<section class="relationship-card"><strong>溝通對象</strong><label><span>我是</span><select id="speakerRole"><option>晚輩</option><option>長輩</option><option>朋友</option><option>同事</option></select></label><span class="relation-arrow">→</span><label><span>對方是</span><select id="audience"><option value="elder">長輩</option><option value="family">晚輩</option><option value="friend">朋友</option><option value="formal">同事</option><option value="formal">不熟悉者</option></select></label></section>
+<section class="original-card"><h2>我原本想說</h2><textarea id="originalText" rows="3" placeholder="例如：我今天無法回家吃飯。"></textarea><div class="voice-row"><button id="recordButton" class="voice-button" type="button">● 開始錄音</button><button id="stopRecordButton" type="button" disabled>■ 停止</button><label class="file-button" for="audioFile">選擇音檔</label><input id="audioFile" type="file" accept="audio/*,.m4a,.aac,.flac,.wav,.mp3,.webm,.ogg"><span id="recordStatus">也可以直接輸入文字</span></div><details class="scenario-field"><summary>補充情境（選填）</summary><textarea id="scenario" rows="2" placeholder="例如：要傳訊息給阿嬤"></textarea></details><div class="input-actions"><button id="clearButton" type="button">重新輸入</button><button id="rewriteButton" type="button">產生三種說法</button></div></section>
+<aside class="context-tip"><strong>語境提醒</strong><span id="contextReminder">系統只調整表達方式，不會替你新增原因、承諾或安排。</span></aside><div id="rewriteProgress" class="progress hidden"><span class="spinner"></span><span>本機模型正在產生並檢查內容…</span></div><p id="rewriteError" class="error hidden"></p>
+<section id="rewriteResult" class="result-section hidden"><div class="result-title"><h2>選擇並編輯表達方式</h2><small>點選一個版本，內容可自行修改</small></div>
+<label class="style-option"><input type="radio" name="rewriteStyle" value="direct"><i></i><span><strong>直接表達</strong><textarea id="directText" rows="3"></textarea></span></label>
+<label class="style-option safe"><input type="radio" name="rewriteStyle" value="warm" checked><i></i><span><strong>安心表達</strong><textarea id="rewrittenText" rows="4"></textarea></span><b>推薦</b></label>
+<label class="style-option taiwan"><input type="radio" name="rewriteStyle" value="taiwanese"><i></i><span><strong>台語表達</strong><textarea id="taiwaneseText" rows="3"></textarea></span></label>
+<div id="rewriteWarning" class="warning-box hidden"></div><label class="confirm-check"><input id="confirmContent" type="checkbox"><span>我已逐字確認所選內容，意思與原句一致</span></label><div class="result-actions"><button id="regenerateButton" type="button">再換一種說法</button><button id="useButton" type="button" disabled>確認並複製</button></div><p id="useMessage" class="use-message hidden"></p><section class="feedback-card"><strong>協助改善在地表達（選填）</strong><p>只有勾選授權且通過人工審查，內容才可納入 Taiwan Context Dataset。</p><label><input id="consentDataset" type="checkbox">我同意將原句與確認版本去識別化後，供研究及開源資料集使用</label><button id="feedbackButton" type="button" disabled>送出改寫回饋</button><small id="feedbackMessage"></small></section><div class="source-card"><small>原句</small><p id="sourceText"></p><small>保留的核心意思</small><p id="meaningSummary"></p></div><details class="technical"><summary>查看技術資訊</summary><dl><div><dt>本機模型</dt><dd id="modelName"></dd></div><div><dt>處理時間</dt><dd id="rewriteTime"></dd></div><div><dt>安全檢查代碼</dt><dd id="technicalWarnings">無</dd></div></dl></details></section>
+<nav class="bottom-nav"><a href="../"><span class="nav-icon">⌂</span><span>首頁</span></a><a href="../speech/"><span class="nav-icon">◉</span><span>聲入其境</span></a><a class="active" href="./"><span class="nav-icon">◇</span><span>語你傳心</span></a><a href="../vision/"><span class="nav-icon">▣</span><span>視界有解</span></a></nav></main><script src="rewrite.js"></script><script src="../auth-nav.js"></script></body></html>

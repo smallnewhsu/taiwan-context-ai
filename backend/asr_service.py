@@ -37,7 +37,7 @@ MODEL_PATH = PROJECT_ROOT / "services" / "asr" / "models"
 PROMPT_PATH = (
     PROJECT_ROOT / "datasets" / "taiwan_context" / "asr_prompt_family.txt"
 )
-SUPPORTED_EXTENSIONS = {".wav", ".mp3", ".flac", ".m4a", ".aac"}
+SUPPORTED_EXTENSIONS = {".wav", ".mp3", ".flac", ".m4a", ".aac", ".webm", ".ogg"}
 
 
 class ASRService:

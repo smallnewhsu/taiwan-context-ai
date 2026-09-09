@@ -4,6 +4,16 @@ const errorBox = document.querySelector("#reviewError");
 
 const escapeText = (value) => String(value ?? "");
 
+function contextPayload(item) {
+  if (item.ai_context && item.human_context) {
+    return { ai_context: item.ai_context, human_context: item.human_context };
+  }
+  const encoded = (item.reasons || []).find((reason) => String(reason).startsWith("context_edit_json:"));
+  if (!encoded) return null;
+  try { return JSON.parse(String(encoded).slice("context_edit_json:".length)); }
+  catch { return null; }
+}
+
 async function loadPending() {
   status.classList.remove("hidden");
   errorBox.classList.add("hidden");
@@ -11,7 +21,8 @@ async function loadPending() {
     const response = await fetch("/feedback/pending");
     const payload = await response.json();
     if (!response.ok) throw new Error(payload.detail || "無法載入待審核資料");
-    render(payload.items);
+    const consentedOnly = new URLSearchParams(location.search).get("consented") === "1";
+    render(consentedOnly ? payload.items.filter((item) => item.consent_to_dataset) : payload.items);
   } catch (error) {
     errorBox.textContent = error.message;
     errorBox.classList.remove("hidden");
@@ -42,6 +53,7 @@ function render(items) {
   }
 
   items.forEach((item) => {
+    const savedContext = contextPayload(item);
     const card = document.createElement("article");
     card.className = "review-card";
     card.dataset.feedbackId = item.feedback_id;
@@ -70,14 +82,29 @@ function render(items) {
     reject.addEventListener("click", () => review(item.feedback_id, "reject", note.value, card));
     actions.append(approve, reject);
 
-    card.append(
-      meta,
-      textRow("原始辨識", item.baseline_text),
-      textRow("提示辨識", item.prompt_text),
-      textRow("使用者修正", item.corrected_text, true),
-      note,
-      actions
-    );
+    const contentRows = (item.feedback_type === "speech_context" || savedContext)
+      ? [
+          textRow("確認逐字稿", item.corrected_text),
+          textRow("AI 字面意思", savedContext?.ai_context?.literal_meaning || item.ai_context?.literal_meaning || "未提供"),
+          textRow("修改後字面意思", savedContext?.human_context?.literal_meaning || item.human_context?.literal_meaning, true),
+          textRow("AI 可能意境", (savedContext?.ai_context?.possible_intents || item.ai_context?.possible_intents || []).join("；") || savedContext?.ai_context?.possible_intent || "未提供"),
+          textRow("修改後可能意境", savedContext?.human_context?.possible_intent || item.human_context?.possible_intent, true),
+          textRow("AI 判斷依據", (savedContext?.ai_context?.basis || item.ai_context?.basis || []).join("・") || "未提供"),
+          textRow("修改後判斷依據", savedContext?.human_context?.basis || item.human_context?.basis, true),
+          textRow("AI 建議回應", savedContext?.ai_context?.suggested_reply || item.ai_context?.suggested_reply || "未提供"),
+          textRow("修改後建議回應", savedContext?.human_context?.suggested_reply || item.human_context?.suggested_reply, true),
+        ]
+      : [
+          textRow("原始辨識", item.baseline_text),
+          textRow("提示辨識", item.prompt_text),
+          textRow("使用者修正", item.corrected_text, true),
+        ];
+    if (item.feedback_type === "speech_context" || savedContext) {
+      const type = document.createElement("span");
+      type.textContent = "語境判斷修正";
+      meta.prepend(type);
+    }
+    card.append(meta, ...contentRows, note, actions);
     list.append(card);
   });
 }

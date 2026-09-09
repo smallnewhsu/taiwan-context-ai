@@ -1,71 +1,37 @@
-<!doctype html>
-<html lang="zh-Hant">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>聲入其境｜Taiwan Context AI</title>
-  <link rel="stylesheet" href="../styles.css">
-</head>
-<body>
-  <main class="shell">
-    <header>
-      <p class="eyebrow">TAIWAN CONTEXT AI</p>
-      <h1>聲入其境</h1>
-      <p class="subtitle">不只聽見語音，更理解臺灣生活裡的語境。</p>
-      <a class="review-link" href="../">← 系統首頁</a>
-      <a class="review-link" href="../review/">人工審查台 →</a>
-      <a class="review-link" href="../rewrite/">語你傳心 →</a>
-      <a class="review-link" href="../vision/">視界有解 →</a>
-    </header>
+<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#ffffff"><title>聲入其境｜Taiwan Context AI</title><link rel="stylesheet" href="../app-theme.css"><link rel="stylesheet" href="speech.css"><link rel="stylesheet" href="../ux-refresh.css"><link rel="stylesheet" href="relation-status.css"></head>
+<body><main class="app-screen speech-screen" style="--accent:#089fa4">
+<header class="page-head"><a class="back-link" href="../" aria-label="返回首頁">←</a><h1>聲入其境</h1><p>聽見話語，走進情境</p></header>
 
-    <section class="panel upload-panel">
-      <label class="drop-zone" for="audioFile">
-        <span class="icon">🎙️</span>
-        <strong>選擇語音檔</strong>
-        <span>支援 M4A、WAV、MP3、FLAC、AAC，最大 25 MB</span>
-      </label>
-      <input id="audioFile" type="file" accept="audio/*,.m4a,.aac,.flac">
-      <div id="fileInfo" class="file-info hidden"></div>
-      <audio id="audioPreview" class="hidden" controls></audio>
-      <button id="analyzeButton" type="button" disabled>開始理解</button>
-      <div id="progress" class="progress hidden">
-        <span class="spinner"></span>
-        <span>正在進行雙路徑辨識與語境判斷…</span>
-      </div>
-      <p id="errorMessage" class="error hidden"></p>
-    </section>
+<section class="relationship-card"><strong>人物關係 <small id="relationStatus">辨識後自動判斷</small></strong><label><span>我是</span><select id="speakerRole"><option selected>不確定</option><option>晚輩</option><option>長輩</option><option>朋友</option><option>同事</option><option>不熟悉者</option></select></label><span class="relation-arrow">→</span><label><span>對方是</span><select id="listenerRole"><option selected>不確定</option><option>長輩</option><option>晚輩</option><option>朋友</option><option>同事</option><option>不熟悉者</option></select></label></section>
 
-    <section id="resultPanel" class="panel hidden" aria-live="polite">
-      <div class="result-head">
-        <div><p class="eyebrow">理解結果</p><h2 id="statusTitle">辨識完成</h2></div>
-        <span id="statusBadge" class="badge"></span>
-      </div>
-      <div id="safeResult" class="safe-result hidden">
-        <p class="label">系統理解</p><p id="selectedText" class="selected-text"></p>
-      </div>
-      <div id="confirmationBox" class="confirmation hidden">
-        <p class="warning-title">這段語音可能辨識不完整</p>
-        <p class="muted">請選擇較接近的內容，或直接修正。</p>
-        <label class="candidate"><input type="radio" name="candidate" value="baseline"><span><small>原始辨識</small><strong id="baselineText"></strong></span></label>
-        <label class="candidate"><input type="radio" name="candidate" value="prompt"><span><small>臺灣語境提示</small><strong id="promptText"></strong></span></label>
-        <label class="manual-label" for="manualText">手動修正</label>
-        <textarea id="manualText" rows="3" placeholder="輸入正確內容…"></textarea>
-        <label class="consent"><input id="datasetConsent" type="checkbox"><span>我同意將去識別後的修正文字用於改善臺灣語境模型（不保存原始錄音）</span></label>
-        <button id="confirmButton" type="button">確認內容</button>
-        <p id="confirmedMessage" class="success hidden"></p>
-      </div>
-      <details class="technical">
-        <summary>查看技術資訊</summary>
-        <dl>
-          <div><dt>音檔長度</dt><dd id="audioDuration"></dd></div>
-          <div><dt>雙路徑時間</dt><dd id="processingTime"></dd></div>
-          <div><dt>原始信心</dt><dd id="baselineConfidence"></dd></div>
-          <div><dt>提示信心</dt><dd id="promptConfidence"></dd></div>
-          <div><dt>判斷原因</dt><dd id="decisionReasons"></dd></div>
-        </dl>
-      </details>
-    </section>
-  </main>
-  <script src="speech.js"></script>
-</body>
-</html>
+<section class="capture-card">
+  <h2>按下錄音，聽聽他怎麼說</h2>
+  <button class="mic-button" id="recordButton" type="button" aria-label="開始錄音"><svg viewBox="0 0 24 24"><rect x="8" y="2" width="8" height="13" rx="4"/><path d="M5 11a7 7 0 0 0 14 0M12 18v4M8 22h8"/><path class="sound" d="M19 7c1.7 1.7 1.7 4.3 0 6M21 5c2.8 2.8 2.8 7.2 0 10"/></svg></button>
+  <input class="file-input" id="audioFile" type="file" accept="audio/*,.m4a,.aac,.flac,.wav,.mp3,.webm,.ogg">
+  <strong class="model-name">Taiwan-Tongues ASR-CE</strong>
+  <div class="waveform" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+  <div class="record-controls"><button id="stopRecordButton" type="button" disabled>停止錄音</button><span id="recordTime">00:00</span><label for="audioFile">或選擇音檔</label></div>
+  <div id="fileInfo" class="file-info">點擊麥克風直接錄音，或選擇既有音檔</div><audio id="audioPreview" class="hidden" controls></audio>
+  <button id="discardRecordButton" class="discard-record hidden" type="button">重新錄製</button>
+  <button id="analyzeButton" class="capture-action" type="button" disabled>開始理解</button>
+</section>
+
+<div id="progress" class="progress hidden"><span class="spinner"></span><span>正在辨識語音並理解情境…</span></div><p id="errorMessage" class="error hidden"></p>
+
+<section id="resultPanel" class="result-area hidden">
+  <div class="transcript-bubble"><small>辨識到的話語</small><p id="selectedText"></p><button id="editTranscriptButton" class="edit-transcript-button" type="button">修正辨識文字</button><span id="statusBadge"></span></div>
+  <div id="editTranscriptPanel" class="edit-transcript-panel hidden"><h3>修正辨識文字</h3><p>請輸入這段音檔實際說出的內容。儲存後，系統會以正確文字重新理解語境。</p><textarea id="correctedTranscript" rows="3" placeholder="輸入正確逐字稿"></textarea><label class="context-consent"><input id="transcriptDatasetConsent" type="checkbox"><span><strong>資料使用授權（選填）</strong><small>同意將去識別化修正文字經人工審查後，用於 Taiwan Context Dataset 與模型改善。</small></span></label><div class="edit-actions"><button id="cancelTranscriptEdit" class="secondary-button" type="button">取消</button><button id="saveTranscriptEdit" class="primary-button" type="button">儲存並重新理解</button></div><p id="transcriptSavedMessage" class="success hidden"></p></div>
+  <div class="insight-card"><span class="insight-icon"><svg viewBox="0 0 24 24"><path d="M7 3h8l4 4v14H7zM15 3v5h5M10 12h6M10 16h6"/></svg></span><div><h3>字面意思</h3><p id="literalMeaning"></p></div></div>
+  <div class="insight-card"><span class="insight-icon"><svg viewBox="0 0 24 24"><path d="M7 16c-2.5 0-4-1.7-4-4s1.5-4 4-4c.8-3 3.3-5 6-5 3.3 0 6 2.7 6 6 1.3.5 2 1.7 2 3 0 2.2-1.8 4-4 4H7Z"/><path d="m9 12 3 3 4-5"/></svg></span><div><h3>可能意境</h3><div id="intentTags" class="intent-tags"></div><p id="intentMeaning"></p></div></div>
+  <div class="insight-card"><span class="insight-icon"><svg viewBox="0 0 24 24"><circle cx="10" cy="10" r="6"/><path d="m15 15 6 6M8 10h4M10 8v4"/></svg></span><div><h3>判斷依據</h3><p id="judgmentBasis"></p></div></div>
+  <div class="insight-card"><span class="insight-icon"><svg viewBox="0 0 24 24"><path d="M9 18h6M10 22h4M8 14c-1.2-1.1-2-2.7-2-4.5a6 6 0 1 1 12 0c0 1.8-.8 3.4-2 4.5-.7.6-1 1.3-1 2H9c0-.7-.3-1.4-1-2Z"/></svg></span><div><h3>建議回應</h3><p id="suggestedReply"></p></div></div>
+
+  <div id="confirmationBox" class="confirmation hidden"><h2 id="statusTitle">這段語音需要確認</h2><p>請選擇較接近的內容，或直接修正。</p><label class="candidate"><input type="radio" name="candidate" value="baseline"><span><small>原始辨識</small><strong id="baselineText"></strong></span></label><label class="candidate"><input type="radio" name="candidate" value="prompt"><span><small>臺灣語境提示</small><strong id="promptText"></strong></span></label><textarea id="manualText" rows="3" placeholder="輸入正確內容…"></textarea><label class="consent"><input id="datasetConsent" type="checkbox"><span>同意將去識別修正文字用於改善模型</span></label><button id="confirmButton" class="primary-button" type="button">確認內容</button><p id="confirmedMessage" class="success hidden"></p></div>
+
+  <div id="contextPanel" class="context-panel hidden"><label for="extraContext">補充前後對話</label><textarea id="extraContext" rows="3" placeholder="例如：前面正在討論晚餐與回家時間…"></textarea><button id="applyContext" type="button">套用語境</button></div>
+  <div id="editInsightPanel" class="edit-insight-panel hidden"><h3>修改判斷與建議</h3><p>AI內容僅供參考，你可以依實際情況修正。</p><label>字面意思<textarea id="editLiteral" rows="2"></textarea></label><label>可能意境<textarea id="editIntent" rows="3"></textarea></label><label>判斷依據<textarea id="editBasis" rows="3"></textarea></label><label>建議回應<textarea id="editReply" rows="3"></textarea></label><label class="context-consent"><input id="contextDatasetConsent" type="checkbox"><span><strong>資料使用授權（選填）</strong><small>同意將這次的去識別化逐字稿與語境修正，經管理者人工審查後，用於 Taiwan Context Dataset 與模型改善。未勾選仍可儲存及套用人工修正，但不會納入資料集。</small></span></label><div class="edit-actions"><button id="cancelInsightEdit" class="secondary-button" type="button">取消</button><button id="saveInsightEdit" class="primary-button" type="button">儲存修改</button></div><p id="insightSavedMessage" class="success hidden">已套用你的修改；AI不會覆蓋這次人工判斷。</p></div>
+  <div class="result-actions"><button id="contextButton" class="secondary-button" type="button">補充前後對話</button><button id="editInsightButton" class="secondary-button" type="button">修改判斷與建議</button><button id="resetButton" class="primary-button" type="button">重新錄音</button></div>
+  <details class="technical"><summary>查看技術資訊</summary><dl><div><dt>音檔長度</dt><dd id="audioDuration"></dd></div><div><dt>雙路徑時間</dt><dd id="processingTime"></dd></div><div><dt>原始信心</dt><dd id="baselineConfidence"></dd></div><div><dt>提示信心</dt><dd id="promptConfidence"></dd></div><div><dt>判斷原因</dt><dd id="decisionReasons"></dd></div></dl></details>
+</section>
+<nav class="bottom-nav"><a href="../"><span class="nav-icon">⌂</span><span>首頁</span></a><a class="active" href="./"><span class="nav-icon">◉</span><span>聲入其境</span></a><a href="../rewrite/"><span class="nav-icon">◇</span><span>語你傳心</span></a><a href="../vision/"><span class="nav-icon">▣</span><span>視界有解</span></a></nav>
+</main><script src="speech.js"></script><script src="../auth-nav.js"></script></body></html>

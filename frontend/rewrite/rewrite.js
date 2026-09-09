@@ -1,52 +1,25 @@
-const button = document.querySelector("#rewriteButton");
-const progress = document.querySelector("#rewriteProgress");
-const errorBox = document.querySelector("#rewriteError");
-const resultBox = document.querySelector("#rewriteResult");
-
-button.addEventListener("click", async () => {
-  const originalText = document.querySelector("#originalText").value.trim();
-  if (!originalText) {
-    alert("請先輸入想說的話。");
-    return;
-  }
-  button.disabled = true;
-  progress.classList.remove("hidden");
-  errorBox.classList.add("hidden");
-  resultBox.classList.add("hidden");
-  try {
-    const response = await fetch("/expression/rewrite", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        original_text: originalText,
-        audience: document.querySelector("#audience").value,
-        tone: document.querySelector("#tone").value,
-        scenario: document.querySelector("#scenario").value.trim(),
-      }),
-    });
-    const payload = await response.json();
-    if (!response.ok) throw new Error(payload.detail || "改寫失敗");
-    document.querySelector("#rewrittenText").textContent = payload.rewritten_text;
-    document.querySelector("#sourceText").textContent = payload.original_text;
-    document.querySelector("#meaningSummary").textContent = payload.meaning_summary || "未提供";
-    document.querySelector("#modelName").textContent = payload.model;
-    document.querySelector("#rewriteTime").textContent = `${payload.processing_seconds.toFixed(2)} 秒`;
-    const warning = document.querySelector("#rewriteWarning");
-    if (payload.needs_confirmation) {
-      warning.textContent = payload.fallback_used
-        ? `LLM候選未通過語意保真檢查，已改用保守式安全改寫，請確認後使用。原因：${payload.warnings.join("、")}`
-        : `請確認原意是否保留：${payload.warnings.join("、")}`;
-      warning.classList.remove("hidden");
-    } else {
-      warning.classList.add("hidden");
-    }
-    resultBox.classList.remove("hidden");
-    resultBox.scrollIntoView({ behavior: "smooth" });
-  } catch (error) {
-    errorBox.textContent = error.message;
-    errorBox.classList.remove("hidden");
-  } finally {
-    button.disabled = false;
-    progress.classList.add("hidden");
-  }
-});
+const $=(s)=>document.querySelector(s),button=$("#rewriteButton"),progress=$("#rewriteProgress"),errorBox=$("#rewriteError"),resultBox=$("#rewriteResult");
+const warningLabels={added_information_detected:"候選內容可能加入原句沒有的資訊",safe_fallback_applied:"已自動改用保守安全版本",semantic_fidelity_check_failed:"候選內容未通過語意一致性檢查",numbers_changed_or_missing:"數字或時間資訊可能改變",negation_may_be_missing:"否定語意可能遺失",constraint_modality_changed_or_missing:"限制條件或語氣可能改變",taiwanese_term_changed_or_missing:"台語關鍵詞可能改變",taigi_conversion_unavailable:"台語轉換服務暫時無法使用"};
+const warningObserver=new MutationObserver(()=>{const box=$("#rewriteWarning"),raw=box.textContent||"";if(box.classList.contains("hidden")){$("#technicalWarnings").textContent="無";return}if(!raw.includes("_")||!raw.includes("："))return;const codes=raw.split("：").slice(1).join("：").split("、").map(x=>x.trim()).filter(Boolean);$("#technicalWarnings").textContent=codes.join("、")||"無";const labels=[...new Set(codes.map(code=>warningLabels[code]||"部分內容需要人工確認"))];box.textContent=`為了避免改變原意，系統已啟用語意保護。${labels.join("；")}。請逐字確認後再使用。`});
+warningObserver.observe($("#rewriteWarning"),{childList:true,characterData:true,subtree:true,attributes:true,attributeFilter:["class"]});
+let mediaRecorder=null,mediaStream=null,recordedChunks=[],generatedVersions={};
+function roleLabel(){const s=$("#audience");return s.options[s.selectedIndex].text}
+function updateReminder(){$("#contextReminder").textContent=`對方是${roleLabel()}；系統只調整說法，不會替你新增原因、承諾或行程。`}
+function resetConfirmation(){$("#confirmContent").checked=false;$("#useButton").disabled=true;$("#feedbackButton").disabled=true;$("#useMessage").classList.add("hidden");$("#feedbackMessage").textContent=""}
+$("#audience").addEventListener("change",updateReminder);
+async function jsonPost(url,body){const r=await fetch(url,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)}),p=await r.json();if(!r.ok)throw new Error(p.detail||"處理失敗");return p}
+function requestRewrite(tone){return jsonPost("/expression/rewrite",{original_text:$("#originalText").value.trim(),audience:$("#audience").value,tone,scenario:$("#scenario").value.trim()})}
+function requestTaigi(){return jsonPost("/expression/taigi",{original_text:$("#originalText").value.trim(),audience:$("#audience").value,scenario:$("#scenario").value.trim()})}
+async function transcribeAudio(file){const d=new FormData();d.append("file",file,file.name||"rewrite-recording.webm");const r=await fetch("/speech/interpret",{method:"POST",body:d}),p=await r.json();if(!r.ok)throw new Error(p.detail||"語音辨識失敗");const t=p?.decision?.selected_text||p?.corrected_text||p?.baseline?.text||"";if(!t)throw new Error("沒有辨識到可用文字");$("#originalText").value=t;$("#recordStatus").textContent="語音已轉成文字，請確認後再產生說法"}
+$("#audioFile").addEventListener("change",async e=>{const f=e.target.files?.[0];if(!f)return;$("#recordStatus").textContent=`辨識中：${f.name}`;try{await transcribeAudio(f)}catch(x){$("#recordStatus").textContent=x.message}});
+$("#recordButton").addEventListener("click",async()=>{if(!navigator.mediaDevices?.getUserMedia||!window.MediaRecorder)return alert("此瀏覽器不支援錄音，請改用選擇音檔。");try{mediaStream=await navigator.mediaDevices.getUserMedia({audio:true});recordedChunks=[];const m=MediaRecorder.isTypeSupported("audio/webm;codecs=opus")?"audio/webm;codecs=opus":"audio/webm";mediaRecorder=new MediaRecorder(mediaStream,{mimeType:m});mediaRecorder.ondataavailable=e=>{if(e.data.size)recordedChunks.push(e.data)};mediaRecorder.onstop=async()=>{mediaStream?.getTracks().forEach(t=>t.stop());const f=new File([new Blob(recordedChunks,{type:m})],"rewrite-recording.webm",{type:m});$("#recordStatus").textContent="錄音完成，正在辨識…";try{await transcribeAudio(f)}catch(x){$("#recordStatus").textContent=x.message}};mediaRecorder.start();$("#recordButton").disabled=true;$("#stopRecordButton").disabled=false;$("#recordStatus").textContent="錄音中…"}catch(x){$("#recordStatus").textContent=`無法開始錄音：${x.message}`}});
+$("#stopRecordButton").addEventListener("click",()=>{if(mediaRecorder?.state==="recording")mediaRecorder.stop();$("#recordButton").disabled=false;$("#stopRecordButton").disabled=true});
+async function runRewrite(){const original=$("#originalText").value.trim();if(!original)return alert("請先輸入文字、錄音或選擇音檔。");button.disabled=true;progress.classList.remove("hidden");errorBox.classList.add("hidden");resultBox.classList.add("hidden");try{const [direct,warm,taigi]=await Promise.all([requestRewrite("clear"),requestRewrite("warm"),requestTaigi().catch(()=>({taigi_text:original,warnings:["taigi_conversion_unavailable"],processing_seconds:0}))]);$("#directText").value=direct.rewritten_text;$("#rewrittenText").value=warm.rewritten_text;$("#taiwaneseText").value=taigi.taigi_text;$("#sourceText").textContent=original;$("#meaningSummary").textContent=warm.meaning_summary||direct.meaning_summary||"保留原句的人物、事件、否定、數字及限制條件。";$("#modelName").textContent=warm.model||direct.model;$("#rewriteTime").textContent=`${Math.max(direct.processing_seconds||0,warm.processing_seconds||0,taigi.processing_seconds||0).toFixed(2)} 秒（平行處理）`;const w=[...new Set([...(direct.warnings||[]),...(warm.warnings||[]),...(taigi.warnings||[])])];if(w.length){$("#rewriteWarning").textContent=`系統已攔截或回退部分候選，仍請逐字確認：${w.join("、")}`;$("#rewriteWarning").classList.remove("hidden")}else $("#rewriteWarning").classList.add("hidden");resetConfirmation();resultBox.classList.remove("hidden");resultBox.scrollIntoView({behavior:"smooth",block:"start"})}catch(x){errorBox.textContent=x.message;errorBox.classList.remove("hidden")}finally{button.disabled=false;progress.classList.add("hidden")}}
+button.addEventListener("click",runRewrite);$("#regenerateButton").addEventListener("click",runRewrite);
+$("#clearButton").addEventListener("click",()=>{$("#originalText").value="";$("#scenario").value="";$("#audioFile").value="";$("#recordStatus").textContent="也可以直接輸入文字";resultBox.classList.add("hidden");$("#originalText").focus()});
+document.querySelectorAll('input[name="rewriteStyle"],.style-option textarea').forEach(e=>e.addEventListener("input",resetConfirmation));
+$("#confirmContent").addEventListener("change",e=>$("#useButton").disabled=!e.target.checked);
+$("#useButton").addEventListener("click",async()=>{if(!$("#confirmContent").checked)return;const s=$('input[name="rewriteStyle"]:checked').value,id=s==="direct"?"#directText":s==="taiwanese"?"#taiwaneseText":"#rewrittenText",t=$(id).value.trim();try{await navigator.clipboard.writeText(t);$("#useMessage").textContent="已確認並複製所選版本。"}catch{$("#useMessage").textContent=`已確認內容：${t}`}$("#useMessage").classList.remove("hidden")});updateReminder();
+$("#useButton").addEventListener("click",()=>{if($("#confirmContent").checked)$("#feedbackButton").disabled=false});
+$("#feedbackButton").addEventListener("click",async()=>{const s=$('input[name="rewriteStyle"]:checked').value,id=s==="direct"?"#directText":s==="taiwanese"?"#taiwaneseText":"#rewrittenText",corrected=$(id).value.trim();$("#feedbackButton").disabled=true;$("#feedbackMessage").textContent="送出中…";try{const p=await jsonPost("/feedback",{audio_file:"語你傳心（文字）",audio_sha256:"",baseline_text:$("#originalText").value.trim(),prompt_text:corrected,selected_source:"manual",corrected_text:corrected,reasons:["expression_rewrite",`style_${s}`,`audience_${$("#audience").value}`],consent_to_dataset:$("#consentDataset").checked});$("#feedbackMessage").textContent=p.dataset_eligible?"已送交人工審查；核准後可納入資料集。":"已送交人工審查；未授權納入資料集。"}catch(x){$("#feedbackMessage").textContent=x.message;$("#feedbackButton").disabled=false}});
+updateReminder();
