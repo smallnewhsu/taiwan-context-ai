@@ -1,0 +1,6 @@
+﻿language_type,sample_count,cer_sample_count,macro_average_cer,micro_cer,total_errors,total_reference_characters,average_inference_seconds,p95_inference_seconds,average_rtf
+國台混合,6,6,0.3876662030182019,0.3627450980392157,37,102,,,
+國語,8,8,0.032366071428571425,0.03305785123966942,4,121,,,
+中英混合,4,4,0.07395644283121597,0.07608695652173914,7,92,,,
+台語,7,7,0.7496839761545644,0.7403846153846154,77,104,,,
+客語（四縣）,4,4,0.6608391608391608,0.6666666666666666,32,48,,,
