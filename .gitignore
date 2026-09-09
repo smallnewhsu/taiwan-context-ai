@@ -68,3 +68,15 @@ evaluation/**/*.jpg
 evaluation/**/*.jpeg
 evaluation/**/*.png
 evaluation/**/*.webp
+
+# Local authentication runtime data
+datasets/taiwan_context/auth/
+
+# Generated per-sample ASR transcripts
+evaluation/asr_extended/T*_asr.txt
+
+# Deprecated ASR prompt v1 results
+evaluation/asr_extended/asr_prompt_results_gpu_29.json
+evaluation/asr_extended/asr_prompt_comparison_gpu_29.csv
+evaluation/asr_extended/asr_prompt_language_comparison_gpu_29.csv
+evaluation/asr_extended/asr_prompt_latency_gpu_29.csv
