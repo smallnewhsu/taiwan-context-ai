@@ -7,7 +7,7 @@ import urllib.request
 
 
 OLLAMA_URL = os.getenv("TAIWAN_CONTEXT_LLM_URL", "http://127.0.0.1:11434").rstrip("/")
-OLLAMA_MODEL = os.getenv("TAIWAN_CONTEXT_LLM_MODEL", "qwen2.5:3b")
+OLLAMA_MODEL = os.getenv("TAIWAN_CONTEXT_LLM_MODEL", "qwen2.5:1.5b")
 
 AUDIENCE_LABELS = {
     "elder": "長輩",

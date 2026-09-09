@@ -10,7 +10,7 @@ class MultimodalService:
 
     def __init__(self):
         self.base_url = os.getenv("OLLAMA_BASE_URL", "http://127.0.0.1:11434").rstrip("/")
-        self.model = os.getenv("MULTIMODAL_QA_MODEL", "qwen2.5:3b")
+        self.model = os.getenv("MULTIMODAL_QA_MODEL", "qwen2.5:1.5b")
 
     def answer(self, question: str, image_context: dict, relationship: str = "未提供") -> dict:
         started = time.perf_counter()

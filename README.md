@@ -10,7 +10,7 @@
 
 ### 語你傳心
 
-使用本機 Ollama 與 Qwen2.5 3B 進行表達改寫，提供長輩、家人、朋友與正式情境的不同語氣。安全檢查會保護數字、日期、否定、限制語氣、臺灣台語詞彙與省略主詞，候選未通過語意保真時自動改用保守式回退結果。
+使用本機 Ollama 與 Qwen2.5 1.5B Instruct 進行表達改寫，提供長輩、家人、朋友與正式情境的不同語氣。安全檢查會保護數字、日期、否定、限制語氣、臺灣台語詞彙與省略主詞，候選未通過語意保真時自動改用保守式回退結果。
 
 ### 視界有解
 
@@ -45,7 +45,7 @@ Taiwan Context Engine
 安裝模型：
 
 ```bat
-ollama pull qwen2.5:3b
+ollama pull qwen2.5:1.5b
 ollama pull gemma3:4b
 ```
 
@@ -114,7 +114,7 @@ start_demo.bat
 - [29份標準逐字稿與評測輸出](evaluation/asr_extended/)
 - [語言條件路由v3詳細結果](evaluation/asr_extended/asr_hybrid_v3_results_gpu_29.json)
 
-### 語你傳心 v0.2.3
+### 語你傳心 v0.2.3（Qwen2.5 3B 歷史基準）
 
 - 12/12案例完成
 - 自動安全檢查通過率：100%
@@ -123,6 +123,8 @@ start_demo.bat
 - 穩態平均時間：1.155秒
 - 穩態P95：1.356秒
 - 人工整體平均：4.92/5
+
+目前預設文字模型已切換為 Qwen2.5 1.5B Instruct。為避免把不同模型的結果混為一談，1.5B 評測請輸出至 `evaluation/rewrite/results/v0.3_qwen1.5b_gpu/`，完成後再新增其實測指標。
 
 ### 視界有解 v0.1.1
 
@@ -165,11 +167,10 @@ docs/                    技術與Demo文件
 - 6GB GPU需避免ASR、文字模型與視覺模型同時常駐。
 - 正式研究需增加說話者、圖片來源與獨立測試集，並進行多位評閱者一致性分析。
 
-## 開源模型
+## 模型與授權
 
-- Taiwan Tongues ASR CE
-- Qwen2.5 3B（Ollama）
-- Gemma 3 4B（Ollama）
+- Taiwan Tongues ASR CE（TRAIL v0.1；含 linking exception）
+- Qwen2.5 1.5B Instruct（Apache License 2.0）
+- Gemma 3 4B（Google Gemma Terms）
 
-使用與再散布前，請分別確認模型、資料與第三方套件的原始授權條款。
-
+本專案自行開發的程式碼採 Apache License 2.0；模型、資料與第三方套件仍依各自授權條款使用。詳見 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。

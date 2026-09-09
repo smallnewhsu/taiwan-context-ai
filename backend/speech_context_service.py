@@ -46,7 +46,7 @@ def _literal_meaning(source_text, model_literal):
 class SpeechContextService:
     def __init__(self):
         self.base_url = os.getenv("OLLAMA_BASE_URL", "http://127.0.0.1:11434").rstrip("/")
-        self.model = os.getenv("SPEECH_CONTEXT_MODEL", "qwen2.5:3b")
+        self.model = os.getenv("SPEECH_CONTEXT_MODEL", "qwen2.5:1.5b")
 
     def analyze(self, text, speaker_hint="不確定", listener_hint="不確定", extra_context=""):
         started = time.perf_counter()

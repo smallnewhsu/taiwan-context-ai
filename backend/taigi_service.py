@@ -16,7 +16,7 @@ class TaigiService:
 
     def __init__(self):
         self.base_url = os.getenv("OLLAMA_BASE_URL", "http://127.0.0.1:11434").rstrip("/")
-        self.model = os.getenv("TAIGI_MODEL", "qwen2.5:3b")
+        self.model = os.getenv("TAIGI_MODEL", "qwen2.5:1.5b")
 
     @staticmethod
     def _key(text: str) -> str:

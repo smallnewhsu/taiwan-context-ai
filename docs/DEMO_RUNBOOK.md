@@ -59,7 +59,7 @@ RTX 4050 Laptop GPU為6GB顯示記憶體。Demo時依序展示，不要同時重
 
 ```bat
 ollama ps
-ollama stop qwen2.5:3b
+ollama stop qwen2.5:1.5b
 ollama stop gemma3:4b
 ```
 
@@ -103,6 +103,6 @@ Ctrl + C
 再停止模型：
 
 ```bat
-ollama stop qwen2.5:3b
+ollama stop qwen2.5:1.5b
 ollama stop gemma3:4b
 ```
