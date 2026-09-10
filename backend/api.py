@@ -8,7 +8,7 @@ from fastapi.responses import RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 
-from backend.asr_service import ASRService, SUPPORTED_EXTENSIONS
+from backend.asr_service import ASRService, SUPPORTED_EXTENSIONS, SUPPORTED_LANGUAGES
 from backend.context_engine import Candidate, ContextEngine
 from backend.feedback_service import FeedbackService
 from backend.rewrite_service import RewriteService
@@ -129,6 +129,7 @@ class VisionTextFollowUpRequest(BaseModel):
 
 class SpeechContextRequest(BaseModel):
     text: str = Field(min_length=1, max_length=1000)
+    source_language: Literal["auto", "zh", "nan", "hak", "vi", "en"] = "auto"
     speaker_hint: str = Field(default="不確定", max_length=40)
     listener_hint: str = Field(default="不確定", max_length=40)
     extra_context: str = Field(default="", max_length=1000)
@@ -505,13 +506,17 @@ def review_feedback(feedback_id: str, request: ReviewRequest, _=Depends(current_
 
 
 @app.post("/speech/interpret")
-async def interpret_speech(file: UploadFile = File(...)):
+async def interpret_speech(
+    file: UploadFile = File(...), language: str = Form("auto")
+):
     suffix = Path(file.filename or "").suffix.lower()
     if suffix not in SUPPORTED_EXTENSIONS:
         raise HTTPException(
             status_code=415,
             detail=f"不支援的格式。允許格式: {sorted(SUPPORTED_EXTENSIONS)}",
         )
+    if language not in SUPPORTED_LANGUAGES:
+        raise HTTPException(status_code=422, detail="不支援的語言選項")
 
     content = await file.read()
     if not content:
@@ -544,11 +549,14 @@ async def interpret_speech(file: UploadFile = File(...)):
             "correction_applied": True,
             "correction_source": "human_review",
             "context_override": approved_correction.get("human_context"),
+            "requested_language": language,
+            "language_label": approved_correction.get("language_label", "人工確認"),
+            "model_route": "human_review",
         }
 
     try:
         asr_result = await run_in_threadpool(
-            asr_service.interpret_bytes, content, suffix
+            asr_service.interpret_bytes, content, suffix, language
         )
         decision = make_decision(asr_result["baseline"], asr_result["prompt"])
         return {
@@ -561,6 +569,9 @@ async def interpret_speech(file: UploadFile = File(...)):
             "decision": decision.to_dict(),
             "correction_applied": False,
             "correction_source": None,
+            "requested_language": asr_result["requested_language"],
+            "language_label": asr_result["language_label"],
+            "model_route": asr_result["model_route"],
         }
     except ValueError as exc:
         raise HTTPException(status_code=415, detail=str(exc)) from exc
@@ -577,6 +588,7 @@ async def analyze_speech_context(request: SpeechContextRequest):
             request.speaker_hint,
             request.listener_hint,
             request.extra_context.strip(),
+            request.source_language,
         )
     except RuntimeError as exc:
         raise HTTPException(status_code=503, detail=str(exc)) from exc

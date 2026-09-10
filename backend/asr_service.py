@@ -38,14 +38,30 @@ PROMPT_PATH = (
     PROJECT_ROOT / "datasets" / "taiwan_context" / "asr_prompt_family.txt"
 )
 SUPPORTED_EXTENSIONS = {".wav", ".mp3", ".flac", ".m4a", ".aac", ".webm", ".ogg"}
+SUPPORTED_LANGUAGES = {"auto", "zh", "nan", "hak", "vi", "en"}
+LANGUAGE_LABELS = {
+    "auto": "自動判斷", "zh": "國語", "nan": "台語",
+    "hak": "客語", "vi": "越南語", "en": "英語",
+}
 
 
 class ASRService:
     def __init__(self):
         self._model = None
+        self._vietnamese_model = None
         self._model_lock = threading.Lock()
         self._inference_lock = threading.Lock()
         self._converter = opencc.OpenCC("s2tw")
+
+    def _load_vietnamese_model(self):
+        if self._vietnamese_model is None:
+            with self._model_lock:
+                if self._vietnamese_model is None:
+                    model_name = os.getenv("VIETNAMESE_ASR_MODEL", "turbo")
+                    self._vietnamese_model = WhisperModel(
+                        model_name, device="cuda", compute_type="int8_float16"
+                    )
+        return self._vietnamese_model
 
     def _load_model(self):
         if self._model is None:
@@ -59,21 +75,23 @@ class ASRService:
         return self._model
 
     @staticmethod
-    def _clean_text(text):
+    def _clean_text(text, preserve_spaces=False):
         text = unicodedata.normalize("NFKC", text or "")
         text = re.sub(
             r'[,"\'。，；「」《》:：\[\]、【】〈〉（）『』…(),`&!?！;]',
             "",
             text,
         )
+        if preserve_spaces:
+            return re.sub(r"\s+", " ", text).strip()
         return re.sub(r"\s+", "", text).strip()
 
-    def _transcribe(self, audio, initial_prompt=""):
-        model = self._load_model()
+    def _transcribe(self, audio, initial_prompt="", language="zh", model=None):
+        model = model or self._load_model()
         started = time.perf_counter()
-        segments, _ = model.transcribe(
+        segments, info = model.transcribe(
             audio,
-            language="zh",
+            language=language,
             word_timestamps=False,
             vad_filter=True,
             beam_size=5,
@@ -82,8 +100,10 @@ class ASRService:
         )
         segments = list(segments)
         inference_seconds = time.perf_counter() - started
+        joined_text = "".join(segment.text for segment in segments)
+        preserve_spaces = language in {"vi", "en"}
         text = self._clean_text(
-            self._converter.convert("".join(segment.text for segment in segments))
+            self._converter.convert(joined_text), preserve_spaces=preserve_spaces
         )
 
         weights = [max(segment.end - segment.start, 0.001) for segment in segments]
@@ -101,12 +121,15 @@ class ASRService:
             "text": text,
             "confidence": float(confidence),
             "inference_seconds": round(inference_seconds, 4),
+            "detected_language": getattr(info, "language", None),
         }
 
-    def interpret_bytes(self, content, suffix):
+    def interpret_bytes(self, content, suffix, language="auto"):
         suffix = suffix.lower()
         if suffix not in SUPPORTED_EXTENSIONS:
             raise ValueError(f"不支援的音檔格式: {suffix}")
+        if language not in SUPPORTED_LANGUAGES:
+            raise ValueError(f"不支援的語言代碼: {language}")
 
         temp_path = None
         try:
@@ -117,11 +140,33 @@ class ASRService:
             audio, sample_rate = librosa.load(temp_path, sr=16000, mono=True)
             audio_duration = len(audio) / float(sample_rate)
             prompt = PROMPT_PATH.read_text(encoding="utf-8-sig").strip()
+            requested_language = language
+            # Taiwan Tongues目前的整合模型沿用中文解碼設定；台語與客語
+            # 透過語言提示保留在地詞彙。越南語使用獨立多語Whisper模型。
+            if language == "vi":
+                model = self._load_vietnamese_model()
+                decoder_language = "vi"
+                prompt = "Đây là lời nói tiếng Việt trong sinh hoạt hằng ngày."
+                model_route = "multilingual_whisper_vi"
+            else:
+                model = self._load_model()
+                decoder_language = (
+                    None if language == "auto" else ("en" if language == "en" else "zh")
+                )
+                language_prompt = {
+                    "nan": "以下是台語生活對話，請保留原本的台語用詞。",
+                    "hak": "以下是客語生活對話，請保留原本的客語用詞。",
+                    "en": "The following is an English daily-life conversation.",
+                }.get(language, "")
+                prompt = "\n".join(x for x in (language_prompt, prompt) if x)
+                model_route = "taiwan_tongues_asr_ce"
 
             total_started = time.perf_counter()
             with self._inference_lock:
-                baseline = self._transcribe(audio)
-                prompted = self._transcribe(audio, prompt)
+                baseline = self._transcribe(audio, language=decoder_language, model=model)
+                prompted = self._transcribe(
+                    audio, prompt, language=decoder_language, model=model
+                )
             total_seconds = time.perf_counter() - total_started
 
             return {
@@ -129,6 +174,13 @@ class ASRService:
                 "prompt": prompted,
                 "audio_duration_seconds": round(audio_duration, 4),
                 "dual_pass_seconds": round(total_seconds, 4),
+                "requested_language": requested_language,
+                "language_label": (
+                    LANGUAGE_LABELS.get(baseline.get("detected_language"), "自動判斷")
+                    if requested_language == "auto"
+                    else LANGUAGE_LABELS[requested_language]
+                ),
+                "model_route": model_route,
             }
         finally:
             if temp_path and os.path.exists(temp_path):

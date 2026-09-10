@@ -32,14 +32,20 @@ def _comparison_text(value):
     return re.sub(r"[\s，。！？、；：,.!?;:]", "", str(value or ""))
 
 
-def _literal_meaning(source_text, model_literal):
+def _literal_meaning(source_text, model_literal, source_language="auto"):
     source_key = _comparison_text(source_text)
     candidate = str(model_literal or "").strip()
     verified = VERIFIED_LITERAL_TRANSLATIONS.get(source_key)
     # Prefer the reviewed translation when the model omitted the field or only
     # copied the transcript. This prevents two identical UI sections.
     if not candidate or _comparison_text(candidate) == source_key:
-        return verified or "尚無法產生字面意思，請先確認辨識到的話語。"
+        if verified:
+            return verified
+        if source_language == "vi":
+            return "越南語字面翻譯未成功，請先確認越南語逐字稿後再試一次。"
+        return "尚無法產生字面意思，請先確認辨識到的話語。"
+    if source_language == "vi" and not re.search(r"[\u3400-\u9fff]", candidate):
+        return "越南語字面翻譯未成功，請先確認越南語逐字稿後再試一次。"
     return candidate
 
 
@@ -48,20 +54,61 @@ class SpeechContextService:
         self.base_url = os.getenv("OLLAMA_BASE_URL", "http://127.0.0.1:11434").rstrip("/")
         self.model = os.getenv("SPEECH_CONTEXT_MODEL", "qwen2.5:1.5b")
 
-    def analyze(self, text, speaker_hint="不確定", listener_hint="不確定", extra_context=""):
+    def _translate_vietnamese_literal(self, text):
+        """Retry Vietnamese literal translation separately from context JSON."""
+        payload = {
+            "model": self.model,
+            "prompt": (
+                "請把下列越南語忠實翻譯成自然的繁體中文。"
+                "只輸出中文譯文，不要解釋、不要加上原文、不要使用Markdown，"
+                "不得新增原句沒有的人物、原因、時間或承諾。\n\n"
+                f"越南語原文：{text}"
+            ),
+            "stream": False,
+            "keep_alive": "5m",
+            "options": {"temperature": 0.0, "num_ctx": 2048},
+        }
+        request = Request(
+            f"{self.base_url}/api/generate",
+            data=json.dumps(payload, ensure_ascii=False).encode("utf-8"),
+            headers={"Content-Type": "application/json"},
+            method="POST",
+        )
+        try:
+            with urlopen(request, timeout=90) as response:
+                outer = json.loads(response.read().decode("utf-8"))
+            translated = str(outer.get("response", "")).strip()
+            translated = re.sub(r"^```(?:text)?\s*|\s*```$", "", translated).strip()
+            translated = translated.strip('"「」')
+            if translated and re.search(r"[\u3400-\u9fff]", translated):
+                return translated
+        except (HTTPError, URLError, TimeoutError, json.JSONDecodeError):
+            pass
+        return ""
+
+    def analyze(
+        self, text, speaker_hint="不確定", listener_hint="不確定",
+        extra_context="", source_language="auto"
+    ):
         started = time.perf_counter()
+        language_label = {
+            "auto": "自動判斷", "zh": "國語", "nan": "台語",
+            "hak": "客語", "vi": "越南語", "en": "英語",
+        }.get(source_language, "自動判斷")
         prompt = f"""你是 Taiwan Context Engine，請分析臺灣日常對話，不可捏造未提供的資訊。
 
 規則：
 1. speaker_role 與 listener_role 只能是：長輩、晚輩、朋友、同事、不熟悉者、不確定。不可輸出阿嬤、阿公、孫子或孫女等過度細分角色。
 2. 只有稱謂、說話方式或前後文提供充分證據時才判定關係，否則填「不確定」，relationship_confidence 不得高於 0.5。
-3. literal_meaning 是字面意思；台語可翻成自然繁體中文，但不得增加原因、承諾、時間或事件。
-4. possible_intents 提供 1 至 3 個可能意境，使用「可能」語氣，不能把推測寫成事實。
-5. basis 僅列出語句中的具體詞彙、稱謂或使用者提供的前後文。
-6. suggested_reply 必須簡短、可修改、不得替使用者新增承諾；資訊不足時使用中性回應。
-7. 嚴格輸出 JSON，不要輸出 Markdown：
+3. literal_meaning一律使用繁體中文，呈現忠實的字面翻譯，不得照抄非中文原句，也不得增加原因、承諾、時間或事件。
+4. 來源語言若是越南語，必須把越南語逐字稿翻譯成自然、完整的繁體中文；literal_meaning不得包含未翻譯的越南語句子。
+5. possible_intents使用繁體中文提供1至3個可能意境，使用「可能」語氣，不能把推測寫成事實。
+6. basis使用繁體中文說明原句中的具體詞彙、稱謂或使用者提供的前後文；引用越南語詞彙時須同時說明中文意思。
+7. suggested_reply使用繁體中文，必須簡短、可修改、不得替使用者新增承諾；資訊不足時使用中性回應。
+8. 嚴格輸出 JSON，不要輸出 Markdown：
 {{"speaker_role":"不確定","listener_role":"不確定","relationship_confidence":0.0,"literal_meaning":"...","possible_intents":["..."],"basis":["..."],"suggested_reply":"...","needs_confirmation":true}}
 
+來源語言：{language_label}（代碼：{source_language}）
 辨識文字：{text}
 使用者暫選說話者：{speaker_hint}
 使用者暫選接收者：{listener_hint}
@@ -120,7 +167,14 @@ class SpeechContextService:
             confidence = max(confidence, 0.95)
         intents = [str(item).strip() for item in result.get("possible_intents", []) if str(item).strip()][:3]
         basis = [str(item).strip() for item in result.get("basis", []) if str(item).strip()][:4]
-        literal = _literal_meaning(text, result.get("literal_meaning"))
+        model_literal = result.get("literal_meaning")
+        literal = _literal_meaning(text, model_literal, source_language)
+        vietnamese_translation_retry = False
+        if source_language == "vi" and literal.startswith("越南語字面翻譯未成功"):
+            retried_literal = self._translate_vietnamese_literal(text)
+            if retried_literal:
+                literal = retried_literal
+                vietnamese_translation_retry = True
         reply = str(result.get("suggested_reply", "")).strip() or "我知道了，謝謝你告訴我。"
         if vocative and confidence < 0.65:
             confidence = 0.65 if speaker != "不確定" else 0.55
@@ -139,5 +193,7 @@ class SpeechContextService:
             "relationship_needs_confirmation": uncertain,
             "needs_confirmation": bool(result.get("needs_confirmation", False) or uncertain),
             "model": self.model,
+            "source_language": source_language,
+            "vietnamese_translation_retry": vietnamese_translation_retry,
             "processing_seconds": round(time.perf_counter() - started, 4),
         }

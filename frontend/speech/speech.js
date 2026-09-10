@@ -22,6 +22,16 @@ const recordButton = $("#recordButton");
 const stopRecordButton = $("#stopRecordButton");
 const discardRecordButton = $("#discardRecordButton");
 const recordTime = $("#recordTime");
+const speechLanguage = $("#speechLanguage");
+const selectedLanguageHint = $("#selectedLanguageHint");
+
+speechLanguage.addEventListener("change", () => {
+  const label = speechLanguage.options[speechLanguage.selectedIndex].text;
+  selectedLanguageHint.textContent = speechLanguage.value === "vi"
+    ? "目前：越南語；將使用 multilingual Whisper 辨識"
+    : `目前：${label}`;
+  document.querySelector(".language-card").classList.toggle("vietnamese-selected", speechLanguage.value === "vi");
+});
 
 function setAudioSource(file, label) {
   selectedAudio = file;
@@ -130,6 +140,7 @@ analyzeButton.addEventListener("click", async () => {
   hide(resultPanel);
   const formData = new FormData();
   formData.append("file", file);
+  formData.append("language", $("#speechLanguage").value);
   try {
     const response = await fetch("/speech/interpret", { method: "POST", body: formData });
     const payload = await response.json();
@@ -156,6 +167,8 @@ analyzeButton.addEventListener("click", async () => {
 
 function renderResult(data) {
   const decision = data.decision;
+  $("#recognizedLanguage").textContent = data.language_label || "自動判斷";
+  $("#modelRoute").textContent = data.model_route || "Taiwan Tongues ASR CE";
   if (data.context) applyModelRelationship(data.context);
   else inferRelationship(decision.selected_text);
   $("#audioDuration").textContent = data.audio_duration_seconds == null ? "已審核修正記憶" : `${round(data.audio_duration_seconds)} 秒`;
@@ -201,6 +214,7 @@ async function requestSpeechContext(text, extraContext = "") {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       text,
+      source_language: speechLanguage.value,
       speaker_hint: $("#speakerRole").value || "不確定",
       listener_hint: $("#listenerRole").value || "不確定",
       extra_context: extraContext,
@@ -284,7 +298,8 @@ function renderContextInterpretation(text, reasons = [], extraContext = "", mode
   if (modelContext) {
     const modelIntents = contextList(modelContext.possible_intent || modelContext.possible_intents);
     const modelBasis = contextList(modelContext.basis || modelContext.judgment_basis);
-    $("#literalMeaning").textContent = modelContext.literal_meaning;
+    $("#literalMeaning").textContent = String(modelContext.literal_meaning || "").trim()
+      || "字面翻譯尚未完成，請重新執行語境分析。";
     $("#intentMeaning").textContent = modelIntents.join("；") || "資訊不足，請補充前後文。";
     $("#intentTags").replaceChildren(...modelIntents.map((item) => {
       const tag = document.createElement("span");
@@ -295,7 +310,9 @@ function renderContextInterpretation(text, reasons = [], extraContext = "", mode
     $("#suggestedReply").textContent = modelContext.suggested_reply;
     return;
   }
-  $("#literalMeaning").textContent = text;
+  $("#literalMeaning").textContent = latestResult?.context_error
+    ? `字面翻譯未完成：${latestResult.context_error}`
+    : "字面翻譯尚未完成，請按「開始理解」重試。";
   $("#intentMeaning").textContent = intent;
   $("#intentTags").innerHTML = tags.map((tag) => `<span>${tag}</span>`).join("");
   const basis = [`${speaker}對${listener}的對話關係`, "句中的家庭與生活用語"];

@@ -7,6 +7,7 @@ set "TAIWAN_CONTEXT_LLM_MODEL=qwen2.5:1.5b"
 set "SPEECH_CONTEXT_MODEL=qwen2.5:1.5b"
 set "TAIGI_MODEL=qwen2.5:1.5b"
 set "MULTIMODAL_QA_MODEL=qwen2.5:1.5b"
+set "VIETNAMESE_ASR_MODEL=turbo"
 set "PROJECT_PYTHON=%CD%\services\asr\asr_api\Scripts\python.exe"
 
 if not exist "%PROJECT_PYTHON%" (

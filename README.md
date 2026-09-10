@@ -102,6 +102,7 @@ git clone --recurse-submodules https://github.com/smallnewhsu/taiwan-context-ai.
 cd /d taiwan-context-ai
 ollama pull qwen2.5:1.5b
 ollama pull gemma3:4b
+services\asr\asr_api\Scripts\python.exe -c "from huggingface_hub import snapshot_download; snapshot_download('mobiuslabsgmbh/faster-whisper-large-v3-turbo')"
 start_demo.bat
 ```
 
@@ -139,5 +140,6 @@ docs/                    架構與Demo文件
 - Taiwan Tongues ASR CE：TRAIL v0.1，含linking exception
 - Qwen2.5 1.5B Instruct：Apache License 2.0
 - Gemma 3 4B：Google Gemma Terms
+- OpenAI Whisper／faster-whisper large-v3-turbo：依上游授權條款，用於越南語辨識
 
 本專案自行開發的程式碼採Apache License 2.0；模型、資料與第三方套件仍依各自授權條款使用。詳見[第三方授權說明](THIRD_PARTY_NOTICES.md)。
