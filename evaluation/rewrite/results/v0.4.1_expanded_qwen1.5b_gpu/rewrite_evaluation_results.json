@@ -1,0 +1,2931 @@
+{
+  "suite": "expression_rewrite_v0.4_expanded",
+  "description": "語你傳心 v0.4 擴充集：36筆家庭、朋友、職場、醫療照護、公共服務與台語情境安全評測",
+  "evaluated_at": "2026-09-10T10:50:08.180979+00:00",
+  "api_url": "http://127.0.0.1:8000/expression/rewrite",
+  "summary": {
+    "total_cases": 36,
+    "completed_cases": 36,
+    "api_error_count": 0,
+    "automatic_pass_count": 36,
+    "automatic_pass_rate": 1.0,
+    "llm_candidate_accepted_count": 26,
+    "llm_candidate_accepted_rate": 0.7222222222222222,
+    "safe_fallback_count": 10,
+    "safe_fallback_rate": 0.2777777777777778,
+    "needs_confirmation_count": 10,
+    "warning_counts": {
+      "added_information_detected": 10,
+      "safe_fallback_applied": 10,
+      "changed_facts_detected": 1,
+      "removed_information_detected": 1,
+      "constraint_modality_changed_or_missing": 1,
+      "negation_may_be_missing": 2,
+      "taiwanese_term_changed_or_missing": 3
+    },
+    "automatic_failure_counts": {},
+    "mean_processing_seconds": 0.6265222222222222,
+    "median_processing_seconds": 0.59205,
+    "p95_processing_seconds": 0.7821,
+    "warmup_processing_seconds": 1.2411,
+    "steady_state_sample_count": 35,
+    "steady_state_mean_processing_seconds": 0.6089628571428571,
+    "steady_state_median_processing_seconds": 0.5902,
+    "steady_state_p95_processing_seconds": 0.7065,
+    "suite_wall_seconds": 30.274826299995766
+  },
+  "results": [
+    {
+      "case": {
+        "id": "R13",
+        "category": "family_cross_generation",
+        "original_text": "阿公，我今天晚上7點才會到家，不用等我吃飯。",
+        "audience": "elder",
+        "tone": "warm",
+        "scenario": "晚輩傳訊息給阿公",
+        "required_all": [
+          "阿公",
+          "今天",
+          "晚上",
+          "7",
+          "到家",
+          "吃飯"
+        ],
+        "required_any_groups": [
+          [
+            "不用等",
+            "不必等",
+            "毋免等"
+          ]
+        ],
+        "forbidden_terms": [
+          "加班",
+          "明天",
+          "幫我留菜"
+        ]
+      },
+      "request": {
+        "original_text": "阿公，我今天晚上7點才會到家，不用等我吃飯。",
+        "audience": "elder",
+        "tone": "warm",
+        "scenario": "晚輩傳訊息給阿公"
+      },
+      "response": {
+        "original_text": "阿公，我今天晚上7點才會到家，不用等我吃飯。",
+        "rewritten_text": "想跟您說，阿公，我今天晚上7點才會到家，不用等我吃飯。",
+        "generated_candidate": "阿公，我今天晚上7點才會到家，不用等我吃飯。晚輩會準備簡單的晚餐，請您吃吧。",
+        "meaning_summary": "保留原句內容，僅調整稱謂或開頭語氣。",
+        "audience": "elder",
+        "tone": "warm",
+        "scenario": "晚輩傳訊息給阿公",
+        "warnings": [
+          "added_information_detected",
+          "safe_fallback_applied"
+        ],
+        "needs_confirmation": true,
+        "safe_to_use": true,
+        "fallback_used": true,
+        "verification": {
+          "meaning_preserved": true,
+          "added_information": [
+            "{'context': '晚輩傳訊息給阿公'}"
+          ],
+          "removed_information": [],
+          "changed_facts": [],
+          "missing_taiwanese_terms": [],
+          "missing_natural_phrases": [],
+          "missing_constraint_terms": [],
+          "completion_object_added": false,
+          "statement_changed_to_instruction": false
+        },
+        "model": "qwen2.5:1.5b",
+        "processing_seconds": 1.2411
+      },
+      "checks": {
+        "automatic_pass": true,
+        "failures": [],
+        "missing_required_terms": [],
+        "missing_required_groups": [],
+        "forbidden_terms_found": [],
+        "source_numbers": [
+          "7"
+        ],
+        "output_numbers": [
+          "7"
+        ],
+        "numbers_preserved": true,
+        "negation_preserved": true
+      }
+    },
+    {
+      "case": {
+        "id": "R14",
+        "category": "family_medicine",
+        "original_text": "媽媽，這包藥只能睡前吃1顆，不要多吃。",
+        "audience": "elder",
+        "tone": "clear",
+        "scenario": "提醒家人服藥",
+        "required_all": [
+          "媽媽",
+          "藥",
+          "睡前",
+          "1",
+          "多吃"
+        ],
+        "required_any_groups": [
+          [
+            "只能",
+            "僅能"
+          ],
+          [
+            "不要",
+            "不可",
+            "不能"
+          ]
+        ],
+        "forbidden_terms": [
+          "醫生說",
+          "飯後",
+          "每天"
+        ]
+      },
+      "request": {
+        "original_text": "媽媽，這包藥只能睡前吃1顆，不要多吃。",
+        "audience": "elder",
+        "tone": "clear",
+        "scenario": "提醒家人服藥"
+      },
+      "response": {
+        "original_text": "媽媽，這包藥只能睡前吃1顆，不要多吃。",
+        "rewritten_text": "媽媽，這包藥只能睡前吃1顆，不要多吃。",
+        "generated_candidate": "媽媽，這包藥只能睡前吃1顆，不要多吃。",
+        "meaning_summary": "媽媽提醒長輩服藥時不要過量。",
+        "audience": "elder",
+        "tone": "clear",
+        "scenario": "提醒家人服藥",
+        "warnings": [],
+        "needs_confirmation": false,
+        "safe_to_use": true,
+        "fallback_used": false,
+        "verification": {
+          "meaning_preserved": true,
+          "added_information": [],
+          "removed_information": [],
+          "changed_facts": [],
+          "missing_taiwanese_terms": [],
+          "missing_natural_phrases": [],
+          "missing_constraint_terms": [],
+          "completion_object_added": false,
+          "statement_changed_to_instruction": false
+        },
+        "model": "qwen2.5:1.5b",
+        "processing_seconds": 0.5167
+      },
+      "checks": {
+        "automatic_pass": true,
+        "failures": [],
+        "missing_required_terms": [],
+        "missing_required_groups": [],
+        "forbidden_terms_found": [],
+        "source_numbers": [
+          "1"
+        ],
+        "output_numbers": [
+          "1"
+        ],
+        "numbers_preserved": true,
+        "negation_preserved": true
+      }
+    },
+    {
+      "case": {
+        "id": "R15",
+        "category": "family_schedule",
+        "original_text": "星期六早上10點我要帶爸爸回診，下午不會在家。",
+        "audience": "family",
+        "tone": "clear",
+        "scenario": "家庭群組說明行程",
+        "required_all": [
+          "星期六",
+          "早上",
+          "10",
+          "爸爸",
+          "回診",
+          "下午",
+          "在家"
+        ],
+        "required_any_groups": [
+          [
+            "不會",
+            "不在"
+          ]
+        ],
+        "forbidden_terms": [
+          "醫院",
+          "開車",
+          "晚上"
+        ]
+      },
+      "request": {
+        "original_text": "星期六早上10點我要帶爸爸回診，下午不會在家。",
+        "audience": "family",
+        "tone": "clear",
+        "scenario": "家庭群組說明行程"
+      },
+      "response": {
+        "original_text": "星期六早上10點我要帶爸爸回診，下午不會在家。",
+        "rewritten_text": "星期六早上10點我要帶爸爸回診，下午不會在家。",
+        "generated_candidate": "星期六早上10點我要帶爸爸去診所，下午不會在家。",
+        "meaning_summary": "保留原句內容，僅調整稱謂或開頭語氣。",
+        "audience": "family",
+        "tone": "clear",
+        "scenario": "家庭群組說明行程",
+        "warnings": [
+          "added_information_detected",
+          "changed_facts_detected",
+          "removed_information_detected",
+          "safe_fallback_applied"
+        ],
+        "needs_confirmation": true,
+        "safe_to_use": true,
+        "fallback_used": true,
+        "verification": {
+          "meaning_preserved": true,
+          "added_information": [
+            "{'added': '星期六早上10點我要帶爸爸去診所'}"
+          ],
+          "removed_information": [
+            "{'removed': '星期六早上10點我要帶爸爸回診'}"
+          ],
+          "changed_facts": [
+            "{'fact': '下午不會在家'}"
+          ],
+          "missing_taiwanese_terms": [],
+          "missing_natural_phrases": [],
+          "missing_constraint_terms": [],
+          "completion_object_added": false,
+          "statement_changed_to_instruction": false
+        },
+        "model": "qwen2.5:1.5b",
+        "processing_seconds": 1.0053
+      },
+      "checks": {
+        "automatic_pass": true,
+        "failures": [],
+        "missing_required_terms": [],
+        "missing_required_groups": [],
+        "forbidden_terms_found": [],
+        "source_numbers": [
+          "10"
+        ],
+        "output_numbers": [
+          "10"
+        ],
+        "numbers_preserved": true,
+        "negation_preserved": true
+      }
+    },
+    {
+      "case": {
+        "id": "R16",
+        "category": "family_money",
+        "original_text": "這個月我只能給家裡3000元，其他費用要再討論。",
+        "audience": "family",
+        "tone": "polite",
+        "scenario": "與家人討論生活費",
+        "required_all": [
+          "這個月",
+          "家裡",
+          "3000",
+          "其他",
+          "費用"
+        ],
+        "required_any_groups": [
+          [
+            "只能",
+            "僅能"
+          ],
+          [
+            "討論",
+            "商量"
+          ]
+        ],
+        "forbidden_terms": [
+          "下個月",
+          "薪水",
+          "借錢"
+        ]
+      },
+      "request": {
+        "original_text": "這個月我只能給家裡3000元，其他費用要再討論。",
+        "audience": "family",
+        "tone": "polite",
+        "scenario": "與家人討論生活費"
+      },
+      "response": {
+        "original_text": "這個月我只能給家裡3000元，其他費用要再討論。",
+        "rewritten_text": "這個月我只能給家裡3000元，其他費用我們再商量。",
+        "generated_candidate": "這個月我只能給家裡3000元，其他費用我們再商量。",
+        "meaning_summary": "我這個月只能給家裡3000元，其他費用我們再商量。",
+        "audience": "family",
+        "tone": "polite",
+        "scenario": "與家人討論生活費",
+        "warnings": [],
+        "needs_confirmation": false,
+        "safe_to_use": true,
+        "fallback_used": false,
+        "verification": {
+          "meaning_preserved": true,
+          "added_information": [],
+          "removed_information": [],
+          "changed_facts": [],
+          "missing_taiwanese_terms": [],
+          "missing_natural_phrases": [],
+          "missing_constraint_terms": [],
+          "completion_object_added": false,
+          "statement_changed_to_instruction": false
+        },
+        "model": "qwen2.5:1.5b",
+        "processing_seconds": 0.629
+      },
+      "checks": {
+        "automatic_pass": true,
+        "failures": [],
+        "missing_required_terms": [],
+        "missing_required_groups": [],
+        "forbidden_terms_found": [],
+        "source_numbers": [
+          "3000"
+        ],
+        "output_numbers": [
+          "3000"
+        ],
+        "numbers_preserved": true,
+        "negation_preserved": true
+      }
+    },
+    {
+      "case": {
+        "id": "R17",
+        "category": "family_refusal",
+        "original_text": "我明天不能陪你去市場，但可以先幫你列清單。",
+        "audience": "elder",
+        "tone": "warm",
+        "scenario": "回覆長輩的採買需求",
+        "required_all": [
+          "明天",
+          "陪",
+          "市場",
+          "清單"
+        ],
+        "required_any_groups": [
+          [
+            "不能",
+            "無法",
+            "沒辦法"
+          ],
+          [
+            "可以",
+            "能"
+          ]
+        ],
+        "forbidden_terms": [
+          "後天",
+          "叫車",
+          "代買"
+        ]
+      },
+      "request": {
+        "original_text": "我明天不能陪你去市場，但可以先幫你列清單。",
+        "audience": "elder",
+        "tone": "warm",
+        "scenario": "回覆長輩的採買需求"
+      },
+      "response": {
+        "original_text": "我明天不能陪你去市場，但可以先幫你列清單。",
+        "rewritten_text": "明天我不能陪你去市場，但我可以先幫你列清單。",
+        "generated_candidate": "明天我不能陪你去市場，但我可以先幫你列清單。",
+        "meaning_summary": "明天我不能陪你去市場，但我可以先幫你列清單。",
+        "audience": "elder",
+        "tone": "warm",
+        "scenario": "回覆長輩的採買需求",
+        "warnings": [],
+        "needs_confirmation": false,
+        "safe_to_use": true,
+        "fallback_used": false,
+        "verification": {
+          "meaning_preserved": true,
+          "added_information": [],
+          "removed_information": [],
+          "changed_facts": [],
+          "missing_taiwanese_terms": [],
+          "missing_natural_phrases": [],
+          "missing_constraint_terms": [],
+          "completion_object_added": false,
+          "statement_changed_to_instruction": false
+        },
+        "model": "qwen2.5:1.5b",
+        "processing_seconds": 0.4917
+      },
+      "checks": {
+        "automatic_pass": true,
+        "failures": [],
+        "missing_required_terms": [],
+        "missing_required_groups": [],
+        "forbidden_terms_found": [],
+        "source_numbers": [],
+        "output_numbers": [],
+        "numbers_preserved": true,
+        "negation_preserved": true
+      }
+    },
+    {
+      "case": {
+        "id": "R18",
+        "category": "family_uncertainty",
+        "original_text": "過年能不能回去，我要到1月20日才知道。",
+        "audience": "family",
+        "tone": "warm",
+        "scenario": "向家人說明返鄉安排",
+        "required_all": [
+          "過年",
+          "回去",
+          "1",
+          "20",
+          "知道"
+        ],
+        "required_any_groups": [
+          [
+            "能不能",
+            "是否能",
+            "是否可以"
+          ],
+          [
+            "才",
+            "之後"
+          ]
+        ],
+        "forbidden_terms": [
+          "一定",
+          "保證",
+          "訂票"
+        ]
+      },
+      "request": {
+        "original_text": "過年能不能回去，我要到1月20日才知道。",
+        "audience": "family",
+        "tone": "warm",
+        "scenario": "向家人說明返鄉安排"
+      },
+      "response": {
+        "original_text": "過年能不能回去，我要到1月20日才知道。",
+        "rewritten_text": "過年能不能回去，我要到1月20日才知道。",
+        "generated_candidate": "過年能不能回去，我到1月20日才知道。你放心，我會盡力讓你過個好年。",
+        "meaning_summary": "保留原句內容，僅調整稱謂或開頭語氣。",
+        "audience": "family",
+        "tone": "warm",
+        "scenario": "向家人說明返鄉安排",
+        "warnings": [
+          "added_information_detected",
+          "safe_fallback_applied"
+        ],
+        "needs_confirmation": true,
+        "safe_to_use": true,
+        "fallback_used": true,
+        "verification": {
+          "meaning_preserved": true,
+          "added_information": [
+            "{'context': '向家人說明返鄉安排'}"
+          ],
+          "removed_information": [],
+          "changed_facts": [],
+          "missing_taiwanese_terms": [],
+          "missing_natural_phrases": [],
+          "missing_constraint_terms": [],
+          "completion_object_added": false,
+          "statement_changed_to_instruction": false
+        },
+        "model": "qwen2.5:1.5b",
+        "processing_seconds": 0.7821
+      },
+      "checks": {
+        "automatic_pass": true,
+        "failures": [],
+        "missing_required_terms": [],
+        "missing_required_groups": [],
+        "forbidden_terms_found": [],
+        "source_numbers": [
+          "1",
+          "20"
+        ],
+        "output_numbers": [
+          "1",
+          "20"
+        ],
+        "numbers_preserved": true,
+        "negation_preserved": true
+      }
+    },
+    {
+      "case": {
+        "id": "R19",
+        "category": "friend_cancellation",
+        "original_text": "今晚的電影我沒辦法去，票先不要幫我買。",
+        "audience": "friend",
+        "tone": "polite",
+        "scenario": "取消朋友邀約",
+        "required_all": [
+          "今晚",
+          "電影",
+          "票",
+          "買"
+        ],
+        "required_any_groups": [
+          [
+            "沒辦法去",
+            "不能去",
+            "無法去"
+          ],
+          [
+            "不要",
+            "不用",
+            "別"
+          ]
+        ],
+        "forbidden_terms": [
+          "生病",
+          "改天",
+          "退票"
+        ]
+      },
+      "request": {
+        "original_text": "今晚的電影我沒辦法去，票先不要幫我買。",
+        "audience": "friend",
+        "tone": "polite",
+        "scenario": "取消朋友邀約"
+      },
+      "response": {
+        "original_text": "今晚的電影我沒辦法去，票先不要幫我買。",
+        "rewritten_text": "今晚的電影我沒辦法去，票先不要幫我買了。",
+        "generated_candidate": "今晚的電影我沒辦法去，票先不要幫我買了。",
+        "meaning_summary": "朋友取消了今晚的電影邀約，希望朋友能理解並理解原因。",
+        "audience": "friend",
+        "tone": "polite",
+        "scenario": "取消朋友邀約",
+        "warnings": [],
+        "needs_confirmation": false,
+        "safe_to_use": true,
+        "fallback_used": false,
+        "verification": {
+          "meaning_preserved": true,
+          "added_information": [],
+          "removed_information": [],
+          "changed_facts": [],
+          "missing_taiwanese_terms": [],
+          "missing_natural_phrases": [],
+          "missing_constraint_terms": [],
+          "completion_object_added": false,
+          "statement_changed_to_instruction": false
+        },
+        "model": "qwen2.5:1.5b",
+        "processing_seconds": 0.5902
+      },
+      "checks": {
+        "automatic_pass": true,
+        "failures": [],
+        "missing_required_terms": [],
+        "missing_required_groups": [],
+        "forbidden_terms_found": [],
+        "source_numbers": [],
+        "output_numbers": [],
+        "numbers_preserved": true,
+        "negation_preserved": true
+      }
+    },
+    {
+      "case": {
+        "id": "R20",
+        "category": "friend_location",
+        "original_text": "我在火車站前面，不是在捷運站出口。",
+        "audience": "friend",
+        "tone": "concise",
+        "scenario": "告知朋友會合地點",
+        "required_all": [
+          "火車站",
+          "前面",
+          "捷運站",
+          "出口"
+        ],
+        "required_any_groups": [
+          [
+            "不是",
+            "不在"
+          ]
+        ],
+        "forbidden_terms": [
+          "等你",
+          "迷路",
+          "北口"
+        ]
+      },
+      "request": {
+        "original_text": "我在火車站前面，不是在捷運站出口。",
+        "audience": "friend",
+        "tone": "concise",
+        "scenario": "告知朋友會合地點"
+      },
+      "response": {
+        "original_text": "我在火車站前面，不是在捷運站出口。",
+        "rewritten_text": "我在火車站前面，不是在捷運站出口。",
+        "generated_candidate": "我在火車站前面，不是在捷運站出口。",
+        "meaning_summary": "朋友，告訴我你會合的火車站前面，而不是捷運站出口。",
+        "audience": "friend",
+        "tone": "concise",
+        "scenario": "告知朋友會合地點",
+        "warnings": [],
+        "needs_confirmation": false,
+        "safe_to_use": true,
+        "fallback_used": false,
+        "verification": {
+          "meaning_preserved": true,
+          "added_information": [],
+          "removed_information": [],
+          "changed_facts": [],
+          "missing_taiwanese_terms": [],
+          "missing_natural_phrases": [],
+          "missing_constraint_terms": [],
+          "completion_object_added": false,
+          "statement_changed_to_instruction": false
+        },
+        "model": "qwen2.5:1.5b",
+        "processing_seconds": 0.5767
+      },
+      "checks": {
+        "automatic_pass": true,
+        "failures": [],
+        "missing_required_terms": [],
+        "missing_required_groups": [],
+        "forbidden_terms_found": [],
+        "source_numbers": [],
+        "output_numbers": [],
+        "numbers_preserved": true,
+        "negation_preserved": true
+      }
+    },
+    {
+      "case": {
+        "id": "R21",
+        "category": "friend_amount",
+        "original_text": "聚餐每人是650元，不包含飲料。",
+        "audience": "friend",
+        "tone": "clear",
+        "scenario": "朋友群組告知費用",
+        "required_all": [
+          "聚餐",
+          "每人",
+          "650",
+          "飲料"
+        ],
+        "required_any_groups": [
+          [
+            "不包含",
+            "不含",
+            "未包含"
+          ]
+        ],
+        "forbidden_terms": [
+          "服務費",
+          "現金",
+          "轉帳"
+        ]
+      },
+      "request": {
+        "original_text": "聚餐每人是650元，不包含飲料。",
+        "audience": "friend",
+        "tone": "clear",
+        "scenario": "朋友群組告知費用"
+      },
+      "response": {
+        "original_text": "聚餐每人是650元，不包含飲料。",
+        "rewritten_text": "聚餐每人是650元，不含飲料。",
+        "generated_candidate": "聚餐每人是650元，不含飲料。",
+        "meaning_summary": "聚餐每人650元，不含飲料。",
+        "audience": "friend",
+        "tone": "clear",
+        "scenario": "朋友群組告知費用",
+        "warnings": [],
+        "needs_confirmation": false,
+        "safe_to_use": true,
+        "fallback_used": false,
+        "verification": {
+          "meaning_preserved": true,
+          "added_information": [],
+          "removed_information": [],
+          "changed_facts": [],
+          "missing_taiwanese_terms": [],
+          "missing_natural_phrases": [],
+          "missing_constraint_terms": [],
+          "completion_object_added": false,
+          "statement_changed_to_instruction": false
+        },
+        "model": "qwen2.5:1.5b",
+        "processing_seconds": 0.549
+      },
+      "checks": {
+        "automatic_pass": true,
+        "failures": [],
+        "missing_required_terms": [],
+        "missing_required_groups": [],
+        "forbidden_terms_found": [],
+        "source_numbers": [
+          "650"
+        ],
+        "output_numbers": [
+          "650"
+        ],
+        "numbers_preserved": true,
+        "negation_preserved": true
+      }
+    },
+    {
+      "case": {
+        "id": "R22",
+        "category": "friend_uncertainty",
+        "original_text": "我可能會晚到20分鐘，你們不用先等我。",
+        "audience": "friend",
+        "tone": "concise",
+        "scenario": "朋友聚會前告知",
+        "required_all": [
+          "可能",
+          "20",
+          "分鐘",
+          "等我"
+        ],
+        "required_any_groups": [
+          [
+            "晚到",
+            "遲到"
+          ],
+          [
+            "不用",
+            "不必",
+            "別"
+          ]
+        ],
+        "forbidden_terms": [
+          "塞車",
+          "先點餐",
+          "一定"
+        ]
+      },
+      "request": {
+        "original_text": "我可能會晚到20分鐘，你們不用先等我。",
+        "audience": "friend",
+        "tone": "concise",
+        "scenario": "朋友聚會前告知"
+      },
+      "response": {
+        "original_text": "我可能會晚到20分鐘，你們不用先等我。",
+        "rewritten_text": "我可能遲到20分鐘，你們不用等我。",
+        "generated_candidate": "我可能遲到20分鐘，你們不用等我。",
+        "meaning_summary": "朋友聚會前告知，朋友可能會遲到，但不需要擔心，因為朋友會盡快到達。",
+        "audience": "friend",
+        "tone": "concise",
+        "scenario": "朋友聚會前告知",
+        "warnings": [],
+        "needs_confirmation": false,
+        "safe_to_use": true,
+        "fallback_used": false,
+        "verification": {
+          "meaning_preserved": true,
+          "added_information": [],
+          "removed_information": [],
+          "changed_facts": [],
+          "missing_taiwanese_terms": [],
+          "missing_natural_phrases": [],
+          "missing_constraint_terms": [],
+          "completion_object_added": false,
+          "statement_changed_to_instruction": false
+        },
+        "model": "qwen2.5:1.5b",
+        "processing_seconds": 0.5119
+      },
+      "checks": {
+        "automatic_pass": true,
+        "failures": [],
+        "missing_required_terms": [],
+        "missing_required_groups": [],
+        "forbidden_terms_found": [],
+        "source_numbers": [
+          "20"
+        ],
+        "output_numbers": [
+          "20"
+        ],
+        "numbers_preserved": true,
+        "negation_preserved": true
+      }
+    },
+    {
+      "case": {
+        "id": "R23",
+        "category": "friend_borrowing",
+        "original_text": "你的相機我可以借到星期日，但不能帶去海邊。",
+        "audience": "friend",
+        "tone": "polite",
+        "scenario": "確認借用物品限制",
+        "required_all": [
+          "相機",
+          "借",
+          "星期日",
+          "海邊"
+        ],
+        "required_any_groups": [
+          [
+            "可以",
+            "能"
+          ],
+          [
+            "不能",
+            "不可",
+            "不要"
+          ]
+        ],
+        "forbidden_terms": [
+          "弄壞",
+          "星期一",
+          "防水"
+        ]
+      },
+      "request": {
+        "original_text": "你的相機我可以借到星期日，但不能帶去海邊。",
+        "audience": "friend",
+        "tone": "polite",
+        "scenario": "確認借用物品限制"
+      },
+      "response": {
+        "original_text": "你的相機我可以借到星期日，但不能帶去海邊。",
+        "rewritten_text": "你的相機我可以借到星期日，但不能帶去海邊。",
+        "generated_candidate": "你的相機我可以借到星期日，但不能帶去海邊。",
+        "meaning_summary": "朋友可以借用你的相機，但有個限制是不能帶去海邊。",
+        "audience": "friend",
+        "tone": "polite",
+        "scenario": "確認借用物品限制",
+        "warnings": [],
+        "needs_confirmation": false,
+        "safe_to_use": true,
+        "fallback_used": false,
+        "verification": {
+          "meaning_preserved": true,
+          "added_information": [],
+          "removed_information": [],
+          "changed_facts": [],
+          "missing_taiwanese_terms": [],
+          "missing_natural_phrases": [],
+          "missing_constraint_terms": [],
+          "completion_object_added": false,
+          "statement_changed_to_instruction": false
+        },
+        "model": "qwen2.5:1.5b",
+        "processing_seconds": 0.623
+      },
+      "checks": {
+        "automatic_pass": true,
+        "failures": [],
+        "missing_required_terms": [],
+        "missing_required_groups": [],
+        "forbidden_terms_found": [],
+        "source_numbers": [],
+        "output_numbers": [],
+        "numbers_preserved": true,
+        "negation_preserved": true
+      }
+    },
+    {
+      "case": {
+        "id": "R24",
+        "category": "friend_privacy",
+        "original_text": "這張照片可以留著，但請不要放到社群網站。",
+        "audience": "friend",
+        "tone": "polite",
+        "scenario": "向朋友說明照片使用範圍",
+        "required_all": [
+          "照片",
+          "留",
+          "社群網站"
+        ],
+        "required_any_groups": [
+          [
+            "可以",
+            "能"
+          ],
+          [
+            "不要",
+            "請勿",
+            "不能"
+          ]
+        ],
+        "forbidden_terms": [
+          "刪除",
+          "限時動態",
+          "標註"
+        ]
+      },
+      "request": {
+        "original_text": "這張照片可以留著，但請不要放到社群網站。",
+        "audience": "friend",
+        "tone": "polite",
+        "scenario": "向朋友說明照片使用範圍"
+      },
+      "response": {
+        "original_text": "這張照片可以留著，但請不要放到社群網站。",
+        "rewritten_text": "這張照片可以留下，但請不要放在社群網站上。",
+        "generated_candidate": "這張照片可以留下，但請不要放在社群網站上。",
+        "meaning_summary": "這張照片可以留下，但請不要放在社群網站上。",
+        "audience": "friend",
+        "tone": "polite",
+        "scenario": "向朋友說明照片使用範圍",
+        "warnings": [],
+        "needs_confirmation": false,
+        "safe_to_use": true,
+        "fallback_used": false,
+        "verification": {
+          "meaning_preserved": true,
+          "added_information": [],
+          "removed_information": [],
+          "changed_facts": [],
+          "missing_taiwanese_terms": [],
+          "missing_natural_phrases": [],
+          "missing_constraint_terms": [],
+          "completion_object_added": false,
+          "statement_changed_to_instruction": false
+        },
+        "model": "qwen2.5:1.5b",
+        "processing_seconds": 0.5754
+      },
+      "checks": {
+        "automatic_pass": true,
+        "failures": [],
+        "missing_required_terms": [],
+        "missing_required_groups": [],
+        "forbidden_terms_found": [],
+        "source_numbers": [],
+        "output_numbers": [],
+        "numbers_preserved": true,
+        "negation_preserved": true
+      }
+    },
+    {
+      "case": {
+        "id": "R25",
+        "category": "work_deadline",
+        "original_text": "這份報告必須在週三中午12點前交給主管。",
+        "audience": "formal",
+        "tone": "polite",
+        "scenario": "提醒同事工作期限",
+        "required_all": [
+          "報告",
+          "週三",
+          "中午",
+          "12",
+          "主管"
+        ],
+        "required_any_groups": [
+          [
+            "必須",
+            "務必",
+            "應於"
+          ],
+          [
+            "交給",
+            "提交"
+          ]
+        ],
+        "forbidden_terms": [
+          "延後",
+          "電子郵件",
+          "開會"
+        ]
+      },
+      "request": {
+        "original_text": "這份報告必須在週三中午12點前交給主管。",
+        "audience": "formal",
+        "tone": "polite",
+        "scenario": "提醒同事工作期限"
+      },
+      "response": {
+        "original_text": "這份報告必須在週三中午12點前交給主管。",
+        "rewritten_text": "您好，這份報告必須在週三中午12點前交給主管。",
+        "generated_candidate": "這份報告請在週三中午12點前交給主管，謝謝。",
+        "meaning_summary": "保留原句內容，僅調整稱謂或開頭語氣。",
+        "audience": "formal",
+        "tone": "polite",
+        "scenario": "提醒同事工作期限",
+        "warnings": [
+          "added_information_detected",
+          "constraint_modality_changed_or_missing",
+          "safe_fallback_applied"
+        ],
+        "needs_confirmation": true,
+        "safe_to_use": true,
+        "fallback_used": true,
+        "verification": {
+          "meaning_preserved": true,
+          "added_information": [
+            "{'context': '提醒同事工作期限'}"
+          ],
+          "removed_information": [],
+          "changed_facts": [],
+          "missing_taiwanese_terms": [],
+          "missing_natural_phrases": [],
+          "missing_constraint_terms": [
+            "必須"
+          ],
+          "completion_object_added": false,
+          "statement_changed_to_instruction": false
+        },
+        "model": "qwen2.5:1.5b",
+        "processing_seconds": 0.6284
+      },
+      "checks": {
+        "automatic_pass": true,
+        "failures": [],
+        "missing_required_terms": [],
+        "missing_required_groups": [],
+        "forbidden_terms_found": [],
+        "source_numbers": [
+          "12"
+        ],
+        "output_numbers": [
+          "12"
+        ],
+        "numbers_preserved": true,
+        "negation_preserved": true
+      }
+    },
+    {
+      "case": {
+        "id": "R26",
+        "category": "work_status",
+        "original_text": "目前只完成第一部分，第二部分還沒確認。",
+        "audience": "formal",
+        "tone": "clear",
+        "scenario": "向主管回報進度",
+        "required_all": [
+          "目前",
+          "第一部分",
+          "第二部分",
+          "確認"
+        ],
+        "required_any_groups": [
+          [
+            "只完成",
+            "僅完成"
+          ],
+          [
+            "還沒",
+            "尚未",
+            "未"
+          ]
+        ],
+        "forbidden_terms": [
+          "今天",
+          "一定",
+          "延誤"
+        ]
+      },
+      "request": {
+        "original_text": "目前只完成第一部分，第二部分還沒確認。",
+        "audience": "formal",
+        "tone": "clear",
+        "scenario": "向主管回報進度"
+      },
+      "response": {
+        "original_text": "目前只完成第一部分，第二部分還沒確認。",
+        "rewritten_text": "目前只完成第一部分，第二部分還沒確認。",
+        "generated_candidate": "目前只完成第一部分，第二部分還沒確認。",
+        "meaning_summary": "目前只完成第一部分，第二部分尚未確認。",
+        "audience": "formal",
+        "tone": "clear",
+        "scenario": "向主管回報進度",
+        "warnings": [],
+        "needs_confirmation": false,
+        "safe_to_use": true,
+        "fallback_used": false,
+        "verification": {
+          "meaning_preserved": true,
+          "added_information": [],
+          "removed_information": [],
+          "changed_facts": [],
+          "missing_taiwanese_terms": [],
+          "missing_natural_phrases": [],
+          "missing_constraint_terms": [],
+          "completion_object_added": false,
+          "statement_changed_to_instruction": false
+        },
+        "model": "qwen2.5:1.5b",
+        "processing_seconds": 0.5301
+      },
+      "checks": {
+        "automatic_pass": true,
+        "failures": [],
+        "missing_required_terms": [],
+        "missing_required_groups": [],
+        "forbidden_terms_found": [],
+        "source_numbers": [],
+        "output_numbers": [],
+        "numbers_preserved": true,
+        "negation_preserved": true
+      }
+    },
+    {
+      "case": {
+        "id": "R27",
+        "category": "work_meeting",
+        "original_text": "明天的會議改成線上，原本的會議室不用保留。",
+        "audience": "formal",
+        "tone": "polite",
+        "scenario": "工作群組通知會議異動",
+        "required_all": [
+          "明天",
+          "會議",
+          "線上",
+          "會議室",
+          "保留"
+        ],
+        "required_any_groups": [
+          [
+            "改成",
+            "改為",
+            "改到"
+          ],
+          [
+            "不用",
+            "不必",
+            "無須"
+          ]
+        ],
+        "forbidden_terms": [
+          "連結",
+          "下午",
+          "取消"
+        ]
+      },
+      "request": {
+        "original_text": "明天的會議改成線上，原本的會議室不用保留。",
+        "audience": "formal",
+        "tone": "polite",
+        "scenario": "工作群組通知會議異動"
+      },
+      "response": {
+        "original_text": "明天的會議改成線上，原本的會議室不用保留。",
+        "rewritten_text": "明天的會議改成線上，原本的會議室不用保留了。",
+        "generated_candidate": "明天的會議改成線上，原本的會議室不用保留了。",
+        "meaning_summary": "明天的會議將轉移到線上進行，原本的會議室可以不用保留。",
+        "audience": "formal",
+        "tone": "polite",
+        "scenario": "工作群組通知會議異動",
+        "warnings": [],
+        "needs_confirmation": false,
+        "safe_to_use": true,
+        "fallback_used": false,
+        "verification": {
+          "meaning_preserved": true,
+          "added_information": [],
+          "removed_information": [],
+          "changed_facts": [],
+          "missing_taiwanese_terms": [],
+          "missing_natural_phrases": [],
+          "missing_constraint_terms": [],
+          "completion_object_added": false,
+          "statement_changed_to_instruction": false
+        },
+        "model": "qwen2.5:1.5b",
+        "processing_seconds": 0.651
+      },
+      "checks": {
+        "automatic_pass": true,
+        "failures": [],
+        "missing_required_terms": [],
+        "missing_required_groups": [],
+        "forbidden_terms_found": [],
+        "source_numbers": [],
+        "output_numbers": [],
+        "numbers_preserved": true,
+        "negation_preserved": true
+      }
+    },
+    {
+      "case": {
+        "id": "R28",
+        "category": "work_access",
+        "original_text": "這個帳號只能查詢資料，不能修改或下載。",
+        "audience": "formal",
+        "tone": "clear",
+        "scenario": "說明系統權限",
+        "required_all": [
+          "帳號",
+          "查詢",
+          "資料",
+          "修改",
+          "下載"
+        ],
+        "required_any_groups": [
+          [
+            "只能",
+            "僅能",
+            "只有查詢",
+            "僅有查詢"
+          ],
+          [
+            "不能",
+            "不可",
+            "無法"
+          ]
+        ],
+        "forbidden_terms": [
+          "管理員",
+          "密碼",
+          "申請"
+        ]
+      },
+      "request": {
+        "original_text": "這個帳號只能查詢資料，不能修改或下載。",
+        "audience": "formal",
+        "tone": "clear",
+        "scenario": "說明系統權限"
+      },
+      "response": {
+        "original_text": "這個帳號只能查詢資料，不能修改或下載。",
+        "rewritten_text": "這個帳號只有查詢資料的權限，無法修改或下載。",
+        "generated_candidate": "這個帳號只有查詢資料的權限，無法修改或下載。",
+        "meaning_summary": "這個帳號的權限僅限於查詢資料，無法進行修改或下載操作。",
+        "audience": "formal",
+        "tone": "clear",
+        "scenario": "說明系統權限",
+        "warnings": [],
+        "needs_confirmation": false,
+        "safe_to_use": true,
+        "fallback_used": false,
+        "verification": {
+          "meaning_preserved": true,
+          "added_information": [],
+          "removed_information": [],
+          "changed_facts": [],
+          "missing_taiwanese_terms": [],
+          "missing_natural_phrases": [],
+          "missing_constraint_terms": [],
+          "completion_object_added": false,
+          "statement_changed_to_instruction": false
+        },
+        "model": "qwen2.5:1.5b",
+        "processing_seconds": 0.5646
+      },
+      "checks": {
+        "automatic_pass": true,
+        "failures": [],
+        "missing_required_terms": [],
+        "missing_required_groups": [],
+        "forbidden_terms_found": [],
+        "source_numbers": [],
+        "output_numbers": [],
+        "numbers_preserved": true,
+        "negation_preserved": true
+      }
+    },
+    {
+      "case": {
+        "id": "R29",
+        "category": "work_leave",
+        "original_text": "我9月8日上午請假，下午會正常上班。",
+        "audience": "formal",
+        "tone": "polite",
+        "scenario": "通知同事請假時段",
+        "required_all": [
+          "9",
+          "8",
+          "上午",
+          "請假",
+          "下午",
+          "上班"
+        ],
+        "required_any_groups": [
+          [
+            "正常",
+            "照常"
+          ]
+        ],
+        "forbidden_terms": [
+          "看醫生",
+          "整天",
+          "代理人"
+        ]
+      },
+      "request": {
+        "original_text": "我9月8日上午請假，下午會正常上班。",
+        "audience": "formal",
+        "tone": "polite",
+        "scenario": "通知同事請假時段"
+      },
+      "response": {
+        "original_text": "我9月8日上午請假，下午會正常上班。",
+        "rewritten_text": "我9月8日上午請假，下午會正常上班。",
+        "generated_candidate": "我9月8日上午請假，下午會正常上班。",
+        "meaning_summary": "我將在9月8日上午請假，下午會正常上班。",
+        "audience": "formal",
+        "tone": "polite",
+        "scenario": "通知同事請假時段",
+        "warnings": [],
+        "needs_confirmation": false,
+        "safe_to_use": true,
+        "fallback_used": false,
+        "verification": {
+          "meaning_preserved": true,
+          "added_information": [],
+          "removed_information": [],
+          "changed_facts": [],
+          "missing_taiwanese_terms": [],
+          "missing_natural_phrases": [],
+          "missing_constraint_terms": [],
+          "completion_object_added": false,
+          "statement_changed_to_instruction": false
+        },
+        "model": "qwen2.5:1.5b",
+        "processing_seconds": 0.5639
+      },
+      "checks": {
+        "automatic_pass": true,
+        "failures": [],
+        "missing_required_terms": [],
+        "missing_required_groups": [],
+        "forbidden_terms_found": [],
+        "source_numbers": [
+          "9",
+          "8"
+        ],
+        "output_numbers": [
+          "9",
+          "8"
+        ],
+        "numbers_preserved": true,
+        "negation_preserved": true
+      }
+    },
+    {
+      "case": {
+        "id": "R30",
+        "category": "work_correction",
+        "original_text": "上一封信的附件放錯了，請不要使用，改看這一份。",
+        "audience": "formal",
+        "tone": "polite",
+        "scenario": "寄送更正附件",
+        "required_all": [
+          "上一封信",
+          "附件",
+          "錯",
+          "使用",
+          "這一份"
+        ],
+        "required_any_groups": [
+          [
+            "不要",
+            "請勿",
+            "不可"
+          ],
+          [
+            "改看",
+            "使用"
+          ]
+        ],
+        "forbidden_terms": [
+          "刪除",
+          "機密",
+          "重新下載"
+        ]
+      },
+      "request": {
+        "original_text": "上一封信的附件放錯了，請不要使用，改看這一份。",
+        "audience": "formal",
+        "tone": "polite",
+        "scenario": "寄送更正附件"
+      },
+      "response": {
+        "original_text": "上一封信的附件放錯了，請不要使用，改看這一份。",
+        "rewritten_text": "上一封信的附件放錯了，請不要使用，改看這一份。",
+        "generated_candidate": "上一封信的附件放錯了，請不要使用，改看這一份。",
+        "meaning_summary": "上一封信的附件放錯了，請不要使用，改看這一份。",
+        "audience": "formal",
+        "tone": "polite",
+        "scenario": "寄送更正附件",
+        "warnings": [],
+        "needs_confirmation": false,
+        "safe_to_use": true,
+        "fallback_used": false,
+        "verification": {
+          "meaning_preserved": true,
+          "added_information": [],
+          "removed_information": [],
+          "changed_facts": [],
+          "missing_taiwanese_terms": [],
+          "missing_natural_phrases": [],
+          "missing_constraint_terms": [],
+          "completion_object_added": false,
+          "statement_changed_to_instruction": false
+        },
+        "model": "qwen2.5:1.5b",
+        "processing_seconds": 0.5943
+      },
+      "checks": {
+        "automatic_pass": true,
+        "failures": [],
+        "missing_required_terms": [],
+        "missing_required_groups": [],
+        "forbidden_terms_found": [],
+        "source_numbers": [],
+        "output_numbers": [],
+        "numbers_preserved": true,
+        "negation_preserved": true
+      }
+    },
+    {
+      "case": {
+        "id": "R31",
+        "category": "medical_dosage",
+        "original_text": "這瓶藥水每次喝5毫升，一天最多3次。",
+        "audience": "elder",
+        "tone": "clear",
+        "scenario": "向長輩說明用藥方式",
+        "required_all": [
+          "藥水",
+          "每次",
+          "5",
+          "毫升",
+          "一天",
+          "3",
+          "次"
+        ],
+        "required_any_groups": [
+          [
+            "最多",
+            "不超過"
+          ]
+        ],
+        "forbidden_terms": [
+          "飯後",
+          "睡前",
+          "醫師"
+        ]
+      },
+      "request": {
+        "original_text": "這瓶藥水每次喝5毫升，一天最多3次。",
+        "audience": "elder",
+        "tone": "clear",
+        "scenario": "向長輩說明用藥方式"
+      },
+      "response": {
+        "original_text": "這瓶藥水每次喝5毫升，一天最多3次。",
+        "rewritten_text": "這瓶藥水每次喝5毫升，一天最多喝3次。",
+        "generated_candidate": "這瓶藥水每次喝5毫升，一天最多喝3次。",
+        "meaning_summary": "這瓶藥水的用法說明。",
+        "audience": "elder",
+        "tone": "clear",
+        "scenario": "向長輩說明用藥方式",
+        "warnings": [],
+        "needs_confirmation": false,
+        "safe_to_use": true,
+        "fallback_used": false,
+        "verification": {
+          "meaning_preserved": true,
+          "added_information": [],
+          "removed_information": [],
+          "changed_facts": [],
+          "missing_taiwanese_terms": [],
+          "missing_natural_phrases": [],
+          "missing_constraint_terms": [],
+          "completion_object_added": false,
+          "statement_changed_to_instruction": false
+        },
+        "model": "qwen2.5:1.5b",
+        "processing_seconds": 0.5119
+      },
+      "checks": {
+        "automatic_pass": true,
+        "failures": [],
+        "missing_required_terms": [],
+        "missing_required_groups": [],
+        "forbidden_terms_found": [],
+        "source_numbers": [
+          "5",
+          "3"
+        ],
+        "output_numbers": [
+          "5",
+          "3"
+        ],
+        "numbers_preserved": true,
+        "negation_preserved": true
+      }
+    },
+    {
+      "case": {
+        "id": "R32",
+        "category": "medical_fasting",
+        "original_text": "明早檢查前8小時不能吃東西，可以喝少量白開水。",
+        "audience": "elder",
+        "tone": "clear",
+        "scenario": "提醒檢查前注意事項",
+        "required_all": [
+          "檢查",
+          "8",
+          "小時",
+          "吃東西",
+          "白開水"
+        ],
+        "required_any_groups": [
+          [
+            "明早",
+            "明天早上"
+          ],
+          [
+            "不能",
+            "不可",
+            "不要"
+          ],
+          [
+            "可以",
+            "能"
+          ]
+        ],
+        "forbidden_terms": [
+          "抽血",
+          "大量",
+          "藥物"
+        ]
+      },
+      "request": {
+        "original_text": "明早檢查前8小時不能吃東西，可以喝少量白開水。",
+        "audience": "elder",
+        "tone": "clear",
+        "scenario": "提醒檢查前注意事項"
+      },
+      "response": {
+        "original_text": "明早檢查前8小時不能吃東西，可以喝少量白開水。",
+        "rewritten_text": "明天早上檢查前8小時不能吃東西，可以喝少量白開水。",
+        "generated_candidate": "明天早上檢查前8小時不能吃東西，可以喝少量白開水。",
+        "meaning_summary": "提醒長輩明天早上檢查前注意不能吃東西，只可以喝少量白開水。",
+        "audience": "elder",
+        "tone": "clear",
+        "scenario": "提醒檢查前注意事項",
+        "warnings": [],
+        "needs_confirmation": false,
+        "safe_to_use": true,
+        "fallback_used": false,
+        "verification": {
+          "meaning_preserved": true,
+          "added_information": [],
+          "removed_information": [],
+          "changed_facts": [],
+          "missing_taiwanese_terms": [],
+          "missing_natural_phrases": [],
+          "missing_constraint_terms": [],
+          "completion_object_added": false,
+          "statement_changed_to_instruction": false
+        },
+        "model": "qwen2.5:1.5b",
+        "processing_seconds": 0.6006
+      },
+      "checks": {
+        "automatic_pass": true,
+        "failures": [],
+        "missing_required_terms": [],
+        "missing_required_groups": [],
+        "forbidden_terms_found": [],
+        "source_numbers": [
+          "8"
+        ],
+        "output_numbers": [
+          "8"
+        ],
+        "numbers_preserved": true,
+        "negation_preserved": true
+      }
+    },
+    {
+      "case": {
+        "id": "R33",
+        "category": "medical_appointment",
+        "original_text": "門診改到10月3日下午，上午的預約已經取消。",
+        "audience": "family",
+        "tone": "clear",
+        "scenario": "告知家人門診異動",
+        "required_all": [
+          "門診",
+          "10",
+          "3",
+          "下午",
+          "上午",
+          "預約"
+        ],
+        "required_any_groups": [
+          [
+            "改到",
+            "改為",
+            "改成"
+          ],
+          [
+            "取消",
+            "作廢"
+          ]
+        ],
+        "forbidden_terms": [
+          "醫師",
+          "重新掛號",
+          "醫院"
+        ]
+      },
+      "request": {
+        "original_text": "門診改到10月3日下午，上午的預約已經取消。",
+        "audience": "family",
+        "tone": "clear",
+        "scenario": "告知家人門診異動"
+      },
+      "response": {
+        "original_text": "門診改到10月3日下午，上午的預約已經取消。",
+        "rewritten_text": "門診改到10月3日下午，上午的預約已經取消了。",
+        "generated_candidate": "門診改到10月3日下午，上午的預約已經取消了。",
+        "meaning_summary": "門診時間異動，上午預約取消，需要家人了解並調整安排。",
+        "audience": "family",
+        "tone": "clear",
+        "scenario": "告知家人門診異動",
+        "warnings": [],
+        "needs_confirmation": false,
+        "safe_to_use": true,
+        "fallback_used": false,
+        "verification": {
+          "meaning_preserved": true,
+          "added_information": [],
+          "removed_information": [],
+          "changed_facts": [],
+          "missing_taiwanese_terms": [],
+          "missing_natural_phrases": [],
+          "missing_constraint_terms": [],
+          "completion_object_added": false,
+          "statement_changed_to_instruction": false
+        },
+        "model": "qwen2.5:1.5b",
+        "processing_seconds": 0.5199
+      },
+      "checks": {
+        "automatic_pass": true,
+        "failures": [],
+        "missing_required_terms": [],
+        "missing_required_groups": [],
+        "forbidden_terms_found": [],
+        "source_numbers": [
+          "10",
+          "3"
+        ],
+        "output_numbers": [
+          "10",
+          "3"
+        ],
+        "numbers_preserved": true,
+        "negation_preserved": true
+      }
+    },
+    {
+      "case": {
+        "id": "R34",
+        "category": "medical_uncertainty",
+        "original_text": "檢查結果還沒出來，目前不能確定要不要住院。",
+        "audience": "family",
+        "tone": "warm",
+        "scenario": "向家人說明檢查狀況",
+        "required_all": [
+          "檢查結果",
+          "目前",
+          "確定",
+          "住院"
+        ],
+        "required_any_groups": [
+          [
+            "還沒",
+            "尚未",
+            "未"
+          ],
+          [
+            "不能確定",
+            "無法確定"
+          ],
+          [
+            "要不要",
+            "是否要",
+            "是否需要"
+          ]
+        ],
+        "forbidden_terms": [
+          "嚴重",
+          "醫生說",
+          "一定"
+        ]
+      },
+      "request": {
+        "original_text": "檢查結果還沒出來，目前不能確定要不要住院。",
+        "audience": "family",
+        "tone": "warm",
+        "scenario": "向家人說明檢查狀況"
+      },
+      "response": {
+        "original_text": "檢查結果還沒出來，目前不能確定要不要住院。",
+        "rewritten_text": "目前檢查結果還沒出來，我們還不能確定要不要住院。",
+        "generated_candidate": "目前檢查結果還沒出來，我們還不能確定要不要住院。",
+        "meaning_summary": "目前檢查結果尚未出來，我們還不能確定是否需要住院。",
+        "audience": "family",
+        "tone": "warm",
+        "scenario": "向家人說明檢查狀況",
+        "warnings": [],
+        "needs_confirmation": false,
+        "safe_to_use": true,
+        "fallback_used": false,
+        "verification": {
+          "meaning_preserved": true,
+          "added_information": [],
+          "removed_information": [],
+          "changed_facts": [],
+          "missing_taiwanese_terms": [],
+          "missing_natural_phrases": [],
+          "missing_constraint_terms": [],
+          "completion_object_added": false,
+          "statement_changed_to_instruction": false
+        },
+        "model": "qwen2.5:1.5b",
+        "processing_seconds": 0.5939
+      },
+      "checks": {
+        "automatic_pass": true,
+        "failures": [],
+        "missing_required_terms": [],
+        "missing_required_groups": [],
+        "forbidden_terms_found": [],
+        "source_numbers": [],
+        "output_numbers": [],
+        "numbers_preserved": true,
+        "negation_preserved": true
+      }
+    },
+    {
+      "case": {
+        "id": "R35",
+        "category": "caregiving_boundary",
+        "original_text": "今晚我可以陪到9點，之後需要由其他家人接手。",
+        "audience": "family",
+        "tone": "polite",
+        "scenario": "協調家庭照護時間",
+        "required_all": [
+          "今晚",
+          "陪",
+          "9",
+          "之後",
+          "其他家人",
+          "接手"
+        ],
+        "required_any_groups": [
+          [
+            "可以",
+            "能"
+          ],
+          [
+            "需要",
+            "必須"
+          ]
+        ],
+        "forbidden_terms": [
+          "看護",
+          "明天",
+          "醫院"
+        ]
+      },
+      "request": {
+        "original_text": "今晚我可以陪到9點，之後需要由其他家人接手。",
+        "audience": "family",
+        "tone": "polite",
+        "scenario": "協調家庭照護時間"
+      },
+      "response": {
+        "original_text": "今晚我可以陪到9點，之後需要由其他家人接手。",
+        "rewritten_text": "今晚我可以陪到9點，之後需要由其他家人接手。",
+        "generated_candidate": "今晚我可以陪你聊到9點，之後需要由其他家人接手。",
+        "meaning_summary": "保留原句內容，僅調整稱謂或開頭語氣。",
+        "audience": "family",
+        "tone": "polite",
+        "scenario": "協調家庭照護時間",
+        "warnings": [
+          "added_information_detected",
+          "safe_fallback_applied"
+        ],
+        "needs_confirmation": true,
+        "safe_to_use": true,
+        "fallback_used": true,
+        "verification": {
+          "meaning_preserved": true,
+          "added_information": [
+            "{'context': '協調家庭照護時間'}"
+          ],
+          "removed_information": [],
+          "changed_facts": [],
+          "missing_taiwanese_terms": [],
+          "missing_natural_phrases": [],
+          "missing_constraint_terms": [],
+          "completion_object_added": false,
+          "statement_changed_to_instruction": false
+        },
+        "model": "qwen2.5:1.5b",
+        "processing_seconds": 0.6331
+      },
+      "checks": {
+        "automatic_pass": true,
+        "failures": [],
+        "missing_required_terms": [],
+        "missing_required_groups": [],
+        "forbidden_terms_found": [],
+        "source_numbers": [
+          "9"
+        ],
+        "output_numbers": [
+          "9"
+        ],
+        "numbers_preserved": true,
+        "negation_preserved": true
+      }
+    },
+    {
+      "case": {
+        "id": "R36",
+        "category": "medical_allergy",
+        "original_text": "我對這種藥過敏，請不要再給我同一種。",
+        "audience": "formal",
+        "tone": "clear",
+        "scenario": "向醫療人員說明藥物過敏",
+        "required_all": [
+          "藥",
+          "過敏",
+          "同一種"
+        ],
+        "required_any_groups": [
+          [
+            "不要",
+            "請勿",
+            "不能"
+          ],
+          [
+            "再給",
+            "再次提供"
+          ]
+        ],
+        "forbidden_terms": [
+          "抗生素",
+          "紅疹",
+          "以前"
+        ]
+      },
+      "request": {
+        "original_text": "我對這種藥過敏，請不要再給我同一種。",
+        "audience": "formal",
+        "tone": "clear",
+        "scenario": "向醫療人員說明藥物過敏"
+      },
+      "response": {
+        "original_text": "我對這種藥過敏，請不要再給我同一種。",
+        "rewritten_text": "我對這種藥物過敏，請不要再給我使用同一種。",
+        "generated_candidate": "我對這種藥物過敏，請不要再給我使用同一種。",
+        "meaning_summary": "患者說明自己對特定藥物過敏，並要求醫療人員避免再次使用相同藥物。",
+        "audience": "formal",
+        "tone": "clear",
+        "scenario": "向醫療人員說明藥物過敏",
+        "warnings": [],
+        "needs_confirmation": false,
+        "safe_to_use": true,
+        "fallback_used": false,
+        "verification": {
+          "meaning_preserved": true,
+          "added_information": [],
+          "removed_information": [],
+          "changed_facts": [],
+          "missing_taiwanese_terms": [],
+          "missing_natural_phrases": [],
+          "missing_constraint_terms": [],
+          "completion_object_added": false,
+          "statement_changed_to_instruction": false
+        },
+        "model": "qwen2.5:1.5b",
+        "processing_seconds": 0.5535
+      },
+      "checks": {
+        "automatic_pass": true,
+        "failures": [],
+        "missing_required_terms": [],
+        "missing_required_groups": [],
+        "forbidden_terms_found": [],
+        "source_numbers": [],
+        "output_numbers": [],
+        "numbers_preserved": true,
+        "negation_preserved": true
+      }
+    },
+    {
+      "case": {
+        "id": "R37",
+        "category": "public_deadline",
+        "original_text": "補助申請只收到6月30日，超過期限不能補件。",
+        "audience": "formal",
+        "tone": "polite",
+        "scenario": "公共服務申請公告",
+        "required_all": [
+          "補助",
+          "申請",
+          "6",
+          "30",
+          "期限",
+          "補件"
+        ],
+        "required_any_groups": [
+          [
+            "只收到",
+            "僅受理至",
+            "截止"
+          ],
+          [
+            "不能",
+            "不可",
+            "無法"
+          ]
+        ],
+        "forbidden_terms": [
+          "延期",
+          "例外",
+          "線上"
+        ]
+      },
+      "request": {
+        "original_text": "補助申請只收到6月30日，超過期限不能補件。",
+        "audience": "formal",
+        "tone": "polite",
+        "scenario": "公共服務申請公告"
+      },
+      "response": {
+        "original_text": "補助申請只收到6月30日，超過期限不能補件。",
+        "rewritten_text": "您好，補助申請只收到6月30日，超過期限不能補件。",
+        "generated_candidate": "我們的申請截止日期是6月30日，如果超過期限，我們將無法補件。",
+        "meaning_summary": "保留原句內容，僅調整稱謂或開頭語氣。",
+        "audience": "formal",
+        "tone": "polite",
+        "scenario": "公共服務申請公告",
+        "warnings": [
+          "added_information_detected",
+          "safe_fallback_applied"
+        ],
+        "needs_confirmation": true,
+        "safe_to_use": true,
+        "fallback_used": true,
+        "verification": {
+          "meaning_preserved": true,
+          "added_information": [
+            "{'context': '公共服務申請公告'}"
+          ],
+          "removed_information": [],
+          "changed_facts": [],
+          "missing_taiwanese_terms": [],
+          "missing_natural_phrases": [],
+          "missing_constraint_terms": [],
+          "completion_object_added": false,
+          "statement_changed_to_instruction": false
+        },
+        "model": "qwen2.5:1.5b",
+        "processing_seconds": 0.6359
+      },
+      "checks": {
+        "automatic_pass": true,
+        "failures": [],
+        "missing_required_terms": [],
+        "missing_required_groups": [],
+        "forbidden_terms_found": [],
+        "source_numbers": [
+          "6",
+          "30"
+        ],
+        "output_numbers": [
+          "6",
+          "30"
+        ],
+        "numbers_preserved": true,
+        "negation_preserved": true
+      }
+    },
+    {
+      "case": {
+        "id": "R38",
+        "category": "public_fee",
+        "original_text": "成人票120元，未滿6歲不用買票。",
+        "audience": "formal",
+        "tone": "clear",
+        "scenario": "向民眾說明票價",
+        "required_all": [
+          "成人票",
+          "120",
+          "未滿",
+          "6",
+          "買票"
+        ],
+        "required_any_groups": [
+          [
+            "不用",
+            "不必",
+            "免"
+          ]
+        ],
+        "forbidden_terms": [
+          "學生票",
+          "半價",
+          "證件"
+        ]
+      },
+      "request": {
+        "original_text": "成人票120元，未滿6歲不用買票。",
+        "audience": "formal",
+        "tone": "clear",
+        "scenario": "向民眾說明票價"
+      },
+      "response": {
+        "original_text": "成人票120元，未滿6歲不用買票。",
+        "rewritten_text": "成人票120元，未滿6歲不用買票。",
+        "generated_candidate": "成人票120元，未滿6歲不用買票。",
+        "meaning_summary": "說明成人票價格，未滿6歲免票。",
+        "audience": "formal",
+        "tone": "clear",
+        "scenario": "向民眾說明票價",
+        "warnings": [],
+        "needs_confirmation": false,
+        "safe_to_use": true,
+        "fallback_used": false,
+        "verification": {
+          "meaning_preserved": true,
+          "added_information": [],
+          "removed_information": [],
+          "changed_facts": [],
+          "missing_taiwanese_terms": [],
+          "missing_natural_phrases": [],
+          "missing_constraint_terms": [],
+          "completion_object_added": false,
+          "statement_changed_to_instruction": false
+        },
+        "model": "qwen2.5:1.5b",
+        "processing_seconds": 0.5623
+      },
+      "checks": {
+        "automatic_pass": true,
+        "failures": [],
+        "missing_required_terms": [],
+        "missing_required_groups": [],
+        "forbidden_terms_found": [],
+        "source_numbers": [
+          "120",
+          "6"
+        ],
+        "output_numbers": [
+          "120",
+          "6"
+        ],
+        "numbers_preserved": true,
+        "negation_preserved": true
+      }
+    },
+    {
+      "case": {
+        "id": "R39",
+        "category": "public_transport",
+        "original_text": "末班公車是晚上11點，錯過後沒有其他班次。",
+        "audience": "formal",
+        "tone": "clear",
+        "scenario": "提供旅客交通資訊",
+        "required_all": [
+          "末班公車",
+          "晚上",
+          "11",
+          "錯過",
+          "其他",
+          "班次"
+        ],
+        "required_any_groups": [
+          [
+            "沒有",
+            "無"
+          ]
+        ],
+        "forbidden_terms": [
+          "計程車",
+          "明天",
+          "車站"
+        ]
+      },
+      "request": {
+        "original_text": "末班公車是晚上11點，錯過後沒有其他班次。",
+        "audience": "formal",
+        "tone": "clear",
+        "scenario": "提供旅客交通資訊"
+      },
+      "response": {
+        "original_text": "末班公車是晚上11點，錯過後沒有其他班次。",
+        "rewritten_text": "末班公車是晚上11點，錯過後沒有其他班次了。",
+        "generated_candidate": "末班公車是晚上11點，錯過後沒有其他班次了。",
+        "meaning_summary": "末班公車已經是晚上11點，如果錯過後沒有其他班次，旅客將無法搭乘。",
+        "audience": "formal",
+        "tone": "clear",
+        "scenario": "提供旅客交通資訊",
+        "warnings": [],
+        "needs_confirmation": false,
+        "safe_to_use": true,
+        "fallback_used": false,
+        "verification": {
+          "meaning_preserved": true,
+          "added_information": [],
+          "removed_information": [],
+          "changed_facts": [],
+          "missing_taiwanese_terms": [],
+          "missing_natural_phrases": [],
+          "missing_constraint_terms": [],
+          "completion_object_added": false,
+          "statement_changed_to_instruction": false
+        },
+        "model": "qwen2.5:1.5b",
+        "processing_seconds": 0.6468
+      },
+      "checks": {
+        "automatic_pass": true,
+        "failures": [],
+        "missing_required_terms": [],
+        "missing_required_groups": [],
+        "forbidden_terms_found": [],
+        "source_numbers": [
+          "11"
+        ],
+        "output_numbers": [
+          "11"
+        ],
+        "numbers_preserved": true,
+        "negation_preserved": true
+      }
+    },
+    {
+      "case": {
+        "id": "R40",
+        "category": "public_documents",
+        "original_text": "辦理時必須帶身分證正本，影本不能代替。",
+        "audience": "formal",
+        "tone": "polite",
+        "scenario": "說明臨櫃辦理文件",
+        "required_all": [
+          "辦理",
+          "身分證",
+          "正本",
+          "影本",
+          "代替"
+        ],
+        "required_any_groups": [
+          [
+            "必須",
+            "務必",
+            "需要"
+          ],
+          [
+            "不能",
+            "不可",
+            "無法"
+          ]
+        ],
+        "forbidden_terms": [
+          "戶口名簿",
+          "照片",
+          "線上申請"
+        ]
+      },
+      "request": {
+        "original_text": "辦理時必須帶身分證正本，影本不能代替。",
+        "audience": "formal",
+        "tone": "polite",
+        "scenario": "說明臨櫃辦理文件"
+      },
+      "response": {
+        "original_text": "辦理時必須帶身分證正本，影本不能代替。",
+        "rewritten_text": "辦理時必須帶身分證正本，影本不能代替。",
+        "generated_candidate": "辦理時必須帶身分證正本，影本不能代替。",
+        "meaning_summary": "辦理時必須帶身分證正本，影本不能代替。",
+        "audience": "formal",
+        "tone": "polite",
+        "scenario": "說明臨櫃辦理文件",
+        "warnings": [],
+        "needs_confirmation": false,
+        "safe_to_use": true,
+        "fallback_used": false,
+        "verification": {
+          "meaning_preserved": true,
+          "added_information": [],
+          "removed_information": [],
+          "changed_facts": [],
+          "missing_taiwanese_terms": [],
+          "missing_natural_phrases": [],
+          "missing_constraint_terms": [],
+          "completion_object_added": false,
+          "statement_changed_to_instruction": false
+        },
+        "model": "qwen2.5:1.5b",
+        "processing_seconds": 0.5814
+      },
+      "checks": {
+        "automatic_pass": true,
+        "failures": [],
+        "missing_required_terms": [],
+        "missing_required_groups": [],
+        "forbidden_terms_found": [],
+        "source_numbers": [],
+        "output_numbers": [],
+        "numbers_preserved": true,
+        "negation_preserved": true
+      }
+    },
+    {
+      "case": {
+        "id": "R41",
+        "category": "public_service_time",
+        "original_text": "服務台中午12點到1點暫停受理，下午1點後再來。",
+        "audience": "formal",
+        "tone": "polite",
+        "scenario": "告知民眾服務時間",
+        "required_all": [
+          "服務台",
+          "中午",
+          "12",
+          "1",
+          "暫停",
+          "受理",
+          "下午"
+        ],
+        "required_any_groups": [
+          [
+            "再來",
+            "再前來",
+            "之後辦理"
+          ]
+        ],
+        "forbidden_terms": [
+          "休息",
+          "明天",
+          "預約"
+        ]
+      },
+      "request": {
+        "original_text": "服務台中午12點到1點暫停受理，下午1點後再來。",
+        "audience": "formal",
+        "tone": "polite",
+        "scenario": "告知民眾服務時間"
+      },
+      "response": {
+        "original_text": "服務台中午12點到1點暫停受理，下午1點後再來。",
+        "rewritten_text": "服務台中午12點到1點暫停受理，下午1點後再來。",
+        "generated_candidate": "服務台中午12點到1點暫停受理，下午1點後再來。",
+        "meaning_summary": "服務台中午12點到1點暫停受理，下午1點後再來。",
+        "audience": "formal",
+        "tone": "polite",
+        "scenario": "告知民眾服務時間",
+        "warnings": [],
+        "needs_confirmation": false,
+        "safe_to_use": true,
+        "fallback_used": false,
+        "verification": {
+          "meaning_preserved": true,
+          "added_information": [],
+          "removed_information": [],
+          "changed_facts": [],
+          "missing_taiwanese_terms": [],
+          "missing_natural_phrases": [],
+          "missing_constraint_terms": [],
+          "completion_object_added": false,
+          "statement_changed_to_instruction": false
+        },
+        "model": "qwen2.5:1.5b",
+        "processing_seconds": 0.6938
+      },
+      "checks": {
+        "automatic_pass": true,
+        "failures": [],
+        "missing_required_terms": [],
+        "missing_required_groups": [],
+        "forbidden_terms_found": [],
+        "source_numbers": [
+          "12",
+          "1",
+          "1"
+        ],
+        "output_numbers": [
+          "12",
+          "1",
+          "1"
+        ],
+        "numbers_preserved": true,
+        "negation_preserved": true
+      }
+    },
+    {
+      "case": {
+        "id": "R42",
+        "category": "public_privacy",
+        "original_text": "表格可以拍照，但上面的身分證字號不能公開。",
+        "audience": "formal",
+        "tone": "clear",
+        "scenario": "提醒民眾保護個資",
+        "required_all": [
+          "表格",
+          "拍照",
+          "身分證字號",
+          "公開"
+        ],
+        "required_any_groups": [
+          [
+            "可以",
+            "能"
+          ],
+          [
+            "不能",
+            "不可",
+            "不得"
+          ]
+        ],
+        "forbidden_terms": [
+          "違法",
+          "遮住",
+          "上傳"
+        ]
+      },
+      "request": {
+        "original_text": "表格可以拍照，但上面的身分證字號不能公開。",
+        "audience": "formal",
+        "tone": "clear",
+        "scenario": "提醒民眾保護個資"
+      },
+      "response": {
+        "original_text": "表格可以拍照，但上面的身分證字號不能公開。",
+        "rewritten_text": "表格可以拍照，但上面的身分證字號不能公開。",
+        "generated_candidate": "表格可以拍照，但上面的身分證字號不能公開。",
+        "meaning_summary": "表格可以拍照，但上面的身分證字號不能公開。",
+        "audience": "formal",
+        "tone": "clear",
+        "scenario": "提醒民眾保護個資",
+        "warnings": [],
+        "needs_confirmation": false,
+        "safe_to_use": true,
+        "fallback_used": false,
+        "verification": {
+          "meaning_preserved": true,
+          "added_information": [],
+          "removed_information": [],
+          "changed_facts": [],
+          "missing_taiwanese_terms": [],
+          "missing_natural_phrases": [],
+          "missing_constraint_terms": [],
+          "completion_object_added": false,
+          "statement_changed_to_instruction": false
+        },
+        "model": "qwen2.5:1.5b",
+        "processing_seconds": 0.5867
+      },
+      "checks": {
+        "automatic_pass": true,
+        "failures": [],
+        "missing_required_terms": [],
+        "missing_required_groups": [],
+        "forbidden_terms_found": [],
+        "source_numbers": [],
+        "output_numbers": [],
+        "numbers_preserved": true,
+        "negation_preserved": true
+      }
+    },
+    {
+      "case": {
+        "id": "R43",
+        "category": "taigi_family",
+        "original_text": "阿母，我今仔日欲加班，暗頓毋免等我。",
+        "audience": "elder",
+        "tone": "warm",
+        "scenario": "用台語告知母親晚餐安排",
+        "required_all": [
+          "阿母"
+        ],
+        "required_any_groups": [
+          [
+            "今仔日",
+            "今天"
+          ],
+          [
+            "加班"
+          ],
+          [
+            "暗頓",
+            "晚餐"
+          ],
+          [
+            "毋免等",
+            "不用等",
+            "不必等"
+          ]
+        ],
+        "forbidden_terms": [
+          "明仔載",
+          "回家",
+          "留菜"
+        ]
+      },
+      "request": {
+        "original_text": "阿母，我今仔日欲加班，暗頓毋免等我。",
+        "audience": "elder",
+        "tone": "warm",
+        "scenario": "用台語告知母親晚餐安排"
+      },
+      "response": {
+        "original_text": "阿母，我今仔日欲加班，暗頓毋免等我。",
+        "rewritten_text": "想跟您說，阿母，我今仔日欲加班，暗頓毋免等我。",
+        "generated_candidate": "阿嬤，我今天加班，等我回家吃晚餐。",
+        "meaning_summary": "保留原句內容，僅調整稱謂或開頭語氣。",
+        "audience": "elder",
+        "tone": "warm",
+        "scenario": "用台語告知母親晚餐安排",
+        "warnings": [
+          "added_information_detected",
+          "negation_may_be_missing",
+          "safe_fallback_applied",
+          "taiwanese_term_changed_or_missing"
+        ],
+        "needs_confirmation": true,
+        "safe_to_use": true,
+        "fallback_used": true,
+        "verification": {
+          "meaning_preserved": true,
+          "added_information": [
+            "{'context': '用台語告知母親晚餐安排'}"
+          ],
+          "removed_information": [],
+          "changed_facts": [],
+          "missing_taiwanese_terms": [
+            "今仔日",
+            "毋免"
+          ],
+          "missing_natural_phrases": [],
+          "missing_constraint_terms": [],
+          "completion_object_added": false,
+          "statement_changed_to_instruction": false
+        },
+        "model": "qwen2.5:1.5b",
+        "processing_seconds": 0.7065
+      },
+      "checks": {
+        "automatic_pass": true,
+        "failures": [],
+        "missing_required_terms": [],
+        "missing_required_groups": [],
+        "forbidden_terms_found": [],
+        "source_numbers": [],
+        "output_numbers": [],
+        "numbers_preserved": true,
+        "negation_preserved": true
+      }
+    },
+    {
+      "case": {
+        "id": "R44",
+        "category": "taigi_medicine",
+        "original_text": "這帖藥愛食三工，毋通家己停藥。",
+        "audience": "elder",
+        "tone": "clear",
+        "scenario": "以台語提醒長輩用藥",
+        "required_all": [
+          "藥"
+        ],
+        "required_any_groups": [
+          [
+            "三工",
+            "三天",
+            "3天"
+          ],
+          [
+            "毋通",
+            "不要",
+            "不可",
+            "不能"
+          ],
+          [
+            "家己",
+            "自己"
+          ],
+          [
+            "停藥"
+          ]
+        ],
+        "forbidden_terms": [
+          "醫生說",
+          "飯後",
+          "病好了"
+        ]
+      },
+      "request": {
+        "original_text": "這帖藥愛食三工，毋通家己停藥。",
+        "audience": "elder",
+        "tone": "clear",
+        "scenario": "以台語提醒長輩用藥"
+      },
+      "response": {
+        "original_text": "這帖藥愛食三工，毋通家己停藥。",
+        "rewritten_text": "這帖藥愛食三工，毋通家己停藥。",
+        "generated_candidate": "這藥我愛吃，不要停藥。",
+        "meaning_summary": "保留原句內容，僅調整稱謂或開頭語氣。",
+        "audience": "elder",
+        "tone": "clear",
+        "scenario": "以台語提醒長輩用藥",
+        "warnings": [
+          "added_information_detected",
+          "safe_fallback_applied",
+          "taiwanese_term_changed_or_missing"
+        ],
+        "needs_confirmation": true,
+        "safe_to_use": true,
+        "fallback_used": true,
+        "verification": {
+          "meaning_preserved": true,
+          "added_information": [
+            "{'context': '台語提醒長輩用藥'}"
+          ],
+          "removed_information": [],
+          "changed_facts": [],
+          "missing_taiwanese_terms": [
+            "家己"
+          ],
+          "missing_natural_phrases": [],
+          "missing_constraint_terms": [],
+          "completion_object_added": false,
+          "statement_changed_to_instruction": false
+        },
+        "model": "qwen2.5:1.5b",
+        "processing_seconds": 0.5769
+      },
+      "checks": {
+        "automatic_pass": true,
+        "failures": [],
+        "missing_required_terms": [],
+        "missing_required_groups": [],
+        "forbidden_terms_found": [],
+        "source_numbers": [],
+        "output_numbers": [],
+        "numbers_preserved": true,
+        "negation_preserved": true
+      }
+    },
+    {
+      "case": {
+        "id": "R45",
+        "category": "taigi_schedule",
+        "original_text": "我拜五下晡兩點才會到，毋免提早來等。",
+        "audience": "friend",
+        "tone": "concise",
+        "scenario": "用台語告知朋友抵達時間",
+        "required_all": [
+          "到",
+          "等"
+        ],
+        "required_any_groups": [
+          [
+            "拜五",
+            "星期五",
+            "週五"
+          ],
+          [
+            "下晡",
+            "下午"
+          ],
+          [
+            "兩點",
+            "2點"
+          ],
+          [
+            "毋免",
+            "不用",
+            "不必"
+          ],
+          [
+            "提早",
+            "提前"
+          ]
+        ],
+        "forbidden_terms": [
+          "車站",
+          "遲到",
+          "打電話"
+        ]
+      },
+      "request": {
+        "original_text": "我拜五下晡兩點才會到，毋免提早來等。",
+        "audience": "friend",
+        "tone": "concise",
+        "scenario": "用台語告知朋友抵達時間"
+      },
+      "response": {
+        "original_text": "我拜五下晡兩點才會到，毋免提早來等。",
+        "rewritten_text": "我拜五下晡兩點才會到，毋免提早來等。",
+        "generated_candidate": "拜五下晡兩點到，要提早來等。",
+        "meaning_summary": "保留原句內容，僅調整稱謂或開頭語氣。",
+        "audience": "friend",
+        "tone": "concise",
+        "scenario": "用台語告知朋友抵達時間",
+        "warnings": [
+          "added_information_detected",
+          "negation_may_be_missing",
+          "safe_fallback_applied",
+          "taiwanese_term_changed_or_missing"
+        ],
+        "needs_confirmation": true,
+        "safe_to_use": true,
+        "fallback_used": true,
+        "verification": {
+          "meaning_preserved": true,
+          "added_information": [
+            "{'contextual_remark': '用台語告知朋友抵達時間'}"
+          ],
+          "removed_information": [],
+          "changed_facts": [],
+          "missing_taiwanese_terms": [
+            "毋免"
+          ],
+          "missing_natural_phrases": [],
+          "missing_constraint_terms": [],
+          "completion_object_added": false,
+          "statement_changed_to_instruction": false
+        },
+        "model": "qwen2.5:1.5b",
+        "processing_seconds": 0.6597
+      },
+      "checks": {
+        "automatic_pass": true,
+        "failures": [],
+        "missing_required_terms": [],
+        "missing_required_groups": [],
+        "forbidden_terms_found": [],
+        "source_numbers": [],
+        "output_numbers": [],
+        "numbers_preserved": true,
+        "negation_preserved": true
+      }
+    },
+    {
+      "case": {
+        "id": "R46",
+        "category": "taigi_negation",
+        "original_text": "彼个所在袂使停車，請停去對面的停車場。",
+        "audience": "formal",
+        "tone": "polite",
+        "scenario": "用台語說明停車限制",
+        "required_all": [
+          "停車",
+          "對面",
+          "停車場"
+        ],
+        "required_any_groups": [
+          [
+            "彼个所在",
+            "那個地方",
+            "那裡"
+          ],
+          [
+            "袂使",
+            "不能",
+            "不可"
+          ]
+        ],
+        "forbidden_terms": [
+          "收費",
+          "違規",
+          "入口"
+        ]
+      },
+      "request": {
+        "original_text": "彼个所在袂使停車，請停去對面的停車場。",
+        "audience": "formal",
+        "tone": "polite",
+        "scenario": "用台語說明停車限制"
+      },
+      "response": {
+        "original_text": "彼个所在袂使停車，請停去對面的停車場。",
+        "rewritten_text": "您好，彼个所在袂使停車，請停去對面的停車場。",
+        "generated_candidate": "請您在那邊停車，對面有停車場。",
+        "meaning_summary": "保留原句內容，僅調整稱謂或開頭語氣。",
+        "audience": "formal",
+        "tone": "polite",
+        "scenario": "用台語說明停車限制",
+        "warnings": [
+          "added_information_detected",
+          "safe_fallback_applied"
+        ],
+        "needs_confirmation": true,
+        "safe_to_use": true,
+        "fallback_used": true,
+        "verification": {
+          "meaning_preserved": true,
+          "added_information": [
+            "{'context': '用台語說明停車限制'}"
+          ],
+          "removed_information": [],
+          "changed_facts": [],
+          "missing_taiwanese_terms": [],
+          "missing_natural_phrases": [],
+          "missing_constraint_terms": [],
+          "completion_object_added": false,
+          "statement_changed_to_instruction": false
+        },
+        "model": "qwen2.5:1.5b",
+        "processing_seconds": 0.7023
+      },
+      "checks": {
+        "automatic_pass": true,
+        "failures": [],
+        "missing_required_terms": [],
+        "missing_required_groups": [],
+        "forbidden_terms_found": [],
+        "source_numbers": [],
+        "output_numbers": [],
+        "numbers_preserved": true,
+        "negation_preserved": true
+      }
+    },
+    {
+      "case": {
+        "id": "R47",
+        "category": "mixed_language_work",
+        "original_text": "明天的meeting取消，下午3點不用上線。",
+        "audience": "formal",
+        "tone": "polite",
+        "scenario": "中英混合工作通知",
+        "required_all": [
+          "明天",
+          "下午",
+          "3",
+          "上線"
+        ],
+        "required_any_groups": [
+          [
+            "meeting",
+            "會議"
+          ],
+          [
+            "取消"
+          ],
+          [
+            "不用",
+            "不必",
+            "無須"
+          ]
+        ],
+        "forbidden_terms": [
+          "改期",
+          "主管",
+          "連結"
+        ]
+      },
+      "request": {
+        "original_text": "明天的meeting取消，下午3點不用上線。",
+        "audience": "formal",
+        "tone": "polite",
+        "scenario": "中英混合工作通知"
+      },
+      "response": {
+        "original_text": "明天的meeting取消，下午3點不用上線。",
+        "rewritten_text": "明天的會議取消了，下午3點不用上線了。",
+        "generated_candidate": "明天的會議取消了，下午3點不用上線了。",
+        "meaning_summary": "明天的會議取消了，下午3點不用上線了。",
+        "audience": "formal",
+        "tone": "polite",
+        "scenario": "中英混合工作通知",
+        "warnings": [],
+        "needs_confirmation": false,
+        "safe_to_use": true,
+        "fallback_used": false,
+        "verification": {
+          "meaning_preserved": true,
+          "added_information": [],
+          "removed_information": [],
+          "changed_facts": [],
+          "missing_taiwanese_terms": [],
+          "missing_natural_phrases": [],
+          "missing_constraint_terms": [],
+          "completion_object_added": false,
+          "statement_changed_to_instruction": false
+        },
+        "model": "qwen2.5:1.5b",
+        "processing_seconds": 0.5541
+      },
+      "checks": {
+        "automatic_pass": true,
+        "failures": [],
+        "missing_required_terms": [],
+        "missing_required_groups": [],
+        "forbidden_terms_found": [],
+        "source_numbers": [
+          "3"
+        ],
+        "output_numbers": [
+          "3"
+        ],
+        "numbers_preserved": true,
+        "negation_preserved": true
+      }
+    },
+    {
+      "case": {
+        "id": "R48",
+        "category": "mixed_language_privacy",
+        "original_text": "這份file只能看，請不要forward給其他人。",
+        "audience": "formal",
+        "tone": "clear",
+        "scenario": "中英混合資料使用提醒",
+        "required_all": [
+          "其他人"
+        ],
+        "required_any_groups": [
+          [
+            "file",
+            "檔案",
+            "文件"
+          ],
+          [
+            "只能看",
+            "僅供查看",
+            "只能查看"
+          ],
+          [
+            "不要",
+            "請勿",
+            "不可"
+          ],
+          [
+            "forward",
+            "轉寄",
+            "轉傳"
+          ]
+        ],
+        "forbidden_terms": [
+          "機密",
+          "刪除",
+          "公司規定"
+        ]
+      },
+      "request": {
+        "original_text": "這份file只能看，請不要forward給其他人。",
+        "audience": "formal",
+        "tone": "clear",
+        "scenario": "中英混合資料使用提醒"
+      },
+      "response": {
+        "original_text": "這份file只能看，請不要forward給其他人。",
+        "rewritten_text": "這份檔案只能查看，請不要轉寄給其他人。",
+        "generated_candidate": "這份檔案只能查看，請不要轉寄給其他人。",
+        "meaning_summary": "這份檔案只能查看，請不要轉寄給其他人。",
+        "audience": "formal",
+        "tone": "clear",
+        "scenario": "中英混合資料使用提醒",
+        "warnings": [],
+        "needs_confirmation": false,
+        "safe_to_use": true,
+        "fallback_used": false,
+        "verification": {
+          "meaning_preserved": true,
+          "added_information": [],
+          "removed_information": [],
+          "changed_facts": [],
+          "missing_taiwanese_terms": [],
+          "missing_natural_phrases": [],
+          "missing_constraint_terms": [],
+          "completion_object_added": false,
+          "statement_changed_to_instruction": false
+        },
+        "model": "qwen2.5:1.5b",
+        "processing_seconds": 0.6111
+      },
+      "checks": {
+        "automatic_pass": true,
+        "failures": [],
+        "missing_required_terms": [],
+        "missing_required_groups": [],
+        "forbidden_terms_found": [],
+        "source_numbers": [],
+        "output_numbers": [],
+        "numbers_preserved": true,
+        "negation_preserved": true
+      }
+    }
+  ]
+}
