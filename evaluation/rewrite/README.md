@@ -1,19 +1,18 @@
-# 語你傳心 v0.1 正式評測
+# 語你傳心安全改寫評測
 
-本套件只評估已鎖定的 v0.1，不修改 Prompt、模型或安全規則。12 個案例涵蓋家庭、長輩、朋友、職場與公告情境，以及數字、時間、否定、因果、不確定性、取消、金額限制和臺灣台語混合句。案例使用 API 支援的對象代碼：`elder`、`family`、`friend`、`formal`。
+12個案例涵蓋家庭、長輩、朋友、職場與公告情境，以及數字、時間、否定、因果、不確定性、取消、金額限制和台語混合句。案例使用API支援的對象代碼：`elder`、`family`、`friend`、`formal`。
 
 ## 執行前
 
 1. Ollama 已啟動，且 `qwen2.5:1.5b` 可用。
 2. 後端 API 已在 `http://127.0.0.1:8000` 執行。
-3. 將本套件內的 `evaluation` 與 `tools` 目錄合併至專案根目錄。
 
 ## 執行
 
 在 `C:\taiwan-context-ai` 執行：
 
 ```bat
-python tools\evaluate_rewrite.py
+python tools\evaluate_rewrite.py --output-dir evaluation\rewrite\results\v0.3_qwen1.5b_gpu
 ```
 
 每個案例通常會呼叫本機模型進行改寫與語意驗證，請等待全部 12 案例完成。
@@ -21,9 +20,9 @@ python tools\evaluate_rewrite.py
 輸出位於：
 
 ```text
-evaluation\rewrite\results\v0.1\summary.json
-evaluation\rewrite\results\v0.1\rewrite_evaluation_results.json
-evaluation\rewrite\results\v0.1\human_review_template.csv
+evaluation\rewrite\results\v0.3_qwen1.5b_gpu\summary.json
+evaluation\rewrite\results\v0.3_qwen1.5b_gpu\rewrite_evaluation_results.json
+evaluation\rewrite\results\v0.3_qwen1.5b_gpu\human_review_template.csv
 ```
 
 ## 指標解讀
@@ -40,4 +39,4 @@ evaluation\rewrite\results\v0.1\human_review_template.csv
 - `audience_fit_score_1_5`：是否符合指定對象與情境。
 - `naturalness_score_1_5`：是否自然、像真人訊息。
 
-建議先完成評測與人工審查，再決定是否提交結果或調整 v0.2。
+不同模型版本必須輸出至不同結果目錄。完成自動評測後仍須進行人工審查，不得把Qwen2.5 3B的人工評分直接套用至1.5B輸出。
