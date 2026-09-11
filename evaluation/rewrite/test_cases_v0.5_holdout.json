@@ -1,0 +1,143 @@
+{
+  "suite": "expression_rewrite_v0.5_holdout_frozen",
+  "description": "語你傳心 v0.5 凍結獨立測試集：12筆未參與規則調整的跨情境語意安全評測",
+  "frozen_protocol": {
+    "created_before_evaluation": true,
+    "no_post_result_rule_edits": true,
+    "purpose": "independent_generalization_check"
+  },
+  "cases": [
+    {
+      "id": "H01",
+      "category": "family_pickup_boundary",
+      "original_text": "阿嬤，我週四下午4點只能送你到診所，回程要請其他家人接你。",
+      "audience": "elder",
+      "tone": "warm",
+      "scenario": "向長輩說明接送安排",
+      "required_all": ["阿嬤", "週四", "下午", "4", "診所", "回程", "其他家人", "接"],
+      "required_any_groups": [["只能", "僅能"]],
+      "forbidden_terms": ["我會等你", "我會接你回家", "計程車"]
+    },
+    {
+      "id": "H02",
+      "category": "family_food_restriction",
+      "original_text": "冰箱裡的蛋糕是明天要帶去學校的，今晚先不要吃。",
+      "audience": "family",
+      "tone": "clear",
+      "scenario": "提醒家人保留食物",
+      "required_all": ["冰箱", "蛋糕", "明天", "學校", "今晚", "吃"],
+      "required_any_groups": [["不要", "先別", "不能"]],
+      "forbidden_terms": ["生日", "同學", "再買"]
+    },
+    {
+      "id": "H03",
+      "category": "friend_uncertain_arrival",
+      "original_text": "火車可能會誤點，我不確定能不能在6點前到。",
+      "audience": "friend",
+      "tone": "concise",
+      "scenario": "向朋友說明抵達時間不確定",
+      "required_all": ["火車", "可能", "誤點", "6", "到"],
+      "required_any_groups": [["不確定", "尚未確定", "無法確定"], ["能不能", "是否能", "是否可以"]],
+      "forbidden_terms": ["一定", "改搭", "請等我"]
+    },
+    {
+      "id": "H04",
+      "category": "friend_payment_split",
+      "original_text": "住宿費總共4800元，我只先付一半，剩下的下週再處理。",
+      "audience": "friend",
+      "tone": "polite",
+      "scenario": "與朋友說明費用安排",
+      "required_all": ["住宿費", "4800", "一半", "剩下", "下週", "處理"],
+      "required_any_groups": [["只先付", "僅先付", "先支付"]],
+      "forbidden_terms": ["2400", "轉帳", "還給你"]
+    },
+    {
+      "id": "H05",
+      "category": "work_version_control",
+      "original_text": "請使用9月10日寄出的版本，昨天那份不要再修改。",
+      "audience": "formal",
+      "tone": "polite",
+      "scenario": "通知同事使用正確文件版本",
+      "required_all": ["9", "10", "版本", "昨天", "修改"],
+      "required_any_groups": [["使用", "採用"], ["不要", "請勿", "不可"]],
+      "forbidden_terms": ["刪除", "附件", "主管"]
+    },
+    {
+      "id": "H06",
+      "category": "work_scope_limit",
+      "original_text": "這次只需要完成首頁，不包含登入與管理功能。",
+      "audience": "formal",
+      "tone": "clear",
+      "scenario": "說明本次開發範圍",
+      "required_all": ["這次", "完成", "首頁", "登入", "管理", "功能"],
+      "required_any_groups": [["只需要", "僅需", "只要"], ["不包含", "不含", "未包含"]],
+      "forbidden_terms": ["下次", "之後", "資料庫"]
+    },
+    {
+      "id": "H07",
+      "category": "medical_instruction_limit",
+      "original_text": "今晚量完血壓先記錄數字，不要自行增加藥量。",
+      "audience": "elder",
+      "tone": "clear",
+      "scenario": "提醒長輩記錄血壓與避免自行調藥",
+      "required_all": ["今晚", "血壓", "記錄", "數字", "自行", "增加", "藥量"],
+      "required_any_groups": [["不要", "不可", "不能"]],
+      "forbidden_terms": ["醫生說", "明天", "回診"]
+    },
+    {
+      "id": "H08",
+      "category": "public_registration_limit",
+      "original_text": "每個帳號最多報名2人，送出後不能更換姓名。",
+      "audience": "formal",
+      "tone": "polite",
+      "scenario": "活動報名規則公告",
+      "required_all": ["帳號", "報名", "2", "送出", "更換", "姓名"],
+      "required_any_groups": [["最多", "不超過"], ["不能", "不可", "無法"]],
+      "forbidden_terms": ["退費", "身分證", "截止"]
+    },
+    {
+      "id": "H09",
+      "category": "public_service_exception",
+      "original_text": "今天只有一號窗口受理，其他窗口沒有開放。",
+      "audience": "formal",
+      "tone": "clear",
+      "scenario": "向民眾說明臨櫃服務狀態",
+      "required_all": ["今天", "一號", "窗口", "受理", "其他", "開放"],
+      "required_any_groups": [["只有", "僅有"], ["沒有", "未", "不"]],
+      "forbidden_terms": ["人手不足", "下午", "排隊"]
+    },
+    {
+      "id": "H10",
+      "category": "taigi_family_schedule",
+      "original_text": "阿爸，我拜六早起欲出門，暗時才會轉來。",
+      "audience": "elder",
+      "tone": "warm",
+      "scenario": "以台語向父親說明週末行程",
+      "required_all": ["阿爸", "出門"],
+      "required_any_groups": [["拜六", "星期六", "週六"], ["早起", "早上", "一早"], ["暗時", "晚上"], ["才會轉來", "才會回來", "才回來"]],
+      "forbidden_terms": ["工作", "吃飯", "不用等"]
+    },
+    {
+      "id": "H11",
+      "category": "taigi_purchase_negation",
+      "original_text": "彼項物件傷貴，我這馬無欲買。",
+      "audience": "friend",
+      "tone": "concise",
+      "scenario": "以台語向朋友表達暫不購買",
+      "required_all": [],
+      "required_any_groups": [["彼項物件", "那個東西", "那項物品"], ["傷貴", "太貴"], ["這馬", "現在"], ["無欲買", "不想買", "不買"]],
+      "forbidden_terms": ["沒錢", "下次", "便宜"]
+    },
+    {
+      "id": "H12",
+      "category": "mixed_language_deadline",
+      "original_text": "這份report要在Friday下午5點前完成，但不用先寄給客戶。",
+      "audience": "formal",
+      "tone": "polite",
+      "scenario": "中英混合工作期限通知",
+      "required_all": ["下午", "5", "完成", "客戶"],
+      "required_any_groups": [["report", "報告"], ["Friday", "星期五", "週五"], ["不用", "不必", "無須"], ["寄給", "寄送"]],
+      "forbidden_terms": ["主管", "審核", "下週"]
+    }
+  ]
+}

@@ -260,7 +260,8 @@ def main() -> int:
     )
     write_human_review(output_dir / "human_review_template.csv", results)
 
-    print("\n=== 語你傳心 v0.1 評測完成 ===")
+    suite_name = suite.get("suite") or Path(args.cases).stem
+    print(f"\n=== {suite_name} 評測完成 ===")
     for key, value in summary.items():
         print(f"{key}: {value}")
     print(f"結果目錄: {output_dir.resolve()}")
