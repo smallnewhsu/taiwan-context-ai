@@ -1,0 +1,13 @@
+﻿id,category,original_text,rewritten_text,audience,tone,fallback_used,automatic_pass,fidelity_score_1_5,audience_fit_score_1_5,naturalness_score_1_5,reviewer_notes
+H01,family_pickup_boundary,阿嬤，我週四下午4點只能送你到診所，回程要請其他家人接你。,想跟您說，阿嬤，我週四下午4點只能送你到診所，回程要請其他家人接你。,elder,warm,True,True,,,,
+H02,family_food_restriction,冰箱裡的蛋糕是明天要帶去學校的，今晚先不要吃。,冰箱裡的蛋糕是明天要帶去學校的，今晚先不要吃。,family,clear,True,True,,,,
+H03,friend_uncertain_arrival,火車可能會誤點，我不確定能不能在6點前到。,火車可能會晚點，我也不確定能不能在6點前到站。,friend,concise,False,False,,,,
+H04,friend_payment_split,住宿費總共4800元，我只先付一半，剩下的下週再處理。,住宿費總共4800元，我只先付一半，剩下的下週再處理。,friend,polite,False,True,,,,
+H05,work_version_control,請使用9月10日寄出的版本，昨天那份不要再修改。,您好，請使用9月10日寄出的版本，昨天那份不要再修改。,formal,polite,True,True,,,,
+H06,work_scope_limit,這次只需要完成首頁，不包含登入與管理功能。,這次只需要完成首頁，不包含登入與管理功能。,formal,clear,False,True,,,,
+H07,medical_instruction_limit,今晚量完血壓先記錄數字，不要自行增加藥量。,今晚量完血壓先記錄數字，不要自行增加藥量。,elder,clear,False,True,,,,
+H08,public_registration_limit,每個帳號最多報名2人，送出後不能更換姓名。,您好，每個帳號最多報名2人，送出後不能更換姓名。,formal,polite,True,True,,,,
+H09,public_service_exception,今天只有一號窗口受理，其他窗口沒有開放。,您好，今天只有一號窗口受理，其他窗口沒有開放。,formal,clear,True,True,,,,
+H10,taigi_family_schedule,阿爸，我拜六早起欲出門，暗時才會轉來。,想跟您說，阿爸，我拜六早起欲出門，暗時才會轉來。,elder,warm,True,True,,,,
+H11,taigi_purchase_negation,彼項物件傷貴，我這馬無欲買。,彼項物件傷貴，我這馬無欲買。,friend,concise,True,True,,,,
+H12,mixed_language_deadline,這份report要在Friday下午5點前完成，但不用先寄給客戶。,這份報告要在週五下午五點前完成，但不用先寄給客戶。,formal,polite,False,True,,,,
