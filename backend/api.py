@@ -277,8 +277,8 @@ def admin_overview(_=Depends(current_admin)):
         "evaluation/asr_baseline/prompt_results_gpu_10.json",
     )
     rewrite = _read_summary(
-        "evaluation/rewrite/results/v0.2.3_gpu/summary.json",
-        "evaluation/rewrite/results/v0.1_gpu/summary.json",
+        "evaluation/rewrite/results/v0.6.3_holdout_gemma3_4b_gpu/summary.json",
+        "evaluation/rewrite/results/v0.6.2_expanded_gemma3_4b_gpu/summary.json",
     )
     vision = _read_summary(
         "evaluation/vision/results/v0.1.1_gpu/summary.json",

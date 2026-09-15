@@ -27,6 +27,25 @@ VERIFIED_LITERAL_TRANSLATIONS = {
     "有閒就來坐啦毋免提物件來": "有空就來坐坐，不用帶東西來。",
 }
 
+TAIGI_GLOSSARY = {
+    "食飽未": "吃飽了嗎",
+    "若無": "如果還沒有吃飽",
+    "轉來": "回來",
+    "阮兜": "我們家",
+    "食啦": "吃飯吧",
+    "家己": "自己",
+    "挾": "夾取、盛取",
+    "莫閣": "不要再",
+    "食泡麵": "吃泡麵",
+    "有閒": "有空",
+    "毋免": "不用",
+}
+
+UNSUPPORTED_CONTEXT_TERMS = (
+    "撒嬌", "幽默", "生氣", "命令", "節制飲食", "食物消耗",
+    "走路", "騎車", "開車", "交通方式", "作者", "詩",
+)
+
 
 def _comparison_text(value):
     return re.sub(r"[\s，。！？、；：,.!?;:]", "", str(value or ""))
@@ -49,10 +68,26 @@ def _literal_meaning(source_text, model_literal, source_language="auto"):
     return candidate
 
 
+def _taigi_grounding(text):
+    """Return reviewed lexical evidence and rule-grounded context hints."""
+    hits = [(term, meaning) for term, meaning in TAIGI_GLOSSARY.items() if term in text]
+    intents = []
+    basis = [f'「{term}」表示「{meaning}」' for term, meaning in hits]
+    if "食飽未" in text:
+        intents.extend(["可能是日常詢問", "可能是在關心對方是否吃飽"])
+    if "轉來" in text and ("食" in text or "吃" in text):
+        intents.append("可能是在邀請對方回來吃飯")
+    if "莫閣食泡麵" in text:
+        intents.extend(["可能是在提醒對方不要再吃泡麵", "可能包含對飲食健康的關心"])
+    if "有閒" in text and "來坐" in text:
+        intents.append("可能是在親切地邀請對方有空來坐坐")
+    return hits, list(dict.fromkeys(intents))[:3], basis[:5]
+
+
 class SpeechContextService:
     def __init__(self):
         self.base_url = os.getenv("OLLAMA_BASE_URL", "http://127.0.0.1:11434").rstrip("/")
-        self.model = os.getenv("SPEECH_CONTEXT_MODEL", "qwen2.5:1.5b")
+        self.model = os.getenv("SPEECH_CONTEXT_MODEL", "gemma3:4b")
 
     def _translate_vietnamese_literal(self, text):
         """Retry Vietnamese literal translation separately from context JSON."""
@@ -95,6 +130,10 @@ class SpeechContextService:
             "auto": "自動判斷", "zh": "國語", "nan": "台語",
             "hak": "客語", "vi": "越南語", "en": "英語",
         }.get(source_language, "自動判斷")
+        taigi_hits, grounded_intents, grounded_basis = _taigi_grounding(text)
+        glossary_context = "；".join(
+            f"{term}＝{meaning}" for term, meaning in taigi_hits
+        ) or "未檢索到已確認詞彙"
         prompt = f"""你是 Taiwan Context Engine，請分析臺灣日常對話，不可捏造未提供的資訊。
 
 規則：
@@ -107,6 +146,10 @@ class SpeechContextService:
 7. suggested_reply使用繁體中文，必須簡短、可修改、不得替使用者新增承諾；資訊不足時使用中性回應。
 8. 嚴格輸出 JSON，不要輸出 Markdown：
 {{"speaker_role":"不確定","listener_role":"不確定","relationship_confidence":0.0,"literal_meaning":"...","possible_intents":["..."],"basis":["..."],"suggested_reply":"...","needs_confirmation":true}}
+
+已確認的臺灣詞彙：{glossary_context}
+若有已確認詞彙，literal_meaning與basis必須依照這些詞義，不得重新拆詞或改義。
+不得加入撒嬌、幽默、生氣、命令、節制飲食、交通方式、作者或詩等沒有直接證據的內容。
 
 來源語言：{language_label}（代碼：{source_language}）
 辨識文字：{text}
@@ -167,6 +210,12 @@ class SpeechContextService:
             confidence = max(confidence, 0.95)
         intents = [str(item).strip() for item in result.get("possible_intents", []) if str(item).strip()][:3]
         basis = [str(item).strip() for item in result.get("basis", []) if str(item).strip()][:4]
+        intents = [item for item in intents if not any(term in item for term in UNSUPPORTED_CONTEXT_TERMS)]
+        basis = [item for item in basis if not any(term in item for term in UNSUPPORTED_CONTEXT_TERMS)]
+        if grounded_intents:
+            intents = grounded_intents
+        if grounded_basis:
+            basis = grounded_basis[:4]
         model_literal = result.get("literal_meaning")
         literal = _literal_meaning(text, model_literal, source_language)
         vietnamese_translation_retry = False

@@ -1,0 +1,33 @@
+{
+  "total_cases": 36,
+  "completed_cases": 36,
+  "api_error_count": 0,
+  "automatic_pass_count": 36,
+  "automatic_pass_rate": 1.0,
+  "llm_candidate_accepted_count": 10,
+  "llm_candidate_accepted_rate": 0.2777777777777778,
+  "safe_fallback_count": 26,
+  "safe_fallback_rate": 0.7222222222222222,
+  "needs_confirmation_count": 26,
+  "warning_counts": {
+    "constraint_modality_changed_or_missing": 6,
+    "critical_source_term_changed_or_missing": 12,
+    "negation_may_be_missing": 3,
+    "safe_fallback_applied": 26,
+    "added_information_detected": 13,
+    "semantic_fidelity_check_failed": 4,
+    "removed_information_detected": 1,
+    "taiwanese_term_changed_or_missing": 3,
+    "unnatural_formal_phrase_detected": 1
+  },
+  "automatic_failure_counts": {},
+  "mean_processing_seconds": 1.859636111111111,
+  "median_processing_seconds": 1.6641,
+  "p95_processing_seconds": 1.9342,
+  "warmup_processing_seconds": 8.5459,
+  "steady_state_sample_count": 35,
+  "steady_state_mean_processing_seconds": 1.6685999999999999,
+  "steady_state_median_processing_seconds": 1.662,
+  "steady_state_p95_processing_seconds": 1.847,
+  "suite_wall_seconds": 74.71710120000353
+}

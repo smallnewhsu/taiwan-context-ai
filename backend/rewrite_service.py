@@ -7,7 +7,7 @@ import urllib.request
 
 
 OLLAMA_URL = os.getenv("TAIWAN_CONTEXT_LLM_URL", "http://127.0.0.1:11434").rstrip("/")
-OLLAMA_MODEL = os.getenv("TAIWAN_CONTEXT_LLM_MODEL", "qwen2.5:1.5b")
+OLLAMA_MODEL = os.getenv("TAIWAN_CONTEXT_LLM_MODEL", "gemma3:4b")
 
 AUDIENCE_LABELS = {
     "elder": "長輩",
@@ -56,6 +56,11 @@ CONSTRAINT_EQUIVALENTS = {
     "必須": ("必須", "務必", "應於", "一定要"),
     "不受理": ("不受理", "無法受理", "不予受理"),
 }
+CRITICAL_SOURCE_PHRASES = (
+    "只完成", "只能", "可以", "需要", "接手", "期限", "買票",
+    "錯過後", "服務台", "再來", "明天", "不用",
+)
+UNNATURAL_FORMAL_PHRASES = ("請毋庸",)
 
 
 class RewriteService:
@@ -101,6 +106,10 @@ class RewriteService:
             }
 
     def _chat_json(self, system_prompt, user_prompt, temperature=0.0):
+        messages = [
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": user_prompt},
+        ]
         try:
             response = self._post_json(
                 "/api/chat",
@@ -109,20 +118,65 @@ class RewriteService:
                     "stream": False,
                     "format": "json",
                     "options": {"temperature": temperature, "top_p": 0.9},
-                    "messages": [
-                        {"role": "system", "content": system_prompt},
-                        {"role": "user", "content": user_prompt},
-                    ],
+                    "messages": messages,
                 },
                 self.timeout,
             )
         except urllib.error.URLError as exc:
             raise RuntimeError(f"無法連線本機Ollama: {exc}") from exc
         content = response.get("message", {}).get("content", "")
+        parsed = self._parse_json_object(content)
+        if parsed is not None:
+            return parsed
+
+        # Gemma occasionally wraps JSON in prose or emits malformed JSON. Ask
+        # once for a corrected object before failing the request.
+        retry_messages = messages + [
+            {"role": "assistant", "content": content},
+            {
+                "role": "user",
+                "content": "上一個輸出不是有效JSON。請只重新輸出符合指定欄位的單一JSON物件，不要Markdown或說明。",
+            },
+        ]
         try:
-            return json.loads(content)
-        except json.JSONDecodeError as exc:
-            raise RuntimeError("本機模型未回傳有效JSON") from exc
+            retry = self._post_json(
+                "/api/chat",
+                {
+                    "model": OLLAMA_MODEL,
+                    "stream": False,
+                    "format": "json",
+                    "options": {"temperature": 0.0, "top_p": 0.9},
+                    "messages": retry_messages,
+                },
+                self.timeout,
+            )
+        except urllib.error.URLError as exc:
+            raise RuntimeError(f"無法連線本機Ollama: {exc}") from exc
+        parsed = self._parse_json_object(retry.get("message", {}).get("content", ""))
+        if parsed is None:
+            raise RuntimeError("本機模型未回傳有效JSON")
+        return parsed
+
+    @staticmethod
+    def _parse_json_object(content):
+        text = str(content or "").strip()
+        text = re.sub(r"^```(?:json)?\s*|\s*```$", "", text, flags=re.IGNORECASE).strip()
+        try:
+            value = json.loads(text)
+            return value if isinstance(value, dict) else None
+        except json.JSONDecodeError:
+            pass
+        decoder = json.JSONDecoder()
+        for index, character in enumerate(text):
+            if character != "{":
+                continue
+            try:
+                value, _ = decoder.raw_decode(text[index:])
+            except json.JSONDecodeError:
+                continue
+            if isinstance(value, dict):
+                return value
+        return None
 
     @staticmethod
     def _system_prompt():
@@ -136,6 +190,10 @@ class RewriteService:
 6. 情境補充只用來判斷稱謂與語氣，不得拿來補上原句省略的受詞、原因或行動。
 7. 優先保留臺灣自然口語，不要把「傳給」等自然詞換成生硬或不適用的近義詞。
 8. 不得把已發生或已決定的事實陳述改成要求收件者執行的指令。
+9. 不得解釋任務、評論原句或輸出JSON以外的文字。
+10. 若無法在不改變原意的情況下改寫，rewritten_text必須原樣保留原句。
+11. 「只、只能、可以、需要、必須、不用、錯過後、之後、再來」會改變限制、能力、義務、否定或時間條件，必須保留原詞或完全等義的表達。
+12. 優先保留原句中的日期詞、地點、服務單位及必要動作，例如「明天、期限、服務台、買票、接手」。
 錯誤示例：原句「今天忙，不能回家吃飯」不可加入「我會想辦法解決」「下次補償你」「你放心」。
 正確示例：「阿嬤，我今天工作比較忙，沒辦法回家吃飯。」
 只輸出JSON，欄位必須是 rewritten_text、meaning_summary、tone、warnings。"""
@@ -272,6 +330,19 @@ class RewriteService:
         if missing_constraint_terms:
             warnings.append("constraint_modality_changed_or_missing")
 
+        missing_critical_phrases = [
+            phrase for phrase in CRITICAL_SOURCE_PHRASES
+            if phrase in original_text and phrase not in rewritten
+        ]
+        if missing_critical_phrases:
+            warnings.append("critical_source_term_changed_or_missing")
+
+        unnatural_phrases = [
+            phrase for phrase in UNNATURAL_FORMAL_PHRASES if phrase in rewritten
+        ]
+        if unnatural_phrases:
+            warnings.append("unnatural_formal_phrase_detected")
+
         verification = self._chat_json(
             self._verification_prompt(),
             f"原句：{original_text}\n情境補充：{scenario or '未提供'}\n改寫句：{rewritten}",
@@ -338,6 +409,8 @@ class RewriteService:
                 "missing_taiwanese_terms": missing_taiwanese_terms,
                 "missing_natural_phrases": missing_natural_phrases,
                 "missing_constraint_terms": missing_constraint_terms,
+                "missing_critical_phrases": missing_critical_phrases,
+                "unnatural_phrases": unnatural_phrases,
                 "completion_object_added": completion_object_added,
                 "statement_changed_to_instruction": statement_changed_to_instruction,
             },

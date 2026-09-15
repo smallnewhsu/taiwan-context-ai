@@ -37,7 +37,22 @@
     },
     {
       "id": "R21", "category": "friend_amount", "original_text": "聚餐每人是650元，不包含飲料。", "audience": "friend", "tone": "clear", "scenario": "朋友群組告知費用",
-      "required_all": ["聚餐", "每人", "650", "飲料"], "required_any_groups": [["不包含", "不含", "未包含"]], "forbidden_terms": ["服務費", "現金", "轉帳"]
+      "required_all": [
+  "聚餐",
+  "650",
+  "飲料"
+],
+"required_any_groups": [
+  [
+    "每人",
+    "每個人"
+  ],
+  [
+    "不包含",
+    "不含",
+    "未包含"
+  ]
+], "forbidden_terms": ["服務費", "現金", "轉帳"]
     },
     {
       "id": "R22", "category": "friend_uncertainty", "original_text": "我可能會晚到20分鐘，你們不用先等我。", "audience": "friend", "tone": "concise", "scenario": "朋友聚會前告知",

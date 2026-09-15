@@ -5,12 +5,18 @@ from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
 
+ALLOWED_UNCERTAINTY_TERMS = (
+    "人物", "關係", "語氣", "場合", "情境", "前後文", "對話",
+    "OCR", "文字", "辨識", "真實意圖", "是否", "無法確定",
+)
+
+
 class MultimodalService:
     """Answers spoken questions using only the retained image-analysis context."""
 
     def __init__(self):
         self.base_url = os.getenv("OLLAMA_BASE_URL", "http://127.0.0.1:11434").rstrip("/")
-        self.model = os.getenv("MULTIMODAL_QA_MODEL", "qwen2.5:1.5b")
+        self.model = os.getenv("MULTIMODAL_QA_MODEL", "gemma3:4b")
 
     def answer(self, question: str, image_context: dict, relationship: str = "未提供") -> dict:
         started = time.perf_counter()
@@ -25,6 +31,7 @@ class MultimodalService:
 6. 若問題是在問「怎麼回覆」，可提供一句簡短、可修改的建議回應；否則不要強行加入建議回應。
 7. basis 只列出支持本次回答的具體線索；uncertainties 列出仍無法確認的事項。
 8. 嚴格輸出 JSON：{{"answer":"2至4句的直接回答","basis":["具體線索"],"uncertainties":["無法確認事項"]}}
+9. uncertainties 只能列人物關係、語氣、場合、前後文、OCR正確性或真實意圖；不得列出交通方式等與問題無關的事項。
 
 正確示例：
 問題：「她是在生氣嗎？」
@@ -47,4 +54,8 @@ class MultimodalService:
         if not answer:
             raise RuntimeError("語境問答模型未回傳答案")
         uncertainties = [str(x).strip() for x in result.get("uncertainties", []) if str(x).strip()]
+        uncertainties = [
+            item for item in uncertainties
+            if any(term in item for term in ALLOWED_UNCERTAINTY_TERMS)
+        ][:4]
         return {"answer": answer, "basis": [str(x).strip() for x in result.get("basis", []) if str(x).strip()], "uncertainties": uncertainties, "needs_confirmation": bool(uncertainties), "model": self.model, "processing_seconds": round(time.perf_counter()-started, 4)}

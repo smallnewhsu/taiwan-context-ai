@@ -3,10 +3,10 @@ setlocal
 cd /d "%~dp0"
 
 set "OLLAMA_CONTEXT_LENGTH=8192"
-set "TAIWAN_CONTEXT_LLM_MODEL=qwen2.5:1.5b"
-set "SPEECH_CONTEXT_MODEL=qwen2.5:1.5b"
-set "TAIGI_MODEL=qwen2.5:1.5b"
-set "MULTIMODAL_QA_MODEL=qwen2.5:1.5b"
+set "TAIWAN_CONTEXT_LLM_MODEL=gemma3:4b"
+set "SPEECH_CONTEXT_MODEL=gemma3:4b"
+set "TAIGI_MODEL=gemma3:4b"
+set "MULTIMODAL_QA_MODEL=gemma3:4b"
 set "VIETNAMESE_ASR_MODEL=turbo"
 set "PROJECT_PYTHON=%CD%\services\asr\asr_api\Scripts\python.exe"
 
@@ -44,6 +44,14 @@ curl -s --max-time 2 http://127.0.0.1:11434/api/tags >nul 2>&1
 if errorlevel 1 (
     echo [ERROR] Ollama did not become ready.
     echo Run "ollama serve" in another terminal and try again.
+    pause
+    exit /b 1
+)
+
+ollama list | findstr /i /c:"gemma3:4b" >nul 2>&1
+if errorlevel 1 (
+    echo [ERROR] Required model gemma3:4b is not installed.
+    echo Run: ollama pull gemma3:4b
     pause
     exit /b 1
 )
