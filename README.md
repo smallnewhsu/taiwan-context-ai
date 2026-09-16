@@ -33,8 +33,6 @@ Taiwan Context Engine
 - Gemma 3 4B：文字改寫、語境分析、繁中翻譯、影像理解與多模態問答
 - Taiwan Context Engine：關係判斷、語意保真、安全回退及人工確認
 
-正式競賽版本使用Google Gemma 3 4B。歷史開發結果不列入正式成果。
-
 ## 評測摘要
 
 |項目|結果|
