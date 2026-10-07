@@ -37,7 +37,7 @@ Taiwan Context Engine
 | **Taiwan Tongues ASR CE** | 國語、台語、客語、英語與混合語音辨識 | 本機推論 |
 | **OpenAI Whisper large-v3-turbo** | 越南語語音辨識 | 透過 `faster-whisper`／CTranslate2本機推論 |
 | **Gemma 3 4B** | 文字改寫、語境分析、繁體中文字面翻譯、影像理解與多模態問答 | Ollama本機推論 |
-| **Taiwan Context Engine** | 語言路由、人物關係判斷、語意保真檢查、安全回退及人工確認 | 專案自建服務 |
+| **Taiwan Context Engine** | 語言路由、人物關係判斷、語意保真檢查、安全回退及人工確認 | 本專案自建服務 |
 
 `faster-whisper` 是執行Whisper模型的推論框架，不是另一個語音模型。本系統越南語路徑實際使用的模型為 **OpenAI Whisper `large-v3-turbo`**，並在本機完成辨識，不呼叫OpenAI雲端API。
 
