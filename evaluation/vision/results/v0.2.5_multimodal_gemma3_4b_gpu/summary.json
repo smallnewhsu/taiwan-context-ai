@@ -1,0 +1,26 @@
+{
+  "suite": "Taiwan Context AI Vision Multimodal v0.2",
+  "evaluated_at": "2026-10-07T07:41:57.630588+00:00",
+  "total_cases": 12,
+  "completed_cases": 12,
+  "missing_image_count": 0,
+  "api_error_count": 0,
+  "automatic_pass_count": 11,
+  "automatic_pass_rate": 0.9166666666666666,
+  "answer_keyword_recall": 0.9642857142857143,
+  "hallucination_free_rate": 1.0,
+  "uncertainty_accuracy": 1.0,
+  "warmup_end_to_end_seconds": 25.1679,
+  "steady_state_sample_count": 11,
+  "steady_state_mean_end_to_end_seconds": 14.102172727272727,
+  "steady_state_median_end_to_end_seconds": 13.9757,
+  "steady_state_p95_end_to_end_seconds": 29.0675,
+  "warning_counts": {
+    "low_confidence_ocr_requires_confirmation": 10,
+    "context_is_inference_not_fact": 11,
+    "low_confidence_context_requires_confirmation": 7,
+    "low_confidence_observation": 8
+  },
+  "image_cache_used": false,
+  "suite_wall_seconds": 182.7579311002046
+}

@@ -1,0 +1,2241 @@
+{
+  "summary": {
+    "suite": "Taiwan Context AI Vision Multimodal v0.2",
+    "evaluated_at": "2026-10-07T07:41:57.630588+00:00",
+    "total_cases": 12,
+    "completed_cases": 12,
+    "missing_image_count": 0,
+    "api_error_count": 0,
+    "automatic_pass_count": 11,
+    "automatic_pass_rate": 0.9166666666666666,
+    "answer_keyword_recall": 0.9642857142857143,
+    "hallucination_free_rate": 1.0,
+    "uncertainty_accuracy": 1.0,
+    "warmup_end_to_end_seconds": 25.1679,
+    "steady_state_sample_count": 11,
+    "steady_state_mean_end_to_end_seconds": 14.102172727272727,
+    "steady_state_median_end_to_end_seconds": 13.9757,
+    "steady_state_p95_end_to_end_seconds": 29.0675,
+    "warning_counts": {
+      "low_confidence_ocr_requires_confirmation": 10,
+      "context_is_inference_not_fact": 11,
+      "low_confidence_context_requires_confirmation": 7,
+      "low_confidence_observation": 8
+    },
+    "image_cache_used": false,
+    "suite_wall_seconds": 182.7579311002046
+  },
+  "results": [
+    {
+      "case": {
+        "id": "M01",
+        "image_file": "V01.jpg",
+        "relationship": "未提供",
+        "question": "這張圖片是在什麼樣的地方？",
+        "required_answer_groups": [
+          [
+            "街道",
+            "道路"
+          ],
+          [
+            "城市",
+            "都市",
+            "市區"
+          ]
+        ],
+        "forbidden_claims": [
+          "台北",
+          "臺北",
+          "高雄",
+          "台中",
+          "臺中"
+        ],
+        "expect_uncertainty": false
+      },
+      "status": "completed",
+      "input_mode": "text",
+      "image_source": "live",
+      "image_response": {
+        "filename": "V01.jpg",
+        "model": "gemma3:4b",
+        "original_size": {
+          "width": 768,
+          "height": 512
+        },
+        "processed_size": {
+          "width": 768,
+          "height": 512
+        },
+        "processing_seconds": 16.503,
+        "analysis": {
+          "observations": [
+            {
+              "text": "街道",
+              "confidence": 1.0
+            },
+            {
+              "text": "汽車",
+              "confidence": 0.9
+            },
+            {
+              "text": "白色休旅車",
+              "confidence": 0.8
+            },
+            {
+              "text": "紅綠燈",
+              "confidence": 0.9
+            },
+            {
+              "text": "標誌",
+              "confidence": 0.7
+            },
+            {
+              "text": "建築物",
+              "confidence": 1.0
+            },
+            {
+              "text": "窗戶",
+              "confidence": 0.8
+            },
+            {
+              "text": "招牌",
+              "confidence": 0.6
+            },
+            {
+              "text": "電線杆",
+              "confidence": 0.7
+            },
+            {
+              "text": "樹木",
+              "confidence": 0.5
+            },
+            {
+              "text": "人行道",
+              "confidence": 0.4
+            }
+          ],
+          "visible_text": [
+            {
+              "text": "怪手電了",
+              "confidence": 0.7
+            },
+            {
+              "text": "市民運動中心",
+              "confidence": 0.8
+            },
+            {
+              "text": "禁止騎車",
+              "confidence": 0.9
+            },
+            {
+              "text": "台北市",
+              "confidence": 0.6
+            },
+            {
+              "text": "請勿停車",
+              "confidence": 0.5
+            },
+            {
+              "text": "無",
+              "confidence": 0.9
+            }
+          ],
+          "context_inferences": [
+            {
+              "description": "可能在白天",
+              "basis": "光線充足，沒有明顯的陰影變化。",
+              "confidence": 0.7
+            },
+            {
+              "description": "可能在城市地區",
+              "basis": "建築物密集，街道繁忙。",
+              "confidence": 0.8
+            }
+          ],
+          "uncertainties": [
+            "街道名稱",
+            "建築物用途",
+            "車輛種類",
+            "人行道寬度",
+            "照片拍攝時間"
+          ]
+        },
+        "needs_confirmation": true,
+        "warnings": [
+          "low_confidence_ocr_requires_confirmation",
+          "context_is_inference_not_fact",
+          "low_confidence_context_requires_confirmation",
+          "low_confidence_observation"
+        ],
+        "privacy": {
+          "processed_locally": true,
+          "image_persisted": false
+        }
+      },
+      "follow_up_response": {
+        "input_mode": "text",
+        "question": "這張圖片是在什麼樣的地方？",
+        "question_needs_confirmation": false,
+        "answer": {
+          "answer": "畫面可確認的內容是街道、汽車、紅綠燈、標誌、建築物、窗戶、招牌、電線杆和樹木。可能的語境或意圖：可能在城市地區，光線充足，且可能在白天拍攝。",
+          "basis": [
+            "街道",
+            "汽車",
+            "紅綠燈",
+            "標誌",
+            "建築物",
+            "窗戶",
+            "招牌",
+            "電線杆",
+            "樹木"
+          ],
+          "uncertainties": [],
+          "needs_confirmation": false,
+          "model": "gemma3:4b",
+          "processing_seconds": 8.2595
+        },
+        "flow": [
+          "VLM",
+          "文字問題",
+          "Taiwan Context Engine",
+          "LLM"
+        ]
+      },
+      "checks": {
+        "answer_nonempty": true,
+        "required_group_hits": 2,
+        "required_group_total": 2,
+        "keyword_recall": 1.0,
+        "missing_required_groups": [],
+        "forbidden_claim_hits": [],
+        "hallucination_free": true,
+        "expected_uncertainty": false,
+        "returned_uncertainty": false,
+        "uncertainty_correct": true,
+        "automatic_pass": true
+      },
+      "timing": {
+        "image_wall_seconds": 16.8814,
+        "follow_up_wall_seconds": 8.2865,
+        "end_to_end_wall_seconds": 25.1679
+      }
+    },
+    {
+      "case": {
+        "id": "M02",
+        "image_file": "V02.jpg",
+        "relationship": "顧客與店家",
+        "question": "這間店可能提供什麼服務？",
+        "required_answer_groups": [
+          [
+            "水族",
+            "魚缸",
+            "水族用品",
+            "無法",
+            "不能"
+          ],
+          [
+            "可能",
+            "看起來",
+            "較像",
+            "確認"
+          ]
+        ],
+        "forbidden_claims": [
+          "寵物醫療",
+          "獸醫",
+          "24小時"
+        ],
+        "expect_uncertainty": true
+      },
+      "status": "completed",
+      "input_mode": "text",
+      "image_source": "live",
+      "image_response": {
+        "filename": "V02.jpg",
+        "model": "gemma3:4b",
+        "original_size": {
+          "width": 678,
+          "height": 501
+        },
+        "processed_size": {
+          "width": 678,
+          "height": 502
+        },
+        "processing_seconds": 15.6746,
+        "analysis": {
+          "observations": [
+            {
+              "text": "一棟建築物",
+              "confidence": 1.0
+            },
+            {
+              "text": "一塊天空",
+              "confidence": 1.0
+            },
+            {
+              "text": "一塊地面",
+              "confidence": 1.0
+            },
+            {
+              "text": "一輛紅色車輛",
+              "confidence": 0.9
+            },
+            {
+              "text": "一輛黑色摩托車",
+              "confidence": 0.8
+            },
+            {
+              "text": "一個黃色帳篷",
+              "confidence": 0.9
+            },
+            {
+              "text": "一個綠色貨車",
+              "confidence": 0.7
+            },
+            {
+              "text": "一個藍色貨車",
+              "confidence": 0.7
+            },
+            {
+              "text": "一些植物",
+              "confidence": 0.6
+            },
+            {
+              "text": "一個燈箱",
+              "confidence": 0.9
+            },
+            {
+              "text": "一個電子看板",
+              "confidence": 0.9
+            },
+            {
+              "text": "一些動物圖片",
+              "confidence": 0.8
+            },
+            {
+              "text": "一個招牌",
+              "confidence": 0.7
+            }
+          ],
+          "visible_text": [
+            {
+              "text": "algam水族精機",
+              "confidence": 0.9
+            },
+            {
+              "text": "至海水族設備 舉世聞名",
+              "confidence": 0.7
+            },
+            {
+              "text": "1.30-2.2",
+              "confidence": 0.6
+            },
+            {
+              "text": "雨品雨品5 稅稅",
+              "confidence": 0.5
+            }
+          ],
+          "context_inferences": [
+            {
+              "description": "可能在晚上",
+              "basis": "建築物和天空的照明暗示夜晚",
+              "confidence": 0.8
+            },
+            {
+              "description": "可能是一個水族館或寵物店",
+              "basis": "電子看板上顯示的動物圖片和招牌名稱",
+              "confidence": 0.7
+            }
+          ],
+          "uncertainties": [
+            "建築物的具體地址",
+            "建築物的內部情況",
+            "照片拍攝的時間"
+          ]
+        },
+        "needs_confirmation": true,
+        "warnings": [
+          "low_confidence_ocr_requires_confirmation",
+          "context_is_inference_not_fact",
+          "low_confidence_context_requires_confirmation",
+          "low_confidence_observation"
+        ],
+        "privacy": {
+          "processed_locally": true,
+          "image_persisted": false
+        }
+      },
+      "follow_up_response": {
+        "input_mode": "text",
+        "question": "這間店可能提供什麼服務？",
+        "question_needs_confirmation": false,
+        "answer": {
+          "answer": "目前OCR結果的信心不足，無法可靠確認圖片中的完整文字內容。可以先描述看得見的版面與物件，但具體文字仍應由使用者對照原圖確認。",
+          "basis": [
+            "影像分析已標示OCR結果需要確認"
+          ],
+          "uncertainties": [
+            "OCR文字內容與名稱無法確認"
+          ],
+          "needs_confirmation": true,
+          "model": "deterministic_safety_guard",
+          "processing_seconds": 0.0
+        },
+        "flow": [
+          "VLM",
+          "文字問題",
+          "Taiwan Context Engine",
+          "LLM"
+        ]
+      },
+      "checks": {
+        "answer_nonempty": true,
+        "required_group_hits": 2,
+        "required_group_total": 2,
+        "keyword_recall": 1.0,
+        "missing_required_groups": [],
+        "forbidden_claim_hits": [],
+        "hallucination_free": true,
+        "expected_uncertainty": true,
+        "returned_uncertainty": true,
+        "uncertainty_correct": true,
+        "automatic_pass": true
+      },
+      "timing": {
+        "image_wall_seconds": 15.6885,
+        "follow_up_wall_seconds": 0.0039,
+        "end_to_end_wall_seconds": 15.6924
+      }
+    },
+    {
+      "case": {
+        "id": "M03",
+        "image_file": "V03.jpg",
+        "relationship": "顧客與店家",
+        "question": "圖片中的垃圾袋一包多少錢？",
+        "required_answer_groups": [
+          [
+            "40",
+            "四十"
+          ],
+          [
+            "元"
+          ]
+        ],
+        "forbidden_claims": [
+          "50元",
+          "五十元",
+          "30元",
+          "三十元"
+        ],
+        "expect_uncertainty": false
+      },
+      "status": "completed",
+      "input_mode": "text",
+      "image_source": "live",
+      "image_response": {
+        "filename": "V03.jpg",
+        "model": "gemma3:4b",
+        "original_size": {
+          "width": 464,
+          "height": 619
+        },
+        "processed_size": {
+          "width": 464,
+          "height": 619
+        },
+        "processing_seconds": 7.1718,
+        "analysis": {
+          "observations": [
+            {
+              "text": "購物車",
+              "confidence": 0.95
+            },
+            {
+              "text": "口罩",
+              "confidence": 0.95
+            },
+            {
+              "text": "彩色口罩",
+              "confidence": 0.9
+            },
+            {
+              "text": "黃色標語牌",
+              "confidence": 0.95
+            },
+            {
+              "text": "紅色牆壁",
+              "confidence": 0.9
+            },
+            {
+              "text": "銀色購物車框架",
+              "confidence": 0.9
+            },
+            {
+              "text": "地面",
+              "confidence": 0.95
+            }
+          ],
+          "visible_text": [
+            {
+              "text": "白講表",
+              "confidence": 0.95
+            },
+            {
+              "text": "立圾袋",
+              "confidence": 0.95
+            },
+            {
+              "text": "1包3卷",
+              "confidence": 0.95
+            },
+            {
+              "text": "40元",
+              "confidence": 0.95
+            }
+          ],
+          "context_inferences": [
+            {
+              "description": "標語牌上顯示口罩的價格。",
+              "basis": "標語牌上的文字",
+              "confidence": 0.95
+            },
+            {
+              "description": "購物車上擺放著多種顏色的口罩。",
+              "basis": "購物車上的物品",
+              "confidence": 0.95
+            }
+          ],
+          "uncertainties": [
+            "購物車的具體位置",
+            "標語牌上的文字詳細內容",
+            "口罩的具體種類"
+          ]
+        },
+        "needs_confirmation": true,
+        "warnings": [
+          "context_is_inference_not_fact"
+        ],
+        "privacy": {
+          "processed_locally": true,
+          "image_persisted": false
+        }
+      },
+      "follow_up_response": {
+        "input_mode": "text",
+        "question": "圖片中的垃圾袋一包多少錢？",
+        "question_needs_confirmation": false,
+        "answer": {
+          "answer": "紙條大意可能是1包3卷，價格是40元。",
+          "basis": [
+            "紙條上顯示『1包3卷』",
+            "紙條上顯示『40元』"
+          ],
+          "uncertainties": [],
+          "needs_confirmation": false,
+          "model": "gemma3:4b",
+          "processing_seconds": 7.1762
+        },
+        "flow": [
+          "VLM",
+          "文字問題",
+          "Taiwan Context Engine",
+          "LLM"
+        ]
+      },
+      "checks": {
+        "answer_nonempty": true,
+        "required_group_hits": 2,
+        "required_group_total": 2,
+        "keyword_recall": 1.0,
+        "missing_required_groups": [],
+        "forbidden_claim_hits": [],
+        "hallucination_free": true,
+        "expected_uncertainty": false,
+        "returned_uncertainty": false,
+        "uncertainty_correct": true,
+        "automatic_pass": true
+      },
+      "timing": {
+        "image_wall_seconds": 7.1794,
+        "follow_up_wall_seconds": 7.1996,
+        "end_to_end_wall_seconds": 14.379
+      }
+    },
+    {
+      "case": {
+        "id": "M04",
+        "image_file": "V04.jpg",
+        "relationship": "乘客與交通服務",
+        "question": "站牌上可以確認哪些交通資訊？",
+        "required_answer_groups": [
+          [
+            "無法",
+            "不能"
+          ],
+          [
+            "確認",
+            "可靠"
+          ],
+          [
+            "OCR",
+            "文字"
+          ]
+        ],
+        "forbidden_claims": [
+          "台南",
+          "臺南",
+          "台北",
+          "臺北"
+        ],
+        "expect_uncertainty": true
+      },
+      "status": "completed",
+      "input_mode": "text",
+      "image_source": "live",
+      "image_response": {
+        "filename": "V04.jpg",
+        "model": "gemma3:4b",
+        "original_size": {
+          "width": 706,
+          "height": 845
+        },
+        "processed_size": {
+          "width": 642,
+          "height": 768
+        },
+        "processing_seconds": 16.8821,
+        "analysis": {
+          "observations": [
+            {
+              "text": "紅色標誌",
+              "confidence": 0.95
+            },
+            {
+              "text": "路線圖",
+              "confidence": 0.9
+            },
+            {
+              "text": "數字 3275 公尺",
+              "confidence": 0.9
+            },
+            {
+              "text": "巴士路線圖",
+              "confidence": 0.8
+            },
+            {
+              "text": "巴士號碼 6506",
+              "confidence": 0.9
+            },
+            {
+              "text": "台灣",
+              "confidence": 0.7
+            },
+            {
+              "text": "泰山",
+              "confidence": 0.6
+            },
+            {
+              "text": "紅色小人偶",
+              "confidence": 0.8
+            },
+            {
+              "text": "紅色小車",
+              "confidence": 0.7
+            },
+            {
+              "text": "綠色標誌",
+              "confidence": 0.8
+            },
+            {
+              "text": "標誌上文字",
+              "confidence": 0.9
+            },
+            {
+              "text": "交通局聯合管理委員會",
+              "confidence": 0.7
+            }
+          ],
+          "visible_text": [
+            {
+              "text": "正式",
+              "confidence": 0.9
+            },
+            {
+              "text": "海投 3275 公尺",
+              "confidence": 0.95
+            },
+            {
+              "text": "6506 臺南",
+              "confidence": 0.8
+            },
+            {
+              "text": "臺南市公共運輸局",
+              "confidence": 0.7
+            },
+            {
+              "text": "04-2229-1726",
+              "confidence": 0.9
+            },
+            {
+              "text": "04-2259-5089",
+              "confidence": 0.9
+            },
+            {
+              "text": "www.traffic.tainan.gov.tw",
+              "confidence": 0.8
+            }
+          ],
+          "context_inferences": [
+            {
+              "description": "此標誌可能顯示路線資訊。",
+              "basis": "標誌上顯示路線圖和巴士號碼。",
+              "confidence": 0.8
+            },
+            {
+              "description": "此標誌可能位於公共交通站點。",
+              "basis": "標誌上顯示巴士路線資訊。",
+              "confidence": 0.7
+            }
+          ],
+          "uncertainties": [
+            "標誌的具體位置無法確定。",
+            "標誌上文字的完整內容無法確認。",
+            "標誌周圍環境無法確認。"
+          ]
+        },
+        "needs_confirmation": true,
+        "warnings": [
+          "low_confidence_ocr_requires_confirmation",
+          "context_is_inference_not_fact",
+          "low_confidence_context_requires_confirmation",
+          "low_confidence_observation"
+        ],
+        "privacy": {
+          "processed_locally": true,
+          "image_persisted": false
+        }
+      },
+      "follow_up_response": {
+        "input_mode": "text",
+        "question": "站牌上可以確認哪些交通資訊？",
+        "question_needs_confirmation": false,
+        "answer": {
+          "answer": "目前OCR結果的信心不足，無法可靠確認圖片中的完整文字內容。可以先描述看得見的版面與物件，但具體文字仍應由使用者對照原圖確認。",
+          "basis": [
+            "影像分析已標示OCR結果需要確認"
+          ],
+          "uncertainties": [
+            "OCR文字內容與名稱無法確認"
+          ],
+          "needs_confirmation": true,
+          "model": "deterministic_safety_guard",
+          "processing_seconds": 0.0
+        },
+        "flow": [
+          "VLM",
+          "文字問題",
+          "Taiwan Context Engine",
+          "LLM"
+        ]
+      },
+      "checks": {
+        "answer_nonempty": true,
+        "required_group_hits": 3,
+        "required_group_total": 3,
+        "keyword_recall": 1.0,
+        "missing_required_groups": [],
+        "forbidden_claim_hits": [],
+        "hallucination_free": true,
+        "expected_uncertainty": true,
+        "returned_uncertainty": true,
+        "uncertainty_correct": true,
+        "automatic_pass": true
+      },
+      "timing": {
+        "image_wall_seconds": 16.8901,
+        "follow_up_wall_seconds": 0.0031,
+        "end_to_end_wall_seconds": 16.8932
+      }
+    },
+    {
+      "case": {
+        "id": "M05",
+        "image_file": "V05.jpg",
+        "relationship": "顧客與店家",
+        "question": "菜單上有哪些冰沙口味？",
+        "required_answer_groups": [
+          [
+            "無法",
+            "不能"
+          ],
+          [
+            "確認",
+            "OCR",
+            "文字"
+          ]
+        ],
+        "forbidden_claims": [
+          "草莓",
+          "西瓜",
+          "巧克力"
+        ],
+        "expect_uncertainty": true
+      },
+      "status": "completed",
+      "input_mode": "text",
+      "image_source": "live",
+      "image_response": {
+        "filename": "V05.jpg",
+        "model": "gemma3:4b",
+        "original_size": {
+          "width": 410,
+          "height": 565
+        },
+        "processed_size": {
+          "width": 410,
+          "height": 565
+        },
+        "processing_seconds": 13.7243,
+        "analysis": {
+          "observations": [
+            {
+              "text": "藍色背景",
+              "confidence": 1.0
+            },
+            {
+              "text": "水杯",
+              "confidence": 0.9
+            },
+            {
+              "text": "黃色飲料",
+              "confidence": 0.9
+            },
+            {
+              "text": "紅色飲料",
+              "confidence": 0.8
+            },
+            {
+              "text": "橙色飲料",
+              "confidence": 0.8
+            },
+            {
+              "text": "黃色飲料",
+              "confidence": 0.8
+            },
+            {
+              "text": "水果",
+              "confidence": 0.7
+            },
+            {
+              "text": "花",
+              "confidence": 0.6
+            },
+            {
+              "text": "時間",
+              "confidence": 0.7
+            },
+            {
+              "text": "價格",
+              "confidence": 0.8
+            },
+            {
+              "text": "700cc",
+              "confidence": 0.9
+            },
+            {
+              "text": "標音",
+              "confidence": 0.5
+            },
+            {
+              "text": "標誌",
+              "confidence": 0.6
+            }
+          ],
+          "visible_text": [
+            {
+              "text": "清潔冰沙",
+              "confidence": 0.9
+            },
+            {
+              "text": "冰涼清暑，冰爽好滋味!",
+              "confidence": 0.7
+            },
+            {
+              "text": "綠豆冰",
+              "confidence": 0.8
+            },
+            {
+              "text": "40元",
+              "confidence": 0.9
+            },
+            {
+              "text": "芒果冰",
+              "confidence": 0.8
+            },
+            {
+              "text": "50元",
+              "confidence": 0.9
+            },
+            {
+              "text": "百香果冰",
+              "confidence": 0.8
+            },
+            {
+              "text": "50元",
+              "confidence": 0.9
+            },
+            {
+              "text": "鳳梨冰",
+              "confidence": 0.8
+            },
+            {
+              "text": "50元",
+              "confidence": 0.9
+            },
+            {
+              "text": "7月~8月底營業時間",
+              "confidence": 0.8
+            },
+            {
+              "text": "星期一~星期四",
+              "confidence": 0.9
+            },
+            {
+              "text": "下午 4:30~7:30",
+              "confidence": 0.8
+            },
+            {
+              "text": "星期六~星期日 (週六優惠活動)",
+              "confidence": 0.7
+            },
+            {
+              "text": "上午 11:00~下午 6:00",
+              "confidence": 0.8
+            },
+            {
+              "text": "同行檔五送一",
+              "confidence": 0.7
+            }
+          ],
+          "context_inferences": [
+            {
+              "description": "飲料的容量是 700cc",
+              "basis": "圖片中標有 '700cc' 文字",
+              "confidence": 0.9
+            },
+            {
+              "description": "飲料店營業時間是星期一到星期四下午 4:30 到 7:30，星期六和星期日上午 11:00 到下午 6:00",
+              "basis": "圖片中標有營業時間",
+              "confidence": 0.8
+            }
+          ],
+          "uncertainties": [
+            "店名",
+            "地點",
+            "飲料種類的具體成分"
+          ]
+        },
+        "needs_confirmation": true,
+        "warnings": [
+          "low_confidence_ocr_requires_confirmation",
+          "context_is_inference_not_fact",
+          "low_confidence_observation"
+        ],
+        "privacy": {
+          "processed_locally": true,
+          "image_persisted": false
+        }
+      },
+      "follow_up_response": {
+        "input_mode": "text",
+        "question": "菜單上有哪些冰沙口味？",
+        "question_needs_confirmation": false,
+        "answer": {
+          "answer": "目前OCR結果的信心不足，無法可靠確認圖片中的完整文字內容。可以先描述看得見的版面與物件，但具體文字仍應由使用者對照原圖確認。",
+          "basis": [
+            "影像分析已標示OCR結果需要確認"
+          ],
+          "uncertainties": [
+            "OCR文字內容與名稱無法確認"
+          ],
+          "needs_confirmation": true,
+          "model": "deterministic_safety_guard",
+          "processing_seconds": 0.0001
+        },
+        "flow": [
+          "VLM",
+          "文字問題",
+          "Taiwan Context Engine",
+          "LLM"
+        ]
+      },
+      "checks": {
+        "answer_nonempty": true,
+        "required_group_hits": 2,
+        "required_group_total": 2,
+        "keyword_recall": 1.0,
+        "missing_required_groups": [],
+        "forbidden_claim_hits": [],
+        "hallucination_free": true,
+        "expected_uncertainty": true,
+        "returned_uncertainty": true,
+        "uncertainty_correct": true,
+        "automatic_pass": true
+      },
+      "timing": {
+        "image_wall_seconds": 13.7829,
+        "follow_up_wall_seconds": 0.0047,
+        "end_to_end_wall_seconds": 13.7876
+      }
+    },
+    {
+      "case": {
+        "id": "M06",
+        "image_file": "V06.jpg",
+        "relationship": "未提供",
+        "question": "這個電鍋現在正在煮飯嗎？",
+        "required_answer_groups": [
+          [
+            "無法",
+            "不能",
+            "看不出"
+          ],
+          [
+            "確認",
+            "確定",
+            "判斷"
+          ]
+        ],
+        "forbidden_claims": [
+          "正在煮飯",
+          "正在加熱",
+          "飯已經熟了"
+        ],
+        "expect_uncertainty": true
+      },
+      "status": "completed",
+      "input_mode": "text",
+      "image_source": "live",
+      "image_response": {
+        "filename": "V06.jpg",
+        "model": "gemma3:4b",
+        "original_size": {
+          "width": 939,
+          "height": 747
+        },
+        "processed_size": {
+          "width": 768,
+          "height": 610
+        },
+        "processing_seconds": 7.4822,
+        "analysis": {
+          "observations": [
+            {
+              "text": "電鍋",
+              "confidence": 1.0
+            },
+            {
+              "text": "白色電鍋",
+              "confidence": 0.9
+            },
+            {
+              "text": "不鏽鋼鍋蓋",
+              "confidence": 0.9
+            },
+            {
+              "text": "開關",
+              "confidence": 0.8
+            },
+            {
+              "text": "TATUNG",
+              "confidence": 0.9
+            },
+            {
+              "text": "木地板",
+              "confidence": 0.7
+            },
+            {
+              "text": "窗戶",
+              "confidence": 0.6
+            },
+            {
+              "text": "白色牆面",
+              "confidence": 0.5
+            }
+          ],
+          "visible_text": [
+            {
+              "text": "TATUNG",
+              "confidence": 0.9
+            },
+            {
+              "text": "0.8",
+              "confidence": 0.7
+            }
+          ],
+          "context_inferences": [
+            {
+              "description": "電鍋可能正在使用中。",
+              "basis": "電鍋的鍋內有米飯的痕跡",
+              "confidence": 0.6
+            },
+            {
+              "description": "窗戶可能提供自然光照。",
+              "basis": "窗戶的وجود",
+              "confidence": 0.5
+            }
+          ],
+          "uncertainties": [
+            "電鍋的品牌和型號",
+            "電鍋的容量",
+            "電鍋的所在位置",
+            "米飯的種類和烹煮時間"
+          ]
+        },
+        "needs_confirmation": true,
+        "warnings": [
+          "low_confidence_ocr_requires_confirmation",
+          "context_is_inference_not_fact",
+          "low_confidence_context_requires_confirmation",
+          "low_confidence_observation"
+        ],
+        "privacy": {
+          "processed_locally": true,
+          "image_persisted": false
+        }
+      },
+      "follow_up_response": {
+        "input_mode": "text",
+        "question": "這個電鍋現在正在煮飯嗎？",
+        "question_needs_confirmation": false,
+        "answer": {
+          "answer": "無法只憑這張靜態圖片確定物品目前是否正在運作。畫面只能確認物品外觀，沒有足夠證據證明其使用狀態。",
+          "basis": [
+            "圖片只呈現靜態外觀"
+          ],
+          "uncertainties": [
+            "物品目前的運作狀態無法確認"
+          ],
+          "needs_confirmation": true,
+          "model": "deterministic_safety_guard",
+          "processing_seconds": 0.0
+        },
+        "flow": [
+          "VLM",
+          "文字問題",
+          "Taiwan Context Engine",
+          "LLM"
+        ]
+      },
+      "checks": {
+        "answer_nonempty": true,
+        "required_group_hits": 2,
+        "required_group_total": 2,
+        "keyword_recall": 1.0,
+        "missing_required_groups": [],
+        "forbidden_claim_hits": [],
+        "hallucination_free": true,
+        "expected_uncertainty": true,
+        "returned_uncertainty": true,
+        "uncertainty_correct": true,
+        "automatic_pass": true
+      },
+      "timing": {
+        "image_wall_seconds": 7.5027,
+        "follow_up_wall_seconds": 0.0032,
+        "end_to_end_wall_seconds": 7.5059
+      }
+    },
+    {
+      "case": {
+        "id": "M07",
+        "image_file": "V07.jpg",
+        "relationship": "居民與清潔隊",
+        "question": "這張圖主要是在說明什麼？",
+        "required_answer_groups": [
+          [
+            "垃圾分類",
+            "回收分類"
+          ],
+          [
+            "回收"
+          ],
+          [
+            "無法受理",
+            "不可回收",
+            "垃圾"
+          ]
+        ],
+        "forbidden_claims": [
+          "所有物品都能回收",
+          "不用分類"
+        ],
+        "expect_uncertainty": false
+      },
+      "status": "completed",
+      "input_mode": "text",
+      "image_source": "live",
+      "image_response": {
+        "filename": "V07.jpg",
+        "model": "gemma3:4b",
+        "original_size": {
+          "width": 529,
+          "height": 831
+        },
+        "processed_size": {
+          "width": 488,
+          "height": 768
+        },
+        "processing_seconds": 20.2916,
+        "analysis": {
+          "observations": [
+            {
+              "text": "垃圾回收分類區別圖示",
+              "confidence": 1.0
+            },
+            {
+              "text": "垃圾桶",
+              "confidence": 0.9
+            },
+            {
+              "text": "行李箱",
+              "confidence": 0.8
+            },
+            {
+              "text": "水果包裝泡泡",
+              "confidence": 0.7
+            },
+            {
+              "text": "洗器碗頻頻",
+              "confidence": 0.6
+            },
+            {
+              "text": "平面玻璃精 (打破包)",
+              "confidence": 0.5
+            },
+            {
+              "text": "健檢保麗龍",
+              "confidence": 0.9
+            },
+            {
+              "text": "高壓噴嘴瓶",
+              "confidence": 0.8
+            },
+            {
+              "text": "卡式瓦斯瓶",
+              "confidence": 0.7
+            },
+            {
+              "text": "安全帽",
+              "confidence": 0.9
+            },
+            {
+              "text": "小家電",
+              "confidence": 0.8
+            },
+            {
+              "text": "塑膠飲品盒",
+              "confidence": 0.7
+            },
+            {
+              "text": "難食盒",
+              "confidence": 0.6
+            },
+            {
+              "text": "紙容器",
+              "confidence": 0.8
+            },
+            {
+              "text": "黃色打包包束帶",
+              "confidence": 0.7
+            },
+            {
+              "text": "玻璃瓶罐",
+              "confidence": 0.6
+            },
+            {
+              "text": "事業廢棄物 (無法送運)",
+              "confidence": 0.9
+            },
+            {
+              "text": "馬桶",
+              "confidence": 0.8
+            },
+            {
+              "text": "磁磚",
+              "confidence": 0.7
+            },
+            {
+              "text": "木材",
+              "confidence": 0.8
+            },
+            {
+              "text": "廢棄農膜",
+              "confidence": 0.7
+            },
+            {
+              "text": "滅火器",
+              "confidence": 0.6
+            },
+            {
+              "text": "瓦斯瓶",
+              "confidence": 0.7
+            },
+            {
+              "text": "接板",
+              "confidence": 0.5
+            },
+            {
+              "text": "冷氣泡棉",
+              "confidence": 0.6
+            },
+            {
+              "text": "電線皮",
+              "confidence": 0.5
+            },
+            {
+              "text": "裝飾輔料",
+              "confidence": 0.6
+            },
+            {
+              "text": "石棉",
+              "confidence": 0.4
+            }
+          ],
+          "visible_text": [
+            {
+              "text": "健檢保麗龍",
+              "confidence": 0.9
+            },
+            {
+              "text": "高壓噴嘴瓶",
+              "confidence": 0.8
+            },
+            {
+              "text": "卡式瓦斯瓶",
+              "confidence": 0.7
+            },
+            {
+              "text": "安全帽",
+              "confidence": 0.9
+            },
+            {
+              "text": "小家電",
+              "confidence": 0.8
+            },
+            {
+              "text": "塑膠飲品盒",
+              "confidence": 0.7
+            },
+            {
+              "text": "難食盒",
+              "confidence": 0.6
+            },
+            {
+              "text": "木材",
+              "confidence": 0.8
+            },
+            {
+              "text": "廢棄農膜",
+              "confidence": 0.7
+            },
+            {
+              "text": "石棉",
+              "confidence": 0.4
+            }
+          ],
+          "context_inferences": [
+            {
+              "description": "圖示可能用於說明垃圾分類方法。",
+              "basis": "圖示標題為『垃圾回收分類區別圖示』",
+              "confidence": 0.8
+            }
+          ],
+          "uncertainties": [
+            "圖片中人物的身份和活動無法確認。",
+            "圖片中建築物的具體位置和用途無法確認。",
+            "圖片中垃圾回收站的具體名稱和地址無法確認。"
+          ]
+        },
+        "needs_confirmation": true,
+        "warnings": [
+          "low_confidence_ocr_requires_confirmation",
+          "context_is_inference_not_fact",
+          "low_confidence_observation"
+        ],
+        "privacy": {
+          "processed_locally": true,
+          "image_persisted": false
+        }
+      },
+      "follow_up_response": {
+        "input_mode": "text",
+        "question": "這張圖主要是在說明什麼？",
+        "question_needs_confirmation": false,
+        "answer": {
+          "answer": "畫面可確認的內容是垃圾回收分類區別圖示、垃圾桶、行李箱等。可能是在說明垃圾分類方法，提醒居民將垃圾按照種類丟棄到正確的垃圾桶中。",
+          "basis": [
+            "圖示標題為『垃圾回收分類區別圖示』"
+          ],
+          "uncertainties": [],
+          "needs_confirmation": false,
+          "model": "gemma3:4b",
+          "processing_seconds": 8.7486
+        },
+        "flow": [
+          "VLM",
+          "文字問題",
+          "Taiwan Context Engine",
+          "LLM"
+        ]
+      },
+      "checks": {
+        "answer_nonempty": true,
+        "required_group_hits": 3,
+        "required_group_total": 3,
+        "keyword_recall": 1.0,
+        "missing_required_groups": [],
+        "forbidden_claim_hits": [],
+        "hallucination_free": true,
+        "expected_uncertainty": false,
+        "returned_uncertainty": false,
+        "uncertainty_correct": true,
+        "automatic_pass": true
+      },
+      "timing": {
+        "image_wall_seconds": 20.3151,
+        "follow_up_wall_seconds": 8.7524,
+        "end_to_end_wall_seconds": 29.0675
+      }
+    },
+    {
+      "case": {
+        "id": "M08",
+        "image_file": "V08.jpg",
+        "relationship": "訪客與公共場所",
+        "question": "這可能是什麼場所？",
+        "required_answer_groups": [
+          [
+            "靜思堂",
+            "宗教建築",
+            "公共建築"
+          ],
+          [
+            "可能",
+            "看起來",
+            "較像"
+          ]
+        ],
+        "forbidden_claims": [
+          "醫院",
+          "學校",
+          "車站"
+        ],
+        "expect_uncertainty": true
+      },
+      "status": "completed",
+      "input_mode": "text",
+      "image_source": "live",
+      "image_response": {
+        "filename": "V08.jpg",
+        "model": "gemma3:4b",
+        "original_size": {
+          "width": 622,
+          "height": 620
+        },
+        "processed_size": {
+          "width": 622,
+          "height": 620
+        },
+        "processing_seconds": 13.9406,
+        "analysis": {
+          "observations": [
+            {
+              "text": "一棟大型建築",
+              "confidence": 1.0
+            },
+            {
+              "text": "建築的屋頂呈現日式風格",
+              "confidence": 0.9
+            },
+            {
+              "text": "建築的正面有許多窗戶",
+              "confidence": 0.9
+            },
+            {
+              "text": "建築的正面有拱形門",
+              "confidence": 0.8
+            },
+            {
+              "text": "建築的正面有白色底的圖案",
+              "confidence": 0.7
+            },
+            {
+              "text": "建築前方有水池",
+              "confidence": 0.9
+            },
+            {
+              "text": "建築前方有樹",
+              "confidence": 0.8
+            },
+            {
+              "text": "建築前方有雕像",
+              "confidence": 0.9
+            },
+            {
+              "text": "建築前方有石階",
+              "confidence": 0.7
+            }
+          ],
+          "visible_text": [
+            {
+              "text": "移雲書",
+              "confidence": 0.9
+            },
+            {
+              "text": "新光銀行",
+              "confidence": 0.6
+            }
+          ],
+          "context_inferences": [
+            {
+              "description": "雕像可能代表歷史人物",
+              "basis": "雕像位於建築正面",
+              "confidence": 0.7
+            },
+            {
+              "description": "建築可能用於政府或公共事務",
+              "basis": "建築規模大，風格莊重",
+              "confidence": 0.6
+            }
+          ],
+          "uncertainties": [
+            "建築的具體用途無法確認",
+            "雕像的具體身份無法確認",
+            "建築所在地的具體位置無法確認"
+          ]
+        },
+        "needs_confirmation": true,
+        "warnings": [
+          "low_confidence_ocr_requires_confirmation",
+          "context_is_inference_not_fact",
+          "low_confidence_context_requires_confirmation"
+        ],
+        "privacy": {
+          "processed_locally": true,
+          "image_persisted": false
+        }
+      },
+      "follow_up_response": {
+        "input_mode": "text",
+        "question": "這可能是什麼場所？",
+        "question_needs_confirmation": false,
+        "answer": {
+          "answer": "根據畫面線索，這裡建築可能用於政府或公共事務。不過，具體場所名稱與實際用途仍無法只憑圖片確定。",
+          "basis": [
+            "建築規模大，風格莊重"
+          ],
+          "uncertainties": [
+            "具體場所名稱與用途無法確定"
+          ],
+          "needs_confirmation": true,
+          "model": "deterministic_safety_guard",
+          "processing_seconds": 0.0
+        },
+        "flow": [
+          "VLM",
+          "文字問題",
+          "Taiwan Context Engine",
+          "LLM"
+        ]
+      },
+      "checks": {
+        "answer_nonempty": true,
+        "required_group_hits": 1,
+        "required_group_total": 2,
+        "keyword_recall": 0.5,
+        "missing_required_groups": [
+          [
+            "靜思堂",
+            "宗教建築",
+            "公共建築"
+          ]
+        ],
+        "forbidden_claim_hits": [],
+        "hallucination_free": true,
+        "expected_uncertainty": true,
+        "returned_uncertainty": true,
+        "uncertainty_correct": true,
+        "automatic_pass": false
+      },
+      "timing": {
+        "image_wall_seconds": 13.9472,
+        "follow_up_wall_seconds": 0.0285,
+        "end_to_end_wall_seconds": 13.9757
+      }
+    },
+    {
+      "case": {
+        "id": "M09",
+        "image_file": "V09.jpg",
+        "relationship": "社區居民",
+        "question": "這份公告希望大家怎麼做？",
+        "required_answer_groups": [
+          [
+            "垃圾帶走",
+            "帶走垃圾"
+          ],
+          [
+            "公共環境",
+            "環境",
+            "家園"
+          ],
+          [
+            "維護",
+            "守護",
+            "珍惜",
+            "環境更美好"
+          ]
+        ],
+        "forbidden_claims": [
+          "繳交罰款",
+          "禁止進入",
+          "停止使用場地"
+        ],
+        "expect_uncertainty": false
+      },
+      "status": "completed",
+      "input_mode": "text",
+      "image_source": "live",
+      "image_response": {
+        "filename": "V09.jpg",
+        "model": "gemma3:4b",
+        "original_size": {
+          "width": 641,
+          "height": 946
+        },
+        "processed_size": {
+          "width": 520,
+          "height": 768
+        },
+        "processing_seconds": 12.5282,
+        "analysis": {
+          "observations": [
+            {
+              "text": "綠色背景",
+              "confidence": 1.0
+            },
+            {
+              "text": "多張照片",
+              "confidence": 1.0
+            },
+            {
+              "text": "圍欄",
+              "confidence": 0.9
+            },
+            {
+              "text": "紅色標誌",
+              "confidence": 0.8
+            },
+            {
+              "text": "綠色標誌",
+              "confidence": 0.8
+            },
+            {
+              "text": "灰色地面",
+              "confidence": 0.9
+            },
+            {
+              "text": "紅色牆面",
+              "confidence": 0.9
+            },
+            {
+              "text": "白色標語",
+              "confidence": 0.7
+            },
+            {
+              "text": "綠色標語",
+              "confidence": 0.7
+            },
+            {
+              "text": "人物",
+              "confidence": 0.6
+            },
+            {
+              "text": "消防繩",
+              "confidence": 0.7
+            },
+            {
+              "text": "標語環境",
+              "confidence": 0.6
+            },
+            {
+              "text": "清掃場地",
+              "confidence": 0.6
+            },
+            {
+              "text": "標語場地",
+              "confidence": 0.6
+            },
+            {
+              "text": "中社區發展協會 公告",
+              "confidence": 0.9
+            }
+          ],
+          "visible_text": [
+            {
+              "text": "珍惜公共環境",
+              "confidence": 0.9
+            },
+            {
+              "text": "一起守護我們的家園",
+              "confidence": 0.8
+            },
+            {
+              "text": "南迴納、社區幹部們用心地管理環境",
+              "confidence": 0.7
+            },
+            {
+              "text": "今日抽播：滿地垃圾的景象！",
+              "confidence": 0.9
+            },
+            {
+              "text": "務必將垃圾帶走",
+              "confidence": 0.8
+            },
+            {
+              "text": "請下一個使用場景",
+              "confidence": 0.7
+            },
+            {
+              "text": "不留下任何垃圾",
+              "confidence": 0.8
+            },
+            {
+              "text": "有舒適的空間可使用",
+              "confidence": 0.7
+            },
+            {
+              "text": "你的一步，讓環境更美好!",
+              "confidence": 0.6
+            }
+          ],
+          "context_inferences": [
+            {
+              "description": "照片顯示一個公共空間",
+              "basis": "多張照片顯示圍欄和地面",
+              "confidence": 0.8
+            },
+            {
+              "description": "有人員在清理垃圾",
+              "basis": "照片顯示人員在清掃場地",
+              "confidence": 0.7
+            },
+            {
+              "description": "有標語宣導珍惜環境",
+              "basis": "標語顯示\"珍惜公共環境\"和\"一起守護我們的家園\"",
+              "confidence": 0.8
+            }
+          ],
+          "uncertainties": [
+            "公共空間的具體位置無法確認",
+            "照片中人物的身份無法確認",
+            "標語的具體內容無法完全確認"
+          ]
+        },
+        "needs_confirmation": true,
+        "warnings": [
+          "low_confidence_ocr_requires_confirmation",
+          "context_is_inference_not_fact",
+          "low_confidence_context_requires_confirmation",
+          "low_confidence_observation"
+        ],
+        "privacy": {
+          "processed_locally": true,
+          "image_persisted": false
+        }
+      },
+      "follow_up_response": {
+        "input_mode": "text",
+        "question": "這份公告希望大家怎麼做？",
+        "question_needs_confirmation": false,
+        "answer": {
+          "answer": "這份公告希望大家將垃圾帶走，不要留下任何垃圾，並一起守護我們的家園。",
+          "basis": [
+            "公告顯示\"務必將垃圾帶走\"",
+            "公告顯示\"不留下任何垃圾\"",
+            "公告顯示\"一起守護我們的家園\""
+          ],
+          "uncertainties": [],
+          "needs_confirmation": false,
+          "model": "gemma3:4b",
+          "processing_seconds": 7.7946
+        },
+        "flow": [
+          "VLM",
+          "文字問題",
+          "Taiwan Context Engine",
+          "LLM"
+        ]
+      },
+      "checks": {
+        "answer_nonempty": true,
+        "required_group_hits": 3,
+        "required_group_total": 3,
+        "keyword_recall": 1.0,
+        "missing_required_groups": [],
+        "forbidden_claim_hits": [],
+        "hallucination_free": true,
+        "expected_uncertainty": false,
+        "returned_uncertainty": false,
+        "uncertainty_correct": true,
+        "automatic_pass": true
+      },
+      "timing": {
+        "image_wall_seconds": 12.5415,
+        "follow_up_wall_seconds": 7.8158,
+        "end_to_end_wall_seconds": 20.3573
+      }
+    },
+    {
+      "case": {
+        "id": "M10",
+        "image_file": "V10.jpg",
+        "relationship": "未提供",
+        "question": "這個物品要怎麼使用？",
+        "required_answer_groups": [
+          [
+            "鏡子",
+            "立鏡",
+            "桌上鏡"
+          ],
+          [
+            "支架",
+            "立起",
+            "調整角度",
+            "調整鏡子的角度",
+            "調整到適合的角度",
+            "調整到特定的角度"
+          ]
+        ],
+        "forbidden_claims": [
+          "需要插電",
+          "具有照明",
+          "內建電池"
+        ],
+        "expect_uncertainty": false
+      },
+      "status": "completed",
+      "input_mode": "text",
+      "image_source": "live",
+      "image_response": {
+        "filename": "V10.jpg",
+        "model": "gemma3:4b",
+        "original_size": {
+          "width": 578,
+          "height": 580
+        },
+        "processed_size": {
+          "width": 578,
+          "height": 580
+        },
+        "processing_seconds": 11.5384,
+        "analysis": {
+          "observations": [
+            {
+              "text": "一個金色的立式鏡子",
+              "confidence": 1.0
+            },
+            {
+              "text": "鏡子有金色的邊框",
+              "confidence": 1.0
+            },
+            {
+              "text": "鏡子有三角形的支架",
+              "confidence": 1.0
+            },
+            {
+              "text": "鏡子有兩個螺絲",
+              "confidence": 0.9
+            },
+            {
+              "text": "鏡子是方形的",
+              "confidence": 0.8
+            }
+          ],
+          "visible_text": [],
+          "context_inferences": [
+            {
+              "description": "鏡子可以調整角度",
+              "basis": "鏡子有可調整的支架",
+              "confidence": 0.7
+            }
+          ],
+          "uncertainties": [
+            "鏡子的尺寸無法判斷",
+            "鏡子的材質無法判斷",
+            "鏡子的品牌或型號無法判斷"
+          ]
+        },
+        "needs_confirmation": true,
+        "warnings": [
+          "context_is_inference_not_fact",
+          "low_confidence_context_requires_confirmation"
+        ],
+        "privacy": {
+          "processed_locally": true,
+          "image_persisted": false
+        }
+      },
+      "follow_up_response": {
+        "input_mode": "text",
+        "question": "這個物品要怎麼使用？",
+        "question_needs_confirmation": false,
+        "answer": {
+          "answer": "這是一面帶支架的鏡子，可將支架立起，放在平穩表面，再把鏡面調整到適合的角度使用。",
+          "basis": [
+            "畫面可見鏡面、鏡框與支架"
+          ],
+          "uncertainties": [],
+          "needs_confirmation": false,
+          "model": "deterministic_safety_guard",
+          "processing_seconds": 0.0
+        },
+        "flow": [
+          "VLM",
+          "文字問題",
+          "Taiwan Context Engine",
+          "LLM"
+        ]
+      },
+      "checks": {
+        "answer_nonempty": true,
+        "required_group_hits": 2,
+        "required_group_total": 2,
+        "keyword_recall": 1.0,
+        "missing_required_groups": [],
+        "forbidden_claim_hits": [],
+        "hallucination_free": true,
+        "expected_uncertainty": false,
+        "returned_uncertainty": false,
+        "uncertainty_correct": true,
+        "automatic_pass": true
+      },
+      "timing": {
+        "image_wall_seconds": 11.5564,
+        "follow_up_wall_seconds": 0.0264,
+        "end_to_end_wall_seconds": 11.5828
+      }
+    },
+    {
+      "case": {
+        "id": "M11",
+        "image_file": "V11.jpg",
+        "relationship": "未提供",
+        "question": "這張紙上寫了什麼？",
+        "required_answer_groups": [
+          [
+            "模糊",
+            "看不清",
+            "無法",
+            "不能"
+          ],
+          [
+            "辨識",
+            "確認",
+            "OCR"
+          ]
+        ],
+        "forbidden_claims": [
+          "姓名",
+          "電話",
+          "地址",
+          "日期"
+        ],
+        "expect_uncertainty": true
+      },
+      "status": "completed",
+      "input_mode": "text",
+      "image_source": "live",
+      "image_response": {
+        "filename": "V11.jpg",
+        "model": "gemma3:4b",
+        "original_size": {
+          "width": 444,
+          "height": 433
+        },
+        "processed_size": {
+          "width": 444,
+          "height": 434
+        },
+        "processing_seconds": 4.0813,
+        "analysis": {
+          "observations": [],
+          "visible_text": [
+            {
+              "text": "B",
+              "confidence": 0.9
+            },
+            {
+              "text": "C",
+              "confidence": 0.8
+            },
+            {
+              "text": "D",
+              "confidence": 0.7
+            },
+            {
+              "text": "E",
+              "confidence": 0.6
+            },
+            {
+              "text": "F",
+              "confidence": 0.5
+            },
+            {
+              "text": "G",
+              "confidence": 0.4
+            },
+            {
+              "text": "H",
+              "confidence": 0.3
+            },
+            {
+              "text": "I",
+              "confidence": 0.2
+            }
+          ],
+          "context_inferences": [],
+          "uncertainties": [
+            "文字模糊度高，無法完全辨識"
+          ]
+        },
+        "needs_confirmation": true,
+        "warnings": [
+          "low_confidence_ocr_requires_confirmation"
+        ],
+        "privacy": {
+          "processed_locally": true,
+          "image_persisted": false
+        }
+      },
+      "follow_up_response": {
+        "input_mode": "text",
+        "question": "這張紙上寫了什麼？",
+        "question_needs_confirmation": false,
+        "answer": {
+          "answer": "目前OCR結果的信心不足，無法可靠確認圖片中的完整文字內容。可以先描述看得見的版面與物件，但具體文字仍應由使用者對照原圖確認。",
+          "basis": [
+            "影像分析已標示OCR結果需要確認"
+          ],
+          "uncertainties": [
+            "OCR文字內容與名稱無法確認"
+          ],
+          "needs_confirmation": true,
+          "model": "deterministic_safety_guard",
+          "processing_seconds": 0.0
+        },
+        "flow": [
+          "VLM",
+          "文字問題",
+          "Taiwan Context Engine",
+          "LLM"
+        ]
+      },
+      "checks": {
+        "answer_nonempty": true,
+        "required_group_hits": 2,
+        "required_group_total": 2,
+        "keyword_recall": 1.0,
+        "missing_required_groups": [],
+        "forbidden_claim_hits": [],
+        "hallucination_free": true,
+        "expected_uncertainty": true,
+        "returned_uncertainty": true,
+        "uncertainty_correct": true,
+        "automatic_pass": true
+      },
+      "timing": {
+        "image_wall_seconds": 4.1032,
+        "follow_up_wall_seconds": 0.0163,
+        "end_to_end_wall_seconds": 4.1195
+      }
+    },
+    {
+      "case": {
+        "id": "M12",
+        "image_file": "V12.jpg",
+        "relationship": "未提供",
+        "question": "這是在台灣哪個地方？",
+        "required_answer_groups": [
+          [
+            "無法",
+            "不能"
+          ],
+          [
+            "確認",
+            "確定",
+            "判斷"
+          ],
+          [
+            "地點",
+            "位置"
+          ]
+        ],
+        "forbidden_claims": [
+          "台北",
+          "臺北",
+          "高雄",
+          "花蓮",
+          "基隆",
+          "宜蘭"
+        ],
+        "expect_uncertainty": true
+      },
+      "status": "completed",
+      "input_mode": "text",
+      "image_source": "live",
+      "image_response": {
+        "filename": "V12.jpg",
+        "model": "gemma3:4b",
+        "original_size": {
+          "width": 838,
+          "height": 562
+        },
+        "processed_size": {
+          "width": 768,
+          "height": 516
+        },
+        "processing_seconds": 7.7319,
+        "analysis": {
+          "observations": [
+            {
+              "text": "一座延伸至海中的鋼結構橋",
+              "confidence": 1.0
+            },
+            {
+              "text": "一座大型的圓形雕塑",
+              "confidence": 0.9
+            },
+            {
+              "text": "海",
+              "confidence": 1.0
+            },
+            {
+              "text": "雲",
+              "confidence": 0.8
+            },
+            {
+              "text": "黑色防浪堤",
+              "confidence": 0.9
+            },
+            {
+              "text": "藍色和白色塊狀結構",
+              "confidence": 0.7
+            },
+            {
+              "text": "灰色防浪堤",
+              "confidence": 0.6
+            },
+            {
+              "text": "一個黑色平台",
+              "confidence": 0.8
+            },
+            {
+              "text": "一個白色欄杆",
+              "confidence": 0.7
+            },
+            {
+              "text": "一個藍色和白色條紋的平台",
+              "confidence": 0.6
+            }
+          ],
+          "visible_text": [
+            {
+              "text": "0",
+              "confidence": 0.9
+            },
+            {
+              "text": "1",
+              "confidence": 0.8
+            },
+            {
+              "text": "2",
+              "confidence": 0.7
+            }
+          ],
+          "context_inferences": [
+            {
+              "description": "雕塑可能位於海邊",
+              "basis": "雕塑位於海邊",
+              "confidence": 0.9
+            },
+            {
+              "description": "橋可能用於連接陸地和海邊",
+              "basis": "橋延伸至海中",
+              "confidence": 0.8
+            }
+          ],
+          "uncertainties": [
+            "橋的具體位置",
+            "雕塑的具體名稱",
+            "橋的用途"
+          ]
+        },
+        "needs_confirmation": true,
+        "warnings": [
+          "low_confidence_ocr_requires_confirmation",
+          "context_is_inference_not_fact",
+          "low_confidence_observation"
+        ],
+        "privacy": {
+          "processed_locally": true,
+          "image_persisted": false
+        }
+      },
+      "follow_up_response": {
+        "input_mode": "text",
+        "question": "這是在台灣哪個地方？",
+        "question_needs_confirmation": false,
+        "answer": {
+          "answer": "無法只憑這張圖片確定具體地點。畫面中的景物可供描述，但沒有足以確認城市或地址的可靠線索。",
+          "basis": [
+            "圖片沒有可驗證的地名或地址"
+          ],
+          "uncertainties": [
+            "拍攝地點與地址無法確認"
+          ],
+          "needs_confirmation": true,
+          "model": "deterministic_safety_guard",
+          "processing_seconds": 0.0
+        },
+        "flow": [
+          "VLM",
+          "文字問題",
+          "Taiwan Context Engine",
+          "LLM"
+        ]
+      },
+      "checks": {
+        "answer_nonempty": true,
+        "required_group_hits": 3,
+        "required_group_total": 3,
+        "keyword_recall": 1.0,
+        "missing_required_groups": [],
+        "forbidden_claim_hits": [],
+        "hallucination_free": true,
+        "expected_uncertainty": true,
+        "returned_uncertainty": true,
+        "uncertainty_correct": true,
+        "automatic_pass": true
+      },
+      "timing": {
+        "image_wall_seconds": 7.7415,
+        "follow_up_wall_seconds": 0.0215,
+        "end_to_end_wall_seconds": 7.763
+      }
+    }
+  ]
+}
