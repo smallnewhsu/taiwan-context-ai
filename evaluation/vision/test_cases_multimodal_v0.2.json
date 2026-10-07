@@ -1,0 +1,90 @@
+{
+  "suite": "Taiwan Context AI Vision Multimodal v0.2",
+  "description": "以現行影像分析結果接續文字追問；若個案提供audio_file，另測試影像後接語音追問。",
+  "cases": [
+    {
+      "id": "M01", "image_file": "V01.jpg", "relationship": "未提供",
+      "question": "這張圖片是在什麼樣的地方？",
+      "required_answer_groups": [["街道", "道路"], ["城市", "都市", "市區"]],
+      "forbidden_claims": ["台北", "臺北", "高雄", "台中", "臺中"],
+      "expect_uncertainty": false
+    },
+    {
+      "id": "M02", "image_file": "V02.jpg", "relationship": "顧客與店家",
+      "question": "這間店可能提供什麼服務？",
+      "required_answer_groups": [["水族", "魚缸", "水族用品", "無法", "不能"], ["可能", "看起來", "較像", "確認"]],
+      "forbidden_claims": ["寵物醫療", "獸醫", "24小時"],
+      "expect_uncertainty": true
+    },
+    {
+      "id": "M03", "image_file": "V03.jpg", "relationship": "顧客與店家",
+      "question": "圖片中的垃圾袋一包多少錢？",
+      "required_answer_groups": [["40", "四十"], ["元"]],
+      "forbidden_claims": ["50元", "五十元", "30元", "三十元"],
+      "expect_uncertainty": false
+    },
+    {
+      "id": "M04", "image_file": "V04.jpg", "relationship": "乘客與交通服務",
+      "question": "站牌上可以確認哪些交通資訊？",
+      "required_answer_groups": [["無法", "不能"], ["確認", "可靠"], ["OCR", "文字"]],
+      "forbidden_claims": ["台南", "臺南", "台北", "臺北"],
+      "expect_uncertainty": true
+    },
+    {
+      "id": "M05", "image_file": "V05.jpg", "relationship": "顧客與店家",
+      "question": "菜單上有哪些冰沙口味？",
+      "required_answer_groups": [["無法", "不能"], ["確認", "OCR", "文字"]],
+      "forbidden_claims": ["草莓", "西瓜", "巧克力"],
+      "expect_uncertainty": true
+    },
+    {
+      "id": "M06", "image_file": "V06.jpg", "relationship": "未提供",
+      "question": "這個電鍋現在正在煮飯嗎？",
+      "required_answer_groups": [["無法", "不能", "看不出"], ["確認", "確定", "判斷"]],
+      "forbidden_claims": ["正在煮飯", "正在加熱", "飯已經熟了"],
+      "expect_uncertainty": true
+    },
+    {
+      "id": "M07", "image_file": "V07.jpg", "relationship": "居民與清潔隊",
+      "question": "這張圖主要是在說明什麼？",
+      "required_answer_groups": [["垃圾分類", "回收分類"], ["回收"], ["無法受理", "不可回收", "垃圾"]],
+      "forbidden_claims": ["所有物品都能回收", "不用分類"],
+      "expect_uncertainty": false
+    },
+    {
+      "id": "M08", "image_file": "V08.jpg", "relationship": "訪客與公共場所",
+      "question": "這可能是什麼場所？",
+      "required_answer_groups": [["靜思堂", "宗教建築", "公共建築"], ["可能", "看起來", "較像"]],
+      "forbidden_claims": ["醫院", "學校", "車站"],
+      "expect_uncertainty": true
+    },
+    {
+      "id": "M09", "image_file": "V09.jpg", "relationship": "社區居民",
+      "question": "這份公告希望大家怎麼做？",
+      "required_answer_groups": [["垃圾帶走", "帶走垃圾"], ["公共環境", "環境", "家園"], ["維護", "守護", "珍惜", "環境更美好"]],
+      "forbidden_claims": ["繳交罰款", "禁止進入", "停止使用場地"],
+      "expect_uncertainty": false
+    },
+    {
+      "id": "M10", "image_file": "V10.jpg", "relationship": "未提供",
+      "question": "這個物品要怎麼使用？",
+      "required_answer_groups": [["鏡子", "立鏡", "桌上鏡"], ["支架", "立起", "調整角度", "調整鏡子的角度", "調整到適合的角度", "調整到特定的角度"]],
+      "forbidden_claims": ["需要插電", "具有照明", "內建電池"],
+      "expect_uncertainty": false
+    },
+    {
+      "id": "M11", "image_file": "V11.jpg", "relationship": "未提供",
+      "question": "這張紙上寫了什麼？",
+      "required_answer_groups": [["模糊", "看不清", "無法", "不能"], ["辨識", "確認", "OCR"]],
+      "forbidden_claims": ["姓名", "電話", "地址", "日期"],
+      "expect_uncertainty": true
+    },
+    {
+      "id": "M12", "image_file": "V12.jpg", "relationship": "未提供",
+      "question": "這是在台灣哪個地方？",
+      "required_answer_groups": [["無法", "不能"], ["確認", "確定", "判斷"], ["地點", "位置"]],
+      "forbidden_claims": ["台北", "臺北", "高雄", "花蓮", "基隆", "宜蘭"],
+      "expect_uncertainty": true
+    }
+  ]
+}

@@ -76,31 +76,37 @@ class VisionService:
             processed_size = self._image_size(resized_path)
             encoded_image = base64.b64encode(resized_path.read_bytes()).decode("ascii")
 
-        response = self._request_json(
-            "POST",
-            "/api/chat",
-            {
-                "model": self.model,
-                "stream": False,
-                "keep_alive": "5m",
-                "format": self._response_schema(),
-                "options": {"temperature": 0.1, "num_ctx": 8192},
-                "messages": [
-                    {
-                        "role": "user",
-                        "content": self._prompt(),
-                        "images": [encoded_image],
-                    }
-                ],
-            },
-            timeout=180,
-        )
-
-        message = response.get("message", {}).get("content", "")
-        try:
-            analysis = json.loads(message)
-        except (TypeError, json.JSONDecodeError) as exc:
-            raise RuntimeError("視覺模型未回傳有效的結構化結果") from exc
+        request_payload = {
+            "model": self.model,
+            "stream": False,
+            "keep_alive": "5m",
+            "format": self._response_schema(),
+            "options": {"temperature": 0.0, "num_ctx": 8192},
+            "messages": [
+                {
+                    "role": "user",
+                    "content": self._prompt(),
+                    "images": [encoded_image],
+                }
+            ],
+        }
+        analysis = None
+        parse_error: Exception | None = None
+        for _attempt in range(2):
+            response = self._request_json(
+                "POST", "/api/chat", request_payload, timeout=180
+            )
+            message = response.get("message", {}).get("content", "")
+            try:
+                candidate = json.loads(message)
+                if isinstance(candidate, dict):
+                    analysis = candidate
+                    parse_error = None
+                    break
+            except (TypeError, json.JSONDecodeError) as exc:
+                parse_error = exc
+        if analysis is None:
+            raise RuntimeError("視覺模型連續兩次未回傳有效的結構化結果") from parse_error
 
         analysis = self._sanitize_analysis(analysis)
         warnings = self._safety_warnings(analysis)
