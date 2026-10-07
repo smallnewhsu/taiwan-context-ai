@@ -552,6 +552,7 @@ async def interpret_speech(
             "requested_language": language,
             "language_label": approved_correction.get("language_label", "人工確認"),
             "model_route": "human_review",
+            "model_name": "人工審核修正記憶",
         }
 
     try:
@@ -572,6 +573,7 @@ async def interpret_speech(
             "requested_language": asr_result["requested_language"],
             "language_label": asr_result["language_label"],
             "model_route": asr_result["model_route"],
+            "model_name": asr_result["model_name"],
         }
     except ValueError as exc:
         raise HTTPException(status_code=415, detail=str(exc)) from exc

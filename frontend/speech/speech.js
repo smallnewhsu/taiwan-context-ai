@@ -28,7 +28,7 @@ const selectedLanguageHint = $("#selectedLanguageHint");
 speechLanguage.addEventListener("change", () => {
   const label = speechLanguage.options[speechLanguage.selectedIndex].text;
   selectedLanguageHint.textContent = speechLanguage.value === "vi"
-    ? "目前：越南語；將使用 multilingual Whisper 辨識"
+    ? "目前：越南語；將使用 Whisper Turbo 辨識"
     : `目前：${label}`;
   document.querySelector(".language-card").classList.toggle("vietnamese-selected", speechLanguage.value === "vi");
 });
@@ -168,7 +168,9 @@ analyzeButton.addEventListener("click", async () => {
 function renderResult(data) {
   const decision = data.decision;
   $("#recognizedLanguage").textContent = data.language_label || "自動判斷";
-  $("#modelRoute").textContent = data.model_route || "Taiwan Tongues ASR CE";
+  $("#modelRoute").textContent = data.model_name
+    ? `${data.model_route || "ASR"}｜${data.model_name}`
+    : (data.model_route || "Taiwan Tongues ASR CE");
   if (data.context) applyModelRelationship(data.context);
   else inferRelationship(decision.selected_text);
   $("#audioDuration").textContent = data.audio_duration_seconds == null ? "已審核修正記憶" : `${round(data.audio_duration_seconds)} 秒`;

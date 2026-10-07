@@ -1,0 +1,31 @@
+﻿case_id,language,model,audio_file,reference,hypothesis,cer,substitutions,deletions,insertions,audio_duration_seconds,inference_seconds,rtf
+T51,台語,C:\taiwan-context-ai\services\asr\models,T51.m4a,阿媽，你食飽未？若猶未，就轉來阮兜食。,阿嬤妳吃飽了嗎如果還沒就回來問老闆,0.8666666666666667,11,0,2,7.0827,1.3892,0.1961
+T52,台語,C:\taiwan-context-ai\services\asr\models,T52.m4a,菜佇電鍋內底，轉來家己挾，莫閣食泡麵。,菜放在湯圓裡等我爸爸一天不要再吃泡米,1.0,14,0,2,7.0187,1.0556,0.1504
+T53,台語,C:\taiwan-context-ai\services\asr\models,T53.m4a,我今仔日會較晏轉去，毋免等我食暗頓。,我今天會比較安靜回去不用等我吃晚飯,0.6875,10,0,1,6.7414,0.7959,0.1181
+T54,台語,C:\taiwan-context-ai\services\asr\models,T54.m4a,阿爸，我拜六早起欲出門，暗時才會轉來。,爸爸我伯父的兒子要出門晚上才會回來,0.625,9,0,1,5.9734,0.6617,0.1108
+T55,台語,C:\taiwan-context-ai\services\asr\models,T55.m4a,彼項物件傷貴，我這馬無欲買。,他讓東西太貴我現在不想買,0.75,9,0,0,6.144,0.5956,0.0969
+T56,台語,C:\taiwan-context-ai\services\asr\models,T56.m4a,明仔載早起八點愛去病院，毋通慢到。,媽媽在早上八點要去醫院你不要亂玩,0.7333333333333333,10,0,1,7.0187,0.6694,0.0954
+T57,台語,C:\taiwan-context-ai\services\asr\models,T57.m4a,火車可能會誤點，我毋知六點進前敢會到。,而且可能的緩婚我不知道這六點多是假的嗎,0.7647058823529411,11,0,2,6.7414,0.6767,0.1004
+T58,台語,C:\taiwan-context-ai\services\asr\models,T58.m4a,這包藥睏進前干焦會使食一粒，毋通加食。,這包油啊瓶塞瓶塞只要曬乾淨才可以吃一顆不用多加,1.1764705882352942,14,0,6,7.9787,0.9165,0.1149
+T59,台語,C:\taiwan-context-ai\services\asr\models,T59.m4a,一个人六百五十箍，無包括啉的。,一個人六百五十顆不包括飲料,0.38461538461538464,5,0,0,7.0614,0.6362,0.0901
+T60,台語,C:\taiwan-context-ai\services\asr\models,T60.m4a,相片會使留咧，毋通囥佇網路頂懸。,唱品可以老了不要放在網路上,0.8571428571428571,11,1,0,6.5707,0.6382,0.0971
+T61,客語,C:\taiwan-context-ai\services\asr\models,T61.m4a,阿婆，你食飽吂？吂食就轉來屋下食飯。,奶奶你吃飽了嗎還沒吃就回家吃飯,0.8,12,0,0,7.3143,0.6709,0.0917
+T62,客語,C:\taiwan-context-ai\services\asr\models,T62.m4a,菜在電鑊肚，轉來自家挾，毋好又食泡麵。,菜在房屋裡摘來自己夾不要又吃泡麵,0.5625,9,0,0,8.3592,0.7244,0.0867
+T63,客語,C:\taiwan-context-ai\services\asr\models,T63.m4a,𠊎今晡日會較夜轉屋下，毋使等𠊎食夜。,我今天會靠夜回家不用等我吃夜,0.6875,9,2,0,6.4784,0.6282,0.097
+T64,客語,C:\taiwan-context-ai\services\asr\models,T64.m4a,阿公，𠊎禮拜六朝晨愛出門，暗晡正會轉來。,爺爺這禮拜六早上要出門晚上才會回來,0.5882352941176471,10,0,0,7.175,0.7052,0.0983
+T65,客語,C:\taiwan-context-ai\services\asr\models,T65.m4a,該隻東西忒貴，𠊎這下毋想買。,這個東西太貴我現在不想買,0.5833333333333334,7,0,0,5.8979,0.62,0.1051
+T66,客語,C:\taiwan-context-ai\services\asr\models,T66.m4a,天光日朝晨八點愛去醫院，毋好遲到。,明天早上八點要去醫院不要遲到,0.5333333333333333,7,1,0,6.9196,0.6541,0.0945
+T67,客語,C:\taiwan-context-ai\services\asr\models,T67.m4a,火車可能會慢到，𠊎毋確定六點以前做得著無。,火車可能會慢到我沒有確定6點以前能夠到嗎,0.42105263157894735,7,0,1,8.1734,0.6882,0.0842
+T68,客語,C:\taiwan-context-ai\services\asr\models,T68.m4a,這包藥睡以前淨做得食一粒，毋好加食。,這包藥睡以前才可以吃一顆不要加吃,0.5,8,0,0,7.0124,0.709,0.1011
+T69,客語,C:\taiwan-context-ai\services\asr\models,T69.m4a,一儕人六百五十箍，毋包飲料。,一人六百五十顆不飽飲料,0.3333333333333333,3,1,0,6.014,0.6205,0.1032
+T70,客語,C:\taiwan-context-ai\services\asr\models,T70.m4a,這張相片做得留等，毋好放到網路頂。,這張照片可以留著不要放到馬路上,0.5333333333333333,8,0,0,7.2911,0.661,0.0907
+T71,越南語,turbo,T71.m4a,"Bà ơi, con ăn rồi, bà đừng chờ con ăn cơm nhé.","Bà ơi, con ăn rồi, bà đừng chờ cơm con nhé.",0.1875,4,2,0,4.2867,0.3835,0.0895
+T72,越南語,turbo,T72.m4a,"Thuốc này chỉ uống một viên trước khi ngủ, đừng uống thêm.","Thuốc này chỉ uống một viên trước khi ngủ, đừng uống thêm.",0.0,0,0,0,3.86,0.3865,0.1001
+T73,越南語,turbo,T73.m4a,"Hôm nay con sẽ về muộn, khoảng chín giờ mới về đến nhà.","Hôm nay con sẽ về muộn, khoảng 9 giờ mới về đến nhà.",0.0975609756097561,1,3,0,3.7747,0.3723,0.0986
+T74,越南語,turbo,T74.m4a,"Thức ăn ở trong nồi cơm điện, về nhà thì tự lấy ăn nhé.","Thức ăn ở trong nồi cơm điện, về nhà thì tự lấy nhé.",0.05,0,2,0,3.9454,0.4396,0.1114
+T75,越南語,turbo,T75.m4a,Sáng mai lúc tám giờ chúng ta phải đến bệnh viện.,Sáng mai lúc 8 giờ chúng ta phải đi đến bệnh viện.,0.13157894736842105,1,2,2,4.0307,0.3661,0.0908
+T76,越南語,turbo,T76.m4a,Tôi chưa chắc mình có thể đến trước sáu giờ.,Tôi chưa chắc mình có thể đến trước 6 giờ.,0.08823529411764706,1,2,0,3.5187,0.346,0.0983
+T77,越南語,turbo,T77.m4a,"Mỗi người trả sáu trăm năm mươi Đài tệ, chưa bao gồm đồ uống.","Mỗi người trả 650 đài tệ, chưa bao gồm đồ uống.",0.30434782608695654,3,11,0,5.3107,0.3799,0.0715
+T78,越南語,turbo,T78.m4a,"Tài khoản này chỉ được xem dữ liệu, không được sửa hoặc tải xuống.","Tài khoản này chỉ được xem dữ liệu, không được sử dụng tài xuống.",0.11764705882352941,5,1,0,5.14,0.398,0.0774
+T79,越南語,turbo,T79.m4a,"Sau khi gửi đơn đăng ký, bạn không thể đổi tên.","Sau khi gửi đơn đăng ký, bạn không thể đổi tên.",0.0,0,0,0,4.5427,0.3824,0.0842
+T80,越南語,turbo,T80.m4a,"Thứ Sáu tuần này tôi phải đi làm, đến Chủ nhật tôi mới về nhà.","Thứ 6 tuần này tôi phải đi làm, đến Chủ nhật tôi mới về nhà.",0.06521739130434782,1,2,0,5.396,0.3881,0.0719
