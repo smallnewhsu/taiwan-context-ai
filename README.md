@@ -137,23 +137,6 @@ T51～T80分語言結果：
 - FFmpeg
 - Git
 
-### 安裝與啟動
-
-```bat
-git clone --recurse-submodules https://github.com/smallnewhsu/taiwan-context-ai.git
-cd /d taiwan-context-ai
-ollama pull gemma3:4b
-start_demo.bat
-```
-
-啟動後可開啟：
-
-- 系統首頁：<http://127.0.0.1:8000/app/>
-- 管理中心：<http://127.0.0.1:8000/app/admin/>
-- API文件：<http://127.0.0.1:8000/docs>
-
-操作流程請見 [`docs/DEMO_RUNBOOK.md`](docs/DEMO_RUNBOOK.md)，系統架構請見 [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md)。
-
 ## 專案目錄
 
 ```text
