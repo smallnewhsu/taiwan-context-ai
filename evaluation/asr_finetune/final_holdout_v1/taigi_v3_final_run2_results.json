@@ -1,0 +1,627 @@
+{
+  "summary": {
+    "suite": "T81-T100 frozen LoRA comparison",
+    "total_cases": 20,
+    "base": {
+      "macro_cer": 0.7243180349062702,
+      "micro_cer": 0.7192982456140351,
+      "total_errors": 205,
+      "total_reference_characters": 285,
+      "mean_seconds": 4.5288871199940335
+    },
+    "adapter": {
+      "macro_cer": 0.6562901314371903,
+      "micro_cer": 0.656140350877193,
+      "total_errors": 187,
+      "total_reference_characters": 285,
+      "mean_seconds": 4.562423145002685
+    },
+    "micro_cer_absolute_change": -0.06315789473684208,
+    "micro_cer_relative_improvement": 0.08780487804878045,
+    "improved_cases": 9,
+    "unchanged_cases": 7,
+    "regressed_cases": 4
+  },
+  "results": [
+    {
+      "case_id": "T81",
+      "audio_path": "C:\\taiwan-context-ai\\evaluation\\asr_finetune\\final_holdout_v1\\audio\\T81.m4a",
+      "reference": "你若到厝，會記得共我講一聲。",
+      "base_text": "你如果有出一個解解說一下",
+      "base_seconds": 5.5498292001429945,
+      "base_score": {
+        "normalized_reference": "你若到厝會記得共我講一聲",
+        "normalized_hypothesis": "你如果有出一個解解說一下",
+        "reference_characters": 12,
+        "substitutions": 10,
+        "deletions": 0,
+        "insertions": 0,
+        "errors": 10,
+        "cer": 0.8333333333333334
+      },
+      "adapter_text": "你如果口出鞋底只說一聲",
+      "adapter_seconds": 3.6040013001766056,
+      "adapter_score": {
+        "normalized_reference": "你若到厝會記得共我講一聲",
+        "normalized_hypothesis": "你如果口出鞋底只說一聲",
+        "reference_characters": 12,
+        "substitutions": 8,
+        "deletions": 1,
+        "insertions": 0,
+        "errors": 9,
+        "cer": 0.75
+      },
+      "cer_delta": -0.08333333333333337
+    },
+    {
+      "case_id": "T82",
+      "audio_path": "C:\\taiwan-context-ai\\evaluation\\asr_finetune\\final_holdout_v1\\audio\\T82.m4a",
+      "reference": "今仔日風真透，出門愛加穿一領衫。",
+      "base_text": "今天洪英傑出門要多穿一件衣服",
+      "base_seconds": 7.35555769992061,
+      "base_score": {
+        "normalized_reference": "今仔日風真透出門愛加穿一領衫",
+        "normalized_hypothesis": "今天洪英傑出門要多穿一件衣服",
+        "reference_characters": 14,
+        "substitutions": 8,
+        "deletions": 1,
+        "insertions": 1,
+        "errors": 10,
+        "cer": 0.7142857142857143
+      },
+      "adapter_text": "今天洪仁頭出門要雞清一聲",
+      "adapter_seconds": 4.491309100063518,
+      "adapter_score": {
+        "normalized_reference": "今仔日風真透出門愛加穿一領衫",
+        "normalized_hypothesis": "今天洪仁頭出門要雞清一聲",
+        "reference_characters": 14,
+        "substitutions": 8,
+        "deletions": 2,
+        "insertions": 0,
+        "errors": 10,
+        "cer": 0.7142857142857143
+      },
+      "cer_delta": 0.0
+    },
+    {
+      "case_id": "T83",
+      "audio_path": "C:\\taiwan-context-ai\\evaluation\\asr_finetune\\final_holdout_v1\\audio\\T83.m4a",
+      "reference": "冰箱內底有賰的飯菜，欲食家己炊熱。",
+      "base_text": "冰箱裡有剩菜要吃的時候要去燙一下",
+      "base_seconds": 5.771528200013563,
+      "base_score": {
+        "normalized_reference": "冰箱內底有賰的飯菜欲食家己炊熱",
+        "normalized_hypothesis": "冰箱裡有剩菜要吃的時候要去燙一下",
+        "reference_characters": 15,
+        "substitutions": 9,
+        "deletions": 2,
+        "insertions": 3,
+        "errors": 14,
+        "cer": 0.9333333333333333
+      },
+      "adapter_text": "臉上裡面有剩菜要吃上解決糖果秀",
+      "adapter_seconds": 5.167066799942404,
+      "adapter_score": {
+        "normalized_reference": "冰箱內底有賰的飯菜欲食家己炊熱",
+        "normalized_hypothesis": "臉上裡面有剩菜要吃上解決糖果秀",
+        "reference_characters": 15,
+        "substitutions": 14,
+        "deletions": 0,
+        "insertions": 0,
+        "errors": 14,
+        "cer": 0.9333333333333333
+      },
+      "cer_delta": 0.0
+    },
+    {
+      "case_id": "T84",
+      "audio_path": "C:\\taiwan-context-ai\\evaluation\\asr_finetune\\final_holdout_v1\\audio\\T84.m4a",
+      "reference": "我欲較慢十分鐘到，毋免佇門口等。",
+      "base_text": "我的牌子十五證交你不用在那門口等",
+      "base_seconds": 4.795768799958751,
+      "base_score": {
+        "normalized_reference": "我欲較慢十分鐘到毋免佇門口等",
+        "normalized_hypothesis": "我的牌子十五證交你不用在那門口等",
+        "reference_characters": 14,
+        "substitutions": 9,
+        "deletions": 0,
+        "insertions": 2,
+        "errors": 11,
+        "cer": 0.7857142857142857
+      },
+      "adapter_text": "我的目十分鐘到你還在門口等",
+      "adapter_seconds": 3.6864942999091,
+      "adapter_score": {
+        "normalized_reference": "我欲較慢十分鐘到毋免佇門口等",
+        "normalized_hypothesis": "我的目十分鐘到你還在門口等",
+        "reference_characters": 14,
+        "substitutions": 5,
+        "deletions": 1,
+        "insertions": 0,
+        "errors": 6,
+        "cer": 0.42857142857142855
+      },
+      "cer_delta": -0.35714285714285715
+    },
+    {
+      "case_id": "T85",
+      "audio_path": "C:\\taiwan-context-ai\\evaluation\\asr_finetune\\final_holdout_v1\\audio\\T85.m4a",
+      "reference": "這包藥愛食飯了後才食，一工兩擺。",
+      "base_text": "一包油要讓老闆一天能賣",
+      "base_seconds": 3.8948846000712365,
+      "base_score": {
+        "normalized_reference": "這包藥愛食飯了後才食一工兩擺",
+        "normalized_hypothesis": "一包油要讓老闆一天能賣",
+        "reference_characters": 14,
+        "substitutions": 9,
+        "deletions": 3,
+        "insertions": 0,
+        "errors": 12,
+        "cer": 0.8571428571428571
+      },
+      "adapter_text": "一包藥要飯後吃一天兩次",
+      "adapter_seconds": 3.965866200160235,
+      "adapter_score": {
+        "normalized_reference": "這包藥愛食飯了後才食一工兩擺",
+        "normalized_hypothesis": "一包藥要飯後吃一天兩次",
+        "reference_characters": 14,
+        "substitutions": 5,
+        "deletions": 3,
+        "insertions": 0,
+        "errors": 8,
+        "cer": 0.5714285714285714
+      },
+      "cer_delta": -0.2857142857142857
+    },
+    {
+      "case_id": "T86",
+      "audio_path": "C:\\taiwan-context-ai\\evaluation\\asr_finetune\\final_holdout_v1\\audio\\T86.m4a",
+      "reference": "明仔載下晡三點愛去病院看報告。",
+      "base_text": "明天的報紙你一定要去看報告",
+      "base_seconds": 3.7271114999894053,
+      "base_score": {
+        "normalized_reference": "明仔載下晡三點愛去病院看報告",
+        "normalized_hypothesis": "明天的報紙你一定要去看報告",
+        "reference_characters": 14,
+        "substitutions": 7,
+        "deletions": 2,
+        "insertions": 1,
+        "errors": 10,
+        "cer": 0.7142857142857143
+      },
+      "adapter_text": "明天的保生店要去便宜跨報國",
+      "adapter_seconds": 4.4536452000029385,
+      "adapter_score": {
+        "normalized_reference": "明仔載下晡三點愛去病院看報告",
+        "normalized_hypothesis": "明天的保生店要去便宜跨報國",
+        "reference_characters": 14,
+        "substitutions": 10,
+        "deletions": 1,
+        "insertions": 0,
+        "errors": 11,
+        "cer": 0.7857142857142857
+      },
+      "cer_delta": 0.0714285714285714
+    },
+    {
+      "case_id": "T87",
+      "audio_path": "C:\\taiwan-context-ai\\evaluation\\asr_finetune\\final_holdout_v1\\audio\\T87.m4a",
+      "reference": "電火關予好，出門進前閣檢查一擺。",
+      "base_text": "重點是關於讓出門證過檢查一次",
+      "base_seconds": 4.726327300071716,
+      "base_score": {
+        "normalized_reference": "電火關予好出門進前閣檢查一擺",
+        "normalized_hypothesis": "重點是關於讓出門證過檢查一次",
+        "reference_characters": 14,
+        "substitutions": 7,
+        "deletions": 1,
+        "insertions": 1,
+        "errors": 9,
+        "cer": 0.6428571428571429
+      },
+      "adapter_text": "重點是縣府出門進國檢察一次",
+      "adapter_seconds": 4.159615000011399,
+      "adapter_score": {
+        "normalized_reference": "電火關予好出門進前閣檢查一擺",
+        "normalized_hypothesis": "重點是縣府出門進國檢察一次",
+        "reference_characters": 14,
+        "substitutions": 8,
+        "deletions": 1,
+        "insertions": 0,
+        "errors": 9,
+        "cer": 0.6428571428571429
+      },
+      "cer_delta": 0.0
+    },
+    {
+      "case_id": "T88",
+      "audio_path": "C:\\taiwan-context-ai\\evaluation\\asr_finetune\\final_holdout_v1\\audio\\T88.m4a",
+      "reference": "這張相片莫傳予別人，留佇手機就好。",
+      "base_text": "這張照片不要傳給別人看老的手機就好",
+      "base_seconds": 5.017240999964997,
+      "base_score": {
+        "normalized_reference": "這張相片莫傳予別人留佇手機就好",
+        "normalized_hypothesis": "這張照片不要傳給別人看老的手機就好",
+        "reference_characters": 15,
+        "substitutions": 5,
+        "deletions": 0,
+        "insertions": 2,
+        "errors": 7,
+        "cer": 0.4666666666666667
+      },
+      "adapter_text": "這張照片不要傳給別人看劉仔手機就好",
+      "adapter_seconds": 5.330797599861398,
+      "adapter_score": {
+        "normalized_reference": "這張相片莫傳予別人留佇手機就好",
+        "normalized_hypothesis": "這張照片不要傳給別人看劉仔手機就好",
+        "reference_characters": 15,
+        "substitutions": 5,
+        "deletions": 0,
+        "insertions": 2,
+        "errors": 7,
+        "cer": 0.4666666666666667
+      },
+      "cer_delta": 0.0
+    },
+    {
+      "case_id": "T89",
+      "audio_path": "C:\\taiwan-context-ai\\evaluation\\asr_finetune\\final_holdout_v1\\audio\\T89.m4a",
+      "reference": "若有啥物看無，先問清楚才閣揤落去。",
+      "base_text": "如果有什麼看不懂的請問清楚再試下去",
+      "base_seconds": 4.285878599854186,
+      "base_score": {
+        "normalized_reference": "若有啥物看無先問清楚才閣揤落去",
+        "normalized_hypothesis": "如果有什麼看不懂的請問清楚再試下去",
+        "reference_characters": 15,
+        "substitutions": 8,
+        "deletions": 1,
+        "insertions": 3,
+        "errors": 12,
+        "cer": 0.8
+      },
+      "adapter_text": "如果有什麼看不懂的請問清楚去跟七落去",
+      "adapter_seconds": 4.773488200036809,
+      "adapter_score": {
+        "normalized_reference": "若有啥物看無先問清楚才閣揤落去",
+        "normalized_hypothesis": "如果有什麼看不懂的請問清楚去跟七落去",
+        "reference_characters": 15,
+        "substitutions": 8,
+        "deletions": 0,
+        "insertions": 3,
+        "errors": 11,
+        "cer": 0.7333333333333333
+      },
+      "cer_delta": -0.06666666666666676
+    },
+    {
+      "case_id": "T90",
+      "audio_path": "C:\\taiwan-context-ai\\evaluation\\asr_finetune\\final_holdout_v1\\audio\\T90.m4a",
+      "reference": "垃圾車猶未來，袋仔先莫提去外口。",
+      "base_text": "本廚寫業未來提案先不要多去外面",
+      "base_seconds": 5.089827399933711,
+      "base_score": {
+        "normalized_reference": "垃圾車猶未來袋仔先莫提去外口",
+        "normalized_hypothesis": "本廚寫業未來提案先不要多去外面",
+        "reference_characters": 14,
+        "substitutions": 9,
+        "deletions": 0,
+        "insertions": 1,
+        "errors": 10,
+        "cer": 0.7142857142857143
+      },
+      "adapter_text": "本廚寫葉未來茶葉先不要多去外面",
+      "adapter_seconds": 4.934347999980673,
+      "adapter_score": {
+        "normalized_reference": "垃圾車猶未來袋仔先莫提去外口",
+        "normalized_hypothesis": "本廚寫葉未來茶葉先不要多去外面",
+        "reference_characters": 14,
+        "substitutions": 9,
+        "deletions": 0,
+        "insertions": 1,
+        "errors": 10,
+        "cer": 0.7142857142857143
+      },
+      "cer_delta": 0.0
+    },
+    {
+      "case_id": "T91",
+      "audio_path": "C:\\taiwan-context-ai\\evaluation\\asr_finetune\\final_holdout_v1\\audio\\T91.m4a",
+      "reference": "阿公今仔日精神無䆀，毋過行路愛慢慢仔。",
+      "base_text": "阿公今天的精神不錯但是走路要慢慢的走",
+      "base_seconds": 4.026734999846667,
+      "base_score": {
+        "normalized_reference": "阿公今仔日精神無䆀毋過行路愛慢慢仔",
+        "normalized_hypothesis": "阿公今天的精神不錯但是走路要慢慢的走",
+        "reference_characters": 17,
+        "substitutions": 9,
+        "deletions": 0,
+        "insertions": 1,
+        "errors": 10,
+        "cer": 0.5882352941176471
+      },
+      "adapter_text": "阿公怕的精神不錯不過怕路要慢慢的走",
+      "adapter_seconds": 4.412795800017193,
+      "adapter_score": {
+        "normalized_reference": "阿公今仔日精神無䆀毋過行路愛慢慢仔",
+        "normalized_hypothesis": "阿公怕的精神不錯不過怕路要慢慢的走",
+        "reference_characters": 17,
+        "substitutions": 8,
+        "deletions": 1,
+        "insertions": 1,
+        "errors": 10,
+        "cer": 0.5882352941176471
+      },
+      "cer_delta": 0.0
+    },
+    {
+      "case_id": "T92",
+      "audio_path": "C:\\taiwan-context-ai\\evaluation\\asr_finetune\\final_holdout_v1\\audio\\T92.m4a",
+      "reference": "菜市仔彼間店拜一無開，禮拜二才有營業。",
+      "base_text": "市場那間店星期一不開星期二照顧營業",
+      "base_seconds": 5.576747499871999,
+      "base_score": {
+        "normalized_reference": "菜市仔彼間店拜一無開禮拜二才有營業",
+        "normalized_hypothesis": "市場那間店星期一不開星期二照顧營業",
+        "reference_characters": 17,
+        "substitutions": 8,
+        "deletions": 1,
+        "insertions": 1,
+        "errors": 10,
+        "cer": 0.5882352941176471
+      },
+      "adapter_text": "一場那間店星期二不開星期二照費營業",
+      "adapter_seconds": 5.49936500005424,
+      "adapter_score": {
+        "normalized_reference": "菜市仔彼間店拜一無開禮拜二才有營業",
+        "normalized_hypothesis": "一場那間店星期二不開星期二照費營業",
+        "reference_characters": 17,
+        "substitutions": 10,
+        "deletions": 1,
+        "insertions": 1,
+        "errors": 12,
+        "cer": 0.7058823529411765
+      },
+      "cer_delta": 0.11764705882352944
+    },
+    {
+      "case_id": "T93",
+      "audio_path": "C:\\taiwan-context-ai\\evaluation\\asr_finetune\\final_holdout_v1\\audio\\T93.m4a",
+      "reference": "火車誤點半點鐘，我可能會較暗到。",
+      "base_text": "而且萬分保險金不可能一派萬到",
+      "base_seconds": 4.370460200123489,
+      "base_score": {
+        "normalized_reference": "火車誤點半點鐘我可能會較暗到",
+        "normalized_hypothesis": "而且萬分保險金不可能一派萬到",
+        "reference_characters": 14,
+        "substitutions": 11,
+        "deletions": 0,
+        "insertions": 0,
+        "errors": 11,
+        "cer": 0.7857142857142857
+      },
+      "adapter_text": "火車萬分暴念仁外可能會較慢到",
+      "adapter_seconds": 4.6119498000480235,
+      "adapter_score": {
+        "normalized_reference": "火車誤點半點鐘我可能會較暗到",
+        "normalized_hypothesis": "火車萬分暴念仁外可能會較慢到",
+        "reference_characters": 14,
+        "substitutions": 7,
+        "deletions": 0,
+        "insertions": 0,
+        "errors": 7,
+        "cer": 0.5
+      },
+      "cer_delta": -0.2857142857142857
+    },
+    {
+      "case_id": "T94",
+      "audio_path": "C:\\taiwan-context-ai\\evaluation\\asr_finetune\\final_holdout_v1\\audio\\T94.m4a",
+      "reference": "一个人六百五十箍，飲料愛另外算。",
+      "base_text": "一個人六百五十顆飲料要另外一顆",
+      "base_seconds": 3.608578700106591,
+      "base_score": {
+        "normalized_reference": "一个人六百五十箍飲料愛另外算",
+        "normalized_hypothesis": "一個人六百五十顆飲料要另外一顆",
+        "reference_characters": 14,
+        "substitutions": 4,
+        "deletions": 0,
+        "insertions": 1,
+        "errors": 5,
+        "cer": 0.35714285714285715
+      },
+      "adapter_text": "一個人六百五十塊銀鈕要另外刻",
+      "adapter_seconds": 4.393607300007716,
+      "adapter_score": {
+        "normalized_reference": "一个人六百五十箍飲料愛另外算",
+        "normalized_hypothesis": "一個人六百五十塊銀鈕要另外刻",
+        "reference_characters": 14,
+        "substitutions": 6,
+        "deletions": 0,
+        "insertions": 0,
+        "errors": 6,
+        "cer": 0.42857142857142855
+      },
+      "cer_delta": 0.0714285714285714
+    },
+    {
+      "case_id": "T95",
+      "audio_path": "C:\\taiwan-context-ai\\evaluation\\asr_finetune\\final_holdout_v1\\audio\\T95.m4a",
+      "reference": "這个帳號干焦會使看資料，袂使修改。",
+      "base_text": "這個工作只可以查資料不能修改",
+      "base_seconds": 3.1312943000812083,
+      "base_score": {
+        "normalized_reference": "這个帳號干焦會使看資料袂使修改",
+        "normalized_hypothesis": "這個工作只可以查資料不能修改",
+        "reference_characters": 15,
+        "substitutions": 9,
+        "deletions": 1,
+        "insertions": 0,
+        "errors": 10,
+        "cer": 0.6666666666666666
+      },
+      "adapter_text": "這個口罩只可以帶資料不能收解",
+      "adapter_seconds": 4.0499451998621225,
+      "adapter_score": {
+        "normalized_reference": "這个帳號干焦會使看資料袂使修改",
+        "normalized_hypothesis": "這個口罩只可以帶資料不能收解",
+        "reference_characters": 15,
+        "substitutions": 11,
+        "deletions": 1,
+        "insertions": 0,
+        "errors": 12,
+        "cer": 0.8
+      },
+      "cer_delta": 0.13333333333333341
+    },
+    {
+      "case_id": "T96",
+      "audio_path": "C:\\taiwan-context-ai\\evaluation\\asr_finetune\\final_holdout_v1\\audio\\T96.m4a",
+      "reference": "會議改到拜五早起九點，所在無變。",
+      "base_text": "慧雯的解決百貨老闆九點所在不便",
+      "base_seconds": 4.636962000047788,
+      "base_score": {
+        "normalized_reference": "會議改到拜五早起九點所在無變",
+        "normalized_hypothesis": "慧雯的解決百貨老闆九點所在不便",
+        "reference_characters": 14,
+        "substitutions": 10,
+        "deletions": 0,
+        "insertions": 1,
+        "errors": 11,
+        "cer": 0.7857142857142857
+      },
+      "adapter_text": "開花的改改百貨早早九點所在無病",
+      "adapter_seconds": 4.798770599998534,
+      "adapter_score": {
+        "normalized_reference": "會議改到拜五早起九點所在無變",
+        "normalized_hypothesis": "開花的改改百貨早早九點所在無病",
+        "reference_characters": 14,
+        "substitutions": 7,
+        "deletions": 0,
+        "insertions": 1,
+        "errors": 8,
+        "cer": 0.5714285714285714
+      },
+      "cer_delta": -0.2142857142857143
+    },
+    {
+      "case_id": "T97",
+      "audio_path": "C:\\taiwan-context-ai\\evaluation\\asr_finetune\\final_holdout_v1\\audio\\T97.m4a",
+      "reference": "雨傘囥佇門邊，欲出門會記得紮。",
+      "base_text": "華舂有客人問你要出門要記得帶",
+      "base_seconds": 3.655123099917546,
+      "base_score": {
+        "normalized_reference": "雨傘囥佇門邊欲出門會記得紮",
+        "normalized_hypothesis": "華舂有客人問你要出門要記得帶",
+        "reference_characters": 13,
+        "substitutions": 9,
+        "deletions": 0,
+        "insertions": 1,
+        "errors": 10,
+        "cer": 0.7692307692307693
+      },
+      "adapter_text": "華山放人問天要出門要記得帶",
+      "adapter_seconds": 3.932380500016734,
+      "adapter_score": {
+        "normalized_reference": "雨傘囥佇門邊欲出門會記得紮",
+        "normalized_hypothesis": "華山放人問天要出門要記得帶",
+        "reference_characters": 13,
+        "substitutions": 9,
+        "deletions": 0,
+        "insertions": 0,
+        "errors": 9,
+        "cer": 0.6923076923076923
+      },
+      "cer_delta": -0.07692307692307698
+    },
+    {
+      "case_id": "T98",
+      "audio_path": "C:\\taiwan-context-ai\\evaluation\\asr_finetune\\final_holdout_v1\\audio\\T98.m4a",
+      "reference": "我已經買好物件，拜日會提轉去。",
+      "base_text": "我已經買好東西了星期日會帶回去",
+      "base_seconds": 3.324580099899322,
+      "base_score": {
+        "normalized_reference": "我已經買好物件拜日會提轉去",
+        "normalized_hypothesis": "我已經買好東西了星期日會帶回去",
+        "reference_characters": 13,
+        "substitutions": 5,
+        "deletions": 0,
+        "insertions": 2,
+        "errors": 7,
+        "cer": 0.5384615384615384
+      },
+      "adapter_text": "我已經買好東西禮拜會帶回去",
+      "adapter_seconds": 3.7684945999644697,
+      "adapter_score": {
+        "normalized_reference": "我已經買好物件拜日會提轉去",
+        "normalized_hypothesis": "我已經買好東西禮拜會帶回去",
+        "reference_characters": 13,
+        "substitutions": 4,
+        "deletions": 1,
+        "insertions": 1,
+        "errors": 6,
+        "cer": 0.46153846153846156
+      },
+      "cer_delta": -0.07692307692307687
+    },
+    {
+      "case_id": "T99",
+      "audio_path": "C:\\taiwan-context-ai\\evaluation\\asr_finetune\\final_holdout_v1\\audio\\T99.m4a",
+      "reference": "電鍋內底有糜，枵就家己貯一碗。",
+      "base_text": "等過了裡面有買的以後我就決定買這句話",
+      "base_seconds": 4.0694229998625815,
+      "base_score": {
+        "normalized_reference": "電鍋內底有糜枵就家己貯一碗",
+        "normalized_hypothesis": "等過了裡面有買的以後我就決定買這句話",
+        "reference_characters": 13,
+        "substitutions": 11,
+        "deletions": 0,
+        "insertions": 5,
+        "errors": 16,
+        "cer": 1.2307692307692308
+      },
+      "adapter_text": "丁國內裡有麻的腰仔就得在底仔仔碗",
+      "adapter_seconds": 5.6632373000029474,
+      "adapter_score": {
+        "normalized_reference": "電鍋內底有糜枵就家己貯一碗",
+        "normalized_hypothesis": "丁國內裡有麻的腰仔就得在底仔仔碗",
+        "reference_characters": 13,
+        "substitutions": 9,
+        "deletions": 0,
+        "insertions": 3,
+        "errors": 12,
+        "cer": 0.9230769230769231
+      },
+      "cer_delta": -0.3076923076923077
+    },
+    {
+      "case_id": "T100",
+      "audio_path": "C:\\taiwan-context-ai\\evaluation\\asr_finetune\\final_holdout_v1\\audio\\T100.m4a",
+      "reference": "網路若斷去，先共分享器關掉閣開。",
+      "base_text": "往老若回去心的分享器壞掉比較快退",
+      "base_seconds": 3.963884200202301,
+      "base_score": {
+        "normalized_reference": "網路若斷去先共分享器關掉閣開",
+        "normalized_hypothesis": "往老若回去心的分享器壞掉比較快退",
+        "reference_characters": 14,
+        "substitutions": 8,
+        "deletions": 0,
+        "insertions": 2,
+        "errors": 10,
+        "cer": 0.7142857142857143
+      },
+      "adapter_text": "網路若回去新街分鄉區拐吊與國區",
+      "adapter_seconds": 5.551285099936649,
+      "adapter_score": {
+        "normalized_reference": "網路若斷去先共分享器關掉閣開",
+        "normalized_hypothesis": "網路若回去新街分鄉區拐吊與國區",
+        "reference_characters": 14,
+        "substitutions": 9,
+        "deletions": 0,
+        "insertions": 1,
+        "errors": 10,
+        "cer": 0.7142857142857143
+      },
+      "cer_delta": 0.0
+    }
+  ]
+}

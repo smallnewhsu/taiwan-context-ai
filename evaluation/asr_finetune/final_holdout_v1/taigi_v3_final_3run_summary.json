@@ -1,0 +1,69 @@
+{
+  "suite": "Taiwan Context AI Taigi LoRA v3 frozen final evaluation",
+  "runs": 3,
+  "cases_per_run": 20,
+  "total_inferences_per_model": 60,
+  "api_error_count": 0,
+  "transcriptions_identical_across_runs": true,
+  "base_total_errors": 205,
+  "adapter_total_errors": 187,
+  "errors_reduced": 18,
+  "improved_cases": 9,
+  "unchanged_cases": 7,
+  "regressed_cases": 4,
+  "metrics": {
+    "base_macro_cer": {
+      "mean": 0.7243180349062702,
+      "standard_deviation": 0.0,
+      "minimum": 0.7243180349062702,
+      "maximum": 0.7243180349062702
+    },
+    "base_micro_cer": {
+      "mean": 0.7192982456140351,
+      "standard_deviation": 0.0,
+      "minimum": 0.7192982456140351,
+      "maximum": 0.7192982456140351
+    },
+    "adapter_macro_cer": {
+      "mean": 0.6562901314371903,
+      "standard_deviation": 0.0,
+      "minimum": 0.6562901314371903,
+      "maximum": 0.6562901314371903
+    },
+    "adapter_micro_cer": {
+      "mean": 0.656140350877193,
+      "standard_deviation": 0.0,
+      "minimum": 0.656140350877193,
+      "maximum": 0.656140350877193
+    },
+    "relative_micro_cer_improvement": {
+      "mean": 0.08780487804878045,
+      "standard_deviation": 0.0,
+      "minimum": 0.08780487804878045,
+      "maximum": 0.08780487804878045
+    },
+    "base_mean_seconds": {
+      "mean": 4.397540888326088,
+      "standard_deviation": 0.20039809714993834,
+      "minimum": 4.166881339985411,
+      "maximum": 4.5288871199940335
+    },
+    "adapter_mean_seconds": {
+      "mean": 4.40565151500438,
+      "standard_deviation": 0.17954555772756906,
+      "minimum": 4.209776980034076,
+      "maximum": 4.562423145002685
+    },
+    "adapter_minus_base_seconds": {
+      "mean": 0.00811062667829295,
+      "standard_deviation": 0.05235332707959344,
+      "minimum": -0.052099785022437395,
+      "maximum": 0.04289564004866442
+    }
+  },
+  "source_files": [
+    "C:\\taiwan-context-ai\\evaluation\\asr_finetune\\final_holdout_v1\\taigi_v3_final_results.json",
+    "C:\\taiwan-context-ai\\evaluation\\asr_finetune\\final_holdout_v1\\taigi_v3_final_run2_results.json",
+    "C:\\taiwan-context-ai\\evaluation\\asr_finetune\\final_holdout_v1\\taigi_v3_final_run3_results.json"
+  ]
+}
