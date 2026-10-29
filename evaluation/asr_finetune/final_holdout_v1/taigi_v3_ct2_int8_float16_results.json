@@ -1,0 +1,516 @@
+{
+  "summary": {
+    "suite": "T81-T100 frozen CT2 production-route evaluation",
+    "model_path": "C:\\taiwan-context-training\\models\\taigi_lora_v3_ct2_int8_float16",
+    "compute_type": "int8_float16",
+    "total_cases": 20,
+    "api_error_count": 0,
+    "macro_cer": 0.6599542124542124,
+    "micro_cer": 0.656140350877193,
+    "total_errors": 187,
+    "total_reference_characters": 285,
+    "mean_dual_pass_seconds": 1.654690930014476,
+    "needs_confirmation_count": 16
+  },
+  "results": [
+    {
+      "case_id": "T81",
+      "reference": "你若到厝，會記得共我講一聲。",
+      "baseline": {
+        "text": "你如果口齒會計較說一聲",
+        "confidence": -0.4871651828289032,
+        "seconds": 0.9688359000720084
+      },
+      "prompt": {
+        "text": "你如果到處會多說一聲",
+        "confidence": -0.6653645634651184,
+        "seconds": 0.603021799819544
+      },
+      "selected_source": "baseline",
+      "selected_text": "你如果口齒會計較說一聲",
+      "needs_confirmation": true,
+      "reasons": [
+        "baseline_selected",
+        "both_candidates_low_confidence"
+      ],
+      "reference_characters": 12,
+      "errors": 9,
+      "cer": 0.75,
+      "dual_pass_seconds": 1.5718576998915523
+    },
+    {
+      "case_id": "T82",
+      "reference": "今仔日風真透，出門愛加穿一領衫。",
+      "baseline": {
+        "text": "今天洪興桃出門要雞找一隻衣服",
+        "confidence": -0.5066406458616257,
+        "seconds": 0.8501120000146329
+      },
+      "prompt": {
+        "text": "今天洪興頭出門要多找一個衣服",
+        "confidence": -0.65625,
+        "seconds": 1.1453913999721408
+      },
+      "selected_source": "baseline",
+      "selected_text": "今天洪興桃出門要雞找一隻衣服",
+      "needs_confirmation": true,
+      "reasons": [
+        "baseline_selected",
+        "both_candidates_low_confidence"
+      ],
+      "reference_characters": 14,
+      "errors": 11,
+      "cer": 0.7857142857142857,
+      "dual_pass_seconds": 1.9955033999867737
+    },
+    {
+      "case_id": "T83",
+      "reference": "冰箱內底有賰的飯菜，欲食家己炊熱。",
+      "baseline": {
+        "text": "臉上裡面有剩下的飯菜要吃最快去營養",
+        "confidence": -0.6470788250798765,
+        "seconds": 1.3286592001095414
+      },
+      "prompt": {
+        "text": "臺商裡面有剩下的方菜要吃上台語通誓",
+        "confidence": -0.7862216071649031,
+        "seconds": 1.277175499824807
+      },
+      "selected_source": "baseline",
+      "selected_text": "臉上裡面有剩下的飯菜要吃最快去營養",
+      "needs_confirmation": true,
+      "reasons": [
+        "baseline_selected",
+        "both_candidates_low_confidence"
+      ],
+      "reference_characters": 15,
+      "errors": 13,
+      "cer": 0.8666666666666667,
+      "dual_pass_seconds": 2.6058346999343485
+    },
+    {
+      "case_id": "T84",
+      "reference": "我欲較慢十分鐘到，毋免佇門口等。",
+      "baseline": {
+        "text": "我的目十分鐘到不用在門口等",
+        "confidence": -0.41887018313774693,
+        "seconds": 0.8111688999924809
+      },
+      "prompt": {
+        "text": "我的目的十分鐘到不用在門口等",
+        "confidence": -0.48772319299834116,
+        "seconds": 0.6316178999841213
+      },
+      "selected_source": "baseline",
+      "selected_text": "我的目十分鐘到不用在門口等",
+      "needs_confirmation": true,
+      "reasons": [
+        "baseline_selected",
+        "both_candidates_low_confidence"
+      ],
+      "reference_characters": 14,
+      "errors": 6,
+      "cer": 0.42857142857142855,
+      "dual_pass_seconds": 1.4427867999766022
+    },
+    {
+      "case_id": "T85",
+      "reference": "這包藥愛食飯了後才食，一工兩擺。",
+      "baseline": {
+        "text": "這包藥要飯後吃一天兩次",
+        "confidence": -0.2191406269868215,
+        "seconds": 0.6102040000259876
+      },
+      "prompt": {
+        "text": "這包藥要飯後吃一天兩次",
+        "confidence": -0.31302082141240434,
+        "seconds": 0.6681232999544591
+      },
+      "selected_source": "baseline",
+      "selected_text": "這包藥要飯後吃一天兩次",
+      "needs_confirmation": false,
+      "reasons": [
+        "identical_candidates"
+      ],
+      "reference_characters": 14,
+      "errors": 7,
+      "cer": 0.5,
+      "dual_pass_seconds": 1.2783272999804467
+    },
+    {
+      "case_id": "T86",
+      "reference": "明仔載下晡三點愛去病院看報告。",
+      "baseline": {
+        "text": "明天五三點要去醫院看報告",
+        "confidence": -0.49505210717519127,
+        "seconds": 0.6419740999117494
+      },
+      "prompt": {
+        "text": "明天下午三點要去醫院看報告",
+        "confidence": -0.5209960788488388,
+        "seconds": 0.6838073001708835
+      },
+      "selected_source": "prompt",
+      "selected_text": "明天下午三點要去醫院看報告",
+      "needs_confirmation": true,
+      "reasons": [
+        "prompt_selected",
+        "both_candidates_low_confidence"
+      ],
+      "reference_characters": 14,
+      "errors": 5,
+      "cer": 0.35714285714285715,
+      "dual_pass_seconds": 1.325781400082633
+    },
+    {
+      "case_id": "T87",
+      "reference": "電火關予好，出門進前閣檢查一擺。",
+      "baseline": {
+        "text": "重點客觀的復出門證據檢查一次",
+        "confidence": -0.5740131704430831,
+        "seconds": 0.7344464999623597
+      },
+      "prompt": {
+        "text": "重點習慣的符出門禁固檢查一次",
+        "confidence": -0.5673363095238095,
+        "seconds": 0.778389299986884
+      },
+      "selected_source": "prompt",
+      "selected_text": "重點習慣的符出門禁固檢查一次",
+      "needs_confirmation": true,
+      "reasons": [
+        "prompt_selected",
+        "both_candidates_low_confidence",
+        "ambiguous_candidates"
+      ],
+      "reference_characters": 14,
+      "errors": 10,
+      "cer": 0.7142857142857143,
+      "dual_pass_seconds": 1.5128357999492437
+    },
+    {
+      "case_id": "T88",
+      "reference": "這張相片莫傳予別人，留佇手機就好。",
+      "baseline": {
+        "text": "這張照片不要傳給別人看劉的手機就好",
+        "confidence": -0.2796875089406967,
+        "seconds": 0.7075046000536531
+      },
+      "prompt": {
+        "text": "這張照片不要傳到別人看劉仔的手機就好",
+        "confidence": -0.3938210281458768,
+        "seconds": 0.7969103998038918
+      },
+      "selected_source": "baseline",
+      "selected_text": "這張照片不要傳給別人看劉的手機就好",
+      "needs_confirmation": false,
+      "reasons": [
+        "baseline_selected"
+      ],
+      "reference_characters": 15,
+      "errors": 7,
+      "cer": 0.4666666666666667,
+      "dual_pass_seconds": 1.504414999857545
+    },
+    {
+      "case_id": "T89",
+      "reference": "若有啥物看無，先問清楚才閣揤落去。",
+      "baseline": {
+        "text": "如果有什麼看不懂的請問尊早期跟七六期",
+        "confidence": -0.7285156488418579,
+        "seconds": 0.7019468999933451
+      },
+      "prompt": {
+        "text": "若有什麼看不到的請問申紙機和七樂器",
+        "confidence": -0.6662946655636742,
+        "seconds": 0.7616781999822706
+      },
+      "selected_source": "prompt",
+      "selected_text": "若有什麼看不到的請問申紙機和七樂器",
+      "needs_confirmation": true,
+      "reasons": [
+        "prompt_selected",
+        "both_candidates_low_confidence",
+        "candidates_disagree"
+      ],
+      "reference_characters": 15,
+      "errors": 13,
+      "cer": 0.8666666666666667,
+      "dual_pass_seconds": 1.4636250999756157
+    },
+    {
+      "case_id": "T90",
+      "reference": "垃圾車猶未來，袋仔先莫提去外口。",
+      "baseline": {
+        "text": "本廚寫以未來提案先不要多去外面",
+        "confidence": -0.4263980231787029,
+        "seconds": 0.693475800100714
+      },
+      "prompt": {
+        "text": "本組寫以未來提案先不要多去外面",
+        "confidence": -0.5043402943346236,
+        "seconds": 0.7008289000950754
+      },
+      "selected_source": "baseline",
+      "selected_text": "本廚寫以未來提案先不要多去外面",
+      "needs_confirmation": true,
+      "reasons": [
+        "baseline_selected",
+        "both_candidates_low_confidence"
+      ],
+      "reference_characters": 14,
+      "errors": 10,
+      "cer": 0.7142857142857143,
+      "dual_pass_seconds": 1.3943047001957893
+    },
+    {
+      "case_id": "T91",
+      "reference": "阿公今仔日精神無䆀，毋過行路愛慢慢仔。",
+      "baseline": {
+        "text": "阿公怕的精神不錯不過怕路要慢慢的走",
+        "confidence": -0.44255514705882354,
+        "seconds": 0.6785132999066263
+      },
+      "prompt": {
+        "text": "阿公鴨子的精神不錯不過走路要慢慢走",
+        "confidence": -0.46463816416891,
+        "seconds": 0.7668081000447273
+      },
+      "selected_source": "prompt",
+      "selected_text": "阿公鴨子的精神不錯不過走路要慢慢走",
+      "needs_confirmation": true,
+      "reasons": [
+        "prompt_selected",
+        "both_candidates_low_confidence",
+        "ambiguous_candidates"
+      ],
+      "reference_characters": 17,
+      "errors": 9,
+      "cer": 0.5294117647058824,
+      "dual_pass_seconds": 1.4453213999513537
+    },
+    {
+      "case_id": "T92",
+      "reference": "菜市仔彼間店拜一無開，禮拜二才有營業。",
+      "baseline": {
+        "text": "市場那間店禮拜二不開禮拜二招呼營業",
+        "confidence": -0.2864583221574624,
+        "seconds": 0.8243495000060648
+      },
+      "prompt": {
+        "text": "市場那間店禮拜二不開禮拜二招呼營業",
+        "confidence": -0.3567708196739356,
+        "seconds": 0.8422111000400037
+      },
+      "selected_source": "baseline",
+      "selected_text": "市場那間店禮拜二不開禮拜二招呼營業",
+      "needs_confirmation": false,
+      "reasons": [
+        "identical_candidates"
+      ],
+      "reference_characters": 17,
+      "errors": 8,
+      "cer": 0.47058823529411764,
+      "dual_pass_seconds": 1.6665606000460684
+    },
+    {
+      "case_id": "T93",
+      "reference": "火車誤點半點鐘，我可能會較暗到。",
+      "baseline": {
+        "text": "火車萬分暴念仁外可能會較慢到",
+        "confidence": -0.636718773179584,
+        "seconds": 0.6833609000314027
+      },
+      "prompt": {
+        "text": "火車萬分報念仁外可能會跨萬教",
+        "confidence": -0.8012152678436704,
+        "seconds": 0.8298432999290526
+      },
+      "selected_source": "baseline",
+      "selected_text": "火車萬分暴念仁外可能會較慢到",
+      "needs_confirmation": true,
+      "reasons": [
+        "baseline_selected",
+        "both_candidates_low_confidence"
+      ],
+      "reference_characters": 14,
+      "errors": 7,
+      "cer": 0.5,
+      "dual_pass_seconds": 1.5132041999604553
+    },
+    {
+      "case_id": "T94",
+      "reference": "一个人六百五十箍，飲料愛另外算。",
+      "baseline": {
+        "text": "一個人六百五十塊銀鈕要另外刻",
+        "confidence": -0.4482996323529411,
+        "seconds": 0.8149050998035818
+      },
+      "prompt": {
+        "text": "一個人六百五十五十塊銀樓要另外扣",
+        "confidence": -0.5640625,
+        "seconds": 0.8851553001441061
+      },
+      "selected_source": "baseline",
+      "selected_text": "一個人六百五十塊銀鈕要另外刻",
+      "needs_confirmation": true,
+      "reasons": [
+        "baseline_selected",
+        "both_candidates_low_confidence"
+      ],
+      "reference_characters": 14,
+      "errors": 6,
+      "cer": 0.42857142857142855,
+      "dual_pass_seconds": 1.700060399947688
+    },
+    {
+      "case_id": "T95",
+      "reference": "這个帳號干焦會使看資料，袂使修改。",
+      "baseline": {
+        "text": "這個口袋只可以帶資料不能收解",
+        "confidence": -0.3552083412806193,
+        "seconds": 0.7441542998421937
+      },
+      "prompt": {
+        "text": "這個口署只可以查資料不能修改",
+        "confidence": -0.3403320349752903,
+        "seconds": 0.7507019001059234
+      },
+      "selected_source": "prompt",
+      "selected_text": "這個口署只可以查資料不能修改",
+      "needs_confirmation": true,
+      "reasons": [
+        "prompt_selected",
+        "ambiguous_candidates"
+      ],
+      "reference_characters": 15,
+      "errors": 10,
+      "cer": 0.6666666666666666,
+      "dual_pass_seconds": 1.4948561999481171
+    },
+    {
+      "case_id": "T96",
+      "reference": "會議改到拜五早起九點，所在無變。",
+      "baseline": {
+        "text": "規劃解決百貨投擲九點所知的不便",
+        "confidence": -0.6200284334746274,
+        "seconds": 0.8455459999386221
+      },
+      "prompt": {
+        "text": "規範改到百貨投擲九點所知的五點",
+        "confidence": -0.7485795346173372,
+        "seconds": 0.8976111998781562
+      },
+      "selected_source": "baseline",
+      "selected_text": "規劃解決百貨投擲九點所知的不便",
+      "needs_confirmation": true,
+      "reasons": [
+        "baseline_selected",
+        "both_candidates_low_confidence"
+      ],
+      "reference_characters": 14,
+      "errors": 12,
+      "cer": 0.8571428571428571,
+      "dual_pass_seconds": 1.7431571998167783
+    },
+    {
+      "case_id": "T97",
+      "reference": "雨傘囥佇門邊，欲出門會記得紮。",
+      "baseline": {
+        "text": "華山放在門旁要出門要記得帶",
+        "confidence": -0.52734375,
+        "seconds": 0.8446945000905544
+      },
+      "prompt": {
+        "text": "話線放在門邊要出門要記得查",
+        "confidence": -0.6713867001235485,
+        "seconds": 0.751460500061512
+      },
+      "selected_source": "baseline",
+      "selected_text": "華山放在門旁要出門要記得帶",
+      "needs_confirmation": true,
+      "reasons": [
+        "baseline_selected",
+        "both_candidates_low_confidence"
+      ],
+      "reference_characters": 13,
+      "errors": 8,
+      "cer": 0.6153846153846154,
+      "dual_pass_seconds": 1.5961550001520663
+    },
+    {
+      "case_id": "T98",
+      "reference": "我已經買好物件，拜日會提轉去。",
+      "baseline": {
+        "text": "我已經買好東西禮拜會帶回去",
+        "confidence": -0.11369977465697698,
+        "seconds": 0.7350916001014411
+      },
+      "prompt": {
+        "text": "我已經買好東西禮拜會帶回去",
+        "confidence": -0.13392857036420278,
+        "seconds": 0.7344777001999319
+      },
+      "selected_source": "baseline",
+      "selected_text": "我已經買好東西禮拜會帶回去",
+      "needs_confirmation": false,
+      "reasons": [
+        "identical_candidates"
+      ],
+      "reference_characters": 13,
+      "errors": 6,
+      "cer": 0.46153846153846156,
+      "dual_pass_seconds": 1.469569300301373
+    },
+    {
+      "case_id": "T99",
+      "reference": "電鍋內底有糜，枵就家己貯一碗。",
+      "baseline": {
+        "text": "丁溝裡面有梅子搖一搖就踩在地上摸",
+        "confidence": -0.7433894161994641,
+        "seconds": 0.9792947000823915
+      },
+      "prompt": {
+        "text": "電鍋子裡面有麻的藥物就挾仔就挾在茶水碾仔",
+        "confidence": -0.9062499914850507,
+        "seconds": 1.1685538000892848
+      },
+      "selected_source": "baseline",
+      "selected_text": "丁溝裡面有梅子搖一搖就踩在地上摸",
+      "needs_confirmation": true,
+      "reasons": [
+        "baseline_selected",
+        "both_candidates_low_confidence"
+      ],
+      "reference_characters": 13,
+      "errors": 14,
+      "cer": 1.0769230769230769,
+      "dual_pass_seconds": 2.1478485001716763
+    },
+    {
+      "case_id": "T100",
+      "reference": "網路若斷去，先共分享器關掉閣開。",
+      "baseline": {
+        "text": "崩落若崩起新解分鄉區拐戒及國慧",
+        "confidence": -0.67125,
+        "seconds": 1.0631174000445753
+      },
+      "prompt": {
+        "text": "崩落若崩落若崩落新解分鄉區管調及國區",
+        "confidence": -0.6319444444444443,
+        "seconds": 1.1586965001188219
+      },
+      "selected_source": "prompt",
+      "selected_text": "崩落若崩落若崩落新解分鄉區管調及國區",
+      "needs_confirmation": true,
+      "reasons": [
+        "prompt_selected",
+        "both_candidates_low_confidence"
+      ],
+      "reference_characters": 14,
+      "errors": 16,
+      "cer": 1.1428571428571428,
+      "dual_pass_seconds": 2.221813900163397
+    }
+  ]
+}

@@ -1,0 +1,150 @@
+{
+  "suite": "Taigi LoRA v3 PEFT-to-merged verification",
+  "total_cases": 20,
+  "exact_match_count": 18,
+  "mismatch_count": 2,
+  "all_outputs_identical": false,
+  "mean_processing_seconds": 1.0552944600232876,
+  "cases": [
+    {
+      "case_id": "T81",
+      "expected_adapter_text": "你如果口出鞋底只說一聲",
+      "merged_model_text": "你如果口出鞋底只說一聲",
+      "exact_match": true,
+      "processing_seconds": 1.4913294001016766
+    },
+    {
+      "case_id": "T82",
+      "expected_adapter_text": "今天洪仁頭出門要雞清一聲",
+      "merged_model_text": "今天洪仁頭出門要雞清一聲",
+      "exact_match": true,
+      "processing_seconds": 1.0555869999807328
+    },
+    {
+      "case_id": "T83",
+      "expected_adapter_text": "臉上裡面有剩菜要吃上解決糖果秀",
+      "merged_model_text": "臉上裡面有剩菜要吃上解決糖果秀",
+      "exact_match": true,
+      "processing_seconds": 1.2408485000487417
+    },
+    {
+      "case_id": "T84",
+      "expected_adapter_text": "我的目十分鐘到你還在門口等",
+      "merged_model_text": "我的目十分鐘到你還在門口等",
+      "exact_match": true,
+      "processing_seconds": 0.8411834000144154
+    },
+    {
+      "case_id": "T85",
+      "expected_adapter_text": "一包藥要飯後吃一天兩次",
+      "merged_model_text": "一包藥要飯後吃一天兩次",
+      "exact_match": true,
+      "processing_seconds": 0.8800717000849545
+    },
+    {
+      "case_id": "T86",
+      "expected_adapter_text": "明天的保生店要去便宜跨報國",
+      "merged_model_text": "明天的保生店要去便宜跨報國",
+      "exact_match": true,
+      "processing_seconds": 1.1184618000406772
+    },
+    {
+      "case_id": "T87",
+      "expected_adapter_text": "重點是縣府出門進國檢察一次",
+      "merged_model_text": "重點是縣府出門進國檢察一次",
+      "exact_match": true,
+      "processing_seconds": 0.9853354000952095
+    },
+    {
+      "case_id": "T88",
+      "expected_adapter_text": "這張照片不要傳給別人看劉仔手機就好",
+      "merged_model_text": "這張照片不要傳給別人看劉仔手機就好",
+      "exact_match": true,
+      "processing_seconds": 1.0659702999982983
+    },
+    {
+      "case_id": "T89",
+      "expected_adapter_text": "如果有什麼看不懂的請問清楚去跟七落去",
+      "merged_model_text": "如果有什麼看不懂的請問清楚去跟七落去",
+      "exact_match": true,
+      "processing_seconds": 0.990730500081554
+    },
+    {
+      "case_id": "T90",
+      "expected_adapter_text": "本廚寫葉未來茶葉先不要多去外面",
+      "merged_model_text": "本廚寫葉未來茶葉先不要多去外面",
+      "exact_match": true,
+      "processing_seconds": 1.0484165998641402
+    },
+    {
+      "case_id": "T91",
+      "expected_adapter_text": "阿公怕的精神不錯不過怕路要慢慢的走",
+      "merged_model_text": "阿公怕的精神不錯不過怕路要慢慢的走",
+      "exact_match": true,
+      "processing_seconds": 0.8763540000654757
+    },
+    {
+      "case_id": "T92",
+      "expected_adapter_text": "一場那間店星期二不開星期二照費營業",
+      "merged_model_text": "一場那間店星期二不開星期二照費營業",
+      "exact_match": true,
+      "processing_seconds": 1.1777435999829322
+    },
+    {
+      "case_id": "T93",
+      "expected_adapter_text": "火車萬分暴念仁外可能會較慢到",
+      "merged_model_text": "火車萬分暴念仁外可能會較慢到",
+      "exact_match": true,
+      "processing_seconds": 0.979051899863407
+    },
+    {
+      "case_id": "T94",
+      "expected_adapter_text": "一個人六百五十塊銀鈕要另外刻",
+      "merged_model_text": "一個人六百五十塊銀鈕要另外刻",
+      "exact_match": true,
+      "processing_seconds": 0.9686005001422018
+    },
+    {
+      "case_id": "T95",
+      "expected_adapter_text": "這個口罩只可以帶資料不能收解",
+      "merged_model_text": "這個口罩只可以帶資料不能收解",
+      "exact_match": true,
+      "processing_seconds": 0.846944099990651
+    },
+    {
+      "case_id": "T96",
+      "expected_adapter_text": "開花的改改百貨早早九點所在無病",
+      "merged_model_text": "開花的改成百貨投擲九點所知的五點",
+      "exact_match": false,
+      "processing_seconds": 1.2113220000173897
+    },
+    {
+      "case_id": "T97",
+      "expected_adapter_text": "華山放人問天要出門要記得帶",
+      "merged_model_text": "華山放人問天要出門要記得早",
+      "exact_match": false,
+      "processing_seconds": 0.8574272999539971
+    },
+    {
+      "case_id": "T98",
+      "expected_adapter_text": "我已經買好東西禮拜會帶回去",
+      "merged_model_text": "我已經買好東西禮拜會帶回去",
+      "exact_match": true,
+      "processing_seconds": 0.8195829000324011
+    },
+    {
+      "case_id": "T99",
+      "expected_adapter_text": "丁國內裡有麻的腰仔就得在底仔仔碗",
+      "merged_model_text": "丁國內裡有麻的腰仔就得在底仔仔碗",
+      "exact_match": true,
+      "processing_seconds": 1.3539174001198262
+    },
+    {
+      "case_id": "T100",
+      "expected_adapter_text": "網路若回去新街分鄉區拐吊與國區",
+      "merged_model_text": "網路若回去新街分鄉區拐吊與國區",
+      "exact_match": true,
+      "processing_seconds": 1.2970108999870718
+    }
+  ]
+}
