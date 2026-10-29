@@ -8,11 +8,19 @@ set "SPEECH_CONTEXT_MODEL=gemma3:4b"
 set "TAIGI_MODEL=gemma3:4b"
 set "MULTIMODAL_QA_MODEL=gemma3:4b"
 set "VIETNAMESE_ASR_MODEL=turbo"
+if not defined TAIGI_ASR_MODEL_PATH set "TAIGI_ASR_MODEL_PATH=C:\taiwan-context-training\models\taigi_lora_v3_ct2_float16"
 set "PROJECT_PYTHON=%CD%\services\asr\asr_api\Scripts\python.exe"
 
 if not exist "%PROJECT_PYTHON%" (
     echo [ERROR] Project Python not found:
     echo %PROJECT_PYTHON%
+    pause
+    exit /b 1
+)
+
+if not exist "%TAIGI_ASR_MODEL_PATH%\model.bin" (
+    echo [ERROR] Taigi CTranslate2 model not found:
+    echo %TAIGI_ASR_MODEL_PATH%
     pause
     exit /b 1
 )

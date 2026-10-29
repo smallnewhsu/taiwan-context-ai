@@ -35,7 +35,6 @@ from faster_whisper import WhisperModel
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 MODEL_PATH = PROJECT_ROOT / "services" / "asr" / "models"
-VIETNAMESE_MODEL_NAME = os.getenv("VIETNAMESE_ASR_MODEL", "turbo")
 PROMPT_PATH = (
     PROJECT_ROOT / "datasets" / "taiwan_context" / "asr_prompt_family.txt"
 )
@@ -50,6 +49,7 @@ LANGUAGE_LABELS = {
 class ASRService:
     def __init__(self):
         self._model = None
+        self._model_path = None
         self._vietnamese_model = None
         self._model_lock = threading.Lock()
         self._inference_lock = threading.Lock()
@@ -59,23 +59,42 @@ class ASRService:
         if self._vietnamese_model is None:
             with self._model_lock:
                 if self._vietnamese_model is None:
+                    model_name = os.getenv("VIETNAMESE_ASR_MODEL", "turbo")
                     self._vietnamese_model = WhisperModel(
-                        VIETNAMESE_MODEL_NAME,
-                        device="cuda",
-                        compute_type=os.getenv("VIETNAMESE_ASR_COMPUTE_TYPE", "float16"),
+                        model_name, device="cuda", compute_type="int8_float16"
                     )
         return self._vietnamese_model
 
-    def _load_model(self):
-        if self._model is None:
+    @staticmethod
+    def _release_model(model):
+        if model is None:
+            return
+        backend_model = getattr(model, "model", None)
+        unload = getattr(backend_model, "unload_model", None)
+        if callable(unload):
+            unload()
+
+    def _load_model(self, model_path=None):
+        requested_path = Path(model_path or MODEL_PATH).resolve()
+        if self._model is None or self._model_path != requested_path:
             with self._model_lock:
-                if self._model is None:
-                    if not MODEL_PATH.exists():
-                        raise RuntimeError(f"找不到ASR模型: {MODEL_PATH}")
+                if self._model is None or self._model_path != requested_path:
+                    if not requested_path.exists():
+                        raise RuntimeError(f"找不到ASR模型: {requested_path}")
+                    self._release_model(self._model)
+                    self._model = None
+                    self._model_path = None
+                    gc.collect()
                     self._model = WhisperModel(
-                        str(MODEL_PATH), device="cuda", compute_type="float16"
+                        str(requested_path), device="cuda", compute_type="float16"
                     )
+                    self._model_path = requested_path
         return self._model
+
+    @staticmethod
+    def _taigi_model_path():
+        configured = os.getenv("TAIGI_ASR_MODEL_PATH", "").strip()
+        return Path(configured) if configured else MODEL_PATH
 
     @staticmethod
     def _clean_text(text, preserve_spaces=False):
@@ -125,7 +144,6 @@ class ASRService:
             "confidence": float(confidence),
             "inference_seconds": round(inference_seconds, 4),
             "detected_language": getattr(info, "language", None),
-            "language_probability": getattr(info, "language_probability", None),
         }
 
     def interpret_bytes(self, content, suffix, language="auto"):
@@ -148,14 +166,12 @@ class ASRService:
             # Taiwan Tongues目前的整合模型沿用中文解碼設定；台語與客語
             # 透過語言提示保留在地詞彙。越南語使用獨立多語Whisper模型。
             if language == "vi":
+                model_path = None
                 decoder_language = "vi"
-                prompt = (
-                    "Đây là hội thoại tiếng Việt trong đời sống hằng ngày. "
-                    "Hãy giữ nguyên tên, thời gian, số tiền và ý phủ định."
-                )
-                model_route = "Whisper Turbo（越南語）"
-                model_name = VIETNAMESE_MODEL_NAME
+                prompt = "Đây là lời nói tiếng Việt trong sinh hoạt hằng ngày."
+                model_route = "multilingual_whisper_vi"
             else:
+                model_path = self._taigi_model_path() if language == "nan" else MODEL_PATH
                 decoder_language = (
                     None if language == "auto" else ("en" if language == "en" else "zh")
                 )
@@ -165,22 +181,19 @@ class ASRService:
                     "en": "The following is an English daily-life conversation.",
                 }.get(language, "")
                 prompt = "\n".join(x for x in (language_prompt, prompt) if x)
-                model_route = "Taiwan Tongues ASR CE"
-                model_name = str(MODEL_PATH)
+                model_route = (
+                    "taiwan_tongues_asr_ce_taigi_lora_ct2_float16"
+                    if language == "nan" and model_path.resolve() != MODEL_PATH.resolve()
+                    else "taiwan_tongues_asr_ce"
+                )
 
             total_started = time.perf_counter()
             with self._inference_lock:
-                # Demo GPU僅保留目前路由需要的模型，避免兩個大型模型同時常駐。
-                if language == "vi":
-                    if self._model is not None:
-                        self._model = None
-                        gc.collect()
-                    model = self._load_vietnamese_model()
-                else:
-                    if self._vietnamese_model is not None:
-                        self._vietnamese_model = None
-                        gc.collect()
-                    model = self._load_model()
+                model = (
+                    self._load_vietnamese_model()
+                    if language == "vi"
+                    else self._load_model(model_path)
+                )
                 baseline = self._transcribe(audio, language=decoder_language, model=model)
                 prompted = self._transcribe(
                     audio, prompt, language=decoder_language, model=model
@@ -199,7 +212,6 @@ class ASRService:
                     else LANGUAGE_LABELS[requested_language]
                 ),
                 "model_route": model_route,
-                "model_name": model_name,
             }
         finally:
             if temp_path and os.path.exists(temp_path):

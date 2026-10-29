@@ -1,5 +1,6 @@
 from pathlib import Path
 import json
+import logging
 from typing import Literal
 
 from fastapi import Depends, FastAPI, File, Form, HTTPException, Request, Response, UploadFile
@@ -21,6 +22,7 @@ from backend.speech_context_service import SpeechContextService
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
+logger = logging.getLogger(__name__)
 GLOSSARY_PATH = PROJECT_ROOT / "datasets" / "taiwan_context" / "glossary.json"
 MAX_UPLOAD_BYTES = 25 * 1024 * 1024
 MAX_IMAGE_UPLOAD_BYTES = 15 * 1024 * 1024
@@ -552,7 +554,6 @@ async def interpret_speech(
             "requested_language": language,
             "language_label": approved_correction.get("language_label", "人工確認"),
             "model_route": "human_review",
-            "model_name": "人工審核修正記憶",
         }
 
     try:
@@ -573,11 +574,12 @@ async def interpret_speech(
             "requested_language": asr_result["requested_language"],
             "language_label": asr_result["language_label"],
             "model_route": asr_result["model_route"],
-            "model_name": asr_result["model_name"],
         }
     except ValueError as exc:
+        logger.exception("Speech interpretation value error")
         raise HTTPException(status_code=415, detail=str(exc)) from exc
     except Exception as exc:
+        logger.exception("Speech interpretation failed")
         raise HTTPException(status_code=500, detail=f"語音處理失敗: {exc}") from exc
 
 
