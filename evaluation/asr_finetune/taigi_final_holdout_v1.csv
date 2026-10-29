@@ -1,0 +1,23 @@
+﻿台語最終凍結測試集 v1,,,,,
+錄音前確認台語用字；錄音後不得依模型輸出修改 reference_text。E、F欄為人工填寫欄位。,,,,,
+case_id,category,reference_text,literal_meaning,speaker_id,recording_status
+T81,family_arrival,你若到厝，會記得共我講一聲。,你如果到家，記得跟我說一聲。,speaker_a,reviewed
+T82,weather_reminder,今仔日風真透，出門愛加穿一領衫。,今天風很冷，出門要多穿一件衣服。,speaker_a,reviewed
+T83,food_reminder,冰箱內底有賰的飯菜，欲食家己炊熱。,冰箱裡有剩下的飯菜，要吃時自己加熱。,speaker_a,reviewed
+T84,arrival_delay,我欲較慢十分鐘到，毋免佇門口等。,我會晚十分鐘到，不用在門口等。,speaker_a,reviewed
+T85,medication,這包藥愛食飯了後才食，一工兩擺。,這包藥要飯後吃，一天兩次。,speaker_a,reviewed
+T86,medical_visit,明仔載下晡三點愛去病院看報告。,明天下午三點要去醫院看報告。,speaker_a,reviewed
+T87,home_safety,電火關予好，出門進前閣檢查一擺。,把電燈關好，出門前再檢查一次。,speaker_a,reviewed
+T88,privacy,這張相片莫傳予別人，留佇手機就好。,這張照片不要傳給別人，留在手機裡就好。,speaker_a,reviewed
+T89,digital_literacy,若有啥物看無，先問清楚才閣揤落去。,如果有什麼看不懂，先問清楚再按下去。,speaker_a,reviewed
+T90,community,垃圾車猶未來，袋仔先莫提去外口。,垃圾車還沒來，袋子先不要拿到外面。,speaker_a,reviewed
+T91,elder_care,阿公今仔日精神無䆀，毋過行路愛慢慢仔。,阿公今天精神不錯，不過走路要慢一點。,speaker_b,reviewed
+T92,market_hours,菜市仔彼間店拜一無開，禮拜二才有營業。,市場那間店星期一沒開，星期二才有營業。,speaker_b,reviewed
+T93,transport_delay,火車誤點半點鐘，我可能會較暗到。,火車誤點半小時，我可能會晚到。,speaker_b,reviewed
+T94,payment,一个人六百五十箍，飲料愛另外算。,每人六百五十元，飲料要另外計算。,speaker_b,reviewed
+T95,account_permission,這个帳號干焦會使看資料，袂使修改。,這個帳號只能查看資料，不能修改。,speaker_b,reviewed
+T96,meeting_change,會議改到拜五早起九點，所在無變。,會議改到星期五早上九點，地點不變。,speaker_b,reviewed
+T97,rain_reminder,雨傘囥佇門邊，欲出門會記得紮。,雨傘放在門邊，要出門時記得帶。,speaker_b,reviewed
+T98,shopping,我已經買好物件，拜日會提轉去。,我已經買好東西，星期日會帶回去。,speaker_b,reviewed
+T99,meal_location,電鍋內底有糜，枵就家己貯一碗。,電鍋裡有粥，餓了就自己盛一碗。,speaker_b,reviewed
+T100,network_help,網路若斷去，先共分享器關掉閣開。,網路如果斷線，先把路由器關掉再打開。,speaker_b,reviewed
