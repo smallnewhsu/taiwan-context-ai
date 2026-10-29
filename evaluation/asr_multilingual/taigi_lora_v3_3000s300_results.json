@@ -1,0 +1,327 @@
+{
+  "summary": {
+    "suite": "T51-T60 frozen LoRA comparison",
+    "total_cases": 10,
+    "base": {
+      "macro_cer": 0.8050091575091576,
+      "micro_cer": 0.8145695364238411,
+      "total_errors": 123,
+      "total_reference_characters": 151,
+      "mean_seconds": 4.09248017994687
+    },
+    "adapter": {
+      "macro_cer": 0.6988957121310062,
+      "micro_cer": 0.7019867549668874,
+      "total_errors": 106,
+      "total_reference_characters": 151,
+      "mean_seconds": 5.018939439975656
+    },
+    "micro_cer_absolute_change": -0.11258278145695366,
+    "micro_cer_relative_improvement": 0.13821138211382114,
+    "improved_cases": 7,
+    "unchanged_cases": 1,
+    "regressed_cases": 2
+  },
+  "results": [
+    {
+      "case_id": "T51",
+      "audio_path": "C:\\taiwan-context-ai\\evaluation\\asr_multilingual\\T51.m4a",
+      "reference": "阿媽，你食飽未？若猶未，就轉來阮兜食。",
+      "base_text": "阿嬤妳吃得飽嗎如果還沒就回來問老闆",
+      "base_seconds": 5.433039800031111,
+      "base_score": {
+        "normalized_reference": "阿媽你食飽未若猶未就轉來阮兜食",
+        "normalized_hypothesis": "阿嬤妳吃得飽嗎如果還沒就回來問老闆",
+        "reference_characters": 15,
+        "substitutions": 11,
+        "deletions": 0,
+        "insertions": 2,
+        "errors": 13,
+        "cer": 0.8666666666666667
+      },
+      "adapter_text": "阿嬤妳吃飽了嗎如果還要買就回來我們家吃",
+      "adapter_seconds": 4.898794899927452,
+      "adapter_score": {
+        "normalized_reference": "阿媽你食飽未若猶未就轉來阮兜食",
+        "normalized_hypothesis": "阿嬤妳吃飽了嗎如果還要買就回來我們家吃",
+        "reference_characters": 15,
+        "substitutions": 11,
+        "deletions": 0,
+        "insertions": 4,
+        "errors": 15,
+        "cer": 1.0
+      },
+      "cer_delta": 0.1333333333333333
+    },
+    {
+      "case_id": "T52",
+      "audio_path": "C:\\taiwan-context-ai\\evaluation\\asr_multilingual\\T52.m4a",
+      "reference": "菜佇電鍋內底，轉來家己挾，莫閣食泡麵。",
+      "base_text": "菜放在湯圓裡面等我打理一下不要再吃泡米",
+      "base_seconds": 4.921227099839598,
+      "base_score": {
+        "normalized_reference": "菜佇電鍋內底轉來家己挾莫閣食泡麵",
+        "normalized_hypothesis": "菜放在湯圓裡面等我打理一下不要再吃泡米",
+        "reference_characters": 16,
+        "substitutions": 14,
+        "deletions": 0,
+        "insertions": 3,
+        "errors": 17,
+        "cer": 1.0625
+      },
+      "adapter_text": "菜放在湯圓裡回家吃李子不要再吃泡米",
+      "adapter_seconds": 5.056160199921578,
+      "adapter_score": {
+        "normalized_reference": "菜佇電鍋內底轉來家己挾莫閣食泡麵",
+        "normalized_hypothesis": "菜放在湯圓裡回家吃李子不要再吃泡米",
+        "reference_characters": 16,
+        "substitutions": 12,
+        "deletions": 1,
+        "insertions": 2,
+        "errors": 15,
+        "cer": 0.9375
+      },
+      "cer_delta": -0.125
+    },
+    {
+      "case_id": "T53",
+      "audio_path": "C:\\taiwan-context-ai\\evaluation\\asr_multilingual\\T53.m4a",
+      "reference": "我今仔日會較晏轉去，毋免等我食暗頓。",
+      "base_text": "我今天會比較安靜回去不用等我吃晚飯",
+      "base_seconds": 3.940530400024727,
+      "base_score": {
+        "normalized_reference": "我今仔日會較晏轉去毋免等我食暗頓",
+        "normalized_hypothesis": "我今天會比較安靜回去不用等我吃晚飯",
+        "reference_characters": 16,
+        "substitutions": 8,
+        "deletions": 1,
+        "insertions": 2,
+        "errors": 11,
+        "cer": 0.6875
+      },
+      "adapter_text": "我今天會比較安靜去不用等我吃晚餐",
+      "adapter_seconds": 5.575865699909627,
+      "adapter_score": {
+        "normalized_reference": "我今仔日會較晏轉去毋免等我食暗頓",
+        "normalized_hypothesis": "我今天會比較安靜去不用等我吃晚餐",
+        "reference_characters": 16,
+        "substitutions": 8,
+        "deletions": 1,
+        "insertions": 1,
+        "errors": 10,
+        "cer": 0.625
+      },
+      "cer_delta": -0.0625
+    },
+    {
+      "case_id": "T54",
+      "audio_path": "C:\\taiwan-context-ai\\evaluation\\asr_multilingual\\T54.m4a",
+      "reference": "阿爸，我拜六早起欲出門，暗時才會轉來。",
+      "base_text": "爸爸我伯父的兒子要出門晚上才會回來",
+      "base_seconds": 4.099402900086716,
+      "base_score": {
+        "normalized_reference": "阿爸我拜六早起欲出門暗時才會轉來",
+        "normalized_hypothesis": "爸爸我伯父的兒子要出門晚上才會回來",
+        "reference_characters": 16,
+        "substitutions": 9,
+        "deletions": 0,
+        "insertions": 1,
+        "errors": 10,
+        "cer": 0.625
+      },
+      "adapter_text": "伯父我伯勞下夜菜要出門晚上才會回來",
+      "adapter_seconds": 5.873201299924403,
+      "adapter_score": {
+        "normalized_reference": "阿爸我拜六早起欲出門暗時才會轉來",
+        "normalized_hypothesis": "伯父我伯勞下夜菜要出門晚上才會回來",
+        "reference_characters": 16,
+        "substitutions": 10,
+        "deletions": 0,
+        "insertions": 1,
+        "errors": 11,
+        "cer": 0.6875
+      },
+      "cer_delta": 0.0625
+    },
+    {
+      "case_id": "T55",
+      "audio_path": "C:\\taiwan-context-ai\\evaluation\\asr_multilingual\\T55.m4a",
+      "reference": "彼項物件傷貴，我這馬無欲買。",
+      "base_text": "他洪明傑太貴我現在要不想買",
+      "base_seconds": 3.8764575999230146,
+      "base_score": {
+        "normalized_reference": "彼項物件傷貴我這馬無欲買",
+        "normalized_hypothesis": "他洪明傑太貴我現在要不想買",
+        "reference_characters": 12,
+        "substitutions": 9,
+        "deletions": 0,
+        "insertions": 1,
+        "errors": 10,
+        "cer": 0.8333333333333334
+      },
+      "adapter_text": "那人東西太貴我現在無想買",
+      "adapter_seconds": 4.178697200026363,
+      "adapter_score": {
+        "normalized_reference": "彼項物件傷貴我這馬無欲買",
+        "normalized_hypothesis": "那人東西太貴我現在無想買",
+        "reference_characters": 12,
+        "substitutions": 8,
+        "deletions": 0,
+        "insertions": 0,
+        "errors": 8,
+        "cer": 0.6666666666666666
+      },
+      "cer_delta": -0.16666666666666674
+    },
+    {
+      "case_id": "T56",
+      "audio_path": "C:\\taiwan-context-ai\\evaluation\\asr_multilingual\\T56.m4a",
+      "reference": "明仔載早起八點愛去病院，毋通慢到。",
+      "base_text": "媽媽早上八點要去醫院你不要亂玩",
+      "base_seconds": 3.765875200042501,
+      "base_score": {
+        "normalized_reference": "明仔載早起八點愛去病院毋通慢到",
+        "normalized_hypothesis": "媽媽早上八點要去醫院你不要亂玩",
+        "reference_characters": 15,
+        "substitutions": 9,
+        "deletions": 1,
+        "insertions": 1,
+        "errors": 11,
+        "cer": 0.7333333333333333
+      },
+      "adapter_text": "馬仔仔頭吃八點要去醫院不要亂玩",
+      "adapter_seconds": 5.058741100132465,
+      "adapter_score": {
+        "normalized_reference": "明仔載早起八點愛去病院毋通慢到",
+        "normalized_hypothesis": "馬仔仔頭吃八點要去醫院不要亂玩",
+        "reference_characters": 15,
+        "substitutions": 10,
+        "deletions": 0,
+        "insertions": 0,
+        "errors": 10,
+        "cer": 0.6666666666666666
+      },
+      "cer_delta": -0.06666666666666665
+    },
+    {
+      "case_id": "T57",
+      "audio_path": "C:\\taiwan-context-ai\\evaluation\\asr_multilingual\\T57.m4a",
+      "reference": "火車可能會誤點，我毋知六點進前敢會到。",
+      "base_text": "會請課人的萬分我不知道六點半是假的嗎",
+      "base_seconds": 3.911050699884072,
+      "base_score": {
+        "normalized_reference": "火車可能會誤點我毋知六點進前敢會到",
+        "normalized_hypothesis": "會請課人的萬分我不知道六點半是假的嗎",
+        "reference_characters": 17,
+        "substitutions": 13,
+        "deletions": 0,
+        "insertions": 1,
+        "errors": 14,
+        "cer": 0.8235294117647058
+      },
+      "adapter_text": "火車可能會萬分我不知道六點前的交互",
+      "adapter_seconds": 4.648528600111604,
+      "adapter_score": {
+        "normalized_reference": "火車可能會誤點我毋知六點進前敢會到",
+        "normalized_hypothesis": "火車可能會萬分我不知道六點前的交互",
+        "reference_characters": 17,
+        "substitutions": 6,
+        "deletions": 1,
+        "insertions": 1,
+        "errors": 8,
+        "cer": 0.47058823529411764
+      },
+      "cer_delta": -0.3529411764705882
+    },
+    {
+      "case_id": "T58",
+      "audio_path": "C:\\taiwan-context-ai\\evaluation\\asr_multilingual\\T58.m4a",
+      "reference": "這包藥睏進前干焦會使食一粒，毋通加食。",
+      "base_text": "一般油油的空空的只要一晒才吃一點點不聽雞腳",
+      "base_seconds": 5.041163799818605,
+      "base_score": {
+        "normalized_reference": "這包藥睏進前干焦會使食一粒毋通加食",
+        "normalized_hypothesis": "一般油油的空空的只要一晒才吃一點點不聽雞腳",
+        "reference_characters": 17,
+        "substitutions": 16,
+        "deletions": 0,
+        "insertions": 4,
+        "errors": 20,
+        "cer": 1.1764705882352942
+      },
+      "adapter_text": "一包藥放前面只可以吃一顆不要多吃",
+      "adapter_seconds": 5.3899350999854505,
+      "adapter_score": {
+        "normalized_reference": "這包藥睏進前干焦會使食一粒毋通加食",
+        "normalized_hypothesis": "一包藥放前面只可以吃一顆不要多吃",
+        "reference_characters": 17,
+        "substitutions": 12,
+        "deletions": 1,
+        "insertions": 0,
+        "errors": 13,
+        "cer": 0.7647058823529411
+      },
+      "cer_delta": -0.41176470588235303
+    },
+    {
+      "case_id": "T59",
+      "audio_path": "C:\\taiwan-context-ai\\evaluation\\asr_multilingual\\T59.m4a",
+      "reference": "一个人六百五十箍，無包括啉的。",
+      "base_text": "一個人六百五十顆不包括醫療",
+      "base_seconds": 2.991834299871698,
+      "base_score": {
+        "normalized_reference": "一个人六百五十箍無包括啉的",
+        "normalized_hypothesis": "一個人六百五十顆不包括醫療",
+        "reference_characters": 13,
+        "substitutions": 5,
+        "deletions": 0,
+        "insertions": 0,
+        "errors": 5,
+        "cer": 0.38461538461538464
+      },
+      "adapter_text": "一個人六百五十塊不包括飲料",
+      "adapter_seconds": 5.182049499824643,
+      "adapter_score": {
+        "normalized_reference": "一个人六百五十箍無包括啉的",
+        "normalized_hypothesis": "一個人六百五十塊不包括飲料",
+        "reference_characters": 13,
+        "substitutions": 5,
+        "deletions": 0,
+        "insertions": 0,
+        "errors": 5,
+        "cer": 0.38461538461538464
+      },
+      "cer_delta": 0.0
+    },
+    {
+      "case_id": "T60",
+      "audio_path": "C:\\taiwan-context-ai\\evaluation\\asr_multilingual\\T60.m4a",
+      "reference": "相片會使留咧，毋通囥佇網路頂懸。",
+      "base_text": "唱品可以老了不要放在網路上",
+      "base_seconds": 2.944219999946654,
+      "base_score": {
+        "normalized_reference": "相片會使留咧毋通囥佇網路頂懸",
+        "normalized_hypothesis": "唱品可以老了不要放在網路上",
+        "reference_characters": 14,
+        "substitutions": 11,
+        "deletions": 1,
+        "insertions": 0,
+        "errors": 12,
+        "cer": 0.8571428571428571
+      },
+      "adapter_text": "創品可以留下不要放在網路上面",
+      "adapter_seconds": 4.327420799992979,
+      "adapter_score": {
+        "normalized_reference": "相片會使留咧毋通囥佇網路頂懸",
+        "normalized_hypothesis": "創品可以留下不要放在網路上面",
+        "reference_characters": 14,
+        "substitutions": 11,
+        "deletions": 0,
+        "insertions": 0,
+        "errors": 11,
+        "cer": 0.7857142857142857
+      },
+      "cer_delta": -0.0714285714285714
+    }
+  ]
+}
